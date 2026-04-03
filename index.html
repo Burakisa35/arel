@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ar-El | Armutlu Elektrik – Kemalpaşa, İzmir</title>
+  <meta name="description" content="Kemalpaşa ve çevresinde güvenlik kamerası, uydu & anten, kapı zili, elektrik tesisat hizmetleri. Burak Sıvacı – 0536 780 70 59" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+```
+:root {
+  --black: #0e0e0e;
+  --cream: #f5f0e8;
+  --gold: #c9a84c;
+  --gold-light: #e8d5a3;
+  --white: #ffffff;
+  --gray: #888;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--black);
+  color: var(--cream);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  overflow-x: hidden;
+}
+
+/* NAV */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 32px;
+  background: rgba(14,14,14,0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(201,168,76,0.15);
+}
+
+.nav-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  color: var(--cream);
+  text-decoration: none;
+}
+
+.nav-logo span { color: var(--gold); }
+
+.nav-phone {
+  font-size: 0.85rem;
+  color: var(--gold);
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+/* HERO */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 120px 32px 80px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -200px; right: -200px;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(201,168,76,0.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-tag {
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 24px;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.2s forwards;
+}
+
+.hero-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(3rem, 12vw, 7rem);
+  font-weight: 900;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  margin-bottom: 32px;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.4s forwards;
+}
+
+.hero-title em {
+  font-style: italic;
+  color: var(--gold);
+}
+
+.hero-sub {
+  font-size: 1rem;
+  color: rgba(245,240,232,0.6);
+  max-width: 340px;
+  line-height: 1.7;
+  margin-bottom: 48px;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.6s forwards;
+}
+
+.hero-btns {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.8s forwards;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--gold);
+  color: var(--black);
+  padding: 14px 28px;
+  border-radius: 4px;
+  font-weight: 500;
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid rgba(201,168,76,0.4);
+  color: var(--cream);
+  padding: 14px 28px;
+  border-radius: 4px;
+  font-weight: 400;
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  transition: border-color 0.2s, transform 0.2s;
+}
+
+.btn-secondary:hover { border-color: var(--gold); transform: translateY(-2px); }
+
+.hero-line {
+  position: absolute;
+  bottom: 0; left: 32px; right: 32px;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(201,168,76,0.3), transparent);
+}
+
+/* SERVICES */
+.services {
+  padding: 100px 32px;
+}
+
+.section-tag {
+  font-size: 0.7rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 16px;
+}
+
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.8rem, 5vw, 2.8rem);
+  font-weight: 700;
+  margin-bottom: 60px;
+  line-height: 1.2;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2px;
+}
+
+.service-card {
+  background: rgba(245,240,232,0.03);
+  border: 1px solid rgba(201,168,76,0.1);
+  padding: 32px 28px;
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+  transition: background 0.3s, border-color 0.3s;
+  cursor: default;
+}
+
+.service-card:hover {
+  background: rgba(201,168,76,0.06);
+  border-color: rgba(201,168,76,0.3);
+}
+
+.service-icon {
+  font-size: 1.8rem;
+  flex-shrink: 0;
+  width: 48px;
+  text-align: center;
+}
+
+.service-content h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: var(--cream);
+}
+
+.service-content p {
+  font-size: 0.85rem;
+  color: rgba(245,240,232,0.5);
+  line-height: 1.6;
+}
+
+/* ABOUT */
+.about {
+  padding: 80px 32px;
+  border-top: 1px solid rgba(201,168,76,0.1);
+}
+
+.about-inner {
+  max-width: 480px;
+}
+
+.about-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin: 16px 0 8px;
+}
+
+.about-role {
+  font-size: 0.8rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 20px;
+}
+
+.about-text {
+  font-size: 0.9rem;
+  color: rgba(245,240,232,0.6);
+  line-height: 1.8;
+}
+
+.about-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 24px;
+}
+
+.badge {
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border: 1px solid rgba(201,168,76,0.3);
+  color: var(--gold);
+  padding: 6px 12px;
+  border-radius: 2px;
+}
+
+/* CONTACT */
+.contact {
+  padding: 80px 32px 60px;
+  border-top: 1px solid rgba(201,168,76,0.1);
+}
+
+.contact-items {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 40px;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  text-decoration: none;
+  color: var(--cream);
+  padding: 16px 20px;
+  border: 1px solid rgba(201,168,76,0.1);
+  border-radius: 4px;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.contact-item:hover {
+  border-color: rgba(201,168,76,0.4);
+  background: rgba(201,168,76,0.05);
+}
+
+.contact-item-icon {
+  font-size: 1.3rem;
+  width: 36px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.contact-item-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 2px;
+}
+
+.contact-item-value {
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+/* FOOTER */
+footer {
+  padding: 32px;
+  border-top: 1px solid rgba(201,168,76,0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.footer-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem;
+  font-weight: 900;
+  color: var(--cream);
+}
+
+.footer-logo span { color: var(--gold); }
+
+.footer-text {
+  font-size: 0.75rem;
+  color: rgba(245,240,232,0.3);
+  letter-spacing: 0.05em;
+}
+
+/* ANIMATIONS */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* WHATSAPP FLOAT */
+.wa-float {
+  position: fixed;
+  bottom: 28px; right: 24px;
+  z-index: 200;
+  background: #25D366;
+  color: white;
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  text-decoration: none;
+  box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.wa-float:hover { transform: scale(1.1); box-shadow: 0 6px 28px rgba(37,211,102,0.5); }
+```
+
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+
+  <nav>
+    <a href="#" class="nav-logo">Ar<span>-</span>El</a>
+    <a href="tel:+905367807059" class="nav-phone">0536 780 70 59</a>
+  </nav>
+
+  <!-- HERO -->
+
+  <section class="hero">
+    <p class="hero-tag">Kemalpaşa · İzmir</p>
+    <h1 class="hero-title">Ar<em>-</em>El<br/>Teknik<br/>Hizmet</h1>
+    <p class="hero-sub">Güvenlik kamerası, uydu & anten, kapı zili, elektrik tesisat. Kemalpaşa ve çevresinde profesyonel çözümler.</p>
+    <div class="hero-btns">
+      <a href="https://wa.me/905367807059" class="btn-primary" target="_blank">
+        📲 WhatsApp'tan Ulaş
+      </a>
+      <a href="#hizmetler" class="btn-secondary">
+        Hizmetlerimiz ↓
+      </a>
+    </div>
+    <div class="hero-line"></div>
+  </section>
+
+  <!-- SERVICES -->
+
+  <section class="services" id="hizmetler">
+    <p class="section-tag">Ne yapıyoruz</p>
+    <h2 class="section-title">Hizmetlerimiz</h2>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">📡</div>
+        <div class="service-content">
+          <h3>Uydu & Anten</h3>
+          <p>Çanak anten kurulum ve hizalama. Çok uydu sistemleri, uydu alıcısı kurulumu.</p>
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">📷</div>
+        <div class="service-content">
+          <h3>Güvenlik & Alarm</h3>
+          <p>CCTV kurulum ve yapılandırma. IP kamera sistemleri, Hikvision Partner Pro yetkili teknisyen.</p>
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🔔</div>
+        <div class="service-content">
+          <h3>Kapı Zili Sistemleri</h3>
+          <p>Kablosuz ve kablolu alarm kurulumu. Görüntülü diafon, interkom sistemleri.</p>
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">⚡</div>
+        <div class="service-content">
+          <h3>Tesisat Röntgeni</h3>
+          <p>Elektrik altyapısı tespiti ve raporu. Mevcut tesisat analizi, arıza tespiti.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+
+  <section class="about" id="hakkinda">
+    <p class="section-tag">Kim biz</p>
+    <div class="about-inner">
+      <h2 class="about-name">Burak Sıvacı</h2>
+      <p class="about-role">Saha Teknisyeni · Ar-El Armutlu Elektrik</p>
+      <p class="about-text">
+        Kemalpaşa ve çevresinde yıllardır güvenilir teknik hizmet sunuyorum. 
+        Her işi kendi evimde yapıyormuşum gibi özenle tamamlarım. 
+        Armut.com'da 5.0 puan ile hizmet veriyorum.
+      </p>
+      <div class="about-badges">
+        <span class="badge">Hikvision Partner Pro</span>
+        <span class="badge">Armut.com 5.0 ⭐</span>
+        <span class="badge">Kemalpaşa · İzmir</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+
+  <section class="contact" id="iletisim">
+    <p class="section-tag">Bize ulaşın</p>
+    <h2 class="section-title">İletişim</h2>
+    <div class="contact-items">
+      <a href="https://wa.me/905367807059" class="contact-item" target="_blank">
+        <div class="contact-item-icon">💬</div>
+        <div>
+          <div class="contact-item-label">WhatsApp</div>
+          <div class="contact-item-value">0536 780 70 59</div>
+        </div>
+      </a>
+      <a href="tel:+905367807059" class="contact-item">
+        <div class="contact-item-icon">📞</div>
+        <div>
+          <div class="contact-item-label">Telefon</div>
+          <div class="contact-item-value">0536 780 70 59</div>
+        </div>
+      </a>
+      <a href="https://instagram.com/sahadateknisyenvar" class="contact-item" target="_blank">
+        <div class="contact-item-icon">📸</div>
+        <div>
+          <div class="contact-item-label">Instagram</div>
+          <div class="contact-item-value">@sahadateknisyenvar</div>
+        </div>
+      </a>
+      <div class="contact-item" style="cursor:default;">
+        <div class="contact-item-icon">📍</div>
+        <div>
+          <div class="contact-item-label">Konum</div>
+          <div class="contact-item-value">Kemalpaşa, İzmir</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+
+  <footer>
+    <div class="footer-logo">Ar<span>-</span>El</div>
+    <div class="footer-text">Armutlu Elektrik · Kemalpaşa · İzmir</div>
+  </footer>
+
+  <!-- WHATSAPP FLOAT -->
+
+  <a href="https://wa.me/905367807059" class="wa-float" target="_blank" title="WhatsApp ile ulaş">
+    💬
+  </a>
+
+</body>
+</html>
