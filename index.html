@@ -1,0 +1,1462 @@
+<!DOCTYPE html>
+
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ar-El Teknik | Elektrik · Kamera · Anten · Kapı Sistemi — Kemalpaşa İzmir</title>
+  <meta name="description" content="Kemalpaşa, Armutlu ve OSB bölgesinde güvenlik kamerası (Hikvision Partner Pro), elektrik tesisatı, uydu & anten, kapı otomasyonu hizmetleri. 0536 780 70 59" />
+  <meta name="keywords" content="elektrikçi kemalpaşa, güvenlik kamerası kemalpaşa, hikvision izmir, anten kurulum armutlu, tesisat röntgeni, kapı zili kemalpaşa" />
+  <meta property="og:title" content="Ar-El Teknik | Kemalpaşa İzmir" />
+  <meta property="og:description" content="Hikvision Partner Pro sertifikalı teknik hizmet. 0536 780 70 59" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #0c0c0c;
+      --bg2: #141414;
+      --bg3: #1c1c1c;
+      --amber: #f59e0b;
+      --amber-dim: #92400e;
+      --text: #e5e5e5;
+      --text-dim: #737373;
+      --border: #2a2a2a;
+      --white: #ffffff;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Barlow', sans-serif;
+      font-weight: 400;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ─── HEADER ─── */
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 24px;
+      background: rgba(12,12,12,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .logo {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800;
+      font-size: 22px;
+      letter-spacing: 0.08em;
+      color: var(--white);
+    }
+    .logo span { color: var(--amber); }
+
+    .header-cta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .badge-hpp {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: #1a1200;
+      border: 1px solid var(--amber-dim);
+      border-radius: 4px;
+      padding: 4px 10px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--amber);
+      text-transform: uppercase;
+    }
+
+    .badge-hpp::before {
+      content: '✦';
+      font-size: 10px;
+    }
+
+    .btn-wa {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      background: #15803d;
+      color: #fff;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: 0.05em;
+      padding: 8px 16px;
+      border-radius: 4px;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .btn-wa:hover { background: #16a34a; }
+    .btn-wa svg { width: 16px; height: 16px; flex-shrink: 0; }
+
+    /* ─── HERO ─── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 120px 24px 60px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 60px 60px;
+      opacity: 0.4;
+    }
+
+    .hero-glow {
+      position: absolute;
+      bottom: -120px;
+      left: -80px;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(ellipse, rgba(245,158,11,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-content { position: relative; z-index: 1; max-width: 800px; }
+
+    .hero-eyebrow {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 16px;
+    }
+
+    .hero-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(48px, 10vw, 96px);
+      font-weight: 800;
+      line-height: 0.95;
+      letter-spacing: -0.01em;
+      color: var(--white);
+      margin-bottom: 24px;
+    }
+
+    .hero-title em {
+      font-style: normal;
+      color: var(--amber);
+    }
+
+    .hero-sub {
+      font-size: 17px;
+      font-weight: 300;
+      color: var(--text-dim);
+      max-width: 480px;
+      margin-bottom: 40px;
+      line-height: 1.7;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--amber);
+      color: #000;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 16px;
+      letter-spacing: 0.06em;
+      padding: 14px 28px;
+      border-radius: 4px;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .btn-primary:hover { opacity: 0.88; }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 600;
+      font-size: 16px;
+      letter-spacing: 0.06em;
+      padding: 13px 24px;
+      border-radius: 4px;
+      text-decoration: none;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-secondary:hover { border-color: var(--amber); color: var(--amber); }
+
+    .hero-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 32px;
+      margin-top: 64px;
+      padding-top: 40px;
+      border-top: 1px solid var(--border);
+    }
+
+    .stat-item {}
+    .stat-num {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 36px;
+      font-weight: 800;
+      color: var(--amber);
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 12px;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-top: 4px;
+    }
+
+    /* ─── SECTION BASE ─── */
+    section { padding: 80px 24px; }
+    .section-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(32px, 6vw, 56px);
+      font-weight: 800;
+      line-height: 1.0;
+      color: var(--white);
+      margin-bottom: 48px;
+    }
+    .max-w { max-width: 900px; margin: 0 auto; }
+
+    /* ─── GÜVEN ÇUBUĞU ─── */
+    .trust-bar {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 20px 24px;
+    }
+
+    .trust-bar-inner {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex: 1;
+      min-width: 200px;
+      padding: 8px 24px;
+      border-right: 1px solid var(--border);
+    }
+    .trust-item:first-child { padding-left: 0; }
+    .trust-item:last-child { border-right: none; }
+
+    .trust-icon {
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+    .trust-text-main {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: 0.04em;
+    }
+    .trust-text-sub {
+      font-size: 11px;
+      color: var(--text-dim);
+    }
+
+    /* ─── HİZMETLER ─── */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+
+    .service-card {
+      background: var(--bg2);
+      padding: 36px 32px;
+      transition: background 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .service-card:hover { background: var(--bg3); }
+
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--amber);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s;
+    }
+    .service-card:hover::before { transform: scaleX(1); }
+
+    .service-icon {
+      font-size: 28px;
+      margin-bottom: 16px;
+      display: block;
+    }
+    .service-name {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 10px;
+    }
+    .service-desc {
+      font-size: 14px;
+      color: var(--text-dim);
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+    .service-tag {
+      display: inline-block;
+      background: #1a1200;
+      border: 1px solid var(--amber-dim);
+      color: var(--amber);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      padding: 3px 8px;
+      border-radius: 2px;
+      text-transform: uppercase;
+    }
+
+    /* ─── HPP BÖLÜMÜ ─── */
+    .hpp-section {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .hpp-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .hpp-badge-block {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .hpp-logo-box {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: #0d0900;
+      border: 2px solid var(--amber-dim);
+      border-radius: 8px;
+      padding: 20px 28px;
+      width: fit-content;
+    }
+
+    .hpp-logo-text {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800;
+      font-size: 28px;
+      color: var(--amber);
+      letter-spacing: 0.06em;
+    }
+
+    .hpp-logo-sub {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      color: #92400e;
+      text-transform: uppercase;
+    }
+
+    .hpp-divider {
+      width: 32px;
+      height: 2px;
+      background: var(--amber-dim);
+    }
+
+    .hpp-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 36px;
+      font-weight: 800;
+      color: var(--white);
+      line-height: 1.1;
+    }
+
+    .hpp-text {
+      font-size: 15px;
+      color: var(--text-dim);
+      line-height: 1.8;
+    }
+
+    .hpp-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .hpp-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 14px;
+      color: var(--text);
+    }
+
+    .hpp-list li::before {
+      content: '✦';
+      color: var(--amber);
+      font-size: 10px;
+      margin-top: 4px;
+      flex-shrink: 0;
+    }
+
+    /* ─── BÖLGE ─── */
+    .region-section { background: var(--bg); }
+
+    .region-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      max-width: 900px;
+    }
+
+    .region-card {
+      background: var(--bg2);
+      padding: 28px 24px;
+    }
+
+    .region-name {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 4px;
+    }
+
+    .region-detail {
+      font-size: 12px;
+      color: var(--text-dim);
+    }
+
+    /* ─── REFERANSLAR ─── */
+    .gallery-section { background: var(--bg2); }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+
+    .gallery-item {
+      background: var(--bg3);
+      aspect-ratio: 4/3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .gallery-item::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border: 2px solid var(--amber);
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+    .gallery-item:hover::after { opacity: 1; }
+
+    .gallery-icon { font-size: 32px; opacity: 0.3; }
+    .gallery-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      color: var(--text-dim);
+      text-transform: uppercase;
+    }
+    .gallery-note {
+      font-size: 11px;
+      color: #404040;
+      position: absolute;
+      bottom: 8px;
+      font-style: italic;
+    }
+
+    /* ─── GARANTİ ─── */
+    .garanti-section { background: var(--bg); }
+
+    .garanti-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 24px;
+      max-width: 900px;
+    }
+
+    .garanti-card {
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 28px 24px;
+      background: var(--bg2);
+    }
+
+    .garanti-num {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 48px;
+      font-weight: 800;
+      color: var(--amber);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .garanti-unit {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--amber-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 12px;
+    }
+
+    .garanti-text {
+      font-size: 14px;
+      color: var(--text-dim);
+      line-height: 1.7;
+    }
+
+    /* ─── ÇALIŞMA SAATLERİ ─── */
+    .hours-section {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+    }
+
+    .hours-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: start;
+    }
+
+    .hours-table {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      border: 1px solid var(--border);
+    }
+
+    .hours-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--border);
+    }
+    .hours-row:last-child { border-bottom: none; }
+
+    .hours-day {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text);
+      letter-spacing: 0.04em;
+    }
+
+    .hours-time {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--amber);
+    }
+
+    .hours-time.closed { color: var(--text-dim); font-weight: 400; }
+
+    .hours-note {
+      background: #0d0900;
+      border: 1px solid var(--amber-dim);
+      border-radius: 4px;
+      padding: 16px 20px;
+      font-size: 13px;
+      color: var(--text-dim);
+      line-height: 1.7;
+      margin-top: 16px;
+    }
+
+    .hours-note strong { color: var(--amber); }
+
+    .contact-block { display: flex; flex-direction: column; gap: 20px; }
+
+    .contact-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .contact-label {
+      font-size: 11px;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+    }
+
+    .contact-value {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--white);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .contact-value:hover { color: var(--amber); }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+      padding: 32px 24px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 100%;
+    }
+
+    .footer-left {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: 0.06em;
+    }
+    .footer-left span { color: var(--amber); }
+
+    .footer-right {
+      font-size: 12px;
+      color: var(--text-dim);
+    }
+
+    .version-tag {
+      display: inline-block;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      color: #404040;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      padding: 2px 6px;
+      border-radius: 2px;
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 680px) {
+      header { padding: 12px 16px; }
+      .badge-hpp { display: none; }
+      .btn-wa span { display: none; }
+
+      .hero { padding: 100px 16px 48px; }
+
+      section { padding: 60px 16px; }
+
+      .hpp-inner { grid-template-columns: 1fr; gap: 36px; }
+      .hours-inner { grid-template-columns: 1fr; gap: 36px; }
+
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+
+      .trust-item { border-right: none; border-bottom: 1px solid var(--border); }
+      .trust-item:last-child { border-bottom: none; }
+    }
+
+    /* ─── ANİMASYON ─── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-eyebrow { animation: fadeUp 0.6s ease both; }
+    .hero-title { animation: fadeUp 0.6s 0.1s ease both; }
+    .hero-sub { animation: fadeUp 0.6s 0.2s ease both; }
+    .hero-actions { animation: fadeUp 0.6s 0.3s ease both; }
+    .hero-stats { animation: fadeUp 0.6s 0.4s ease both; }
+  </style>
+
+</head>
+<body>
+
+<!-- HEADER -->
+
+<header>
+  <div class="logo">AR<span>·</span>EL</div>
+  <div class="header-cta">
+    <div class="badge-hpp">Hikvision Partner Pro</div>
+    <a href="#teklif" style="font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:700;color:var(--amber);text-decoration:none;letter-spacing:0.06em;">Teklif Hesapla</a>
+    <a class="btn-wa" href="https://wa.me/905367807059?text=Merhaba%2C%20bilgi%20almak%20istiyorum." target="_blank">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.556 4.112 1.527 5.84L0 24l6.317-1.502A11.956 11.956 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.011-1.371l-.36-.214-3.727.885.924-3.619-.235-.372A9.818 9.818 0 1112 21.818z"/></svg>
+      <span>WhatsApp</span>
+    </a>
+  </div>
+</header>
+
+<!-- HERO -->
+
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Kemalpaşa · Armutlu · OSB · İzmir</div>
+    <h1 class="hero-title">
+      Teknik<br>
+      Hizmet.<br>
+      <em>Güven ile.</em>
+    </h1>
+    <p class="hero-sub">
+      Güvenlik kamerası, elektrik tesisatı, uydu &amp; anten, kapı otomasyonu.
+      Kemalpaşa ve bölgesinde 7+ yıl saha deneyimi.
+    </p>
+    <div class="hero-actions">
+      <a class="btn-primary" href="https://wa.me/905367807059?text=Merhaba%2C%20teklif%20almak%20istiyorum." target="_blank">
+        Teklif Al
+      </a>
+      <a class="btn-secondary" href="#hizmetler">Hizmetler ↓</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="stat-num">7+</div>
+        <div class="stat-label">Yıl Deneyim</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">HPP</div>
+        <div class="stat-label">Hikvision Sertifikası</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">1 YIL</div>
+        <div class="stat-label">İşçilik Garantisi</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">4 SAA</div>
+        <div class="stat-label">Maks. Yanıt Süresi</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GÜVEN ÇUBUĞU -->
+
+<div class="trust-bar">
+  <div class="trust-bar-inner">
+    <div class="trust-item">
+      <span class="trust-icon">🔒</span>
+      <div>
+        <div class="trust-text-main">Hikvision Partner Pro</div>
+        <div class="trust-text-sub">Sertifikalı Kurulum & Servis</div>
+      </div>
+    </div>
+    <div class="trust-item">
+      <span class="trust-icon">⚡</span>
+      <div>
+        <div class="trust-text-main">Aynı Gün Yanıt</div>
+        <div class="trust-text-sub">Çağrı saatleri içinde maks. 4 saat</div>
+      </div>
+    </div>
+    <div class="trust-item">
+      <span class="trust-icon">🛡️</span>
+      <div>
+        <div class="trust-text-main">1 Yıl İşçilik Garantisi</div>
+        <div class="trust-text-sub">Tüm kurulum işlerinde geçerli</div>
+      </div>
+    </div>
+    <div class="trust-item">
+      <span class="trust-icon">📍</span>
+      <div>
+        <div class="trust-text-main">Kemalpaşa Bölgesi</div>
+        <div class="trust-text-sub">OSB · Armutlu · Örnekköy</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- HİZMETLER -->
+
+<section id="hizmetler">
+  <div class="max-w">
+    <div class="section-label">Ne Yapıyoruz</div>
+    <h2 class="section-title">Hizmetler</h2>
+    <div class="services-grid">
+
+```
+  <div class="service-card">
+    <span class="service-icon">📷</span>
+    <div class="service-name">Güvenlik Kamerası</div>
+    <p class="service-desc">
+      IP ve HD-TVI kamera sistemleri. NVR/DVR yapılandırması, uzaktan izleme kurulumu.
+      WiFi kameradan çok kameralı kurumsal sisteme kadar her ölçek.
+    </p>
+    <span class="service-tag">Hikvision HPP</span>
+  </div>
+
+  <div class="service-card">
+    <span class="service-icon">⚡</span>
+    <div class="service-name">Tesisat Röntgeni</div>
+    <p class="service-desc">
+      Gizli kablo tespiti, arıza lokalizasyonu, sigorta ve pano analizi.
+      Raporlu profesyonel inceleme — A, B ve C paket seçenekleri mevcuttur.
+    </p>
+    <span class="service-tag">Raporlu Hizmet</span>
+  </div>
+
+  <div class="service-card">
+    <span class="service-icon">📡</span>
+    <div class="service-name">Uydu & Anten</div>
+    <p class="service-desc">
+      Çanak anten kurulum ve hizalama, çok uydu sistemleri, multiswich kurulumu.
+      1 yıl işçilik garantisi. Aynı gün servis imkânı.
+    </p>
+    <span class="service-tag">1 Yıl Garanti</span>
+  </div>
+
+  <div class="service-card">
+    <span class="service-icon">🔔</span>
+    <div class="service-name">Kapı Otomasyonu</div>
+    <p class="service-desc">
+      Görüntülü ve sesli diafon, interkom, villa kit, kapı zili sistemleri.
+      Tek daire kurulumundan çok katlı bina entegrasyonuna.
+    </p>
+    <span class="service-tag">Kurulum + Servis</span>
+  </div>
+
+  <div class="service-card">
+    <span class="service-icon">🌐</span>
+    <div class="service-name">Ağ Altyapısı</div>
+    <p class="service-desc">
+      Fiber bağlantı testi, modem/router kurulumu, yapılandırılmış kablolama.
+      Kamera sistemi altyapısıyla entegre çözüm.
+    </p>
+    <span class="service-tag">Yapılandırma Dahil</span>
+  </div>
+
+  <div class="service-card">
+    <span class="service-icon">🔧</span>
+    <div class="service-name">Elektrik Tesisatı</div>
+    <p class="service-desc">
+      Sigorta arızası, priz &amp; anahtar montajı, aydınlatma kurulumu, pano bakımı.
+      Konut ve küçük ölçekli ticari alanlarda.
+    </p>
+    <span class="service-tag">Kemalpaşa Bölgesi</span>
+  </div>
+
+</div>
+```
+
+  </div>
+</section>
+
+<!-- HİKVİSİON HPP BÖLÜMÜ -->
+
+<section class="hpp-section" id="hpp">
+  <div class="hpp-inner">
+    <div class="hpp-badge-block">
+      <div class="hpp-logo-box">
+        <div>
+          <div class="hpp-logo-text">HIKVISION</div>
+          <div class="hpp-logo-sub">Partner Pro · Sertifikalı</div>
+        </div>
+      </div>
+      <div class="hpp-divider"></div>
+      <div class="hpp-title">Sertifikalı<br>güvenlik<br>kurulumu.</div>
+    </div>
+
+```
+<div>
+  <div class="section-label">Neden HPP Önemli?</div>
+  <p class="hpp-text" style="margin-bottom:24px;">
+    Hikvision Partner Pro sertifikası, sadece ürün satın almak değil —
+    teknik yetkinlik, garanti kapsamı ve resmi destek anlamına gelir.
+    Sertifikasız kurulumlarda cihaz garantisi geçersiz sayılabilir.
+  </p>
+  <ul class="hpp-list">
+    <li>Hikvision tarafından yetkilendirilmiş kurulum ve yapılandırma</li>
+    <li>Uzaktan Hik-Partner Pro sistemi üzerinden arıza takibi</li>
+    <li>Cihaz garantisinin korunması için belgeli kurulum</li>
+    <li>NVR/DVR ve kamera konfigürasyonu fabrika standardında</li>
+    <li>Sigorta eksperi denetimine uygun periyodik bakım raporu</li>
+  </ul>
+</div>
+```
+
+  </div>
+</section>
+
+<!-- HİZMET BÖLGESİ -->
+
+<section class="region-section" id="bolge">
+  <div class="max-w">
+    <div class="section-label">Nereye Gidiyoruz</div>
+    <h2 class="section-title">Hizmet Bölgesi</h2>
+    <div class="region-grid">
+      <div class="region-card">
+        <div class="region-name">Armutlu</div>
+        <div class="region-detail">Kemalpaşa — Ana bölge</div>
+      </div>
+      <div class="region-card">
+        <div class="region-name">Kemalpaşa OSB</div>
+        <div class="region-detail">Organize Sanayi Bölgesi</div>
+      </div>
+      <div class="region-card">
+        <div class="region-name">Örnekköy</div>
+        <div class="region-detail">Kemalpaşa</div>
+      </div>
+      <div class="region-card">
+        <div class="region-name">Ulucak</div>
+        <div class="region-detail">Kemalpaşa</div>
+      </div>
+      <div class="region-card">
+        <div class="region-name">Kemalpaşa Merkez</div>
+        <div class="region-detail">İlçe merkezi</div>
+      </div>
+      <div class="region-card">
+        <div class="region-name">İzmir Çevresi</div>
+        <div class="region-detail">Teklif alınız — Büyük işler</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REFERANS GALERİSİ -->
+
+<section class="gallery-section" id="referanslar">
+  <div class="max-w">
+    <div class="section-label">Yapılan İşler</div>
+    <h2 class="section-title">Referanslar</h2>
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <span class="gallery-icon">📷</span>
+        <span class="gallery-label">Kamera Kurulum</span>
+        <span class="gallery-note">Fotoğraf yükleniyor</span>
+      </div>
+      <div class="gallery-item">
+        <span class="gallery-icon">📷</span>
+        <span class="gallery-label">NVR Kurulum</span>
+        <span class="gallery-note">Fotoğraf yükleniyor</span>
+      </div>
+      <div class="gallery-item">
+        <span class="gallery-icon">📡</span>
+        <span class="gallery-label">Anten Kurulum</span>
+        <span class="gallery-note">Fotoğraf yükleniyor</span>
+      </div>
+      <div class="gallery-item">
+        <span class="gallery-icon">⚡</span>
+        <span class="gallery-label">Tesisat Röntgeni</span>
+        <span class="gallery-note">Fotoğraf yükleniyor</span>
+      </div>
+      <div class="gallery-item">
+        <span class="gallery-icon">🔔</span>
+        <span class="gallery-label">Kapı Sistemi</span>
+        <span class="gallery-note">Fotoğraf yükleniyor</span>
+      </div>
+      <div class="gallery-item">
+        <span class="gallery-icon">🔧</span>
+        <span class="gallery-label">Pano Bakım</span>
+        <span class="gallery-note">Fotoğraf yükleniyor</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GARANTİ -->
+
+<section class="garanti-section" id="garanti">
+  <div class="max-w">
+    <div class="section-label">Taahhütlerimiz</div>
+    <h2 class="section-title">Garanti Koşulları</h2>
+    <div class="garanti-grid">
+      <div class="garanti-card">
+        <div class="garanti-num">1</div>
+        <div class="garanti-unit">Yıl — İşçilik</div>
+        <p class="garanti-text">
+          Tüm kurulum işlerinde 1 yıl işçilik garantisi.
+          Aynı arızada ikinci kez ücret alınmaz.
+        </p>
+      </div>
+      <div class="garanti-card">
+        <div class="garanti-num">4</div>
+        <div class="garanti-unit">Saat — Yanıt</div>
+        <p class="garanti-text">
+          Çalışma saatleri içinde gelen çağrılarda maksimum 4 saat içinde geri dönüş garantisi.
+        </p>
+      </div>
+      <div class="garanti-card">
+        <div class="garanti-num">Net</div>
+        <div class="garanti-unit">Fiyat Teklifi</div>
+        <p class="garanti-text">
+          Yerinde inceleme sonrası verilen fiyat değişmez.
+          Gizli ek ücret uygulanmaz.
+        </p>
+      </div>
+      <div class="garanti-card">
+        <div class="garanti-num">HPP</div>
+        <div class="garanti-unit">Belgeli Kurulum</div>
+        <p class="garanti-text">
+          Hikvision sistemler HPP standardında kurulur. Cihaz garantisi korunur, sigorta uyumluluğu sağlanır.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ÇALIŞMA SAATLERİ -->
+
+<section class="hours-section" id="iletisim">
+  <div class="hours-inner">
+    <div>
+      <div class="section-label">Ne Zaman Ulaşabilirsiniz</div>
+      <h2 class="section-title" style="font-size:36px;margin-bottom:24px;">Çalışma<br>Saatleri</h2>
+      <div class="hours-table">
+        <div class="hours-row">
+          <span class="hours-day">Pazartesi – Cuma</span>
+          <span class="hours-time">08:00 – 19:00</span>
+        </div>
+        <div class="hours-row">
+          <span class="hours-day">Cumartesi</span>
+          <span class="hours-time">09:00 – 17:00</span>
+        </div>
+        <div class="hours-row">
+          <span class="hours-day">Pazar</span>
+          <span class="hours-time closed">Randevuya Göre</span>
+        </div>
+      </div>
+      <div class="hours-note">
+        <strong>Acil durum?</strong> Mesai saatleri dışı acil arızalar için WhatsApp üzerinden ulaşın — yanıt süresi en geç 2 saattir.
+      </div>
+    </div>
+
+```
+<div class="contact-block">
+  <div class="section-label">İletişim</div>
+  <div class="contact-item">
+    <span class="contact-label">Telefon & WhatsApp</span>
+    <a class="contact-value" href="tel:+905367807059">0536 780 70 59</a>
+  </div>
+  <div class="contact-item">
+    <span class="contact-label">Instagram</span>
+    <a class="contact-value" href="https://instagram.com/sahadateknisyenvar" target="_blank">@sahadateknisyenvar</a>
+  </div>
+  <div class="contact-item">
+    <span class="contact-label">Bölge</span>
+    <span class="contact-value" style="font-size:18px;">Kemalpaşa, İzmir</span>
+  </div>
+  <a class="btn-primary" href="https://wa.me/905367807059?text=Merhaba%2C%20teklif%20almak%20istiyorum." target="_blank" style="width:fit-content;margin-top:8px;">
+    WhatsApp'tan Yaz ↗
+  </a>
+</div>
+```
+
+  </div>
+</section>
+
+<!-- TEKLİF HESAPLAYICI -->
+
+<section id="teklif" style="background:var(--bg2);border-top:1px solid var(--border);">
+  <div class="max-w">
+    <div class="section-label">Anında Fiyat</div>
+    <h2 class="section-title">Teklif Hesaplayıcı</h2>
+
+```
+<div id="calc-wrap">
+
+  <!-- ADIM 1: HİZMET SEÇ -->
+  <div id="step-1" class="calc-step">
+    <div class="calc-step-label">Adım 1 / 3 — Hizmet Seçin</div>
+    <div class="calc-services">
+      <button class="calc-service-btn" onclick="selectService('kamera')">
+        <span class="calc-btn-icon">📷</span>
+        <span class="calc-btn-name">Güvenlik Kamerası</span>
+      </button>
+      <button class="calc-service-btn" onclick="selectService('anten')">
+        <span class="calc-btn-icon">📡</span>
+        <span class="calc-btn-name">Uydu & Anten</span>
+      </button>
+      <button class="calc-service-btn" onclick="selectService('kapi')">
+        <span class="calc-btn-icon">🔔</span>
+        <span class="calc-btn-name">Kapı / Diafon</span>
+      </button>
+      <button class="calc-service-btn" onclick="selectService('tesisat')">
+        <span class="calc-btn-icon">⚡</span>
+        <span class="calc-btn-name">Tesisat Röntgeni</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ADIM 2: DETAY — KAMERA -->
+  <div id="step-kamera" class="calc-step" style="display:none;">
+    <div class="calc-step-label">Adım 2 / 3 — Güvenlik Kamerası</div>
+    <div class="calc-question">Kaç kamera kurulacak?</div>
+    <div class="calc-options">
+      <button class="calc-opt-btn" onclick="selectDetail('kamera','1')">1 Kamera<br><small>WiFi / Standalone</small></button>
+      <button class="calc-opt-btn" onclick="selectDetail('kamera','2-4')">2 – 4 Kamera<br><small>Hikvision Sistem</small></button>
+      <button class="calc-opt-btn" onclick="selectDetail('kamera','5+')">5+ Kamera<br><small>Kurumsal / OSB</small></button>
+    </div>
+    <button class="calc-back-btn" onclick="goBack()">← Geri</button>
+  </div>
+
+  <!-- ADIM 2: DETAY — ANTEN -->
+  <div id="step-anten" class="calc-step" style="display:none;">
+    <div class="calc-step-label">Adım 2 / 3 — Uydu & Anten</div>
+    <div class="calc-question">Ne yapılacak?</div>
+    <div class="calc-options">
+      <button class="calc-opt-btn" onclick="selectDetail('anten','kurulum')">Çanak Anten Kurulum<br><small>Komple montaj</small></button>
+      <button class="calc-opt-btn" onclick="selectDetail('anten','ayarlama')">Sinyal Ayarlama<br><small>Mevcut sistem</small></button>
+      <button class="calc-opt-btn" onclick="selectDetail('anten','her-ikisi')">Kurulum + Ayarlama<br><small>Komple hizmet</small></button>
+    </div>
+    <button class="calc-back-btn" onclick="goBack()">← Geri</button>
+  </div>
+
+  <!-- ADIM 2: DETAY — KAPI -->
+  <div id="step-kapi" class="calc-step" style="display:none;">
+    <div class="calc-step-label">Adım 2 / 3 — Kapı / Diafon</div>
+    <div class="calc-question">Sistem tipi?</div>
+    <div class="calc-options">
+      <button class="calc-opt-btn" onclick="selectDetail('kapi','goruntulu')">Görüntülü Diafon<br><small>Tek daire / Villa</small></button>
+      <button class="calc-opt-btn" onclick="selectDetail('kapi','sesli')">Sesli Diafon<br><small>Temel model</small></button>
+      <button class="calc-opt-btn" onclick="selectDetail('kapi','interkom')">Çok Daire İnterkom<br><small>Bina sistemi</small></button>
+    </div>
+    <button class="calc-back-btn" onclick="goBack()">← Geri</button>
+  </div>
+
+  <!-- ADIM 2: DETAY — TESİSAT -->
+  <div id="step-tesisat" class="calc-step" style="display:none;">
+    <div class="calc-step-label">Adım 2 / 3 — Tesisat Röntgeni</div>
+    <div class="calc-question">Paket seçin</div>
+    <div class="calc-options calc-options-3">
+      <button class="calc-opt-btn" onclick="selectDetail('tesisat','A')">
+        <strong>Paket A</strong><br>
+        <small>Temel inceleme<br>Arıza tespiti</small>
+      </button>
+      <button class="calc-opt-btn" onclick="selectDetail('tesisat','B')">
+        <strong>Paket B</strong><br>
+        <small>Orta düzey<br>Rapor dahil</small>
+      </button>
+      <button class="calc-opt-btn" onclick="selectDetail('tesisat','C')">
+        <strong>Paket C</strong><br>
+        <small>Detaylı analiz<br>Profesyonel rapor</small>
+      </button>
+    </div>
+    <button class="calc-back-btn" onclick="goBack()">← Geri</button>
+  </div>
+
+  <!-- ADIM 3: SONUÇ -->
+  <div id="step-result" class="calc-step" style="display:none;">
+    <div class="calc-step-label">Adım 3 / 3 — Tahmini Fiyat</div>
+    <div class="calc-result-box">
+      <div class="calc-result-service" id="result-service"></div>
+      <div class="calc-result-detail" id="result-detail"></div>
+      <div class="calc-result-price" id="result-price"></div>
+      <div class="calc-result-note">
+        ✦ Kesin fiyat yerinde inceleme sonrası belirlenir.<br>
+        ✦ 1 yıl işçilik garantisi tüm kurulumları kapsar.<br>
+        ✦ Gizli ek ücret uygulanmaz.
+      </div>
+      <a id="result-wa-btn" class="btn-primary" href="#" target="_blank" style="width:100%;justify-content:center;margin-top:8px;">
+        WhatsApp'tan Teklif Al ↗
+      </a>
+    </div>
+    <button class="calc-back-btn" onclick="goBack()">← Geri</button>
+  </div>
+
+</div>
+```
+
+  </div>
+</section>
+
+<style>
+  .calc-step-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 24px;
+  }
+
+  .calc-question {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 20px;
+  }
+
+  .calc-services {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    max-width: 600px;
+  }
+
+  .calc-service-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 28px 20px;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+    color: var(--text);
+  }
+  .calc-service-btn:hover {
+    border-color: var(--amber);
+    background: #1a1200;
+  }
+
+  .calc-btn-icon { font-size: 28px; }
+  .calc-btn-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--white);
+    letter-spacing: 0.04em;
+  }
+
+  .calc-options {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    max-width: 600px;
+    margin-bottom: 20px;
+  }
+
+  .calc-options-3 .calc-opt-btn { text-align: left; }
+
+  .calc-opt-btn {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 20px 16px;
+    cursor: pointer;
+    color: var(--text);
+    font-size: 14px;
+    line-height: 1.6;
+    text-align: center;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .calc-opt-btn strong {
+    display: block;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 4px;
+  }
+  .calc-opt-btn small { color: var(--text-dim); font-size: 12px; }
+  .calc-opt-btn:hover {
+    border-color: var(--amber);
+    background: #1a1200;
+    color: var(--text);
+  }
+
+  .calc-back-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-dim);
+    font-size: 14px;
+    cursor: pointer;
+    padding: 8px 0;
+    transition: color 0.2s;
+  }
+  .calc-back-btn:hover { color: var(--amber); }
+
+  .calc-result-box {
+    background: var(--bg3);
+    border: 1px solid var(--amber-dim);
+    border-radius: 8px;
+    padding: 32px 28px;
+    max-width: 480px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .calc-result-service {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--amber);
+  }
+
+  .calc-result-detail {
+    font-size: 15px;
+    color: var(--text-dim);
+  }
+
+  .calc-result-price {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 48px;
+    font-weight: 800;
+    color: var(--white);
+    line-height: 1;
+  }
+
+  .calc-result-note {
+    font-size: 12px;
+    color: var(--text-dim);
+    line-height: 1.8;
+    border-top: 1px solid var(--border);
+    padding-top: 12px;
+  }
+
+  @media (max-width: 520px) {
+    .calc-services { grid-template-columns: 1fr 1fr; }
+    .calc-options { grid-template-columns: 1fr; }
+  }
+</style>
+
+<script>
+  var currentService = '';
+  var history = [];
+
+  var prices = {
+    kamera: {
+      '1':   { label: '1 Kamera (WiFi)', price: '3.500 TL' },
+      '2-4': { label: '2–4 Kamera Sistemi (Hikvision)', price: '18.000 TL\'den başlar' },
+      '5+':  { label: '5+ Kamera (Kurumsal)', price: 'Yerinde teklif' }
+    },
+    anten: {
+      'kurulum':   { label: 'Çanak Anten Kurulum', price: '3.500 TL' },
+      'ayarlama':  { label: 'Sinyal Ayarlama', price: '800 TL' },
+      'her-ikisi': { label: 'Kurulum + Ayarlama', price: '4.300 TL' }
+    },
+    kapi: {
+      'goruntulu': { label: 'Görüntülü Diafon / Villa Kit', price: '10.000 TL' },
+      'sesli':     { label: 'Sesli Diafon', price: 'Yerinde teklif' },
+      'interkom':  { label: 'Çok Daire İnterkom', price: 'Yerinde teklif' }
+    },
+    tesisat: {
+      'A': { label: 'Paket A — Temel İnceleme', price: '3.000 TL' },
+      'B': { label: 'Paket B — Orta Düzey + Rapor', price: '10.000 TL' },
+      'C': { label: 'Paket C — Detaylı Analiz + Profesyonel Rapor', price: '20.000 TL' }
+    }
+  };
+
+  var serviceNames = {
+    kamera: 'Güvenlik Kamerası',
+    anten: 'Uydu & Anten',
+    kapi: 'Kapı / Diafon',
+    tesisat: 'Tesisat Röntgeni'
+  };
+
+  function showStep(id) {
+    document.querySelectorAll('.calc-step').forEach(function(el) {
+      el.style.display = 'none';
+    });
+    document.getElementById(id).style.display = 'block';
+  }
+
+  function selectService(service) {
+    currentService = service;
+    history.push('step-1');
+    showStep('step-' + service);
+  }
+
+  function selectDetail(service, detail) {
+    history.push('step-' + service);
+    var data = prices[service][detail];
+    document.getElementById('result-service').textContent = serviceNames[service];
+    document.getElementById('result-detail').textContent = data.label;
+    document.getElementById('result-price').textContent = data.price;
+
+    var msg = 'Merhaba, ' + serviceNames[service] + ' hizmeti için teklif almak istiyorum. (' + data.label + ' — ' + data.price + ')';
+    document.getElementById('result-wa-btn').href =
+      'https://wa.me/905367807059?text=' + encodeURIComponent(msg);
+
+    showStep('step-result');
+  }
+
+  function goBack() {
+    var prev = history.pop();
+    if (prev) showStep(prev);
+    else showStep('step-1');
+  }
+</script>
+
+<!-- FOOTER -->
+
+<footer>
+  <div class="footer-left">AR<span>·</span>EL <span style="color:#404040;font-size:14px;font-weight:400;">Armutlu Elektrik</span></div>
+  <div class="footer-right">
+    Kemalpaşa, İzmir &nbsp;·&nbsp; 0536 780 70 59 &nbsp;·&nbsp;
+    <span class="version-tag">v0.2.0</span>
+  </div>
+</footer>
+
+</body>
+</html>
