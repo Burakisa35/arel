@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#0c0c0c" />
+  <meta name="format-detection" content="telephone=no" />
+
+  <title>TEHAS | AR-EL Teknik</title>
+  <meta name="description" content="Kemalpaşa ve OSB bölgesinde kamera, elektrik ve teknik müdahale hizmetleri." />
+
+  <meta property="og:title" content="TEHAS | AR-EL Teknik" />
+  <meta property="og:description" content="Kamera, elektrik ve hızlı teknik müdahale." />
+  <meta property="og:type" content="website" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "AR-EL Teknik",
+    "telephone": "+905367807059",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Kemalpaşa",
+      "addressRegion": "İzmir",
+      "addressCountry": "TR"
+    },
+    "areaServed": ["Kemalpaşa", "Armutlu", "Kemalpaşa OSB", "İzmir"],
+    "sameAs": ["https://www.instagram.com/sahadateknisyenvar"]
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #0c0c0c;
+      --bg2: #141414;
+      --bg3: #1c1c1c;
+      --text: #f5f5f5;
+      --muted: #8a8a8a;
+      --dim: #555;
+      --border: #2a2a2a;
+      --amber: #f59e0b;
+      --amber-dark: #92400e;
+      --green: #16a34a;
+      --safe-top: max(0px, env(safe-area-inset-top));
+      --safe-bottom: max(18px, env(safe-area-inset-bottom));
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background: var(--bg);
+    }
+
+    body {
+      min-height: 100vh;
+      min-height: 100dvh;
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Arial, sans-serif;
+      overflow-x: hidden;
+      padding-bottom: calc(64px + var(--safe-bottom));
+    }
+
+    button,
+    a {
+      touch-action: manipulation;
+      cursor: pointer;
+    }
+
+    .app {
+      min-height: 100vh;
+      min-height: 100dvh;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: calc(14px + var(--safe-top)) 20px 14px;
+      background: rgba(12, 12, 12, 0.82);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .brand {
+      display: flex;
+      flex-direction: column;
+      line-height: 1;
+    }
+
+    .brand-main {
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      color: #fff;
+    }
+
+    .brand-sub {
+      margin-top: 4px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.24em;
+      color: var(--amber);
+    }
+
+    .menu-btn {
+      width: 40px;
+      height: 40px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 999px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .menu-btn span {
+      width: 16px;
+      height: 2px;
+      background: #fff;
+      border-radius: 2px;
+    }
+
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      min-height: 100dvh;
+      display: flex;
+      align-items: flex-end;
+      padding: calc(96px + var(--safe-top)) 20px 120px;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 72% 18%, rgba(245, 158, 11, 0.16), transparent 28%),
+        linear-gradient(180deg, rgba(255,255,255,0.02), transparent 40%),
+        var(--bg);
+      pointer-events: none;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+      background-size: 52px 52px;
+      opacity: 0.24;
+      pointer-events: none;
+    }
+
+    .hero-visual {
+      position: absolute;
+      top: 86px;
+      right: -70px;
+      width: min(76vw, 430px);
+      height: min(76vw, 430px);
+      border-radius: 50%;
+      background:
+        radial-gradient(circle, rgba(245,158,11,0.18), transparent 64%),
+        linear-gradient(145deg, #202020, #090909);
+      opacity: 0.94;
+      z-index: 1;
+    }
+
+    .hero-visual::before {
+      content: "";
+      position: absolute;
+      inset: 24%;
+      border-radius: 50%;
+      border: 2px solid rgba(245,158,11,0.32);
+      box-shadow: inset 0 0 40px rgba(0,0,0,0.7);
+    }
+
+    .hero-visual::after {
+      content: "CAM";
+      position: absolute;
+      top: 45%;
+      left: 28%;
+      font-size: 13px;
+      letter-spacing: 0.24em;
+      font-weight: 800;
+      color: rgba(255,255,255,0.22);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 520px;
+    }
+
+    .hero-title {
+      font-size: clamp(54px, 16vw, 96px);
+      line-height: 0.88;
+      letter-spacing: -0.06em;
+      font-weight: 900;
+      color: #fff;
+      margin-bottom: 28px;
+    }
+
+    .hero-title span {
+      color: var(--amber);
+    }
+
+    .actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .cta-primary,
+    .cta-secondary {
+      min-height: 48px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: 0.03em;
+      transition: transform 0.15s ease, opacity 0.15s ease, border-color 0.15s ease;
+    }
+
+    .cta-primary {
+      flex: 1;
+      background: var(--amber);
+      color: #000;
+      padding: 0 22px;
+    }
+
+    .cta-secondary {
+      min-width: 76px;
+      border: 1px solid var(--border);
+      color: #fff;
+      background: rgba(255,255,255,0.04);
+    }
+
+    .cta-primary:active,
+    .cta-secondary:active,
+    .category-card:active,
+    .bottom-action:active {
+      transform: scale(0.97);
+      opacity: 0.86;
+    }
+
+    .trust-line {
+      font-size: 12px;
+      color: var(--muted);
+      letter-spacing: 0.02em;
+    }
+
+    .trust-line strong {
+      color: #fff;
+      font-weight: 700;
+    }
+
+    .category-section {
+      position: relative;
+      z-index: 3;
+      padding: 0 20px 42px;
+      margin-top: -84px;
+    }
+
+    .category-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      max-width: 520px;
+    }
+
+    .category-card {
+      width: 100%;
+      min-height: 74px;
+      border: 1px solid var(--border);
+      background: linear-gradient(135deg, rgba(255,255,255,0.055), rgba(255,255,255,0.018));
+      color: #fff;
+      border-radius: 20px;
+      padding: 0 20px;
+      text-align: left;
+      font-size: 22px;
+      font-weight: 850;
+      letter-spacing: -0.02em;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .category-card::after {
+      content: "→";
+      color: var(--amber);
+      font-size: 22px;
+    }
+
+    .bottom-bar {
+      position: fixed;
+      left: 12px;
+      right: 12px;
+      bottom: calc(10px + env(safe-area-inset-bottom));
+      z-index: 9999;
+      display: grid;
+      grid-template-columns: 1fr 0.62fr;
+      gap: 8px;
+      padding: 8px;
+      background: rgba(12,12,12,0.82);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 999px;
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      box-shadow: 0 18px 60px rgba(0,0,0,0.55);
+    }
+
+    .bottom-action {
+      min-height: 46px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      text-decoration: none;
+      color: #fff;
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .bottom-action.primary {
+      background: var(--green);
+    }
+
+    .bottom-action.secondary {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .flow-panel {
+      position: fixed;
+      inset: 0;
+      z-index: 10001;
+      display: none;
+      align-items: flex-end;
+      background: rgba(0,0,0,0.64);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    .flow-panel.is-open {
+      display: flex;
+    }
+
+    .flow-sheet {
+      width: 100%;
+      max-height: 82vh;
+      overflow-y: auto;
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      border-radius: 28px 28px 0 0;
+      padding: 22px 20px calc(24px + var(--safe-bottom));
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .flow-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    .flow-kicker {
+      color: var(--amber);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+
+    .flow-title {
+      font-size: 30px;
+      line-height: 1;
+      letter-spacing: -0.04em;
+      font-weight: 900;
+    }
+
+    .close-btn {
+      width: 42px;
+      height: 42px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--bg3);
+      color: #fff;
+      font-size: 18px;
+      flex: 0 0 auto;
+    }
+
+    .option-grid {
+      display: grid;
+      gap: 10px;
+    }
+
+    .option-btn {
+      width: 100%;
+      min-height: 58px;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.035);
+      color: #fff;
+      text-align: left;
+      padding: 0 16px;
+      font-size: 17px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .option-btn::after {
+      content: "→";
+      color: var(--amber);
+    }
+
+    .summary {
+      display: grid;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .summary-row strong {
+      color: #fff;
+    }
+
+    .wa-final {
+      width: 100%;
+      min-height: 54px;
+      border-radius: 999px;
+      border: none;
+      background: var(--green);
+      color: #fff;
+      font-size: 16px;
+      font-weight: 900;
+    }
+
+    body.locked {
+      position: fixed;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    @media (min-width: 760px) {
+      body {
+        display: flex;
+        justify-content: center;
+      }
+
+      .app {
+        width: 430px;
+        min-height: 100vh;
+        min-height: 100dvh;
+        border-left: 1px solid rgba(255,255,255,0.06);
+        border-right: 1px solid rgba(255,255,255,0.06);
+      }
+
+      .header,
+      .bottom-bar {
+        left: 50%;
+        right: auto;
+        width: 430px;
+        transform: translateX(-50%);
+      }
+
+      .bottom-bar {
+        width: 406px;
+      }
+
+      .flow-panel {
+        justify-content: center;
+      }
+
+      .flow-sheet {
+        max-width: 430px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        scroll-behavior: auto !important;
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="app">
+    <header class="header">
+      <div class="brand" aria-label="TEHAS AR-EL">
+        <span class="brand-main">TEHAS</span>
+        <span class="brand-sub">AR-EL</span>
+      </div>
+
+      <button class="menu-btn" type="button" aria-label="Menü">
+        <span></span>
+        <span></span>
+      </button>
+    </header>
+
+    <section class="hero" aria-label="Giriş">
+      <div class="hero-visual" aria-hidden="true"></div>
+
+      <div class="hero-content">
+        <h1 class="hero-title">
+          HIZLI<br />
+          <span>MÜDAHALE</span>
+        </h1>
+
+        <div class="actions">
+          <a
+            class="cta-primary"
+            id="hero-whatsapp"
+            href="https://wa.me/905367807059?text=Merhaba%2C%20teknik%20hizmet%20almak%20istiyorum."
+            target="_blank"
+            rel="noopener"
+          >
+            WhatsApp
+          </a>
+
+          <a class="cta-secondary" href="tel:+905367807059">
+            Ara
+          </a>
+        </div>
+
+        <div class="trust-line">
+          <strong>Hikvision Partner Pro</strong>
+        </div>
+      </div>
+    </section>
+
+    <section class="category-section" aria-label="Alan seçimi">
+      <div class="category-grid">
+        <button class="category-card" type="button" data-area="Konut">Konut</button>
+        <button class="category-card" type="button" data-area="İşletme">İşletme</button>
+        <button class="category-card" type="button" data-area="Endüstri">Endüstri</button>
+      </div>
+    </section>
+  </main>
+
+  <nav class="bottom-bar" aria-label="Hızlı iletişim">
+    <a
+      class="bottom-action primary"
+      id="bottom-whatsapp"
+      href="https://wa.me/905367807059?text=Merhaba%2C%20teknik%20hizmet%20almak%20istiyorum."
+      target="_blank"
+      rel="noopener"
+    >
+      WhatsApp
+    </a>
+
+    <a class="bottom-action secondary" href="tel:+905367807059">
+      Ara
+    </a>
+  </nav>
+
+  <div class="flow-panel" id="flow-panel" aria-hidden="true">
+    <div class="flow-sheet" role="dialog" aria-modal="true" aria-labelledby="flow-title">
+      <div class="flow-head">
+        <div>
+          <div class="flow-kicker" id="flow-kicker">Seçim</div>
+          <div class="flow-title" id="flow-title">Hizmet</div>
+        </div>
+
+        <button class="close-btn" type="button" id="close-flow" aria-label="Kapat">×</button>
+      </div>
+
+      <div id="flow-content"></div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      "use strict";
+
+      var phone = "905367807059";
+      var body = document.body;
+      var panel = document.getElementById("flow-panel");
+      var closeFlow = document.getElementById("close-flow");
+      var flowKicker = document.getElementById("flow-kicker");
+      var flowTitle = document.getElementById("flow-title");
+      var flowContent = document.getElementById("flow-content");
+
+      var state = {
+        area: "",
+        service: "",
+        need: ""
+      };
+
+      var services = ["Kamera", "Elektrik", "Anten"];
+      var needs = ["Arıza", "Yeni Kurulum", "Bakım"];
+
+      function lockBody() {
+        body.classList.add("locked");
+      }
+
+      function unlockBody() {
+        body.classList.remove("locked");
+      }
+
+      function openPanel() {
+        panel.classList.add("is-open");
+        panel.setAttribute("aria-hidden", "false");
+        lockBody();
+      }
+
+      function closePanel() {
+        panel.classList.remove("is-open");
+        panel.setAttribute("aria-hidden", "true");
+        unlockBody();
+      }
+
+      function buildButton(label, onSelect) {
+        var btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "option-btn";
+        btn.textContent = label;
+
+        var fired = false;
+
+        function handler(event) {
+          if (event.type === "pointerdown") {
+            fired = true;
+            onSelect();
+            return;
+          }
+
+          if (event.type === "click" && !fired) {
+            onSelect();
+          }
+
+          setTimeout(function () {
+            fired = false;
+          }, 250);
+        }
+
+        btn.addEventListener("pointerdown", handler, { passive: true });
+        btn.addEventListener("click", handler);
+
+        return btn;
+      }
+
+      function renderServiceStep() {
+        flowKicker.textContent = state.area;
+        flowTitle.textContent = "Hizmet";
+
+        var wrap = document.createElement("div");
+        wrap.className = "option-grid";
+
+        services.forEach(function (service) {
+          wrap.appendChild(buildButton(service, function () {
+            state.service = service;
+            renderNeedStep();
+          }));
+        });
+
+        flowContent.innerHTML = "";
+        flowContent.appendChild(wrap);
+      }
+
+      function renderNeedStep() {
+        flowKicker.textContent = state.area + " / " + state.service;
+        flowTitle.textContent = "İhtiyaç";
+
+        var wrap = document.createElement("div");
+        wrap.className = "option-grid";
+
+        needs.forEach(function (need) {
+          wrap.appendChild(buildButton(need, function () {
+            state.need = need;
+            renderResultStep();
+          }));
+        });
+
+        flowContent.innerHTML = "";
+        flowContent.appendChild(wrap);
+      }
+
+      function renderResultStep() {
+        flowKicker.textContent = "Hazır";
+        flowTitle.textContent = "WhatsApp";
+
+        var summary = document.createElement("div");
+        summary.className = "summary";
+
+        summary.innerHTML =
+          '<div class="summary-row"><span>Alan</span><strong>' + escapeHtml(state.area) + '</strong></div>' +
+          '<div class="summary-row"><span>Hizmet</span><strong>' + escapeHtml(state.service) + '</strong></div>' +
+          '<div class="summary-row"><span>İhtiyaç</span><strong>' + escapeHtml(state.need) + '</strong></div>';
+
+        var btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "wa-final";
+        btn.textContent = "WhatsApp'a Geç";
+
+        btn.addEventListener("click", function () {
+          var message =
+            "Merhaba, " +
+            state.area +
+            " için " +
+            state.service +
+            " / " +
+            state.need +
+            " konusunda bilgi almak istiyorum.";
+
+          window.open("https://wa.me/" + phone + "?text=" + encodeURIComponent(message), "_blank");
+        });
+
+        flowContent.innerHTML = "";
+        flowContent.appendChild(summary);
+        flowContent.appendChild(btn);
+      }
+
+      function escapeHtml(value) {
+        return String(value)
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#039;");
+      }
+
+      function initAreaButtons() {
+        var buttons = document.querySelectorAll("[data-area]");
+
+        buttons.forEach(function (btn) {
+          var fired = false;
+
+          function selectArea(event) {
+            if (event.type === "pointerdown") {
+              fired = true;
+            } else if (event.type === "click" && fired) {
+              setTimeout(function () {
+                fired = false;
+              }, 250);
+              return;
+            }
+
+            state.area = btn.getAttribute("data-area");
+            state.service = "";
+            state.need = "";
+
+            renderServiceStep();
+            openPanel();
+
+            setTimeout(function () {
+              fired = false;
+            }, 250);
+          }
+
+          btn.addEventListener("pointerdown", selectArea, { passive: true });
+          btn.addEventListener("click", selectArea);
+        });
+      }
+
+      closeFlow.addEventListener("click", closePanel);
+
+      panel.addEventListener("click", function (event) {
+        if (event.target === panel) {
+          closePanel();
+        }
+      });
+
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape" && panel.classList.contains("is-open")) {
+          closePanel();
+        }
+      });
+
+      initAreaButtons();
+    })();
+  </script>
+</body>
+</html>
