@@ -1,0 +1,1424 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#0c0c0c" />
+  <meta name="format-detection" content="telephone=no" />
+
+  <title>Ar-El Teknik | Güvenlik Kamerası, Elektrik, Anten — Kemalpaşa İzmir</title>
+  <meta name="description" content="Kemalpaşa, Armutlu ve OSB bölgesinde güvenlik kamerası, elektrik tesisatı, uydu & anten, kapı otomasyonu. 0536 780 70 59" />
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%9A%A1%3C/text%3E%3C/svg%3E" />
+
+  <style>
+    :root {
+      --bg: #0c0c0c;
+      --bg2: #141414;
+      --bg3: #1c1c1c;
+      --text: #e5e5e5;
+      --dim: #8a8a8a;
+      --border: #2a2a2a;
+      --amber: #f59e0b;
+      --amber2: #92400e;
+      --green: #16a34a;
+      --red: #dc2626;
+      --safe-top: env(safe-area-inset-top, 0px);
+      --safe-bottom: env(safe-area-inset-bottom, 16px);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: rgba(245, 158, 11, 0.24);
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background: var(--bg);
+    }
+
+    body {
+      min-height: 100%;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.55;
+      overflow-x: hidden;
+      padding-bottom: calc(72px + var(--safe-bottom));
+    }
+
+    body.locked {
+      overflow: hidden;
+    }
+
+    a,
+    button,
+    input,
+    textarea,
+    select {
+      font: inherit;
+    }
+
+    button,
+    a {
+      touch-action: manipulation;
+      cursor: pointer;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .app {
+      width: 100%;
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at 10% 20%, rgba(245, 158, 11, 0.08), transparent 28%),
+        linear-gradient(180deg, #0c0c0c 0%, #111 100%);
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: calc(12px + var(--safe-top)) 18px 12px;
+      background: rgba(12, 12, 12, 0.94);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .logo {
+      font-size: 20px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+    }
+
+    .logo span {
+      color: var(--amber);
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--dim);
+      font-size: 12px;
+      white-space: nowrap;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--dim);
+    }
+
+    .dot.open {
+      background: #22c55e;
+      box-shadow: 0 0 8px #22c55e;
+    }
+
+    .header-tel {
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--amber);
+      white-space: nowrap;
+    }
+
+    .hero {
+      min-height: 100dvh;
+      display: flex;
+      align-items: flex-end;
+      padding: 110px 18px 54px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 56px 56px;
+      opacity: 0.22;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 740px;
+    }
+
+    .eyebrow {
+      color: var(--amber);
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    h1 {
+      font-size: clamp(42px, 10vw, 86px);
+      line-height: 0.94;
+      letter-spacing: -0.04em;
+      margin-bottom: 18px;
+    }
+
+    h1 em {
+      color: var(--amber);
+      font-style: normal;
+    }
+
+    .hero p {
+      max-width: 460px;
+      color: var(--dim);
+      font-size: 15px;
+      margin-bottom: 22px;
+    }
+
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 22px;
+    }
+
+    .badge {
+      border: 1px solid var(--border);
+      background: rgba(20, 20, 20, 0.86);
+      padding: 7px 10px;
+      border-radius: 999px;
+      color: var(--dim);
+      font-size: 12px;
+    }
+
+    .badge strong {
+      color: var(--amber);
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .btn {
+      border: 0;
+      border-radius: 8px;
+      padding: 14px 18px;
+      font-weight: 900;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 48px;
+    }
+
+    .btn-primary {
+      background: var(--amber);
+      color: #000;
+    }
+
+    .btn-dark {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      color: #fff;
+    }
+
+    .btn-green {
+      background: var(--green);
+      color: #fff;
+    }
+
+    section {
+      padding: 54px 18px;
+      border-top: 1px solid var(--border);
+    }
+
+    .section-inner {
+      max-width: 980px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      color: var(--amber);
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    h2 {
+      font-size: clamp(28px, 6vw, 44px);
+      line-height: 1.02;
+      margin-bottom: 24px;
+      letter-spacing: -0.03em;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+
+    .card {
+      background: var(--bg2);
+      padding: 20px;
+      min-height: 174px;
+    }
+
+    .card-icon {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    .card h3 {
+      font-size: 17px;
+      margin-bottom: 8px;
+    }
+
+    .card p {
+      color: var(--dim);
+      font-size: 13px;
+      margin-bottom: 14px;
+    }
+
+    .link-btn {
+      border: 0;
+      background: transparent;
+      color: var(--amber);
+      font-weight: 900;
+      padding: 0;
+    }
+
+    .about {
+      background: var(--bg);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 24px;
+    }
+
+    .about p {
+      color: var(--dim);
+      margin-bottom: 14px;
+    }
+
+    .stat-list {
+      border: 1px solid var(--border);
+      background: var(--border);
+      display: grid;
+      gap: 1px;
+    }
+
+    .stat {
+      background: var(--bg2);
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 14px;
+    }
+
+    .stat span:first-child {
+      color: var(--dim);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .stat span:last-child {
+      font-weight: 900;
+      text-align: right;
+    }
+
+    .contact-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .contact-row span:first-child {
+      color: var(--dim);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .contact-row a,
+    .contact-row strong {
+      color: #fff;
+      font-size: 18px;
+      font-weight: 900;
+      text-align: right;
+    }
+
+    footer {
+      padding: 22px 18px;
+      color: #555;
+      font-size: 12px;
+      border-top: 1px solid var(--border);
+    }
+
+    .sticky {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 60;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      background: #090909;
+      border-top: 1px solid var(--border);
+      box-shadow: 0 -10px 28px rgba(0, 0, 0, 0.45);
+    }
+
+    .sticky a,
+    .sticky button {
+      min-height: 58px;
+      padding: 12px 8px calc(12px + var(--safe-bottom));
+      border: 0;
+      background: #101010;
+      color: #fff;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .sticky a:first-child {
+      color: #22c55e;
+      border-right: 1px solid var(--border);
+    }
+
+    .overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: none;
+      background: rgba(12, 12, 12, 0.98);
+      min-height: 100dvh;
+      overflow-y: auto;
+      padding: calc(22px + var(--safe-top)) 18px calc(24px + var(--safe-bottom));
+    }
+
+    .overlay.active {
+      display: block;
+    }
+
+    .overlay-panel {
+      max-width: 560px;
+      margin: 0 auto;
+      min-height: calc(100dvh - 46px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .overlay-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+    }
+
+    .overlay-title {
+      font-size: 30px;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      margin-bottom: 8px;
+    }
+
+    .overlay-sub {
+      color: var(--dim);
+      font-size: 14px;
+      margin-bottom: 22px;
+    }
+
+    .xbtn,
+    .backbtn {
+      border: 1px solid var(--border);
+      background: var(--bg3);
+      color: #fff;
+      min-width: 42px;
+      min-height: 42px;
+      border-radius: 999px;
+      font-weight: 900;
+    }
+
+    .backbtn {
+      border-radius: 8px;
+      padding: 0 14px;
+      color: var(--dim);
+    }
+
+    .choice-list {
+      display: grid;
+      gap: 9px;
+    }
+
+    .choice {
+      width: 100%;
+      border: 1px solid var(--border);
+      background: var(--bg2);
+      color: #fff;
+      border-radius: 10px;
+      padding: 16px;
+      text-align: left;
+      min-height: 64px;
+    }
+
+    .choice strong {
+      display: block;
+      font-size: 16px;
+      margin-bottom: 3px;
+    }
+
+    .choice span {
+      display: block;
+      color: var(--dim);
+      font-size: 12px;
+    }
+
+    .choice:active {
+      transform: scale(0.99);
+      border-color: var(--amber);
+      background: #1a1200;
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      z-index: 110;
+      display: none;
+      background: rgba(12, 12, 12, 0.98);
+      min-height: 100dvh;
+      overflow-y: auto;
+      padding: calc(22px + var(--safe-top)) 18px calc(24px + var(--safe-bottom));
+    }
+
+    .modal.active {
+      display: block;
+    }
+
+    .modal-panel {
+      max-width: 560px;
+      margin: 0 auto;
+    }
+
+    .modal-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: flex-start;
+      margin-bottom: 20px;
+    }
+
+    .step {
+      color: var(--amber);
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 5px;
+    }
+
+    .modal h2 {
+      margin-bottom: 0;
+      font-size: 28px;
+    }
+
+    .progress {
+      height: 4px;
+      border-radius: 99px;
+      background: var(--border);
+      margin-bottom: 14px;
+      overflow: hidden;
+    }
+
+    .progress span {
+      display: block;
+      height: 100%;
+      background: var(--amber);
+      width: 25%;
+    }
+
+    .pricebar {
+      border: 1px solid var(--border);
+      background: var(--bg2);
+      border-radius: 8px;
+      padding: 10px 12px;
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      color: var(--dim);
+      font-size: 13px;
+      margin-bottom: 14px;
+    }
+
+    .pricebar strong {
+      color: var(--amber);
+    }
+
+    .form-group {
+      margin-bottom: 12px;
+    }
+
+    label {
+      display: block;
+      color: var(--dim);
+      font-size: 12px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 6px;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      border: 1px solid var(--border);
+      background: var(--bg3);
+      color: #fff;
+      border-radius: 8px;
+      padding: 13px;
+      outline: none;
+    }
+
+    textarea {
+      min-height: 96px;
+      resize: vertical;
+    }
+
+    input:focus,
+    textarea:focus {
+      border-color: var(--amber);
+    }
+
+    .result-box {
+      background: var(--amber);
+      color: #000;
+      border-radius: 10px;
+      padding: 18px;
+      margin-bottom: 14px;
+    }
+
+    .result-box small {
+      display: block;
+      font-weight: 900;
+      opacity: 0.65;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      margin-bottom: 6px;
+    }
+
+    .result-box strong {
+      font-size: 28px;
+      display: block;
+      line-height: 1;
+    }
+
+    .summary {
+      border: 1px solid var(--border);
+      background: var(--border);
+      display: grid;
+      gap: 1px;
+      margin-bottom: 14px;
+    }
+
+    .summary div {
+      background: var(--bg2);
+      padding: 12px;
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      font-size: 13px;
+    }
+
+    .summary span:first-child {
+      color: var(--dim);
+    }
+
+    .summary span:last-child {
+      text-align: right;
+      font-weight: 700;
+    }
+
+    .modal-actions {
+      display: grid;
+      gap: 8px;
+    }
+
+    @media (max-width: 860px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .about-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .header-right .status-pill {
+        display: none;
+      }
+
+      .contact-row {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .contact-row a,
+      .contact-row strong {
+        text-align: left;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="app">
+    <header>
+      <a href="#" class="logo" aria-label="Ar-El Teknik">AR<span>·</span>EL</a>
+      <div class="header-right">
+        <div class="status-pill">
+          <i class="dot" id="statusDot"></i>
+          <span id="statusText">Kontrol ediliyor</span>
+        </div>
+        <a class="header-tel" href="tel:+905367807059">0536 780 70 59</a>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-inner">
+          <div class="eyebrow">Kemalpaşa · Armutlu · OSB — İzmir</div>
+          <h1>Kamera,<br>Elektrik,<br><em>Anten.</em></h1>
+          <p>Güvenlik kamerası, elektrik arıza, uydu-anten, kapı otomasyonu ve teknik keşif işleri için hızlı kayıt ve teklif akışı.</p>
+
+          <div class="badge-row">
+            <span class="badge"><strong>WhatsApp</strong> hızlı kayıt</span>
+            <span class="badge"><strong>1 yıl</strong> işçilik garantisi</span>
+            <span class="badge"><strong>Kemalpaşa</strong> saha hizmeti</span>
+          </div>
+
+          <div class="actions">
+            <button class="btn btn-primary" type="button" id="openSegment">📋 Arıza / Teklif Kaydı</button>
+            <button class="btn btn-dark" type="button" id="openQuote">⚡ Hızlı Teklif</button>
+            <a class="btn btn-dark" href="tel:+905367807059">🚨 Acil Ara</a>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="section-inner">
+          <div class="section-label">Hizmetler</div>
+          <h2>Ne Yapıyoruz</h2>
+
+          <div class="grid">
+            <article class="card">
+              <div class="card-icon">📷</div>
+              <h3>Güvenlik Kamerası</h3>
+              <p>IP / analog kamera, NVR-DVR, uzaktan izleme ve bakım.</p>
+              <button class="link-btn service-btn" type="button" data-service="kamera">Teklif al →</button>
+            </article>
+
+            <article class="card">
+              <div class="card-icon">⚡</div>
+              <h3>Elektrik Tesisatı</h3>
+              <p>Arıza tespiti, pano, priz, sigorta, hat çekimi ve montaj.</p>
+              <button class="link-btn service-btn" type="button" data-service="elektrik">Teklif al →</button>
+            </article>
+
+            <article class="card">
+              <div class="card-icon">📡</div>
+              <h3>Uydu & Anten</h3>
+              <p>Çanak ayarı, LNB, merkezi sistem ve sinyal problemi.</p>
+              <button class="link-btn service-btn" type="button" data-service="anten">Teklif al →</button>
+            </article>
+
+            <article class="card">
+              <div class="card-icon">🚪</div>
+              <h3>Kapı Otomasyonu</h3>
+              <p>Diafon, görüntülü interkom, kapı otomatiği ve giriş sistemi.</p>
+              <button class="link-btn service-btn" type="button" data-service="kapi">Teklif al →</button>
+            </article>
+
+            <article class="card">
+              <div class="card-icon">🔍</div>
+              <h3>Tesisat Röntgeni</h3>
+              <p>Kırmadan arıza tespiti, kablo/hat kontrolü ve raporlama.</p>
+              <button class="link-btn service-btn" type="button" data-service="rontgen">Teklif al →</button>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="about">
+        <div class="section-inner about-grid">
+          <div>
+            <div class="section-label">Teknik Partner</div>
+            <h2>Burak İsa Sivacı</h2>
+            <p>Kemalpaşa merkezli saha odaklı teknik servis. Konut, apartman, işletme ve sanayi alanlarında elektrik ve güvenlik teknolojileri işleri.</p>
+            <p>Hedef: müşteriyi hızlıca sınıflandırmak, arıza/teklif/randevu bilgisini net almak ve WhatsApp üzerinden doğrudan kayıt oluşturmak.</p>
+          </div>
+
+          <div class="stat-list">
+            <div class="stat"><span>Yanıt</span><span id="responseTime">~3 dakika</span></div>
+            <div class="stat"><span>Durum</span><span id="openState">—</span></div>
+            <div class="stat"><span>Bölge</span><span>Kemalpaşa · OSB</span></div>
+            <div class="stat"><span>Garanti</span><span>1 yıl işçilik</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="iletisim">
+        <div class="section-inner">
+          <div class="section-label">İletişim</div>
+          <h2>Ulaşın</h2>
+
+          <div class="contact-row">
+            <span>WhatsApp</span>
+            <a id="waMain" href="https://wa.me/905367807059?text=Merhaba%2C%20web%20sitesi%20%C3%BCzerinden%20ula%C5%9F%C4%B1yorum." target="_blank" rel="noopener">0536 780 70 59</a>
+          </div>
+
+          <div class="contact-row">
+            <span>Telefon</span>
+            <a href="tel:+905367807059">0536 780 70 59</a>
+          </div>
+
+          <div class="contact-row">
+            <span>Instagram</span>
+            <a href="https://instagram.com/sahadateknisyenvar" target="_blank" rel="noopener">@sahadateknisyenvar</a>
+          </div>
+
+          <div class="contact-row">
+            <span>Çalışma</span>
+            <strong>Pzt-Cum 08:00-19:00 · Cmt 09:00-17:00</strong>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      AR-EL Teknik · Kemalpaşa / İzmir · <span id="year"></span>
+    </footer>
+  </div>
+
+  <div class="sticky">
+    <a id="stickyWa" href="https://wa.me/905367807059?text=Merhaba%2C%20web%20sitesi%20%C3%BCzerinden%20ula%C5%9F%C4%B1yorum." target="_blank" rel="noopener">💬 WhatsApp</a>
+    <button type="button" id="stickyRecord">📋 Kayıt Aç</button>
+  </div>
+
+  <div class="overlay" id="segmentOverlay" aria-hidden="true">
+    <div class="overlay-panel">
+      <div class="overlay-top">
+        <button class="backbtn" type="button" id="segBack" style="visibility:hidden;">← Geri</button>
+        <button class="xbtn" type="button" id="segClose">✕</button>
+      </div>
+
+      <div class="eyebrow" id="segStep">Aşama 1</div>
+      <h2 class="overlay-title" id="segTitle">Nerede hizmet gerekiyor?</h2>
+      <p class="overlay-sub" id="segSub">Müşteri tipini seç; WhatsApp mesajı otomatik hazırlansın.</p>
+
+      <div class="choice-list" id="segChoices"></div>
+    </div>
+  </div>
+
+  <div class="modal" id="quoteModal" aria-hidden="true">
+    <div class="modal-panel">
+      <div class="modal-head">
+        <div>
+          <div class="step" id="qStep">Adım 1 / 4</div>
+          <h2 id="qTitle">Hangi hizmet?</h2>
+        </div>
+        <button class="xbtn" type="button" id="qClose">✕</button>
+      </div>
+
+      <div class="progress"><span id="qProgress"></span></div>
+
+      <div class="pricebar">
+        <span>Ortalama fiyat aralığı</span>
+        <strong id="qPrice">—</strong>
+      </div>
+
+      <div id="qContent"></div>
+
+      <button class="backbtn" type="button" id="qBack" style="margin-top:12px;display:none;">← Geri</button>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      'use strict';
+
+      var PHONE = '905367807059';
+
+      function $(id) {
+        return document.getElementById(id);
+      }
+
+      function onTap(el, fn) {
+        if (!el) return;
+        el.addEventListener('click', function (e) {
+          fn(e);
+        }, false);
+      }
+
+      function encodeMsg(text) {
+        return 'https://wa.me/' + PHONE + '?text=' + encodeURIComponent(text);
+      }
+
+      function openUrl(url) {
+        window.open(url, '_blank', 'noopener');
+      }
+
+      function formatTL(n) {
+        return Number(n || 0).toLocaleString('tr-TR') + ' TL';
+      }
+
+      function setLocked(locked) {
+        document.body.classList.toggle('locked', !!locked);
+      }
+
+      function updateStatus() {
+        var now = new Date();
+        var h = now.getHours();
+        var m = now.getMinutes();
+        var d = now.getDay();
+
+        var open =
+          (d >= 1 && d <= 5 && (h > 8 || (h === 8 && m >= 0)) && h < 19) ||
+          (d === 6 && (h > 9 || (h === 9 && m >= 0)) && h < 17);
+
+        var dot = $('statusDot');
+        var statusText = $('statusText');
+        var openState = $('openState');
+        var responseTime = $('responseTime');
+
+        if (dot) dot.className = open ? 'dot open' : 'dot';
+        if (statusText) statusText.textContent = open ? 'Açık' : 'Mesai dışı';
+        if (openState) openState.textContent = open ? 'Açık — yanıt verilebilir' : 'Kapalı — WhatsApp bırak';
+        if (responseTime) responseTime.textContent = open ? '~3 dakika' : 'Mesai başında';
+      }
+
+      updateStatus();
+      setInterval(updateStatus, 30000);
+      if ($('year')) $('year').textContent = new Date().getFullYear();
+
+      var segmentData = {
+        konut: {
+          title: 'Konut',
+          sub: 'Daire, apartman, site veya mülk için kayıt.',
+          children: [
+            { id: 'konut-sakini', title: '🏠 Konut Sakini', sub: 'Ev sahibi / kiracı, daire içi arıza ve bakım.' },
+            { id: 'apartman-yoneticisi', title: '🏢 Apartman Yöneticisi', sub: 'Ortak alan, aydınlatma, kamera, diafon.' },
+            { id: 'site-yonetimi', title: '🏘 Profesyonel Site Yönetimi', sub: 'Çok bloklu site, merkezi sistem, teknik denetim.' },
+            { id: 'mulk-sahibi', title: '🔑 Mülk Sahibi', sub: 'Kiracı değişimi, ekspertiz, mülk durum kontrolü.' },
+            { id: 'muteahhit', title: '🏗 Müteahhit / İnşaat', sub: 'Teslim öncesi kontrol, devreye alma, garanti denetimi.' }
+          ],
+          questions: [
+            { title: '🚨 Arıza kaydı aç', sub: 'Elektrik, kamera, anten veya diafon arızası.' },
+            { title: '📋 Teklif iste', sub: 'Yeni kurulum veya yenileme için.' },
+            { title: '📅 Randevu planla', sub: 'Keşif / bakım için müsait zaman belirt.' }
+          ]
+        },
+
+        isletme: {
+          title: 'İşletme',
+          sub: 'Dükkan, ofis, klinik, kafe, mağaza ve hizmet noktası.',
+          children: [
+            { id: 'bakim-stil', title: '💈 Hizmet & Güzellik', sub: 'Berber, kuaför, güzellik merkezi, spa.' },
+            { id: 'gida', title: '🍽 Gıda & Ağırlama', sub: 'Restoran, kafe, fırın, pastane, fast-food.' },
+            { id: 'perakende', title: '🛒 Perakende & Ticaret', sub: 'Market, mağaza, eczane, kasap, showroom.' },
+            { id: 'ofis', title: '🏢 Ofis & Yönetim', sub: 'Avukat, muhasebe, emlak, danışmanlık.' },
+            { id: 'saglik-egitim', title: '🏥 Sağlık & Eğitim', sub: 'Klinik, kreş, kurs, etüt merkezi.' },
+            { id: 'konaklama', title: '🏨 Konaklama & Turizm', sub: 'Otel, pansiyon, yurt, sosyal tesis.' },
+            { id: 'eglence', title: '🎭 Eğlence & Etkinlik', sub: 'Düğün salonu, spor salonu, e-spor.' },
+            { id: 'otomotiv', title: '🚗 Teknik & Otomotiv', sub: 'Oto servis, yıkama, lastikçi, ekspertiz.' },
+            { id: 'sosyal-kamu', title: '🕌 Sosyal & Kamu', sub: 'Cami, muhtarlık, dernek, vakıf.' },
+            { id: 'lojistik', title: '📦 Lojistik & Ulaşım', sub: 'Kargo, taksi durağı, otopark, depo.' }
+          ],
+          questions: [
+            { title: '🚨 İşletme arızası', sub: 'Enerji, kamera, ağ, cihaz veya aydınlatma sorunu.' },
+            { title: '📷 Kamera / güvenlik teklifi', sub: 'İşletme içi ve dışı izleme sistemi.' },
+            { title: '📅 Keşif randevusu', sub: 'Yerinde inceleme ve fiyatlandırma.' }
+          ]
+        },
+
+        endustri: {
+          title: 'Endüstriyel',
+          sub: 'Fabrika, OSB, depo, üretim ve açık alan sistemleri.',
+          children: [
+            { id: 'gida-sanayi', title: '🥫 Gıda ve Tarımsal Sanayi', sub: 'Et, süt, şarküteri, soğuk hava, unlu mamul.' },
+            { id: 'metal-makine', title: '⚙ Metal, Makine, Otomotiv Yan Sanayi', sub: 'Metal işleme, döküm, makine üretimi.' },
+            { id: 'kimya-plastik', title: '🧪 Kimya, Plastik, Ambalaj', sub: 'Plastik, boya, ambalaj, geri dönüşüm.' },
+            { id: 'yapi-malzeme', title: '🧱 Yapı Malzemeleri', sub: 'Seramik, mermer, prefab, yalıtım, cam.' },
+            { id: 'tekstil-mobilya', title: '🪵 Tekstil, Mobilya, Atölye', sub: 'Konfeksiyon, ahşap, reklam, tabela.' },
+            { id: 'lojistik-depo', title: '🏭 Lojistik ve Depolama', sub: 'Antrepo, depo, sevkiyat, açık alan.' }
+          ],
+          questions: [
+            { title: '🚨 Tesis arızası / acil müdahale', sub: 'Elektrik, kamera, pano, hat, enerji problemi.' },
+            { title: '📷 Endüstriyel kamera sistemi', sub: 'Fabrika, depo, açık alan ve giriş-çıkış izleme.' },
+            { title: '📅 Teknik keşif talebi', sub: 'OSB / fabrika için yerinde inceleme.' }
+          ]
+        }
+      };
+
+      var segState = {
+        step: 1,
+        main: null,
+        child: null
+      };
+
+      function openSegment() {
+        segState = { step: 1, main: null, child: null };
+        renderSegment();
+        var ov = $('segmentOverlay');
+        ov.classList.add('active');
+        ov.setAttribute('aria-hidden', 'false');
+        setLocked(true);
+      }
+
+      function closeSegment() {
+        var ov = $('segmentOverlay');
+        ov.classList.remove('active');
+        ov.setAttribute('aria-hidden', 'true');
+        setLocked(false);
+      }
+
+      function segmentBack() {
+        if (segState.step === 3) {
+          segState.step = 2;
+          renderSegment();
+        } else if (segState.step === 2) {
+          segState.step = 1;
+          segState.main = null;
+          renderSegment();
+        }
+      }
+
+      function renderSegment() {
+        var choices = $('segChoices');
+        var title = $('segTitle');
+        var sub = $('segSub');
+        var step = $('segStep');
+        var back = $('segBack');
+
+        choices.innerHTML = '';
+
+        if (segState.step === 1) {
+          step.textContent = 'Aşama 1';
+          title.textContent = 'Nerede hizmet gerekiyor?';
+          sub.textContent = 'Ana müşteri tipini seç.';
+          back.style.visibility = 'hidden';
+
+          [
+            { id: 'konut', title: '🏠 Konut', sub: 'Daire, apartman, site, mülk.' },
+            { id: 'isletme', title: '🏪 İşletme', sub: 'Dükkan, ofis, klinik, kafe, mağaza.' },
+            { id: 'endustri', title: '🏭 Endüstriyel', sub: 'Fabrika, OSB, depo, üretim alanı.' }
+          ].forEach(function (item) {
+            choices.appendChild(choiceButton(item.title, item.sub, function () {
+              segState.main = item.id;
+              segState.step = 2;
+              renderSegment();
+            }));
+          });
+        }
+
+        else if (segState.step === 2) {
+          var group = segmentData[segState.main];
+          step.textContent = 'Aşama 2';
+          title.textContent = group.title + ' kategorisi';
+          sub.textContent = group.sub;
+          back.style.visibility = 'visible';
+
+          group.children.forEach(function (item) {
+            choices.appendChild(choiceButton(item.title, item.sub, function () {
+              segState.child = item;
+              segState.step = 3;
+              renderSegment();
+            }));
+          });
+        }
+
+        else if (segState.step === 3) {
+          var selectedGroup = segmentData[segState.main];
+          step.textContent = 'Aşama 3';
+          title.textContent = 'Ne yapılacak?';
+          sub.textContent = segState.child ? segState.child.title + ' için işlem seç.' : 'İşlem seç.';
+          back.style.visibility = 'visible';
+
+          selectedGroup.questions.forEach(function (item) {
+            choices.appendChild(choiceButton(item.title, item.sub, function () {
+              var msg =
+                'Merhaba, web sitesi üzerinden kayıt oluşturmak istiyorum.\n\n' +
+                'Müşteri Grubu: ' + selectedGroup.title + '\n' +
+                'Alt Kategori: ' + (segState.child ? segState.child.title.replace(/^[^\s]+\s/, '') : '-') + '\n' +
+                'Talep: ' + item.title.replace(/^[^\s]+\s/, '') + '\n\n' +
+                'Adres / Bölge:\n' +
+                'Müsait gün-saat:\n' +
+                'Kısa açıklama:';
+
+              openUrl(encodeMsg(msg));
+              closeSegment();
+            }));
+          });
+
+          choices.appendChild(choiceButton('⚡ Hızlı teklif formuna geç', 'Fiyat aralığı ve PDF/WhatsApp teklif akışı.', function () {
+            closeSegment();
+            openQuote();
+          }));
+        }
+      }
+
+      function choiceButton(title, sub, fn) {
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'choice';
+        b.innerHTML = '<strong>' + title + '</strong><span>' + sub + '</span>';
+        onTap(b, fn);
+        return b;
+      }
+
+      onTap($('openSegment'), openSegment);
+      onTap($('stickyRecord'), openSegment);
+      onTap($('segClose'), closeSegment);
+      onTap($('segBack'), segmentBack);
+
+      var services = {
+        kamera: {
+          label: 'Güvenlik Kamerası',
+          price: [3500, 40000],
+          q2: [
+            ['Yeni sistem kurulumu', [3500, 40000]],
+            ['Mevcut sistem arızası', [800, 3000]],
+            ['Bakım / güncelleme', [500, 2000]]
+          ],
+          q3Title: 'Kaç kamera olacak?',
+          q3: [
+            ['1 kamera', [1800, 3500]],
+            ['2 kamera', [3000, 5500]],
+            ['4 kamera', [5000, 9000]],
+            ['8 kamera', [9000, 16000]],
+            ['16+ kamera', [18000, 40000]]
+          ]
+        },
+        elektrik: {
+          label: 'Elektrik Tesisatı',
+          price: [800, 15000],
+          q2: [
+            ['Arıza / tamir', [800, 4000]],
+            ['Tesisat yenileme', [2000, 15000]],
+            ['Pano / sigorta kutusu', [1500, 8000]],
+            ['Kablo / hat çekme', [1000, 10000]]
+          ],
+          q3Title: 'Detay seç',
+          q3: [
+            ['Sigorta atıyor', [800, 2000]],
+            ['Priz / anahtar çalışmıyor', [500, 1500]],
+            ['Kısa devre şüphesi', [1000, 3000]],
+            ['Yeni hat çekilecek', [1000, 5000]]
+          ]
+        },
+        anten: {
+          label: 'Uydu & Anten',
+          price: [500, 5000],
+          q2: [
+            ['Yeni kurulum', [1500, 3500]],
+            ['Uydu / anten ayarı', [500, 1200]],
+            ['Arıza / tamir', [500, 2000]],
+            ['Merkezi sistem', [5000, 30000]]
+          ],
+          q3Title: 'Malzeme durumu',
+          q3: [
+            ['Malzeme dahil olsun', [1800, 4000]],
+            ['Sadece işçilik', [500, 1500]]
+          ]
+        },
+        kapi: {
+          label: 'Kapı Otomasyonu',
+          price: [1500, 12000],
+          q2: [
+            ['Görüntülü diafon / interkom', [2500, 8000]],
+            ['Kapı otomatiği tamiri', [800, 3000]],
+            ['Yeni giriş sistemi', [3000, 12000]]
+          ],
+          q3Title: 'Yapı tipi',
+          q3: [
+            ['Tek daire', [1500, 5000]],
+            ['Apartman', [3000, 12000]],
+            ['Villa / müstakil', [2500, 10000]]
+          ]
+        },
+        rontgen: {
+          label: 'Tesisat Röntgeni',
+          price: [1500, 5000],
+          q2: [
+            ['Kırmadan arıza tespiti', [1500, 5000]],
+            ['Duvar içi kablo kontrolü', [1500, 4500]],
+            ['Raporlu kontrol', [2000, 6000]]
+          ],
+          q3Title: 'Alan tipi',
+          q3: [
+            ['Daire', [1500, 3500]],
+            ['Apartman ortak alan', [2500, 6000]],
+            ['İşletme / fabrika', [3000, 9000]]
+          ]
+        }
+      };
+
+      var q = {
+        step: 1,
+        service: null,
+        detail: null,
+        sub: null,
+        price: null,
+        history: []
+      };
+
+      function openQuote(serviceId) {
+        q = {
+          step: 1,
+          service: null,
+          detail: null,
+          sub: null,
+          price: null,
+          history: []
+        };
+
+        var modal = $('quoteModal');
+        modal.classList.add('active');
+        modal.setAttribute('aria-hidden', 'false');
+        setLocked(true);
+
+        if (serviceId && services[serviceId]) {
+          q.service = serviceId;
+          q.price = services[serviceId].price;
+          q.history.push(1);
+          q.step = 2;
+        }
+
+        renderQuote();
+      }
+
+      function closeQuote() {
+        var modal = $('quoteModal');
+        modal.classList.remove('active');
+        modal.setAttribute('aria-hidden', 'true');
+        setLocked(false);
+      }
+
+      function qBack() {
+        if (!q.history.length) return;
+        q.step = q.history.pop();
+        renderQuote();
+      }
+
+      function setPrice(price) {
+        q.price = price;
+        $('qPrice').textContent = formatTL(price[0]) + ' - ' + formatTL(price[1]);
+      }
+
+      function renderQuote() {
+        var content = $('qContent');
+        content.innerHTML = '';
+        $('qBack').style.display = q.history.length ? 'inline-flex' : 'none';
+
+        if (q.price) {
+          setPrice(q.price);
+        } else {
+          $('qPrice').textContent = '—';
+        }
+
+        if (q.step === 1) {
+          $('qStep').textContent = 'Adım 1 / 4';
+          $('qTitle').textContent = 'Hangi hizmet?';
+          $('qProgress').style.width = '25%';
+
+          Object.keys(services).forEach(function (key) {
+            content.appendChild(choiceButton('⚡ ' + services[key].label, 'Fiyat aralığı ve WhatsApp teklif akışı.', function () {
+              q.service = key;
+              setPrice(services[key].price);
+              q.history.push(1);
+              q.step = 2;
+              renderQuote();
+            }));
+          });
+        }
+
+        else if (q.step === 2) {
+          var svc = services[q.service];
+          $('qStep').textContent = 'Adım 2 / 4';
+          $('qTitle').textContent = 'İş türü seç';
+          $('qProgress').style.width = '50%';
+
+          svc.q2.forEach(function (item) {
+            content.appendChild(choiceButton(item[0], 'Tahmini aralık: ' + formatTL(item[1][0]) + ' - ' + formatTL(item[1][1]), function () {
+              q.detail = item[0];
+              setPrice(item[1]);
+              q.history.push(2);
+              q.step = 3;
+              renderQuote();
+            }));
+          });
+        }
+
+        else if (q.step === 3) {
+          var svc3 = services[q.service];
+          $('qStep').textContent = 'Adım 3 / 4';
+          $('qTitle').textContent = svc3.q3Title;
+          $('qProgress').style.width = '75%';
+
+          svc3.q3.forEach(function (item) {
+            content.appendChild(choiceButton(item[0], 'Tahmini aralık: ' + formatTL(item[1][0]) + ' - ' + formatTL(item[1][1]), function () {
+              q.sub = item[0];
+              setPrice(item[1]);
+              q.history.push(3);
+              q.step = 4;
+              renderQuote();
+            }));
+          });
+        }
+
+        else if (q.step === 4) {
+          $('qStep').textContent = 'Adım 4 / 4';
+          $('qTitle').textContent = 'Bilgileri yaz';
+          $('qProgress').style.width = '100%';
+
+          content.innerHTML =
+            '<div class="form-group">' +
+              '<label>Ad Soyad</label>' +
+              '<input id="custName" placeholder="Adınız Soyadınız">' +
+            '</div>' +
+            '<div class="form-group">' +
+              '<label>Telefon / WhatsApp</label>' +
+              '<input id="custPhone" placeholder="0 5__ ___ __ __" type="tel">' +
+            '</div>' +
+            '<div class="form-group">' +
+              '<label>Adres / Bölge</label>' +
+              '<input id="custArea" placeholder="Örn: Kemalpaşa, Armutlu, OSB">' +
+            '</div>' +
+            '<div class="form-group">' +
+              '<label>Not</label>' +
+              '<textarea id="custNote" placeholder="Kısa açıklama yazın..."></textarea>' +
+            '</div>' +
+            '<button class="btn btn-primary" type="button" id="finishQuote" style="width:100%;">Teklifi Oluştur →</button>';
+
+          onTap($('finishQuote'), finishQuote);
+        }
+
+        else if (q.step === 5) {
+          var svc5 = services[q.service];
+          var name = $('custNameValue') ? $('custNameValue').value : '';
+          $('qStep').textContent = 'Sonuç';
+          $('qTitle').textContent = 'Teklif hazır';
+          $('qProgress').style.width = '100%';
+
+          content.innerHTML =
+            '<div class="result-box">' +
+              '<small>Tahmini fiyat aralığı</small>' +
+              '<strong>' + formatTL(q.price[0]) + ' - ' + formatTL(q.price[1]) + '</strong>' +
+            '</div>' +
+            '<div class="summary">' +
+              '<div><span>Hizmet</span><span>' + svc5.label + '</span></div>' +
+              '<div><span>İş</span><span>' + (q.detail || '-') + '</span></div>' +
+              '<div><span>Detay</span><span>' + (q.sub || '-') + '</span></div>' +
+              '<div><span>Garanti</span><span>1 yıl işçilik</span></div>' +
+            '</div>' +
+            '<div class="modal-actions">' +
+              '<button class="btn btn-green" type="button" id="sendWa">💬 WhatsApp’ta Gönder</button>' +
+              '<button class="btn btn-dark" type="button" id="newQuote">Yeni Teklif</button>' +
+              '<button class="btn btn-dark" type="button" id="closeQuoteBtn">Kapat</button>' +
+            '</div>';
+
+          onTap($('sendWa'), function () {
+            var d = q.customer || {};
+            var msg =
+              'Merhaba, web sitesi üzerinden teklif kaydı oluşturuyorum.\n\n' +
+              'Ad: ' + (d.name || '-') + '\n' +
+              'Telefon: ' + (d.phone || '-') + '\n' +
+              'Bölge: ' + (d.area || '-') + '\n' +
+              'Hizmet: ' + svc5.label + '\n' +
+              'İş Türü: ' + (q.detail || '-') + '\n' +
+              'Detay: ' + (q.sub || '-') + '\n' +
+              'Tahmini Aralık: ' + formatTL(q.price[0]) + ' - ' + formatTL(q.price[1]) + '\n' +
+              'Not: ' + (d.note || '-');
+
+            openUrl(encodeMsg(msg));
+          });
+
+          onTap($('newQuote'), function () {
+            openQuote();
+          });
+
+          onTap($('closeQuoteBtn'), closeQuote);
+        }
+      }
+
+      function finishQuote() {
+        var name = $('custName').value.trim();
+        if (!name) {
+          $('custName').focus();
+          $('custName').style.borderColor = 'var(--amber)';
+          return;
+        }
+
+        q.customer = {
+          name: name,
+          phone: $('custPhone').value.trim(),
+          area: $('custArea').value.trim(),
+          note: $('custNote').value.trim()
+        };
+
+        q.history.push(4);
+        q.step = 5;
+        renderQuote();
+      }
+
+      onTap($('openQuote'), function () { openQuote(); });
+      onTap($('qClose'), closeQuote);
+      onTap($('qBack'), qBack);
+
+      document.querySelectorAll('.service-btn').forEach(function (btn) {
+        onTap(btn, function () {
+          openQuote(btn.getAttribute('data-service'));
+        });
+      });
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') {
+          closeSegment();
+          closeQuote();
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
