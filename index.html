@@ -1,0 +1,376 @@
+<script>
+function mEkran(ekran) {
+  var ic = document.getElementById('m-content');
+  var bw = document.getElementById('m-back-wrap');
+  var sl = document.getElementById('m-step-label');
+  var mt = document.getElementById('m-title');
+  var akis = mAkis[mVeri.hizmet];
+
+  if (!ic || !bw || !sl || !mt) return;
+
+  if (ekran === 'hizmet') {
+    sl.textContent = 'Adım 1 / 4';
+    mt.textContent = 'Hangi hizmet?';
+    bw.style.display = 'none';
+    mProgressGoster(1, 4);
+
+    var fiyatEl = document.getElementById('m-fiyat-bar-val');
+    if (fiyatEl) fiyatEl.textContent = '—';
+
+    var h = '';
+    mHizmetler.forEach(function (hiz) {
+      h += '<button type="button" class="m-btn" onclick="mSec1(\'' + hiz.id + '\')" data-id="' + hiz.id + '">';
+      h += '<div class="m-btn-title">' + hiz.label + '</div>';
+      h += '</button>';
+    });
+
+    ic.innerHTML = h;
+  }
+
+  else if (ekran === 'adim2') {
+    if (!akis || !akis.adim2) return;
+
+    sl.textContent = 'Adım 2 / 4';
+    bw.style.display = 'block';
+    mProgressGoster(2, 4);
+
+    var a2 = akis.adim2;
+    mt.textContent = a2.soru;
+
+    var h2 = a2.not ? '<div class="m-multi-note">' + a2.not + '</div>' : '';
+
+    a2.secenekler.forEach(function (s) {
+      h2 += '<button type="button" class="m-btn' + (mVeri.detay === s.v ? ' secildi' : '') + '" onclick="mSec2(\'' + s.v + '\')" data-v="' + s.v + '">';
+      h2 += '<div class="m-btn-title">' + s.l + '</div>';
+      h2 += '</button>';
+    });
+
+    ic.innerHTML = h2;
+  }
+
+  else if (ekran === 'adim3') {
+    if (!akis || !akis.adim3) {
+      mEkran('notlar');
+      return;
+    }
+
+    sl.textContent = 'Adım 3 / 4';
+    bw.style.display = 'block';
+    mProgressGoster(3, 4);
+
+    var a3d = akis.adim3;
+    var a3 = (a3d && a3d[mVeri.detay] && a3d[mVeri.detay].soru) ? a3d[mVeri.detay] : a3d;
+
+    if (!a3 || !a3.soru) {
+      mEkran('notlar');
+      return;
+    }
+
+    mt.textContent = a3.soru;
+
+    var h3 = a3.not ? '<div class="m-multi-note">' + a3.not + '</div>' : '';
+
+    if (a3.tip === 'multi') {
+      a3.secenekler.forEach(function (s) {
+        h3 += '<button type="button" class="m-btn" onclick="mToggleMulti(this,\'' + s.v + '\')" data-v="' + s.v + '">';
+        h3 += '<div class="m-btn-title">' + s.l + '</div>';
+        h3 += '</button>';
+      });
+
+      h3 += '<button type="button" class="m-devam-btn" style="margin-top:12px;" onclick="mSec3Multi()">Devam →</button>';
+    } else {
+      a3.secenekler.forEach(function (s) {
+        var fArgs = s.f ? ',' + s.f.min + ',' + s.f.max : '';
+        h3 += '<button type="button" class="m-btn' + (mVeri.altDetay === s.v ? ' secildi' : '') + '" onclick="mSec3(\'' + s.v + '\'' + fArgs + ')">';
+        h3 += '<div class="m-btn-title">' + s.l + '</div>';
+        h3 += '</button>';
+      });
+    }
+
+    ic.innerHTML = h3;
+  }
+
+  else if (ekran === 'notlar') {
+    sl.textContent = 'Adım 4 / 4';
+    mt.textContent = 'Detay ekleyin';
+    bw.style.display = 'block';
+    mProgressGoster(3.5, 4);
+
+    var ornekler = akis && akis.ornekler ? akis.ornekler : [];
+    var ornHtml = '';
+
+    if (ornekler.length > 0) {
+      ornHtml = '<div class="m-ornekler"><div class="m-ornekler-title">💡 Örnekler</div><ul>';
+      ornekler.forEach(function (o) {
+        ornHtml += '<li>' + o + '</li>';
+      });
+      ornHtml += '</ul></div>';
+    }
+
+    ic.innerHTML =
+      '<label class="m-label">İhtiyacınızın detayları</label>' +
+      '<textarea class="m-textarea" id="m-notlar" placeholder="Aklınıza gelen detayları yazın...">' + (mVeri.notlar || '') + '</textarea>' +
+      ornHtml +
+      '<label class="m-label" style="margin-top:8px;">Adınız</label>' +
+      '<input class="m-input" id="m-ad" placeholder="Adınız Soyadınız" value="' + (mVeri.ad || '') + '" />' +
+      '<label class="m-label">Telefon / WhatsApp</label>' +
+      '<input class="m-input" id="m-tel" placeholder="0 5__ ___ __ __" type="tel" value="' + (mVeri.tel || '') + '" />' +
+      '<button type="button" class="m-devam-btn" onclick="mOlustur()">Teklifi Oluştur →</button>';
+  }
+
+  else if (ekran === 'sonuc') {
+    sl.textContent = 'Tahmini Teklif';
+    mt.textContent = 'Hazır';
+    bw.style.display = 'none';
+    mProgressGoster(4, 4);
+
+    var f = mVeri.fiyat || { min: 800, max: 15000 };
+    var hAd = mVeri.hizmetAd || 'Teknik Servis';
+
+    var waText =
+      'TEKLIF%0A' +
+      'Ad%3A%20' + encodeURIComponent(mVeri.ad || '-') + '%0A' +
+      (mVeri.tel ? 'Tel%3A%20' + encodeURIComponent(mVeri.tel) + '%0A' : '') +
+      'Hizmet%3A%20' + encodeURIComponent(hAd) + '%0A' +
+      (mVeri.notlar ? 'Not%3A%20' + encodeURIComponent(mVeri.notlar.substring(0, 120)) + '%0A' : '') +
+      'Tahmini%3A%20' + f.min.toLocaleString('tr-TR') + '-' + f.max.toLocaleString('tr-TR') + '%20TL';
+
+    ic.innerHTML =
+      '<div class="fiyat-box">' +
+      '<div class="fiyat-label">Tahmini Fiyat Aralığı</div>' +
+      '<div class="fiyat-num">' + f.min.toLocaleString('tr-TR') + ' – ' + f.max.toLocaleString('tr-TR') + ' ₺</div>' +
+      '<div class="fiyat-not">Yerinde inceleme sonrası kesinleşir</div>' +
+      '</div>' +
+      '<div class="kosul-list">' +
+      '<div class="kosul-row"><span class="kosul-key">Hizmet</span><span class="kosul-val">' + hAd + '</span></div>' +
+      (mVeri.notlar ? '<div class="kosul-row"><span class="kosul-key">Not</span><span class="kosul-val" style="font-size:11px;">' + mVeri.notlar.substring(0, 60) + (mVeri.notlar.length > 60 ? '…' : '') + '</span></div>' : '') +
+      '<div class="kosul-row"><span class="kosul-key">Garanti</span><span class="kosul-val">1 yıl işçilik</span></div>' +
+      '<div class="kosul-row"><span class="kosul-key">Geçerlilik</span><span class="kosul-val">30 gün</span></div>' +
+      '</div>' +
+      '<button type="button" class="m-wa-btn" onclick="window.open(\'https://wa.me/905367807059?text=' + waText + '\',\'_blank\')">💬 WhatsApp’ta Gönder</button>' +
+      '<button type="button" class="m-pdf-btn" onclick="pdfIndir()">📄 PDF Teklif İndir</button>' +
+      '<button type="button" class="m-ghost-btn" onclick="modalKapat()">Kapat</button>';
+  }
+}
+
+function mSec1(id) {
+  mVeri.hizmet = id;
+
+  var bulunan = mHizmetler.find(function (h) {
+    return h.id === id;
+  });
+
+  if (bulunan) {
+    mVeri.hizmetAd = bulunan.label.replace(/^[^\s]+\s/, '');
+    mFiyatGoster(bulunan.fiyat);
+  }
+
+  mGecmis.push('hizmet');
+  mEkran('adim2');
+}
+
+function mSec2(v) {
+  mVeri.detay = v;
+
+  var a2 = mAkis[mVeri.hizmet].adim2;
+  var s = a2.secenekler.find(function (x) {
+    return x.v === v;
+  });
+
+  if (s && s.f) {
+    mVeri.fiyat = s.f;
+    mFiyatGoster(s.f);
+  }
+
+  mGecmis.push('adim2');
+
+  var a3 = mAkis[mVeri.hizmet].adim3;
+  var a3var = a3 && (a3.soru || (a3[v] && a3[v].soru));
+
+  if (a3var) {
+    mEkran('adim3');
+  } else {
+    mEkran('notlar');
+  }
+}
+
+function mSec3(v, fmin, fmax) {
+  mVeri.altDetay = v;
+
+  if (fmin && fmax) {
+    mVeri.fiyat = { min: fmin, max: fmax };
+    mFiyatGoster(mVeri.fiyat);
+  }
+
+  if (!mVeri.fiyat) {
+    mVeri.fiyat = { min: 800, max: 5000 };
+  }
+
+  mGecmis.push('adim3');
+  mEkran('notlar');
+}
+
+var multiSecimler = [];
+
+function mToggleMulti(btn, v) {
+  var idx = multiSecimler.indexOf(v);
+
+  if (idx > -1) {
+    multiSecimler.splice(idx, 1);
+    btn.classList.remove('secildi');
+  } else {
+    multiSecimler.push(v);
+    btn.classList.add('secildi');
+  }
+}
+
+function mSec3Multi() {
+  mVeri.altDetay = multiSecimler.join(',');
+  mVeri.fiyat = { min: 800, max: 5000 };
+  mGecmis.push('adim3');
+  mEkran('notlar');
+}
+
+function mOlustur() {
+  var adEl = document.getElementById('m-ad');
+  var telEl = document.getElementById('m-tel');
+  var notEl = document.getElementById('m-notlar');
+
+  var ad = adEl ? adEl.value.trim() : '';
+
+  if (!ad) {
+    if (adEl) {
+      adEl.style.borderColor = 'var(--amber)';
+      adEl.focus();
+    }
+    return;
+  }
+
+  mVeri.ad = ad;
+  mVeri.tel = telEl ? telEl.value.trim() : '';
+  mVeri.notlar = notEl ? notEl.value.trim() : '';
+
+  if (!mVeri.fiyat) {
+    mVeri.fiyat = { min: 800, max: 15000 };
+  }
+
+  mGecmis.push('notlar');
+  mEkran('sonuc');
+
+  setTimeout(function () {
+    var now = new Date();
+    var pad = function (n) {
+      return n < 10 ? '0' + n : n;
+    };
+
+    var tNo = 'AR-' + now.getFullYear() + pad(now.getMonth() + 1) + pad(now.getDate()) + '-' + pad(Math.floor(Math.random() * 999) + 1);
+    var f = mVeri.fiyat;
+
+    var msg =
+      'YENI TEKLIF%0A' +
+      tNo + '%0A' +
+      'Ad: ' + encodeURIComponent(mVeri.ad) + '%0A' +
+      'Tel: ' + encodeURIComponent(mVeri.tel || '-') + '%0A' +
+      'Hizmet: ' + encodeURIComponent(mVeri.hizmetAd || 'Teknik Servis') + '%0A' +
+      (mVeri.notlar ? 'Not: ' + encodeURIComponent(mVeri.notlar.substring(0, 120)) + '%0A' : '') +
+      'Tahmini: ' + f.min.toLocaleString('tr-TR') + '-' + f.max.toLocaleString('tr-TR') + ' TL';
+
+    window.open('https://wa.me/905367807059?text=' + msg, '_blank');
+  }, 800);
+}
+
+function modalGeri() {
+  if (mGecmis.length === 0) return;
+
+  var onceki = mGecmis.pop();
+  mEkran(onceki);
+}
+
+function trFix(s) {
+  if (!s) return '';
+
+  return String(s)
+    .replace(/ş/g, 's').replace(/Ş/g, 'S')
+    .replace(/ı/g, 'i').replace(/İ/g, 'I')
+    .replace(/ğ/g, 'g').replace(/Ğ/g, 'G')
+    .replace(/ü/g, 'u').replace(/Ü/g, 'U')
+    .replace(/ö/g, 'o').replace(/Ö/g, 'O')
+    .replace(/ç/g, 'c').replace(/Ç/g, 'C');
+}
+
+function pdfIndir() {
+  if (!window.jspdf || !window.jspdf.jsPDF) {
+    alert('PDF kütüphanesi yüklenemedi. Lütfen WhatsApp üzerinden gönderin.');
+    return;
+  }
+
+  var now = new Date();
+  var pad = function (n) {
+    return n < 10 ? '0' + n : n;
+  };
+
+  var tarih = now.toLocaleDateString('tr-TR');
+  var tNo = 'AR-' + now.getFullYear() + pad(now.getMonth() + 1) + pad(now.getDate()) + '-' + pad(Math.floor(Math.random() * 999) + 1);
+  var f = mVeri.fiyat || { min: 800, max: 15000 };
+
+  var doc = new jspdf.jsPDF({
+    orientation: 'portrait',
+    unit: 'mm',
+    format: 'a4'
+  });
+
+  var W = 210;
+  var M = 20;
+
+  doc.setFillColor(245, 158, 11);
+  doc.rect(0, 0, W, 18, 'F');
+
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(18);
+  doc.setTextColor(0, 0, 0);
+  doc.text('AR-EL', M, 12);
+
+  doc.setFontSize(8);
+  doc.setFont('helvetica', 'normal');
+  doc.text('TEKNIK SERVIS', M + 24, 12);
+
+  doc.setFontSize(8);
+  doc.text('TAHMINI TEKLIF', W - M, 8, { align: 'right' });
+  doc.text(tarih, W - M, 13, { align: 'right' });
+
+  doc.setTextColor(20, 20, 20);
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(16);
+  doc.text('Tahmini Fiyat Araligi', M, 36);
+
+  doc.setFontSize(22);
+  doc.setTextColor(245, 158, 11);
+  doc.text(f.min.toLocaleString('tr-TR') + ' - ' + f.max.toLocaleString('tr-TR') + ' TL', M, 50);
+
+  doc.setTextColor(60, 60, 60);
+  doc.setFontSize(10);
+  doc.setFont('helvetica', 'normal');
+
+  var y = 68;
+  doc.text('Teklif No: ' + tNo, M, y); y += 8;
+  doc.text('Ad: ' + trFix(mVeri.ad || '-'), M, y); y += 8;
+  doc.text('Telefon: ' + trFix(mVeri.tel || '-'), M, y); y += 8;
+  doc.text('Hizmet: ' + trFix(mVeri.hizmetAd || 'Teknik Servis'), M, y); y += 8;
+
+  if (mVeri.notlar) {
+    var lines = doc.splitTextToSize('Not: ' + trFix(mVeri.notlar), 165);
+    doc.text(lines, M, y);
+    y += lines.length * 6 + 6;
+  }
+
+  doc.setFont('helvetica', 'bold');
+  doc.text('Kosullar', M, y); y += 8;
+
+  doc.setFont('helvetica', 'normal');
+  doc.text('- Yerinde inceleme sonrasi kesin fiyat verilir.', M, y); y += 6;
+  doc.text('- 1 yil iscilik garantisi uygulanir.', M, y); y += 6;
+  doc.text('- Teklif gecerlilik suresi: 30 gun.', M, y); y += 6;
+
+  doc.save(tNo + '.pdf');
+}
+</script>
