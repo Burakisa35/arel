@@ -1,884 +1,795 @@
 <!DOCTYPE html>
+
 <html lang="tr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-
-  <title>TEHAŞ | Güvenlik ve Teknoloji Çözümleri</title>
-
-  <meta
-    name="description"
-    content="TEHAŞ güvenlik ve teknoloji çözümleri. WhatsApp, telefon ve hızlı kayıt ile Kemalpaşa / İzmir saha hizmeti."
-  />
-
-  <meta name="theme-color" content="#070707" />
-
-  <style>
-    :root {
-      --bg: #070707;
-      --panel: #101010;
-      --text: #f2f2f2;
-      --muted: #9a9a9a;
-      --line: #262626;
-      --gold: #f2a51a;
-      --green: #25d366;
-      --safe-top: env(safe-area-inset-top, 0px);
-      --safe-bottom: env(safe-area-inset-bottom, 16px);
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      -webkit-tap-highlight-color: rgba(242, 165, 26, 0.18);
-    }
-
-    html, body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-      overflow-x: hidden;
-    }
-
-    body {
-      padding-bottom: calc(86px + var(--safe-bottom));
-    }
-
-    body.modal-open {
-      overflow: hidden;
-    }
-
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    button, input, textarea, select {
-      font: inherit;
-    }
-
-    .page {
-      min-height: 100dvh;
-      background:
-        radial-gradient(circle at top, rgba(242, 165, 26, 0.08), transparent 30%),
-        linear-gradient(180deg, #070707, #0c0c0c 55%, #070707);
-    }
-
-    header {
-      height: 96px;
-      padding:
-        calc(20px + var(--safe-top))
-        24px
-        16px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border-bottom: 1px solid var(--line);
-    }
-
-    .logo {
-      font-size: clamp(24px, 5vw, 30px);
-      font-weight: 900;
-      letter-spacing: 0.22em;
-    }
-
-    .logo .gold {
-      color: var(--gold);
-    }
-
-    .menu {
-      width: 44px;
-      height: 34px;
-      border: 0;
-      background: none;
-      display: grid;
-      gap: 7px;
-      cursor: pointer;
-      transition: opacity 180ms ease;
-    }
-
-    .menu:active {
-      opacity: 0.7;
-    }
-
-    .menu span {
-      height: 2px;
-      background: #fff;
-      display: block;
-      transition: all 180ms cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    main {
-      min-height: calc(100dvh - 96px);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 42px 26px 28px;
-      text-align: center;
-    }
-
-    .eyebrow {
-      color: var(--gold);
-      letter-spacing: 0.42em;
-      font-size: 12px;
-      font-weight: 800;
-      margin-bottom: 28px;
-      text-transform: uppercase;
-    }
-
-    h1 {
-      font-size: clamp(48px, 12vw, 92px);
-      line-height: 0.9;
-      letter-spacing: -0.06em;
-      margin-bottom: 24px;
-      font-weight: 900;
-    }
-
-    .lead {
-      max-width: 340px;
-      margin: 0 auto 48px;
-      color: var(--muted);
-      line-height: 1.6;
-      font-size: clamp(16px, 4.5vw, 19px);
-    }
-
-    .cards {
-      width: 100%;
-      max-width: 580px;
-      margin: 0 auto 30px;
-      display: grid;
-      gap: 18px;
-    }
-
-    .card {
-      min-height: 92px;
-      border: 1px solid var(--line);
-      border-radius: 20px;
-      background: rgba(16, 16, 16, 0.75);
-      display: grid;
-      grid-template-columns: 86px 1fr;
-      overflow: hidden;
-      transition: all 180ms cubic-bezier(0.4, 0, 0.2, 1);
-      cursor: pointer;
-    }
-
-    .card:active {
-      transform: scale(0.98);
-      border-color: var(--gold);
-      background: rgba(16, 16, 16, 0.95);
-    }
-
-    .card:focus-visible {
-      outline: 2px solid var(--gold);
-      outline-offset: 2px;
-    }
-
-    .icon {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 34px;
-      border-right: 1px solid var(--line);
-    }
-
-    .meta {
-      padding: 18px 22px;
-      text-align: left;
-    }
-
-    .label {
-      color: var(--muted);
-      font-size: 12px;
-      letter-spacing: 0.24em;
-      margin-bottom: 8px;
-      font-weight: 700;
-      text-transform: uppercase;
-    }
-
-    .value {
-      font-size: clamp(18px, 5vw, 25px);
-      font-weight: 900;
-    }
-
-    .primary {
-      width: 100%;
-      max-width: 580px;
-      margin: 0 auto;
-      min-height: 78px;
-      border: 0;
-      border-radius: 20px;
-      background: var(--gold);
-      color: #070707;
-      font-weight: 900;
-      letter-spacing: 0.28em;
-      font-size: 15px;
-      cursor: pointer;
-      transition: all 180ms cubic-bezier(0.4, 0, 0.2, 1);
-      text-transform: uppercase;
-    }
-
-    .primary:active {
-      transform: scale(0.96);
-    }
-
-    .primary:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
-    }
-
-    .primary:focus-visible {
-      outline: 2px solid var(--gold);
-      outline-offset: 4px;
-    }
-
-    .footer {
-      margin-top: 60px;
-      padding-top: 30px;
-      border-top: 1px solid var(--line);
-      color: var(--muted);
-      letter-spacing: 0.14em;
-      line-height: 1.9;
-      font-size: clamp(12px, 2vw, 14px);
-    }
-
-    .footer strong {
-      color: #fff;
-    }
-
-    .footer .gold {
-      color: var(--gold);
-    }
-
-    .sticky {
-      position: fixed;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      z-index: 40;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      border-top: 1px solid var(--line);
-      background: #0a0a0a;
-      box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.4);
-    }
-
-    .sticky a, .sticky button {
-      min-height: 66px;
-      padding: 14px 12px calc(14px + var(--safe-bottom));
-      border: 0;
-      background: #0f0f0f;
-      color: #fff;
-      font-size: clamp(14px, 3vw, 18px);
-      font-weight: 900;
-      cursor: pointer;
-      transition: all 180ms cubic-bezier(0.4, 0, 0.2, 1);
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-    }
-
-    .sticky a:active, .sticky button:active {
-      opacity: 0.8;
-    }
-
-    .sticky a:focus-visible, .sticky button:focus-visible {
-      outline: 2px solid var(--gold);
-      outline-offset: -2px;
-    }
-
-    .sticky a {
-      color: var(--green);
-      border-right: 1px solid var(--line);
-    }
-
-    .modal {
-      position: fixed;
-      inset: 0;
-      z-index: 100;
-      background: rgba(7, 7, 7, 0.98);
-      display: none;
-      overflow-y: auto;
-      overflow-x: hidden;
-      padding: calc(28px + var(--safe-top)) 22px calc(28px + var(--safe-bottom));
-      backdrop-filter: blur(4px);
-    }
-
-    .modal.active {
-      display: block;
-    }
-
-    .modal-box {
-      max-width: 560px;
-      margin: 0 auto;
-      animation: slideUp 300ms cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    @keyframes slideUp {
-      from {
-        opacity: 0;
-        transform: translateY(24px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .modal-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 26px;
-      gap: 16px;
-    }
-
-    .modal h2 {
-      font-size: clamp(24px, 6vw, 34px);
-      letter-spacing: -0.04em;
-      font-weight: 900;
-    }
-
-    .close {
-      width: 46px;
-      height: 46px;
-      border-radius: 999px;
-      border: 1px solid var(--line);
-      background: #151515;
-      color: #fff;
-      cursor: pointer;
-      font-weight: 900;
-      font-size: 18px;
-      transition: all 180ms cubic-bezier(0.4, 0, 0.2, 1);
-      flex-shrink: 0;
-    }
-
-    .close:active {
-      transform: scale(0.92);
-      background: var(--gold);
-      color: #070707;
-    }
-
-    .close:focus-visible {
-      outline: 2px solid var(--gold);
-      outline-offset: 2px;
-    }
-
-    .form {
-      display: grid;
-      gap: 14px;
-    }
-
-    .field {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .field label {
-      display: block;
-      color: var(--muted);
-      font-size: 12px;
-      letter-spacing: 0.18em;
-      margin-bottom: 8px;
-      font-weight: 700;
-      text-transform: uppercase;
-    }
-
-    .field input, .field textarea, .field select {
-      width: 100%;
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      background: #101010;
-      color: #fff;
-      padding: 15px;
-      outline: none;
-      transition: all 180ms cubic-bezier(0.4, 0, 0.2, 1);
-      font-size: 16px;
-    }
-
-    .field input::placeholder, .field textarea::placeholder {
-      color: rgba(242, 165, 26, 0.3);
-    }
-
-    .field input:focus, .field textarea:focus, .field select:focus {
-      border-color: var(--gold);
-      background: #151515;
-    }
-
-    .field input.error, .field textarea.error {
-      border-color: #ef4444;
-      background: rgba(239, 68, 68, 0.05);
-    }
-
-    .field textarea {
-      min-height: 100px;
-      resize: vertical;
-      font-family: inherit;
-    }
-
-    .error-msg {
-      color: #ef4444;
-      font-size: 12px;
-      margin-top: 4px;
-      display: none;
-      font-weight: 600;
-    }
-
-    .field.has-error .error-msg {
-      display: block;
-    }
-
-    .send {
-      min-height: 58px;
-      border: 0;
-      border-radius: 14px;
-      background: var(--gold);
-      color: #070707;
-      font-weight: 900;
-      font-size: clamp(13px, 3vw, 15px);
-      cursor: pointer;
-      transition: all 180ms cubic-bezier(0.4, 0, 0.2, 1);
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      margin-top: 8px;
-    }
-
-    .send:active {
-      transform: scale(0.96);
-    }
-
-    .send:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
-    }
-
-    .send:focus-visible {
-      outline: 2px solid var(--gold);
-      outline-offset: 4px;
-    }
-
-    .hint {
-      color: var(--muted);
-      text-align: center;
-      line-height: 1.6;
-      font-size: 12px;
-      margin-top: 12px;
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      * {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-      }
-    }
-
-    @media (max-width: 520px) {
-      .logo {
-        font-size: 22px;
-      }
-
-      header {
-        height: 80px;
-        padding: calc(16px + var(--safe-top)) 18px 12px;
-      }
-
-      .card {
-        grid-template-columns: 70px 1fr;
-        min-height: 80px;
-      }
-
-      .icon {
-        font-size: 28px;
-      }
-
-      .value {
-        font-size: 20px;
-      }
-
-      .lead {
-        font-size: 16px;
-      }
-
-      main {
-        padding: 36px 18px 24px;
-      }
-
-      .sticky a, .sticky button {
-        font-size: 14px;
-        min-height: 60px;
-        padding: 10px 8px calc(10px + var(--safe-bottom));
-      }
-
-      .modal {
-        padding: calc(20px + var(--safe-top)) 16px calc(20px + var(--safe-bottom));
-      }
-
-      .modal-box {
-        max-width: 100%;
-      }
-
-      .modal h2 {
-        font-size: 24px;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="TEHAŞ — Kemalpaşa ve çevresinde güvenlik kamerası kurulumu, elektrik tesisatı, uydu, ağ altyapısı ve kapı otomasyonu hizmetleri. 7 yıllık deneyim, Hikvision Partner Pro sertifikalı.">
+<meta name="keywords" content="Kemalpaşa güvenlik kamerası, Kemalpaşa elektrikçi, Armutlu kamera kurulumu, İzmir güvenlik kamerası, Kemalpaşa uydu kurulumu, kapı otomasyonu Kemalpaşa">
+<title>TEHAŞ — Teknik Hizmetler | Kemalpaşa, İzmir</title>
+<link rel="canonical" href="https://tehas.tr">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8C96A;
+    --gold-dim: rgba(201,168,76,0.12);
+    --dark: #080808;
+    --dark-2: #0f0f0f;
+    --dark-3: #141414;
+    --dark-card: #111111;
+    --white: #ffffff;
+    --gray: #777777;
+    --gray-2: #aaaaaa;
+    --border: rgba(255,255,255,0.05);
+    --border-gold: rgba(201,168,76,0.15);
+    --wa: #25D366;
+  }
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+background: var(–dark);
+color: var(–white);
+font-family: ‘Inter’, sans-serif;
+line-height: 1.6;
+overflow-x: hidden;
+}
+
+/* ─── NAV ─── */
+nav {
+position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+padding: 20px 40px;
+display: flex; align-items: center; justify-content: space-between;
+background: rgba(8,8,8,0.85);
+backdrop-filter: blur(20px);
+border-bottom: 1px solid var(–border);
+transition: padding 0.3s ease;
+}
+
+.nav-logo {
+font-family: ‘Montserrat’, sans-serif;
+font-weight: 900; font-size: 22px; letter-spacing: -0.5px;
+background: linear-gradient(135deg, var(–white) 0%, var(–gold-light) 100%);
+-webkit-background-clip: text; -webkit-text-fill-color: transparent;
+background-clip: text; text-decoration: none;
+}
+
+.nav-links {
+display: flex; gap: 32px; list-style: none;
+}
+
+.nav-links a {
+color: var(–gray-2); text-decoration: none;
+font-size: 13px; font-weight: 500; letter-spacing: 0.5px;
+transition: color 0.2s;
+}
+
+.nav-links a:hover { color: var(–white); }
+
+.nav-cta {
+background: var(–gold); color: var(–dark) !important;
+padding: 8px 18px; border-radius: 8px;
+font-weight: 700 !important; letter-spacing: 0.5px;
+transition: opacity 0.2s !important;
+}
+
+.nav-cta:hover { opacity: 0.88; }
+
+.nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+.nav-hamburger span { width: 24px; height: 1.5px; background: var(–white); display: block; transition: 0.3s; }
+
+/* ─── HERO ─── */
+.hero {
+min-height: 100vh;
+display: flex; flex-direction: column;
+align-items: center; justify-content: center;
+text-align: center;
+padding: 120px 24px 80px;
+position: relative;
+overflow: hidden;
+background:
+radial-gradient(ellipse 70% 50% at 50% -10%, rgba(201,168,76,0.10) 0%, transparent 70%),
+var(–dark);
+}
+
+.hero::after {
+content: ‘’;
+position: absolute; inset: 0;
+background: url(“data:image/svg+xml,%3Csvg width=‘60’ height=‘60’ viewBox=‘0 0 60 60’ xmlns=‘http://www.w3.org/2000/svg’%3E%3Cg fill=‘none’ fill-rule=‘evenodd’%3E%3Cg fill=’%23C9A84C’ fill-opacity=‘0.015’%3E%3Cpath d=‘M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z’/%3E%3C/g%3E%3C/g%3E%3C/svg%3E”);
+pointer-events: none;
+}
+
+.hero-badge {
+display: inline-flex; align-items: center; gap: 8px;
+background: var(–gold-dim); border: 1px solid var(–border-gold);
+border-radius: 100px; padding: 7px 18px;
+font-size: 11px; font-weight: 600; letter-spacing: 2.5px;
+text-transform: uppercase; color: var(–gold);
+margin-bottom: 36px;
+animation: fadeUp 0.7s ease forwards; opacity: 0;
+}
+
+.hero-badge-dot {
+width: 6px; height: 6px; border-radius: 50%;
+background: var(–gold); animation: pulse 2s ease infinite;
+}
+
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(1.6)} }
+
+.hero-title {
+font-family: ‘Montserrat’, sans-serif;
+font-size: clamp(40px, 9vw, 88px);
+font-weight: 900; letter-spacing: -2px; line-height: 1.0;
+margin-bottom: 10px;
+background: linear-gradient(160deg, var(–white) 0%, rgba(255,255,255,0.7) 100%);
+-webkit-background-clip: text; -webkit-text-fill-color: transparent;
+background-clip: text;
+animation: fadeUp 0.7s ease 0.1s forwards; opacity: 0;
+}
+
+.hero-title-accent {
+background: linear-gradient(135deg, var(–gold-light), var(–gold));
+-webkit-background-clip: text; -webkit-text-fill-color: transparent;
+background-clip: text;
+}
+
+.hero-sub-title {
+font-family: ‘Montserrat’, sans-serif;
+font-size: clamp(16px, 3vw, 24px);
+font-weight: 300; color: var(–gray-2);
+letter-spacing: 0.5px; margin-bottom: 48px;
+animation: fadeUp 0.7s ease 0.2s forwards; opacity: 0;
+}
+
+.hero-cta-group {
+display: flex; gap: 14px; flex-wrap: wrap; justify-content: center;
+animation: fadeUp 0.7s ease 0.3s forwards; opacity: 0;
+}
+
+.btn-primary {
+display: inline-flex; align-items: center; gap: 10px;
+background: var(–wa); color: #fff;
+padding: 16px 32px; border-radius: 12px;
+font-family: ‘Montserrat’, sans-serif;
+font-size: 14px; font-weight: 700; letter-spacing: 0.5px;
+text-decoration: none; transition: all 0.3s ease;
+box-shadow: 0 8px 32px rgba(37,211,102,0.25);
+}
+
+.btn-primary:hover {
+transform: translateY(-2px);
+box-shadow: 0 16px 48px rgba(37,211,102,0.35);
+}
+
+.btn-secondary {
+display: inline-flex; align-items: center; gap: 10px;
+background: transparent; color: var(–white);
+padding: 16px 32px; border-radius: 12px;
+border: 1px solid var(–border-gold);
+font-family: ‘Montserrat’, sans-serif;
+font-size: 14px; font-weight: 600; letter-spacing: 0.5px;
+text-decoration: none; transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+background: var(–gold-dim);
+border-color: var(–gold);
+transform: translateY(-2px);
+}
+
+.hero-scroll {
+position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%);
+display: flex; flex-direction: column; align-items: center; gap: 8px;
+animation: fadeUp 0.7s ease 0.6s forwards; opacity: 0;
+}
+
+.hero-scroll span {
+font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+color: var(–gray);
+}
+
+.scroll-line {
+width: 1px; height: 40px;
+background: linear-gradient(to bottom, var(–gold), transparent);
+animation: scrollPulse 2s ease infinite;
+}
+
+@keyframes scrollPulse { 0%{opacity:0;transform:scaleY(0);transform-origin:top} 50%{opacity:1;transform:scaleY(1)} 100%{opacity:0} }
+
+/* ─── SECTIONS COMMON ─── */
+section { padding: 100px 24px; }
+
+.container { max-width: 1100px; margin: 0 auto; }
+
+.section-eyebrow {
+font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+color: var(–gold); font-weight: 600; margin-bottom: 14px;
+display: flex; align-items: center; gap: 12px;
+}
+
+.section-eyebrow::before {
+content: ‘’; width: 24px; height: 1px; background: var(–gold);
+}
+
+.section-title {
+font-family: ‘Montserrat’, sans-serif;
+font-size: clamp(26px, 4vw, 42px);
+font-weight: 700; letter-spacing: -1px;
+margin-bottom: 16px;
+}
+
+.section-desc {
+color: var(–gray-2); font-size: 16px;
+font-weight: 300; max-width: 520px;
+margin-bottom: 60px;
+}
+
+/* ─── HİZMETLER ─── */
+#hizmetler { background: var(–dark-2); }
+
+.services-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+gap: 2px;
+}
+
+.service-card {
+background: var(–dark-card);
+padding: 40px 32px;
+position: relative; overflow: hidden;
+transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
+cursor: default;
+border: 1px solid var(–border);
+}
+
+.service-card::before {
+content: ‘’;
+position: absolute; top: 0; left: 0; right: 0; height: 2px;
+background: linear-gradient(90deg, transparent, var(–gold), transparent);
+opacity: 0; transition: opacity 0.4s;
+}
+
+.service-card:hover {
+background: #161616;
+border-color: var(–border-gold);
+transform: translateY(-4px);
+box-shadow: 0 24px 48px rgba(0,0,0,0.5);
+}
+
+.service-card:hover::before { opacity: 1; }
+
+.service-icon {
+width: 52px; height: 52px; border-radius: 14px;
+background: var(–gold-dim); border: 1px solid var(–border-gold);
+display: flex; align-items: center; justify-content: center;
+font-size: 22px; margin-bottom: 24px;
+transition: transform 0.3s ease;
+}
+
+.service-card:hover .service-icon { transform: scale(1.1); }
+
+.service-name {
+font-family: ‘Montserrat’, sans-serif;
+font-size: 18px; font-weight: 700;
+margin-bottom: 10px; letter-spacing: -0.3px;
+}
+
+.service-desc {
+color: var(–gray-2); font-size: 14px;
+font-weight: 300; line-height: 1.7;
+margin-bottom: 24px;
+}
+
+.service-link {
+font-size: 12px; font-weight: 600;
+letter-spacing: 1px; text-transform: uppercase;
+color: var(–gold); text-decoration: none;
+display: inline-flex; align-items: center; gap: 6px;
+transition: gap 0.2s;
+}
+
+.service-card:hover .service-link { gap: 10px; }
+
+/* ─── NEDEN TEHAŞ ─── */
+#neden { background: var(–dark); }
+
+.reasons-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+gap: 24px;
+}
+
+.reason-card {
+background: var(–dark-3);
+border: 1px solid var(–border);
+border-radius: 16px;
+padding: 36px 32px;
+transition: border-color 0.3s ease, transform 0.3s ease;
+}
+
+.reason-card:hover {
+border-color: var(–border-gold);
+transform: translateY(-3px);
+}
+
+.reason-num {
+font-family: ‘Montserrat’, sans-serif;
+font-size: 48px; font-weight: 900;
+color: rgba(201,168,76,0.08);
+line-height: 1; margin-bottom: 16px;
+letter-spacing: -2px;
+}
+
+.reason-title {
+font-family: ‘Montserrat’, sans-serif;
+font-size: 17px; font-weight: 700;
+margin-bottom: 10px; letter-spacing: -0.3px;
+}
+
+.reason-desc {
+color: var(–gray-2); font-size: 14px;
+font-weight: 300; line-height: 1.7;
+}
+
+/* ─── STATS ─── */
+.stats-bar {
+background: linear-gradient(135deg, rgba(201,168,76,0.07), rgba(201,168,76,0.03));
+border-top: 1px solid var(–border-gold);
+border-bottom: 1px solid var(–border-gold);
+padding: 56px 24px;
+}
+
+.stats-grid {
+max-width: 900px; margin: 0 auto;
+display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+gap: 40px; text-align: center;
+}
+
+.stat-num {
+font-family: ‘Montserrat’, sans-serif;
+font-size: clamp(36px, 5vw, 52px);
+font-weight: 900; letter-spacing: -2px;
+background: linear-gradient(135deg, var(–white), var(–gold-light));
+-webkit-background-clip: text; -webkit-text-fill-color: transparent;
+background-clip: text; margin-bottom: 8px;
+}
+
+.stat-label {
+font-size: 12px; letter-spacing: 2px; text-transform: uppercase;
+color: var(–gray); font-weight: 500;
+}
+
+/* ─── İLETİŞİM ─── */
+#iletisim { background: var(–dark-2); }
+
+.contact-grid {
+display: grid; grid-template-columns: 1fr 1fr; gap: 40px;
+align-items: start;
+}
+
+.contact-info { display: flex; flex-direction: column; gap: 20px; }
+
+.contact-item {
+display: flex; align-items: center; gap: 16px;
+padding: 20px 24px;
+background: var(–dark-card);
+border: 1px solid var(–border);
+border-radius: 12px;
+transition: border-color 0.3s, transform 0.3s;
+text-decoration: none; color: var(–white);
+}
+
+.contact-item:hover {
+border-color: var(–border-gold);
+transform: translateX(4px);
+}
+
+.contact-item-icon {
+width: 44px; height: 44px; border-radius: 12px;
+background: var(–gold-dim); border: 1px solid var(–border-gold);
+display: flex; align-items: center; justify-content: center;
+font-size: 18px; flex-shrink: 0;
+}
+
+.contact-item-label {
+font-size: 11px; letter-spacing: 1px; text-transform: uppercase;
+color: var(–gray); margin-bottom: 4px; font-weight: 500;
+}
+
+.contact-item-value {
+font-size: 15px; font-weight: 500; color: var(–white);
+}
+
+.contact-map {
+border-radius: 16px; overflow: hidden;
+border: 1px solid var(–border);
+height: 320px;
+}
+
+.contact-map iframe {
+width: 100%; height: 100%; border: none; filter: grayscale(80%) invert(90%);
+}
+
+/* ─── FOOTER ─── */
+footer {
+background: var(–dark);
+border-top: 1px solid var(–border);
+padding: 48px 24px;
+}
+
+.footer-inner {
+max-width: 1100px; margin: 0 auto;
+display: flex; align-items: center; justify-content: space-between;
+flex-wrap: wrap; gap: 24px;
+}
+
+.footer-logo-wrap { display: flex; flex-direction: column; gap: 4px; }
+
+.footer-logo {
+font-family: ‘Montserrat’, sans-serif;
+font-weight: 900; font-size: 20px; letter-spacing: -0.5px;
+background: linear-gradient(135deg, var(–white), var(–gold));
+-webkit-background-clip: text; -webkit-text-fill-color: transparent;
+background-clip: text;
+}
+
+.footer-tagline {
+font-size: 11px; color: var(–gray);
+letter-spacing: 1px; text-transform: uppercase;
+}
+
+.footer-links {
+display: flex; gap: 28px; list-style: none; flex-wrap: wrap;
+}
+
+.footer-links a {
+font-size: 13px; color: var(–gray);
+text-decoration: none; transition: color 0.2s;
+}
+
+.footer-links a:hover { color: var(–gold); }
+
+.footer-copy {
+font-size: 12px; color: rgba(255,255,255,0.15);
+width: 100%; text-align: center; padding-top: 32px;
+border-top: 1px solid var(–border); margin-top: 8px;
+}
+
+/* ─── FLOATING WA ─── */
+.wa-float {
+position: fixed; bottom: 28px; right: 28px; z-index: 200;
+width: 60px; height: 60px; border-radius: 50%;
+background: var(–wa);
+display: flex; align-items: center; justify-content: center;
+text-decoration: none; font-size: 26px;
+box-shadow: 0 8px 32px rgba(37,211,102,0.4);
+transition: transform 0.3s ease, box-shadow 0.3s ease;
+animation: floatIn 0.5s ease 1s forwards; opacity: 0; transform: scale(0);
+}
+
+.wa-float:hover {
+transform: scale(1.1);
+box-shadow: 0 16px 48px rgba(37,211,102,0.5);
+}
+
+.wa-float::before {
+content: ‘’;
+position: absolute; inset: -4px; border-radius: 50%;
+border: 2px solid rgba(37,211,102,0.3);
+animation: waPulse 2.5s ease infinite;
+}
+
+@keyframes waPulse { 0%{transform:scale(1);opacity:1} 100%{transform:scale(1.5);opacity:0} }
+@keyframes floatIn { to{opacity:1;transform:scale(1)} }
+
+/* ─── ANIMATIONS ─── */
+@keyframes fadeUp {
+from { opacity:0; transform:translateY(28px); }
+to   { opacity:1; transform:translateY(0); }
+}
+
+.reveal {
+opacity: 0; transform: translateY(28px);
+transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+
+/* ─── MOBILE ─── */
+@media (max-width: 768px) {
+nav { padding: 16px 20px; }
+.nav-links { display: none; }
+.nav-hamburger { display: flex; }
+
+```
+section { padding: 72px 20px; }
+
+.contact-grid { grid-template-columns: 1fr; }
+.contact-map { height: 240px; }
+
+.footer-inner { flex-direction: column; align-items: flex-start; }
+.footer-links { gap: 20px; }
+
+.wa-float { bottom: 20px; right: 20px; width: 54px; height: 54px; font-size: 22px; }
+
+.hero-cta-group { flex-direction: column; align-items: center; }
+.btn-primary, .btn-secondary { width: 100%; max-width: 300px; justify-content: center; }
+```
+
+}
+</style>
+
 </head>
 <body>
 
-  <div class="page">
+<!-- NAV -->
 
-    <header>
-      <a href="#" class="logo" aria-label="TEHAŞ - Güvenlik ve Teknoloji Çözümleri">
-        TE<span class="gold">HA</span>Ş
-      </a>
+<nav>
+  <a href="/" class="nav-logo">TEHAŞ</a>
+  <ul class="nav-links">
+    <li><a href="#hizmetler">Hizmetler</a></li>
+    <li><a href="#neden">Hakkımızda</a></li>
+    <li><a href="#iletisim">İletişim</a></li>
+    <li><a href="tel:05367807059" class="nav-cta">Hemen Ara</a></li>
+  </ul>
+  <div class="nav-hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
 
-      <button class="menu" id="openForm" aria-label="Kayıt formunu aç">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-    </header>
+<!-- HERO -->
 
-    <main>
+<section class="hero" id="anasayfa">
+  <div class="hero-badge">
+    <div class="hero-badge-dot"></div>
+    Kemalpaşa · İzmir
+  </div>
+  <h1 class="hero-title">
+    Güvenliğiniz<br>
+    <span class="hero-title-accent">Bizim İşimiz.</span>
+  </h1>
+  <p class="hero-sub-title">
+    Kamera kurulumundan elektrik tesisatına,<br>
+    uydudan ağ altyapısına — tek adres.
+  </p>
+  <div class="hero-cta-group">
+    <a href="https://wa.me/905367807059?text=Merhaba,%20hizmet%20almak%20istiyorum." class="btn-primary" target="_blank">
+      💬 WhatsApp'ta Yaz
+    </a>
+    <a href="tel:05367807059" class="btn-secondary">
+      📞 0 (536) 780 70 59
+    </a>
+  </div>
+  <div class="hero-scroll">
+    <span>Keşfet</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
 
-      <div class="eyebrow">
-        İletişim
-      </div>
+<!-- HİZMETLER -->
 
-      <h1>Ulaşın</h1>
+<section id="hizmetler">
+  <div class="container">
+    <div class="section-eyebrow reveal">Hizmetlerimiz</div>
+    <h2 class="section-title reveal">Ne yapıyoruz?</h2>
+    <p class="section-desc reveal">7 yıllık saha deneyimi ile Kemalpaşa ve çevresinde profesyonel teknik hizmet.</p>
 
-      <p class="lead">
-        Size en hızlı şekilde dönüş yapalım.
-      </p>
-
-      <div class="cards">
-
-        <a
-          class="card"
-          href="https://wa.me/905367807059?text=Merhaba%2C%20TEHA%C5%9E%20web%20sitesi%20%C3%BCzerinden%20ula%C5%9F%C4%B1yorum."
-          target="_blank"
-          rel="noopener"
-          aria-label="WhatsApp ile iletişim kur"
-        >
-          <div class="icon">💬</div>
-
-          <div class="meta">
-            <div class="label">WhatsApp</div>
-            <div class="value">0536 780 70 59</div>
-          </div>
-        </a>
-
-        <a
-          class="card"
-          href="tel:+905367807059"
-          aria-label="Telefon ile ara"
-        >
-          <div class="icon">📞</div>
-
-          <div class="meta">
-            <div class="label">Telefon</div>
-            <div class="value">0536 780 70 59</div>
-          </div>
-        </a>
-
-      </div>
-
-      <button
-        class="primary"
-        id="openForm2"
-        aria-label="Kayıt formunu aç"
-      >
-        ➤ Bize Yazın
-      </button>
-
-      <div class="footer">
-        <strong>
-          TE<span class="gold">HA</span>Ş
-        </strong>
-
-        <br><br>
-
-        Güvenlik ve Teknoloji Çözümleri
-      </div>
-
-    </main>
-
+```
+<div class="services-grid">
+  <div class="service-card reveal reveal-delay-1">
+    <div class="service-icon">📷</div>
+    <div class="service-name">Güvenlik Kameraları</div>
+    <div class="service-desc">Hikvision Partner Pro sertifikalı kurulum. IP kamera, analog sistem, NVR/DVR kurulumu, uzaktan izleme yapılandırması.</div>
+    <a href="hizmetler.html#kamera" class="service-link">Detaylı bilgi →</a>
   </div>
 
-  <div class="sticky">
+  <div class="service-card reveal reveal-delay-2">
+    <div class="service-icon">⚡</div>
+    <div class="service-name">Elektrik Tesisatı</div>
+    <div class="service-desc">Komple tesisat kurulumu, pano montajı, tesisat röntgeni ile mevcut altyapı tespiti ve raporlaması.</div>
+    <a href="hizmetler.html#elektrik" class="service-link">Detaylı bilgi →</a>
+  </div>
 
-    <a
-      href="https://wa.me/905367807059?text=Merhaba%2C%20TEHA%C5%9E%20web%20sitesi%20%C3%BCzerinden%20ula%C5%9F%C4%B1yorum."
-      target="_blank"
-      rel="noopener"
-      aria-label="WhatsApp ile cevap al"
-    >
-      💬 WhatsApp
+  <div class="service-card reveal reveal-delay-3">
+    <div class="service-icon">📡</div>
+    <div class="service-name">Uydu & Anten</div>
+    <div class="service-desc">Çanak anten kurulumu, çoklu oda dağıtımı, merkezi anten sistemleri, sinyal optimizasyonu.</div>
+    <a href="hizmetler.html#uydu" class="service-link">Detaylı bilgi →</a>
+  </div>
+
+  <div class="service-card reveal reveal-delay-1">
+    <div class="service-icon">🌐</div>
+    <div class="service-name">Ağ Altyapısı</div>
+    <div class="service-desc">Cat6 kablolama, network switch kurulumu, Wi-Fi erişim noktası yerleşimi, pasif PoE çözümleri.</div>
+    <a href="hizmetler.html#ag" class="service-link">Detaylı bilgi →</a>
+  </div>
+
+  <div class="service-card reveal reveal-delay-2">
+    <div class="service-icon">🚪</div>
+    <div class="service-name">Kapı Otomasyonu</div>
+    <div class="service-desc">Otomatik bariyer, garaj kapısı, kartlı geçiş sistemi, video kapı zili kurulumu ve bakımı.</div>
+    <a href="hizmetler.html#kapi" class="service-link">Detaylı bilgi →</a>
+  </div>
+</div>
+```
+
+  </div>
+</section>
+
+<!-- STATS -->
+
+<div class="stats-bar">
+  <div class="stats-grid">
+    <div class="reveal">
+      <div class="stat-num">7+</div>
+      <div class="stat-label">Yıl Deneyim</div>
+    </div>
+    <div class="reveal reveal-delay-1">
+      <div class="stat-num">500+</div>
+      <div class="stat-label">Tamamlanan Proje</div>
+    </div>
+    <div class="reveal reveal-delay-2">
+      <div class="stat-num">5.0</div>
+      <div class="stat-label">Google Puanı</div>
+    </div>
+    <div class="reveal reveal-delay-3">
+      <div class="stat-num">HPP</div>
+      <div class="stat-label">Hikvision Sertifikası</div>
+    </div>
+  </div>
+</div>
+
+<!-- NEDEN TEHAŞ -->
+
+<section id="neden">
+  <div class="container">
+    <div class="section-eyebrow reveal">Neden TEHAŞ?</div>
+    <h2 class="section-title reveal">Fark yaratan 3 şey</h2>
+    <p class="section-desc reveal">Bölgede on yıllardır teknik hizmet veren firmalar var. Bizi farklı kılan bunlar.</p>
+
+```
+<div class="reasons-grid">
+  <div class="reason-card reveal reveal-delay-1">
+    <div class="reason-num">01</div>
+    <div class="reason-title">Sertifikalı Uzmanlık</div>
+    <div class="reason-desc">Hikvision Partner Pro sertifikası ile güvenlik sistemlerinde üretici destekli teknik bilgi. Amatör kurulum değil, profesyonel yapılandırma.</div>
+  </div>
+
+  <div class="reason-card reveal reveal-delay-2">
+    <div class="reason-num">02</div>
+    <div class="reason-title">Yerel & Hızlı</div>
+    <div class="reason-desc">Kemalpaşa ve Armutlu'da ikamet eden teknik ekip. Acil durumlarda aynı gün müdahale, uzak firma bekleme süresi yok.</div>
+  </div>
+
+  <div class="reason-card reveal reveal-delay-3">
+    <div class="reason-num">03</div>
+    <div class="reason-title">Tek Adres, 5 Hizmet</div>
+    <div class="reason-desc">Kamera için bir firma, elektrik için başka firma aramak yerine tüm teknik ihtiyaçlarınız tek elden. Koordinasyon sorunu yok.</div>
+  </div>
+</div>
+```
+
+  </div>
+</section>
+
+<!-- İLETİŞİM -->
+
+<section id="iletisim">
+  <div class="container">
+    <div class="section-eyebrow reveal">İletişim</div>
+    <h2 class="section-title reveal">Ulaşın</h2>
+    <p class="section-desc reveal">Ücretsiz keşif için hemen arayın veya mesaj gönderin.</p>
+
+```
+<div class="contact-grid">
+  <div class="contact-info">
+    <a href="https://wa.me/905367807059?text=Merhaba,%20bilgi%20almak%20istiyorum." class="contact-item reveal" target="_blank">
+      <div class="contact-item-icon">💬</div>
+      <div>
+        <div class="contact-item-label">WhatsApp</div>
+        <div class="contact-item-value">Mesaj Gönder</div>
+      </div>
     </a>
 
-    <button id="stickyForm" aria-label="Kayıt formunu aç">
-      📋 Kayıt Aç
-    </button>
-
-  </div>
-
-  <div class="modal" id="modal" aria-hidden="true" role="dialog" aria-labelledby="modalTitle">
-
-    <div class="modal-box">
-
-      <div class="modal-head">
-
-        <h2 id="modalTitle">Kayıt Oluştur</h2>
-
-        <button class="close" id="closeModal" aria-label="Formu kapat">
-          ✕
-        </button>
-
+    <a href="tel:05367807059" class="contact-item reveal reveal-delay-1">
+      <div class="contact-item-icon">📞</div>
+      <div>
+        <div class="contact-item-label">Telefon</div>
+        <div class="contact-item-value">0 (536) 780 70 59</div>
       </div>
+    </a>
 
-      <form id="leadForm" class="form" novalidate>
-
-        <div class="field">
-          <label for="name">Ad Soyad</label>
-
-          <input
-            type="text"
-            id="name"
-            name="name"
-            placeholder="Adınız Soyadınız"
-            autocomplete="name"
-            required
-            aria-required="true"
-          />
-          <div class="error-msg">Ad soyad en az 3 karakter olmalıdır</div>
-        </div>
-
-        <div class="field">
-          <label for="phone">Telefon</label>
-
-          <input
-            type="tel"
-            id="phone"
-            name="phone"
-            placeholder="05__ ___ __ __"
-            autocomplete="tel"
-            required
-            aria-required="true"
-          />
-          <div class="error-msg">Lütfen geçerli bir telefon numarası girin</div>
-        </div>
-
-        <div class="field">
-          <label for="service">Hizmet</label>
-
-          <select id="service" name="service" aria-label="Hizmet seçin">
-
-            <option value="">
-              Seçiniz
-            </option>
-
-            <option value="kamera">
-              Güvenlik Kamerası
-            </option>
-
-            <option value="elektrik">
-              Elektrik Arıza
-            </option>
-
-            <option value="anten">
-              Uydu / Anten
-            </option>
-
-            <option value="kapi">
-              Kapı Otomasyonu
-            </option>
-
-            <option value="network">
-              Network / Zayıf Akım
-            </option>
-
-          </select>
-        </div>
-
-        <div class="field">
-          <label for="area">Bölge</label>
-
-          <input
-            type="text"
-            id="area"
-            name="area"
-            placeholder="Kemalpaşa / İzmir"
-            autocomplete="address-level2"
-          />
-        </div>
-
-        <div class="field">
-          <label for="note">Not</label>
-
-          <textarea
-            id="note"
-            name="note"
-            placeholder="Kısaca talebinizi yazın"
-          ></textarea>
-        </div>
-
-        <button class="send" type="submit" id="submitBtn">
-          WHATSAPP'A AKTAR
-        </button>
-
-        <div class="hint">
-          Form bilgileri cihazınızdan WhatsApp mesajı olarak hazırlanır.
-        </div>
-
-      </form>
-
+    <div class="contact-item reveal reveal-delay-2" style="cursor:default;">
+      <div class="contact-item-icon">📍</div>
+      <div>
+        <div class="contact-item-label">Hizmet Bölgesi</div>
+        <div class="contact-item-value">Kemalpaşa, Armutlu ve çevresi</div>
+      </div>
     </div>
 
+    <div class="contact-item reveal reveal-delay-3" style="cursor:default;">
+      <div class="contact-item-icon">🕐</div>
+      <div>
+        <div class="contact-item-label">Çalışma Saatleri</div>
+        <div class="contact-item-value">Hft içi 08:00 – 19:00</div>
+      </div>
+    </div>
   </div>
 
-  <script>
-    (function() {
-      'use strict';
+  <div class="contact-map reveal reveal-delay-1">
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d50000!2d27.4!3d38.43!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14b97c2e9a4f1e1b%3A0x1234!2sKemalpa%C5%9Fa%2C%20%C4%B0zmir!5e0!3m2!1str!2str!4v1234567890"
+      allowfullscreen loading="lazy">
+    </iframe>
+  </div>
+</div>
+```
 
-      const PHONE = '905367807059';
-      const modal = document.getElementById('modal');
-      const form = document.getElementById('leadForm');
-      const submitBtn = document.getElementById('submitBtn');
+  </div>
+</section>
 
-      // Modal management
-      function openModal() {
-        modal.classList.add('active');
-        document.body.classList.add('modal-open');
-        modal.setAttribute('aria-hidden', 'false');
-        document.getElementById('name').focus();
+<!-- FOOTER -->
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo-wrap">
+      <div class="footer-logo">TEHAŞ</div>
+      <div class="footer-tagline">Teknik Hizmetler · Kemalpaşa / İzmir</div>
+    </div>
+    <ul class="footer-links">
+      <li><a href="#hizmetler">Hizmetler</a></li>
+      <li><a href="#neden">Hakkımızda</a></li>
+      <li><a href="#iletisim">İletişim</a></li>
+      <li><a href="https://wa.me/905367807059" target="_blank">WhatsApp</a></li>
+    </ul>
+    <div class="footer-copy">© 2026 TEHAŞ Teknik Hizmetler · tehas.tr</div>
+  </div>
+</footer>
+
+<!-- FLOATING WHATSAPP -->
+
+<a href="https://wa.me/905367807059?text=Merhaba,%20hizmet%20almak%20istiyorum." class="wa-float" target="_blank" aria-label="WhatsApp">
+  💬
+</a>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
       }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => observer.observe(el));
 
-      function closeModal() {
-        modal.classList.remove('active');
-        document.body.classList.remove('modal-open');
-        modal.setAttribute('aria-hidden', 'true');
-        form.reset();
-        clearErrors();
-      }
+  // Mobile menu
+  function toggleMenu() {
+    const links = document.querySelector('.nav-links');
+    links.style.display = links.style.display === 'flex' ? 'none' : 'flex';
+    links.style.flexDirection = 'column';
+    links.style.position = 'absolute';
+    links.style.top = '64px'; links.style.left = '0'; links.style.right = '0';
+    links.style.background = 'rgba(8,8,8,0.97)';
+    links.style.padding = '20px 40px 32px';
+    links.style.borderBottom = '1px solid rgba(255,255,255,0.05)';
+  }
 
-      // Event listeners for open
-      document.getElementById('openForm').addEventListener('click', openModal);
-      document.getElementById('openForm2').addEventListener('click', openModal);
-      document.getElementById('stickyForm').addEventListener('click', openModal);
-
-      // Event listeners for close
-      document.getElementById('closeModal').addEventListener('click', closeModal);
-
-      // Close on ESC key
-      document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && modal.classList.contains('active')) {
-          closeModal();
-        }
-      });
-
-      // Close on click outside
-      modal.addEventListener('click', function(e) {
-        if (e.target === modal) {
-          closeModal();
-        }
-      });
-
-      // Form validation
-      function clearErrors() {
-        const fields = form.querySelectorAll('.field');
-        fields.forEach(field => {
-          field.classList.remove('has-error');
-          const input = field.querySelector('input, textarea');
-          if (input) {
-            input.classList.remove('error');
-          }
-        });
-      }
-
-      function setError(fieldId, show) {
-        const field = document.getElementById(fieldId).parentElement;
-        if (show) {
-          field.classList.add('has-error');
-          document.getElementById(fieldId).classList.add('error');
-        } else {
-          field.classList.remove('has-error');
-          document.getElementById(fieldId).classList.remove('error');
-        }
-      }
-
-      function validateForm() {
-        clearErrors();
-        let isValid = true;
-
-        const name = document.getElementById('name').value.trim();
-        if (name.length < 3) {
-          setError('name', true);
-          isValid = false;
-        }
-
-        const phone = document.getElementById('phone').value.trim();
-        const digits = phone.replace(/\D/g, '');
-        if (!((digits.length === 10 && digits.startsWith('5')) ||
-              (digits.length === 11 && digits.startsWith('05')))) {
-          setError('phone', true);
-          isValid = false;
-        }
-
-        return isValid;
-      }
-
-      // Form submission
-      form.addEventListener('submit', function(e) {
-        e.preventDefault();
-
-        if (!validateForm()) {
-          return;
-        }
-
-        submitBtn.disabled = true;
-        submitBtn.textContent = 'Gönderiliyor...';
-
-        const name = document.getElementById('name').value.trim();
-        const phone = document.getElementById('phone').value.trim();
-        const service = document.getElementById('service').value;
-        const area = document.getElementById('area').value.trim();
-        const note = document.getElementById('note').value.trim();
-
-        const message = `TEHAŞ Kayıt Talebi
-
-Ad Soyad: ${name}
-Telefon: ${phone}
-Hizmet: ${service || '-'}
-Bölge: ${area || '-'}
-Not: ${note || '-'}
-
-Kaynak: Web sitesi`;
-
-        const waUrl = 'https://wa.me/' + PHONE + '?text=' + encodeURIComponent(message);
-
-        // Small delay for UX feedback
-        setTimeout(function() {
-          window.open(waUrl, '_blank', 'noopener');
-          closeModal();
-          submitBtn.disabled = false;
-          submitBtn.textContent = 'WHATSAPP\'A AKTAR';
-        }, 300);
-      });
-
-      // Real-time validation feedback
-      document.getElementById('name').addEventListener('blur', function() {
-        const hasError = this.value.trim().length < 3;
-        setError('name', hasError);
-      });
-
-      document.getElementById('phone').addEventListener('blur', function() {
-        const digits = this.value.replace(/\D/g, '');
-        const hasError = !((digits.length === 10 && digits.startsWith('5')) ||
-                           (digits.length === 11 && digits.startsWith('05')));
-        setError('phone', hasError);
-      });
-
-    })();
-  </script>
+  // Nav scroll shrink
+  window.addEventListener('scroll', () => {
+    const nav = document.querySelector('nav');
+    nav.style.padding = window.scrollY > 50 ? '12px 40px' : '20px 40px';
+  });
+</script>
 
 </body>
 </html>
