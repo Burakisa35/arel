@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="TEHAŞ hizmetleri: Güvenlik kamerası kurulumu, elektrik tesisatı, uydu anten, ağ altyapısı ve kapı otomasyonu. Kemalpaşa, Armutlu ve çevresi.">
+<meta name="keywords" content="Kemalpaşa güvenlik kamerası kurulumu, Kemalpaşa elektrikçi, Armutlu uydu kurulumu, Kemalpaşa kapı otomasyonu, tesisat röntgeni İzmir">
+<title>Hizmetler — TEHAŞ Teknik Hizmetler | Kemalpaşa, İzmir</title>
+<link rel="canonical" href="https://tehas.tr/hizmetler">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8C96A;
+    --gold-dim: rgba(201,168,76,0.10);
+    --dark: #080808;
+    --dark-2: #0f0f0f;
+    --dark-3: #141414;
+    --dark-card: #111111;
+    --white: #ffffff;
+    --gray: #777777;
+    --gray-2: #aaaaaa;
+    --border: rgba(255,255,255,0.05);
+    --border-gold: rgba(201,168,76,0.15);
+    --wa: #25D366;
+  }
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body { background: var(–dark); color: var(–white); font-family: ‘Inter’, sans-serif; line-height: 1.6; overflow-x: hidden; }
+
+/* NAV */
+nav {
+position: fixed; top:0; left:0; right:0; z-index:100;
+padding: 18px 40px;
+display: flex; align-items: center; justify-content: space-between;
+background: rgba(8,8,8,0.9); backdrop-filter: blur(20px);
+border-bottom: 1px solid var(–border);
+}
+.nav-logo {
+font-family: ‘Montserrat’, sans-serif; font-weight:900; font-size:20px;
+background: linear-gradient(135deg, var(–white), var(–gold-light));
+-webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+text-decoration:none;
+}
+.nav-links { display:flex; gap:28px; list-style:none; }
+.nav-links a { color:var(–gray-2); text-decoration:none; font-size:13px; font-weight:500; transition:color 0.2s; }
+.nav-links a:hover, .nav-links a.active { color:var(–gold); }
+.nav-cta {
+background:var(–gold) !important; color:var(–dark) !important;
+padding:8px 18px; border-radius:8px; font-weight:700 !important;
+}
+
+/* PAGE HERO */
+.page-hero {
+padding: 140px 24px 80px;
+text-align: center;
+background: radial-gradient(ellipse 60% 40% at 50% 0%, rgba(201,168,76,0.08) 0%, transparent 70%), var(–dark);
+border-bottom: 1px solid var(–border);
+}
+.page-hero-tag {
+font-size:11px; letter-spacing:3px; text-transform:uppercase;
+color:var(–gold); font-weight:600; margin-bottom:16px;
+}
+.page-hero-title {
+font-family:‘Montserrat’, sans-serif;
+font-size: clamp(32px,6vw,64px); font-weight:900; letter-spacing:-2px;
+margin-bottom:16px;
+background: linear-gradient(160deg, var(–white) 0%, rgba(255,255,255,0.7) 100%);
+-webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+}
+.page-hero-sub { color:var(–gray-2); font-size:17px; font-weight:300; max-width:520px; margin:0 auto 48px; }
+
+/* SERVICE NAV PILLS */
+.service-nav {
+display:flex; gap:10px; justify-content:center; flex-wrap:wrap;
+max-width:900px; margin:0 auto;
+}
+.service-pill {
+display:inline-flex; align-items:center; gap:8px;
+padding:10px 20px; border-radius:100px;
+border:1px solid var(–border-gold);
+background:var(–gold-dim);
+color:var(–gray-2); font-size:13px; font-weight:500;
+text-decoration:none; transition:all 0.3s ease;
+}
+.service-pill:hover, .service-pill.active {
+background:var(–gold); color:var(–dark); border-color:var(–gold);
+transform:translateY(-2px);
+}
+
+/* CONTAINER */
+.container { max-width:1100px; margin:0 auto; padding:0 24px; }
+
+/* SERVICE SECTION */
+.service-section {
+padding: 96px 24px;
+border-bottom: 1px solid var(–border);
+}
+.service-section:nth-child(even) { background: var(–dark-2); }
+
+.service-layout {
+max-width:1100px; margin:0 auto;
+display:grid; grid-template-columns:1fr 1fr; gap:72px; align-items:start;
+}
+
+.service-layout.reverse { direction:rtl; }
+.service-layout.reverse > * { direction:ltr; }
+
+/* SERVICE INFO */
+.service-eyebrow {
+font-size:11px; letter-spacing:3px; text-transform:uppercase;
+color:var(–gold); font-weight:600; margin-bottom:14px;
+display:flex; align-items:center; gap:10px;
+}
+.service-eyebrow::before { content:’’; width:20px; height:1px; background:var(–gold); }
+
+.service-title {
+font-family:‘Montserrat’, sans-serif;
+font-size:clamp(26px,3.5vw,38px); font-weight:700; letter-spacing:-1px;
+margin-bottom:16px;
+}
+
+.service-desc {
+color:var(–gray-2); font-size:15px; font-weight:300;
+line-height:1.8; margin-bottom:32px;
+}
+
+/* INCLUDES LIST */
+.includes-title {
+font-size:12px; letter-spacing:2px; text-transform:uppercase;
+color:var(–gray); font-weight:600; margin-bottom:16px;
+}
+.includes-list { display:flex; flex-direction:column; gap:10px; margin-bottom:36px; }
+.include-item {
+display:flex; align-items:center; gap:12px;
+font-size:14px; color:var(–gray-2);
+}
+.include-check {
+width:20px; height:20px; border-radius:50%;
+background:rgba(201,168,76,0.1); border:1px solid rgba(201,168,76,0.25);
+display:flex; align-items:center; justify-content:center;
+font-size:10px; color:var(–gold); flex-shrink:0;
+}
+
+/* WHO IS IT FOR */
+.for-tags { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:32px; }
+.for-tag {
+padding:6px 14px; border-radius:8px;
+background:var(–dark-3); border:1px solid var(–border);
+font-size:12px; color:var(–gray-2); font-weight:500;
+}
+
+/* CTA BUTTONS */
+.service-cta-group { display:flex; gap:12px; flex-wrap:wrap; }
+
+.btn-wa {
+display:inline-flex; align-items:center; gap:8px;
+background:var(–wa); color:#fff;
+padding:13px 24px; border-radius:10px;
+font-family:‘Montserrat’, sans-serif; font-size:13px; font-weight:700;
+text-decoration:none; transition:all 0.3s;
+box-shadow:0 6px 24px rgba(37,211,102,0.2);
+}
+.btn-wa:hover { transform:translateY(-2px); box-shadow:0 12px 36px rgba(37,211,102,0.3); }
+
+.btn-outline {
+display:inline-flex; align-items:center; gap:8px;
+background:transparent; color:var(–white);
+padding:13px 24px; border-radius:10px;
+border:1px solid var(–border-gold);
+font-family:‘Montserrat’, sans-serif; font-size:13px; font-weight:600;
+text-decoration:none; transition:all 0.3s;
+}
+.btn-outline:hover { background:var(–gold-dim); border-color:var(–gold); transform:translateY(-2px); }
+
+/* SERVICE VISUAL CARD */
+.service-visual {
+position:sticky; top:100px;
+}
+
+.visual-card {
+background:var(–dark-card);
+border:1px solid var(–border-gold);
+border-radius:20px; overflow:hidden;
+}
+
+.visual-header {
+padding:32px; background:rgba(201,168,76,0.05);
+border-bottom:1px solid var(–border);
+display:flex; align-items:center; gap:16px;
+}
+.visual-icon-big {
+width:64px; height:64px; border-radius:16px;
+background:var(–gold-dim); border:1px solid var(–border-gold);
+display:flex; align-items:center; justify-content:center;
+font-size:28px; flex-shrink:0;
+}
+.visual-header-title {
+font-family:‘Montserrat’, sans-serif; font-size:20px; font-weight:700;
+}
+.visual-header-sub { font-size:13px; color:var(–gray); margin-top:4px; }
+
+.visual-body { padding:28px 32px; }
+
+/* PRICE RANGE */
+.price-section { margin-bottom:28px; }
+.price-label { font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(–gray); font-weight:600; margin-bottom:10px; }
+.price-range {
+display:flex; align-items:baseline; gap:8px;
+}
+.price-from { font-family:‘Montserrat’, sans-serif; font-size:28px; font-weight:800; color:var(–gold-light); }
+.price-note { font-size:12px; color:var(–gray); }
+
+/* FAQ */
+.faq-section { margin-top:28px; padding-top:28px; border-top:1px solid var(–border); }
+.faq-title { font-size:12px; letter-spacing:2px; text-transform:uppercase; color:var(–gray); font-weight:600; margin-bottom:16px; }
+.faq-item { margin-bottom:16px; }
+.faq-q {
+font-size:13px; font-weight:600; color:var(–white);
+margin-bottom:6px; cursor:pointer;
+display:flex; justify-content:space-between; align-items:center; gap:8px;
+}
+.faq-q:hover { color:var(–gold); }
+.faq-a { font-size:13px; color:var(–gray-2); font-weight:300; line-height:1.7; }
+
+/* DIVIDER */
+.section-divider { height:1px; background:var(–border); margin:0; }
+
+/* FLOATING WA */
+.wa-float {
+position:fixed; bottom:28px; right:28px; z-index:200;
+width:58px; height:58px; border-radius:50%;
+background:var(–wa); display:flex; align-items:center; justify-content:center;
+font-size:24px; text-decoration:none;
+box-shadow:0 8px 32px rgba(37,211,102,0.4);
+transition:transform 0.3s, box-shadow 0.3s;
+}
+.wa-float:hover { transform:scale(1.1); box-shadow:0 16px 48px rgba(37,211,102,0.5); }
+.wa-float::before {
+content:’’; position:absolute; inset:-4px; border-radius:50%;
+border:2px solid rgba(37,211,102,0.3);
+animation:waPulse 2.5s ease infinite;
+}
+@keyframes waPulse { 0%{transform:scale(1);opacity:1} 100%{transform:scale(1.5);opacity:0} }
+
+/* REVEAL */
+.reveal { opacity:0; transform:translateY(24px); transition:opacity 0.7s ease, transform 0.7s ease; }
+.reveal.visible { opacity:1; transform:translateY(0); }
+.reveal-delay-1 { transition-delay:0.1s; }
+.reveal-delay-2 { transition-delay:0.2s; }
+
+/* FOOTER */
+footer {
+background:var(–dark); border-top:1px solid var(–border);
+padding:40px 24px;
+}
+.footer-inner {
+max-width:1100px; margin:0 auto;
+display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:20px;
+}
+.footer-logo { font-family:‘Montserrat’, sans-serif; font-weight:900; font-size:18px;
+background:linear-gradient(135deg,var(–white),var(–gold)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.footer-copy { font-size:12px; color:rgba(255,255,255,0.15); }
+
+/* MOBILE */
+@media (max-width:768px) {
+nav { padding:14px 20px; }
+.nav-links { display:none; }
+.service-layout, .service-layout.reverse { grid-template-columns:1fr; direction:ltr; gap:40px; }
+.service-visual { position:static; }
+.service-section { padding:72px 20px; }
+}
+</style>
+
+</head>
+<body>
+
+<!-- NAV -->
+
+<nav>
+  <a href="index.html" class="nav-logo">TEHAŞ</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Ana Sayfa</a></li>
+    <li><a href="hizmetler.html" class="active">Hizmetler</a></li>
+    <li><a href="hakkimizda.html">Hakkımızda</a></li>
+    <li><a href="iletisim.html">İletişim</a></li>
+    <li><a href="tel:05367807059" class="nav-cta">Hemen Ara</a></li>
+  </ul>
+</nav>
+
+<!-- PAGE HERO -->
+
+<div class="page-hero">
+  <div class="page-hero-tag">Hizmetlerimiz</div>
+  <h1 class="page-hero-title">Ne yapıyoruz?</h1>
+  <p class="page-hero-sub">Kemalpaşa ve çevresinde 5 alanda profesyonel teknik hizmet. 7 yıllık deneyim, sertifikalı ekip.</p>
+
+  <div class="service-nav">
+    <a href="#kamera" class="service-pill">📷 Güvenlik Kameraları</a>
+    <a href="#elektrik" class="service-pill">⚡ Elektrik Tesisatı</a>
+    <a href="#uydu" class="service-pill">📡 Uydu & Anten</a>
+    <a href="#ag" class="service-pill">🌐 Ağ Altyapısı</a>
+    <a href="#kapi" class="service-pill">🚪 Kapı Otomasyonu</a>
+  </div>
+</div>
+
+<!-- ─── 1. GÜVENLİK KAMERALARI ─── -->
+
+<section class="service-section" id="kamera">
+  <div class="service-layout">
+    <div class="service-info reveal">
+      <div class="service-eyebrow">Hizmet 01</div>
+      <h2 class="service-title">Güvenlik Kameraları</h2>
+      <p class="service-desc">
+        Hikvision Partner Pro sertifikalı kurulum. Ev, işyeri, depo, tarla — her alan için doğru sistem seçimi, profesyonel montaj ve uzaktan izleme yapılandırması. Kamerayı takıp bırakmıyoruz; telefona düşene kadar teslim etmiyoruz.
+      </p>
+
+```
+  <div class="includes-title">Dahil olanlar</div>
+  <div class="includes-list">
+    <div class="include-item"><div class="include-check">✓</div>Keşif ve sistem tasarımı</div>
+    <div class="include-item"><div class="include-check">✓</div>IP veya analog kamera montajı</div>
+    <div class="include-item"><div class="include-check">✓</div>NVR / DVR kurulumu ve yapılandırma</div>
+    <div class="include-item"><div class="include-check">✓</div>Kablo döşeme (gizli veya kanalda)</div>
+    <div class="include-item"><div class="include-check">✓</div>Mobil uygulama kurulumu (telefona bağlama)</div>
+    <div class="include-item"><div class="include-check">✓</div>Kullanım eğitimi</div>
+    <div class="include-item"><div class="include-check">✓</div>CGNAT / Superbox ortamında erişim çözümü</div>
+  </div>
+
+  <div class="includes-title">Kim için?</div>
+  <div class="for-tags">
+    <span class="for-tag">🏠 Ev & Villa</span>
+    <span class="for-tag">🏪 Dükkan & İşyeri</span>
+    <span class="for-tag">🏭 Depo & Fabrika</span>
+    <span class="for-tag">🌾 Tarla & Bahçe</span>
+    <span class="for-tag">🏢 Apartman</span>
+  </div>
+
+  <div class="service-cta-group">
+    <a href="https://wa.me/905367807059?text=Güvenlik%20kamerası%20kurulumu%20hakkında%20bilgi%20almak%20istiyorum." class="btn-wa" target="_blank">💬 Teklif İste</a>
+    <a href="tel:05367807059" class="btn-outline">📞 Ara</a>
+  </div>
+</div>
+
+<div class="service-visual reveal reveal-delay-1">
+  <div class="visual-card">
+    <div class="visual-header">
+      <div class="visual-icon-big">📷</div>
+      <div>
+        <div class="visual-header-title">Güvenlik Kameraları</div>
+        <div class="visual-header-sub">Hikvision Partner Pro Sertifikalı</div>
+      </div>
+    </div>
+    <div class="visual-body">
+      <div class="price-section">
+        <div class="price-label">Başlangıç Fiyatı</div>
+        <div class="price-range">
+          <div class="price-from">2.500 ₺</div>
+          <div class="price-note">/ kamera (montaj dahil)</div>
+        </div>
+        <div style="font-size:12px;color:var(--gray);margin-top:6px;">Keşif ücretsiz · Fiyat yerinde netleşir</div>
+      </div>
+
+      <div class="faq-section">
+        <div class="faq-title">Sık Sorulan Sorular</div>
+
+        <div class="faq-item">
+          <div class="faq-q">Kaç kamera gerekir?</div>
+          <div class="faq-a">Alanın büyüklüğüne ve kör noktalarına göre değişir. Ücretsiz keşifte belirliyoruz.</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q">Telefona görüntü gelir mi?</div>
+          <div class="faq-a">Evet. Kurulumda uygulamayı telefona yükler, canlı görüntüyü yerinde test ederiz.</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q">İnternetsiz yerde çalışır mı?</div>
+          <div class="faq-a">Yerel kayıt çalışır. Uzaktan erişim için 4G yönlendirici çözümü sunuyoruz.</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q">Garanti var mı?</div>
+          <div class="faq-a">Hikvision ürünleri 2 yıl üretici garantisi. İşçilik için 1 yıl hizmet garantisi veriyoruz.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+  </div>
+</section>
+
+<!-- ─── 2. ELEKTRİK TESİSATI ─── -->
+
+<section class="service-section" id="elektrik">
+  <div class="service-layout reverse">
+    <div class="service-info reveal">
+      <div class="service-eyebrow">Hizmet 02</div>
+      <h2 class="service-title">Elektrik Tesisatı</h2>
+      <p class="service-desc">
+        Komple tesisat kurulumu, pano montajı ve en önemlisi — tesisat röntgeni. Duvarı açmadan mevcut altyapıyı tespit eder, rapor sunarız. Eski binalarda gizli sorunları bulmak için doğru yöntem.
+      </p>
+
+```
+  <div class="includes-title">Dahil olanlar</div>
+  <div class="includes-list">
+    <div class="include-item"><div class="include-check">✓</div>Komple tesisat kurulumu</div>
+    <div class="include-item"><div class="include-check">✓</div>Sigorta panosu montajı ve kaçak akım koruma</div>
+    <div class="include-item"><div class="include-check">✓</div>Tesisat röntgeni — termal / dedektör ile tespit</div>
+    <div class="include-item"><div class="include-check">✓</div>Topraklama ölçümü ve düzeltme</div>
+    <div class="include-item"><div class="include-check">✓</div>Arıza tespiti ve onarım</div>
+    <div class="include-item"><div class="include-check">✓</div>Aydınlatma sistemi kurulumu</div>
+  </div>
+
+  <div class="includes-title">Kim için?</div>
+  <div class="for-tags">
+    <span class="for-tag">🏠 Ev & Daire</span>
+    <span class="for-tag">🏪 İşyeri</span>
+    <span class="for-tag">🏗️ Yeni Bina</span>
+    <span class="for-tag">🏚️ Tadilat</span>
+    <span class="for-tag">🏢 Apartman Ortak Alan</span>
+  </div>
+
+  <div class="service-cta-group">
+    <a href="https://wa.me/905367807059?text=Elektrik%20tesisatı%20hakkında%20bilgi%20almak%20istiyorum." class="btn-wa" target="_blank">💬 Teklif İste</a>
+    <a href="tel:05367807059" class="btn-outline">📞 Ara</a>
+  </div>
+</div>
+
+<div class="service-visual reveal reveal-delay-1">
+  <div class="visual-card">
+    <div class="visual-header">
+      <div class="visual-icon-big">⚡</div>
+      <div>
+        <div class="visual-header-title">Elektrik Tesisatı</div>
+        <div class="visual-header-sub">Tesisat Röntgeni dahil</div>
+      </div>
+    </div>
+    <div class="visual-body">
+      <div class="price-section">
+        <div class="price-label">Tesisat Röntgeni</div>
+        <div class="price-range">
+          <div class="price-from">800 ₺</div>
+          <div class="price-note">'den başlayan fiyatlar</div>
+        </div>
+        <div style="font-size:12px;color:var(--gray);margin-top:6px;">Komple tesisat fiyatı keşifte belirlenir</div>
+      </div>
+
+      <div class="faq-section">
+        <div class="faq-title">Sık Sorulan Sorular</div>
+
+        <div class="faq-item">
+          <div class="faq-q">Tesisat röntgeni ne işe yarar?</div>
+          <div class="faq-a">Duvarı açmadan mevcut kablo güzergahlarını, sorunlu noktaları ve kaçakları tespit eder. Özellikle eski binalarda zorunlu ilk adım.</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q">Sigorta sürekli atıyorsa?</div>
+          <div class="faq-a">Kaçak akım veya aşırı yük sorunudur. Aynı gün tespit ve onarım yapıyoruz.</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q">Topraklama zorunlu mu?</div>
+          <div class="faq-a">Evet. Hem yasal zorunluluk hem güvenlik. Ölçüp rapora döküyoruz.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+  </div>
+</section>
+
+<!-- ─── 3. UYDU & ANTEN ─── -->
+
+<section class="service-section" id="uydu">
+  <div class="service-layout">
+    <div class="service-info reveal">
+      <div class="service-eyebrow">Hizmet 03</div>
+      <h2 class="service-title">Uydu & Anten Sistemleri</h2>
+      <p class="service-desc">
+        Çanak anten kurulumu, çoklu oda dağıtımı, merkezi anten sistemi tasarımı. Sinyal sorunlarını ve paraziti kökten çözüyoruz — tek kaynaktan tüm odalara temiz görüntü.
+      </p>
+
+```
+  <div class="includes-title">Dahil olanlar</div>
+  <div class="includes-list">
+    <div class="include-item"><div class="include-check">✓</div>Çanak anten montajı ve yön ayarı</div>
+    <div class="include-item"><div class="include-check">✓</div>LNB ve multiswitch kurulumu</div>
+    <div class="include-item"><div class="include-check">✓</div>Çoklu oda kablo dağıtımı</div>
+    <div class="include-item"><div class="include-check">✓</div>Dijital karasal anten kurulumu</div>
+    <div class="include-item"><div class="include-check">✓</div>Merkezi anten sistemi (apartman/site)</div>
+    <div class="include-item"><div class="include-check">✓</div>Sinyal ölçümü ve optimizasyon</div>
+  </div>
+
+  <div class="includes-title">Kim için?</div>
+  <div class="for-tags">
+    <span class="for-tag">🏠 Ev & Villa</span>
+    <span class="for-tag">🏢 Apartman</span>
+    <span class="for-tag">🏨 Pansiyon & Otel</span>
+    <span class="for-tag">🏘️ Site</span>
+  </div>
+
+  <div class="service-cta-group">
+    <a href="https://wa.me/905367807059?text=Uydu%20anten%20kurulumu%20hakkında%20bilgi%20almak%20istiyorum." class="btn-wa" target="_blank">💬 Teklif İste</a>
+    <a href="tel:05367807059" class="btn-outline">📞 Ara</a>
+  </div>
+</div>
+
+<div class="service-visual reveal reveal-delay-1">
+  <div class="visual-card">
+    <div class="visual-header">
+      <div class="visual-icon-big">📡</div>
+      <div>
+        <div class="visual-header-title">Uydu & Anten</div>
+        <div class="visual-header-sub">Merkezi sistem dahil</div>
+      </div>
+    </div>
+    <div class="visual-body">
+      <div class="price-section">
+        <div class="price-label">Başlangıç Fiyatı</div>
+        <div class="price-range">
+          <div class="price-from">600 ₺</div>
+          <div class="price-note">'den başlayan fiyatlar</div>
+        </div>
+        <div style="font-size:12px;color:var(--gray);margin-top:6px;">Apartman sistemleri için keşif gerekli</div>
+      </div>
+
+      <div class="faq-section">
+        <div class="faq-title">Sık Sorulan Sorular</div>
+
+        <div class="faq-item">
+          <div class="faq-q">Kanal gelmiyor, sorun ne?</div>
+          <div class="faq-a">Anten yönü, LNB arızası veya kablo kopukluğu olabilir. Aynı gün tespit yapıyoruz.</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q">Tüm odalara uydu gelebilir mi?</div>
+          <div class="faq-a">Evet. Multiswitch ile birden fazla odaya bağımsız kanal dağıtımı yapıyoruz.</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q">Apartman için merkezi sistem kurabilir misiniz?</div>
+          <div class="faq-a">Evet. Tüm dairelere tek çanaktan dağıtım yapan merkezi sistem kuruyoruz.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+  </div>
+</section>
+
+<!-- ─── 4. AĞ ALTYAPISI ─── -->
+
+<section class="service-section" id="ag">
+  <div class="service-layout reverse">
+    <div class="service-info reveal">
+      <div class="service-eyebrow">Hizmet 04</div>
+      <h2 class="service-title">Ağ Altyapısı</h2>
+      <p class="service-desc">
+        Cat6 kablolama, network switch montajı, Wi-Fi erişim noktası planlaması. Evde ve işyerinde kesintisiz, hızlı ve güvenli ağ altyapısı — kablosuz değil, kalıcı çözüm.
+      </p>
+
+```
+  <div class="includes-title">Dahil olanlar</div>
+  <div class="includes-list">
+    <div class="include-item"><div class="include-check">✓</div>Cat5e / Cat6 kablo döşeme</div>
+    <div class="include-item"><div class="include-check">✓</div>Network switch kurulumu</div>
+    <div class="include-item"><div class="include-check">✓</div>Wi-Fi erişim noktası yerleşimi</div>
+    <div class="include-item"><div class="include-check">✓</div>Pasif PoE çözümleri</div>
+    <div class="include-item"><div class="include-check">✓</div>Patch panel ve rack dolap montajı</div>
+    <div class="include-item"><div class="include-check">✓</div>Ağ testi ve hız ölçümü</div>
+  </div>
+
+  <div class="includes-title">Kim için?</div>
+  <div class="for-tags">
+    <span class="for-tag">🏪 Ofis & İşyeri</span>
+    <span class="for-tag">🏠 Ev</span>
+    <span class="for-tag">🏨 Pansiyon & Otel</span>
+    <span class="for-tag">🏭 Fabrika & Depo</span>
+  </div>
+
+  <div class="service-cta-group">
+    <a href="https://wa.me/905367807059?text=Ağ%20altyapısı%20hakkında%20bilgi%20almak%20istiyorum." class="btn-wa" target="_blank">💬 Teklif İste</a>
+    <a href="tel:05367807059" class="btn-outline">📞 Ara</a>
+  </div>
+</div>
+
+<div class="service-visual reveal reveal-delay-1">
+  <div class="visual-card">
+    <div class="visual-header">
+      <div class="visual-icon-big">🌐</div>
+      <div>
+        <div class="visual-header-title">Ağ Altyapısı</div>
+        <div class="visual-header-sub">Cat6 kablolama & Wi-Fi</div>
+      </div>
+    </div>
+    <div class="visual-body">
+      <div class="price-section">
+        <div class="price-label">Başlangıç Fiyatı</div>
+        <div class="price-range">
+          <div class="price-from">1.200 ₺</div>
+          <div class="price-note">'den başlayan fiyatlar</div>
+        </div>
+        <div style="font-size:12px;color:var(--gray);margin-top:6px;">Oda sayısı ve mesafeye göre değişir</div>
+      </div>
+
+      <div class="faq-section">
+        <div class="faq-title">Sık Sorulan Sorular</div>
+
+        <div class="faq-item">
+          <div class="faq-q">Wi-Fi sinyalim zayıf, ne yapmalıyım?</div>
+          <div class="faq-a">Erişim noktası konumu ve kanal yapılandırması çözüm olabilir. Yerinde ölçüm yaparak doğru noktaları belirliyoruz.</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q">Kamera için ayrı ağ kurulabilir mi?</div>
+          <div class="faq-a">Evet. Güvenlik kameraları için ayrı VLAN veya switch segmenti oluşturuyoruz.</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q">Kaç metreye kadar Cat6 çalışır?</div>
+          <div class="faq-a">Standart olarak 100 metreye kadar sorunsuz. Daha uzun mesafeler için fiber veya medya dönüştürücü çözümü var.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+  </div>
+</section>
+
+<!-- ─── 5. KAPI OTOMASYONU ─── -->
+
+<section class="service-section" id="kapi">
+  <div class="service-layout">
+    <div class="service-info reveal">
+      <div class="service-eyebrow">Hizmet 05</div>
+      <h2 class="service-title">Kapı Otomasyonu</h2>
+      <p class="service-desc">
+        Otomatik bariyer, garaj kapısı motoru, kartlı geçiş sistemi ve video kapı zili kurulumu. Girişi kontrol altına almak için güvenlik kameralarıyla entegre çözümler.
+      </p>
+
+```
+  <div class="includes-title">Dahil olanlar</div>
+  <div class="includes-list">
+    <div class="include-item"><div class="include-check">✓</div>Otomatik bariyer kurulumu</div>
+    <div class="include-item"><div class="include-check">✓</div>Garaj kapısı motor montajı</div>
+    <div class="include-item"><div class="include-check">✓</div>Kartlı / şifreli geçiş sistemi</div>
+    <div class="include-item"><div class="include-check">✓</div>Video kapı zili (görüntülü interkom)</div>
+    <div class="include-item"><div class="include-check">✓</div>Turnike sistemi</div>
+    <div class="include-item"><div class="include-check">✓</div>Güvenlik kamerası ile entegrasyon</div>
+  </div>
+
+  <div class="includes-title">Kim için?</div>
+  <div class="for-tags">
+    <span class="for-tag">🏢 Apartman</span>
+    <span class="for-tag">🏪 İşyeri & Ofis</span>
+    <span class="for-tag">🏭 Fabrika & Depo</span>
+    <span class="for-tag">🏘️ Site</span>
+    <span class="for-tag">🏠 Villa</span>
+  </div>
+
+  <div class="service-cta-group">
+    <a href="https://wa.me/905367807059?text=Kapı%20otomasyonu%20hakkında%20bilgi%20almak%20istiyorum." class="btn-wa" target="_blank">💬 Teklif İste</a>
+    <a href="tel:05367807059" class="btn-outline">📞 Ara</a>
+  </div>
+</div>
+
+<div class="service-visual reveal reveal-delay-1">
+  <div class="visual-card">
+    <div class="visual-header">
+      <div class="visual-icon-big">🚪</div>
+      <div>
+        <div class="visual-header-title">Kapı Otomasyonu</div>
+        <div class="visual-header-sub">Kamera entegrasyonu dahil</div>
+      </div>
+    </div>
+    <div class="visual-body">
+      <div class="price-section">
+        <div class="price-label">Başlangıç Fiyatı</div>
+        <div class="price-range">
+          <div class="price-from">3.500 ₺</div>
+          <div class="price-note">'den başlayan fiyatlar</div>
+        </div>
+        <div style="font-size:12px;color:var(--gray);margin-top:6px;">Sistem türüne göre keşifte netleşir</div>
+      </div>
+
+      <div class="faq-section">
+        <div class="faq-title">Sık Sorulan Sorular</div>
+
+        <div class="faq-item">
+          <div class="faq-q">Elektrik kesilirse kapı açılır mı?</div>
+          <div class="faq-a">Sistemlere UPS veya batarya yedek ekliyoruz. Elektrik kesilse de kapı çalışmaya devam eder.</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q">Mevcut kapıya motor takılabilir mi?</div>
+          <div class="faq-a">Çoğu durumda evet. Yerinde inceleyerek uyumlu motor seçiyoruz.</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q">Güvenlik kamerası ile bağlantı kurulabilir mi?</div>
+          <div class="faq-a">Evet. Kapı girişine kamera ekleyip sisteme entegre ediyoruz.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">TEHAŞ</div>
+    <div class="footer-copy">© 2026 TEHAŞ Teknik Hizmetler · tehas.tr</div>
+  </div>
+</footer>
+
+<!-- FLOATING WA -->
+
+<a href="https://wa.me/905367807059?text=Merhaba,%20hizmet%20almak%20istiyorum." class="wa-float" target="_blank">💬</a>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Active pill on scroll
+  const sections = document.querySelectorAll('section[id]');
+  const pills = document.querySelectorAll('.service-pill');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 200) current = s.id; });
+    pills.forEach(p => {
+      p.classList.remove('active');
+      if (p.getAttribute('href') === '#' + current) p.classList.add('active');
+    });
+  });
+</script>
+
+</body>
+</html>
