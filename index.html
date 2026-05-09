@@ -3,186 +3,261 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="TEHAŞ — Teknik Çözüm Merkezi. Kemalpaşa / İzmir.">
 <title>TEHAŞ — Teknik Çözüm Merkezi</title>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 html,body{height:100%;overflow:hidden}
-body{background:#000;color:#fff;font-family:'Inter',sans-serif;display:flex;flex-direction:column;align-items:center;justify-content:space-between;min-height:100vh;position:relative}
-
-/* CANVAS BACKGROUND */
+body{background:#070709;color:#fff;font-family:'Inter',sans-serif;min-height:100vh;position:relative}
 canvas{position:fixed;inset:0;z-index:0;pointer-events:none}
+.glow-orb{position:fixed;bottom:40%;left:50%;transform:translateX(-50%);width:260px;height:90px;background:radial-gradient(ellipse at center,rgba(37,99,235,0.18) 0%,rgba(37,99,235,0.04) 55%,transparent 80%);border-radius:50%;animation:orbPulse 5s ease-in-out infinite;z-index:1;pointer-events:none}
+@keyframes orbPulse{0%,100%{opacity:0.5}50%{opacity:0.9}}
 
-/* GLOW ORB */
-.glow-orb{position:fixed;bottom:35%;left:50%;transform:translateX(-50%);width:320px;height:120px;background:radial-gradient(ellipse at center,rgba(37,99,235,0.35) 0%,rgba(37,99,235,0.08) 50%,transparent 80%);border-radius:50%;animation:orbPulse 4s ease-in-out infinite;z-index:1;pointer-events:none}
-.glow-line{position:fixed;bottom:35%;left:50%;transform:translateX(-50%);width:200px;height:1px;background:linear-gradient(90deg,transparent,rgba(37,99,235,0.6),rgba(147,197,253,0.8),rgba(37,99,235,0.6),transparent);animation:linePulse 4s ease-in-out infinite;z-index:1;pointer-events:none}
-@keyframes orbPulse{0%,100%{opacity:0.6;transform:translateX(-50%) scaleX(1)}50%{opacity:1;transform:translateX(-50%) scaleX(1.15)}}
-@keyframes linePulse{0%,100%{opacity:0.4;width:160px}50%{opacity:1;width:240px}}
+/* EKRANLAR */
+.screen{position:fixed;inset:0;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:0 28px 44px;transition:opacity 0.4s ease,transform 0.4s ease}
+.screen.hidden{opacity:0;pointer-events:none;transform:translateX(-24px)}
+.screen.slide-in{animation:slideIn 0.4s ease forwards}
+@keyframes slideIn{from{opacity:0;transform:translateX(24px)}to{opacity:1;transform:translateX(0)}}
 
-/* LAYOUT */
-.top-section{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;flex:1;padding-top:60px}
-.bottom-section{position:relative;z-index:2;width:100%;padding:0 32px 48px;display:flex;flex-direction:column;gap:0}
+/* LOGO ALANI */
+.logo-section{display:flex;flex-direction:column;align-items:center;gap:14px;padding-top:72px;flex:1;justify-content:center}
+.logo-svg-wrap{opacity:0;animation:logoIn 0.7s ease 0.2s forwards}
+@keyframes logoIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
+.logo-tagline{font-family:'Barlow',sans-serif;font-size:9px;letter-spacing:5px;text-transform:uppercase;color:rgba(255,255,255,0.2);font-weight:400;opacity:0;animation:fadeIn 0.5s ease 0.9s forwards}
+.screen-label{font-family:'Barlow',sans-serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.25);opacity:0;animation:fadeIn 0.5s ease 0.7s forwards;margin-top:32px}
 
-/* LOGO */
-.logo-wrap{display:flex;flex-direction:column;align-items:center;gap:16px;margin-bottom:0}
-.logo-letters{display:flex;align-items:center;gap:2px}
-.logo-letter{font-family:'Montserrat',sans-serif;font-size:clamp(52px,14vw,72px);font-weight:900;letter-spacing:8px;opacity:0;animation:letterIn 0.5s ease forwards}
-.logo-letter.silver{color:#c8cdd6;text-shadow:0 0 30px rgba(200,205,214,0.3)}
-.logo-letter.blue{color:#3B82F6;text-shadow:0 0 20px rgba(59,130,246,0.6)}
-.logo-letter.l1{animation-delay:0.1s}
-.logo-letter.l2{animation-delay:0.25s}
-.logo-letter.l3{animation-delay:0.4s}
-.logo-letter.l4{animation-delay:0.55s}
-.logo-letter.l5{animation-delay:0.7s}
-.logo-letter.l6{animation-delay:0.85s}
-
-/* A harfi özel — çapraz çizgi */
-.logo-a{position:relative;display:inline-flex;align-items:center;justify-content:center}
-.logo-a svg{width:clamp(40px,11vw,56px);height:clamp(52px,14vw,72px);opacity:0;animation:letterIn 0.5s ease 0.4s forwards}
-
-.logo-tagline{font-size:10px;letter-spacing:5px;text-transform:uppercase;color:rgba(255,255,255,0.35);font-weight:400;opacity:0;animation:fadeIn 0.6s ease 1.2s forwards;margin-top:4px}
-
-@keyframes letterIn{from{opacity:0;transform:translateY(-12px)}to{opacity:1;transform:translateY(0)}}
-@keyframes fadeIn{from{opacity:0}to{opacity:1}}
-
-/* BUTTONS */
-.btn-list{display:flex;flex-direction:column;gap:14px;width:100%;margin-bottom:32px}
-.segment-btn{display:flex;align-items:center;gap:18px;padding:20px 24px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:16px;text-decoration:none;color:#fff;transition:all 0.3s ease;opacity:0;transform:translateY(20px);animation:btnIn 0.5s ease forwards;position:relative;overflow:hidden}
-.segment-btn::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(37,99,235,0.08),transparent);opacity:0;transition:opacity 0.3s}
-.segment-btn:hover{border-color:rgba(59,130,246,0.5);background:rgba(37,99,235,0.08);transform:translateY(-1px);box-shadow:0 8px 32px rgba(37,99,235,0.15)}
-.segment-btn:hover::before{opacity:1}
-.segment-btn:active{transform:scale(0.98)}
-.btn-b1{animation-delay:1.0s}
-.btn-b2{animation-delay:1.15s}
-.btn-b3{animation-delay:1.3s}
+/* BUTON LİSTESİ */
+.btn-list{display:flex;flex-direction:column;gap:11px;width:100%;margin-bottom:24px}
+.choice-btn{display:flex;align-items:center;gap:16px;padding:17px 20px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:13px;color:#fff;cursor:pointer;transition:all 0.25s ease;opacity:0;transform:translateY(14px);animation:btnIn 0.45s ease forwards;text-align:left;width:100%;font-family:inherit}
+.choice-btn:hover{border-color:rgba(59,130,246,0.35);background:rgba(37,99,235,0.07);transform:translateY(-1px);box-shadow:0 4px 20px rgba(37,99,235,0.1)}
+.choice-btn:active{transform:scale(0.98)}
+.b1{animation-delay:0.85s}.b2{animation-delay:1.0s}.b3{animation-delay:1.15s}.b4{animation-delay:1.3s}
 @keyframes btnIn{to{opacity:1;transform:translateY(0)}}
+.btn-icon{width:38px;height:38px;border-radius:9px;background:rgba(37,99,235,0.1);border:1px solid rgba(59,130,246,0.13);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.25s}
+.choice-btn:hover .btn-icon{background:rgba(37,99,235,0.18);border-color:rgba(59,130,246,0.3)}
+.btn-icon svg{width:18px;height:18px;stroke:#3B82F6;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.btn-text{flex:1}
+.btn-main{font-family:'Barlow',sans-serif;font-size:14px;font-weight:600;letter-spacing:0.3px;color:#e8e8e8;line-height:1.3}
+.btn-sub{font-size:11px;color:rgba(255,255,255,0.28);margin-top:2px;font-weight:300}
+.btn-arrow{color:rgba(255,255,255,0.18);font-size:18px;transition:all 0.25s;flex-shrink:0}
+.choice-btn:hover .btn-arrow{color:#3B82F6;transform:translateX(3px)}
 
-.btn-icon{width:44px;height:44px;border-radius:10px;background:rgba(37,99,235,0.12);border:1px solid rgba(59,130,246,0.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.3s}
-.segment-btn:hover .btn-icon{background:rgba(37,99,235,0.2);border-color:rgba(59,130,246,0.4)}
-.btn-icon svg{width:22px;height:22px;stroke:#3B82F6;fill:none;stroke-width:1.5}
-.btn-label{font-family:'Montserrat',sans-serif;font-size:15px;font-weight:700;letter-spacing:2px;text-transform:uppercase;flex:1}
-.btn-arrow{color:rgba(255,255,255,0.3);font-size:18px;transition:all 0.3s}
-.segment-btn:hover .btn-arrow{color:#3B82F6;transform:translateX(4px)}
+/* GERİ BUTONU */
+.back-btn{display:flex;align-items:center;gap:8px;color:rgba(255,255,255,0.3);font-size:12px;letter-spacing:1px;text-transform:uppercase;background:none;border:none;cursor:pointer;font-family:'Barlow',sans-serif;font-weight:500;margin-bottom:20px;transition:color 0.2s;padding:0}
+.back-btn:hover{color:rgba(255,255,255,0.6)}
+.back-btn svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2}
 
-/* FOOTER INFO */
-.footer-info{display:flex;flex-direction:column;align-items:center;gap:10px;opacity:0;animation:fadeIn 0.6s ease 1.6s forwards}
-.footer-badge{display:flex;align-items:center;gap:8px;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.3)}
-.footer-badge svg{width:14px;height:14px;stroke:rgba(59,130,246,0.6);fill:none;stroke-width:1.5}
-.footer-phone{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:500;color:rgba(255,255,255,0.5);text-decoration:none;transition:color 0.2s}
-.footer-phone:hover{color:#3B82F6}
-.footer-phone svg{width:14px;height:14px;stroke:rgba(59,130,246,0.6);fill:none;stroke-width:1.5}
+/* FOOTER */
+.footer-info{display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0;animation:fadeIn 0.5s ease 1.5s forwards}
+.footer-badge{display:flex;align-items:center;gap:7px;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.18)}
+.footer-badge svg{width:11px;height:11px;stroke:rgba(59,130,246,0.4);fill:none;stroke-width:1.5}
+.footer-phone{display:flex;align-items:center;gap:9px;font-family:'Barlow',sans-serif;font-size:17px;font-weight:300;letter-spacing:3px;color:rgba(255,255,255,0.32);text-decoration:none;transition:color 0.2s;line-height:1.6}
+.footer-phone:hover{color:rgba(59,130,246,0.7)}
+.footer-phone svg{width:13px;height:13px;stroke:rgba(59,130,246,0.38);fill:none;stroke-width:1.5;flex-shrink:0}
+.home-indicator{width:120px;height:4px;background:rgba(255,255,255,0.1);border-radius:2px;margin:14px auto 0}
 
-/* HOME INDICATOR */
-.home-indicator{width:134px;height:5px;background:rgba(255,255,255,0.18);border-radius:3px;margin:12px auto 0;position:relative;z-index:2}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
 </style>
 </head>
 <body>
 
 <canvas id="stars"></canvas>
 <div class="glow-orb"></div>
-<div class="glow-line"></div>
 
-<!-- ÜST ALAN — LOGO -->
-<div class="top-section">
-  <div class="logo-wrap">
-    <div class="logo-letters">
-      <span class="logo-letter silver l1">T</span>
-      <span class="logo-letter silver l2">E</span>
-      <span class="logo-letter silver l3">H</span>
-      <!-- A harfi — ok şekli -->
-      <span class="logo-letter blue l4" style="animation-delay:0.55s">A</span>
-      <span class="logo-letter silver l5">Ş</span>
+<!-- EKRAN 1: NİYET -->
+<div class="screen" id="screen1">
+  <div class="logo-section">
+    <div class="logo-svg-wrap">
+      <svg width="220" height="56" viewBox="0 0 220 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs><filter id="g"><feGaussianBlur stdDeviation="2" result="b"/><feComposite in="SourceGraphic" in2="b" operator="over"/></filter></defs>
+        <rect x="0" y="6" width="32" height="4" rx="1" fill="#EDEDED"/>
+        <rect x="14" y="6" width="4" height="44" rx="1" fill="#EDEDED"/>
+        <rect x="42" y="6" width="4" height="44" rx="1" fill="#EDEDED"/>
+        <rect x="42" y="6" width="26" height="4" rx="1" fill="#EDEDED"/>
+        <rect x="42" y="26" width="20" height="3.5" rx="1" fill="#EDEDED"/>
+        <rect x="42" y="46" width="26" height="4" rx="1" fill="#EDEDED"/>
+        <rect x="78" y="6" width="4" height="44" rx="1" fill="#EDEDED"/>
+        <rect x="78" y="26" width="22" height="3.5" rx="1" fill="#EDEDED"/>
+        <rect x="96" y="6" width="4" height="44" rx="1" fill="#EDEDED"/>
+        <g filter="url(#g)">
+          <rect x="112" y="6" width="4" height="44" rx="1" fill="#EDEDED" transform="rotate(-7 114 28)"/>
+          <rect x="131" y="6" width="4" height="44" rx="1" fill="#EDEDED" transform="rotate(7 133 28)"/>
+          <rect x="113" y="26" width="20" height="3" rx="1" fill="#3B82F6"/>
+        </g>
+        <path d="M152 18 Q152 6 165 6 Q178 6 178 15 Q178 22 165 24 Q152 26 152 35 Q152 44 165 44 Q178 44 178 35" stroke="#EDEDED" stroke-width="4" stroke-linecap="round" fill="none"/>
+        <rect x="163" y="44" width="4" height="6" rx="1" fill="#EDEDED"/>
+        <rect x="159" y="48" width="12" height="3.5" rx="1" fill="#EDEDED"/>
+      </svg>
     </div>
-    <div class="logo-tagline">Enerji ve Güvenlik Teknolojileri</div>
+    <div class="logo-tagline">Teknik Çözüm Merkezi</div>
+    <div class="screen-label">Durumunuzu seçin</div>
+  </div>
+
+  <div style="width:100%">
+    <div class="btn-list">
+      <button class="choice-btn b1" onclick="goScreen2('ariza')">
+        <div class="btn-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <div class="btn-text">
+          <div class="btn-main">Bir arızam var</div>
+          <div class="btn-sub">Sistem çalışmıyor, sorun yaşıyorum</div>
+        </div>
+        <span class="btn-arrow">›</span>
+      </button>
+
+      <button class="choice-btn b2" onclick="goScreen2('kurulum')">
+        <div class="btn-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 010 14.14M4.93 4.93a10 10 0 000 14.14"/></svg></div>
+        <div class="btn-text">
+          <div class="btn-main">Yeni sistem yaptırmak istiyorum</div>
+          <div class="btn-sub">Kamera, elektrik, ağ veya uydu kurulumu</div>
+        </div>
+        <span class="btn-arrow">›</span>
+      </button>
+
+      <button class="choice-btn b3" onclick="goScreen2('bakim')">
+        <div class="btn-icon"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg></div>
+        <div class="btn-text">
+          <div class="btn-main">Bakım veya kontrol istiyorum</div>
+          <div class="btn-sub">Periyodik kontrol, sistem testi</div>
+        </div>
+        <span class="btn-arrow">›</span>
+      </button>
+
+      <button class="choice-btn b4" onclick="waGeneral()">
+        <div class="btn-icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div>
+        <div class="btn-text">
+          <div class="btn-main">Bilgi almak istiyorum</div>
+          <div class="btn-sub">Fiyat, süreç veya genel soru</div>
+        </div>
+        <span class="btn-arrow">›</span>
+      </button>
+    </div>
+
+    <div class="footer-info">
+      <div class="footer-badge">
+        <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        TEHAŞ · Kemalpaşa / İzmir
+      </div>
+      <a href="tel:05367807059" class="footer-phone">
+        <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.4 11.1 19.79 19.79 0 01.36 2.5 2 2 0 012.34.5h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.09a16 16 0 006 6l.77-.77a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+        0 (536) 780 70 59
+      </a>
+    </div>
+    <div class="home-indicator"></div>
   </div>
 </div>
 
-<!-- ALT ALAN — BUTONLAR -->
-<div class="bottom-section">
-  <div class="btn-list">
-
-    <a href="https://wa.me/905367807059?text=Konut%20için%20teknik%20destek%20almak%20istiyorum." class="segment-btn btn-b1" target="_blank">
-      <div class="btn-icon">
-        <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-      </div>
-      <span class="btn-label">Konut</span>
-      <span class="btn-arrow">›</span>
-    </a>
-
-    <a href="https://wa.me/905367807059?text=İşletme%20için%20teknik%20destek%20almak%20istiyorum." class="segment-btn btn-b2" target="_blank">
-      <div class="btn-icon">
-        <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/><line x1="12" y1="12" x2="12" y2="12.01"/></svg>
-      </div>
-      <span class="btn-label">İşletme</span>
-      <span class="btn-arrow">›</span>
-    </a>
-
-    <a href="https://wa.me/905367807059?text=Endüstriyel%20tesis%20için%20teknik%20destek%20almak%20istiyorum." class="segment-btn btn-b3" target="_blank">
-      <div class="btn-icon">
-        <svg viewBox="0 0 24 24"><path d="M2 20h20M4 20V10l4-4 4 4 4-4 4 4v10"/><path d="M10 20v-5h4v5"/></svg>
-      </div>
-      <span class="btn-label">Endüstri</span>
-      <span class="btn-arrow">›</span>
-    </a>
-
+<!-- EKRAN 2: PROBLEM ALANI -->
+<div class="screen hidden" id="screen2">
+  <div style="width:100%;padding-top:64px;flex:1;display:flex;flex-direction:column;justify-content:center">
+    <div class="screen-label" style="opacity:1;animation:none;margin-bottom:8px;text-align:center" id="screen2-label">Problem alanını seçin</div>
+    <div style="font-family:'Barlow',sans-serif;font-size:22px;font-weight:600;text-align:center;color:#e8e8e8;margin-bottom:36px;letter-spacing:-0.3px" id="screen2-title">Sorun nerede?</div>
   </div>
 
-  <div class="footer-info">
-    <div class="footer-badge">
-      <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-      Teknik Çözüm Merkezi
-    </div>
-    <a href="tel:05367807059" class="footer-phone">
-      <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.4 11.1 19.79 19.79 0 01.36 2.5 2 2 0 012.34.5h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.09a16 16 0 006 6l.77-.77a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-      0 905 367 80 70 59
-    </a>
-  </div>
+  <div style="width:100%">
+    <button class="back-btn" onclick="goBack()">
+      <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+      Geri
+    </button>
 
-  <div class="home-indicator"></div>
+    <div class="btn-list" id="screen2-btns"></div>
+    <div class="home-indicator"></div>
+  </div>
 </div>
 
 <script>
-// YILDIZ CANVAS
+// YILDIZLAR
 const canvas=document.getElementById('stars');
 const ctx=canvas.getContext('2d');
 let W,H,stars=[];
-
-function resize(){
-  W=canvas.width=window.innerWidth;
-  H=canvas.height=window.innerHeight;
-}
-
-function initStars(){
-  stars=[];
-  for(let i=0;i<120;i++){
-    stars.push({
-      x:Math.random()*W,
-      y:Math.random()*H,
-      r:Math.random()*1.2+0.2,
-      o:Math.random()*0.5+0.1,
-      speed:Math.random()*0.3+0.05,
-      twinkle:Math.random()*Math.PI*2
-    });
-  }
-}
-
-function drawStars(t){
-  ctx.clearRect(0,0,W,H);
-  stars.forEach(s=>{
-    s.twinkle+=s.speed*0.02;
-    const alpha=s.o*(0.6+0.4*Math.sin(s.twinkle));
-    ctx.beginPath();
-    ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
-    ctx.fillStyle=`rgba(255,255,255,${alpha})`;
-    ctx.fill();
-  });
-  requestAnimationFrame(drawStars);
-}
-
-resize();
-initStars();
-drawStars();
+function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight}
+function initStars(){stars=[];for(let i=0;i<90;i++)stars.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*0.9+0.2,o:Math.random()*0.3+0.08,sp:Math.random()*0.3+0.05,t:Math.random()*Math.PI*2})}
+function draw(){ctx.clearRect(0,0,W,H);stars.forEach(s=>{s.t+=s.sp*0.018;const a=s.o*(0.5+0.5*Math.sin(s.t));ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fillStyle=`rgba(255,255,255,${a})`;ctx.fill()});requestAnimationFrame(draw)}
+resize();initStars();draw();
 window.addEventListener('resize',()=>{resize();initStars()});
+
+// AKIŞ
+const flows = {
+  ariza:{
+    title:'Arıza nerede?',
+    label:'Sistemi seçin',
+    btns:[
+      {icon:'📷',main:'Kamera sistemi',sub:'Görüntü yok, kayıt durdu, bağlantı koptu',wa:'Kamera sistemimde arıza var. Görüntü veya kayıt sorunu yaşıyorum, yardımcı olur musunuz?'},
+      {icon:'⚡',main:'Elektrik / Sigorta',sub:'Sigorta atıyor, elektrik gelmiyor, arıza var',wa:'Elektrik arızam var. Sigorta atıyor veya elektrik gelmiyor, birlikte bakabilir miyiz?'},
+      {icon:'🌐',main:'İnternet / Ağ',sub:'Bağlantı kopuyor, cihazlar görünmüyor',wa:'İnternet veya ağ bağlantımda sorun var. Hangi cihazda, ne zaman oluyor birlikte netleştirelim.'},
+      {icon:'📡',main:'Uydu / Anten',sub:'Sinyal yok, kanal gelmiyor',wa:'Uydu veya anten sistemimde sorun var. Sinyal alınamıyor, yardım alabilir miyim?'},
+      {icon:'🚪',main:'Kapı / Motor',sub:'Kapı açılmıyor, motor ses yapıyor',wa:'Kapı veya motor sistemimde arıza var. Ses yapıyor veya çalışmıyor, bakabilir misiniz?'},
+    ]
+  },
+  kurulum:{
+    title:'Ne kurdurmak istiyorsunuz?',
+    label:'Sistem seçin',
+    btns:[
+      {icon:'📷',main:'Güvenlik kamerası',sub:'Ev, işyeri veya tesis için kamera sistemi',wa:'Güvenlik kamerası kurulumu yaptırmak istiyorum. Bilgi alabilir miyim?'},
+      {icon:'⚡',main:'Elektrik tesisatı',sub:'Yeni tesisat veya panel kurulumu',wa:'Elektrik tesisatı kurulumu yaptırmak istiyorum. Keşif için müsait misiniz?'},
+      {icon:'🌐',main:'Ağ altyapısı',sub:'Kablolu ağ, Wi-Fi, network kurulumu',wa:'Ağ altyapısı kurulumu yaptırmak istiyorum. Bilgi alabilir miyim?'},
+      {icon:'📡',main:'Uydu / Merkezi anten',sub:'Çanak anten, merkezi sistem kurulumu',wa:'Uydu veya merkezi anten sistemi kurulumu yaptırmak istiyorum.'},
+      {icon:'🚪',main:'Kapı otomasyonu',sub:'Bariyer, garaj kapısı, kartlı geçiş',wa:'Kapı otomasyonu kurulumu yaptırmak istiyorum. Bilgi alabilir miyim?'},
+    ]
+  },
+  bakim:{
+    title:'Ne kontrol edilsin?',
+    label:'Sistem seçin',
+    btns:[
+      {icon:'📷',main:'Kamera sistemi bakımı',sub:'Kayıt, görüntü ve bağlantı kontrolü',wa:'Kamera sistemimin bakımını ve kontrolünü yaptırmak istiyorum.'},
+      {icon:'⚡',main:'Elektrik kontrolü',sub:'Tesisat röntgeni, ölçüm ve kontrol',wa:'Elektrik tesisatı kontrolü yaptırmak istiyorum. Ölçüm ve inceleme için müsait misiniz?'},
+      {icon:'🌐',main:'Ağ sistemi kontrolü',sub:'Bağlantı testi ve optimizasyon',wa:'Ağ sistemi bakımı ve kontrolü yaptırmak istiyorum.'},
+      {icon:'📡',main:'Uydu sistemi kontrolü',sub:'Sinyal ölçümü ve optimizasyon',wa:'Uydu sistemi bakımı ve sinyal kontrolü yaptırmak istiyorum.'},
+    ]
+  }
+};
+
+let currentFlow = null;
+
+function goScreen2(flow){
+  currentFlow = flow;
+  const f = flows[flow];
+  document.getElementById('screen2-title').textContent = f.title;
+  document.getElementById('screen2-label').textContent = f.label;
+  const container = document.getElementById('screen2-btns');
+  container.innerHTML = '';
+  f.btns.forEach((b,i)=>{
+    const btn = document.createElement('button');
+    btn.className = `choice-btn`;
+    btn.style.animationDelay = (i*0.1)+'s';
+    btn.style.opacity = '0';
+    btn.style.transform = 'translateY(14px)';
+    btn.style.animation = `btnIn 0.4s ease ${i*0.08}s forwards`;
+    btn.innerHTML = `
+      <div class="btn-icon" style="font-size:18px;background:rgba(37,99,235,0.1);border:1px solid rgba(59,130,246,0.13)">${b.icon}</div>
+      <div class="btn-text">
+        <div class="btn-main">${b.main}</div>
+        <div class="btn-sub">${b.sub}</div>
+      </div>
+      <span class="btn-arrow">›</span>
+    `;
+    btn.onclick = ()=>waOpen(b.wa);
+    container.appendChild(btn);
+  });
+  document.getElementById('screen1').classList.add('hidden');
+  const s2 = document.getElementById('screen2');
+  s2.classList.remove('hidden');
+  s2.classList.add('slide-in');
+  setTimeout(()=>s2.classList.remove('slide-in'),500);
+}
+
+function goBack(){
+  document.getElementById('screen2').classList.add('hidden');
+  document.getElementById('screen1').classList.remove('hidden');
+}
+
+function waOpen(msg){
+  window.open('https://wa.me/905367807059?text='+encodeURIComponent(msg),'_blank');
+}
+
+function waGeneral(){
+  waOpen('Merhaba, teknik bir konuda bilgi almak istiyorum.');
+}
 </script>
 </body>
 </html>
