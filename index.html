@@ -4,22 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="TEHAŞ — Kemalpaşa ve çevresinde güvenlik kamerası kurulumu, elektrik tesisatı, uydu, ağ altyapısı ve kapı otomasyonu hizmetleri.">
-<meta name="keywords" content="Kemalpaşa güvenlik kamerası, Kemalpaşa elektrikçi, Armutlu kamera kurulumu, İzmir güvenlik kamerası">
+<meta name="keywords" content="Kemalpaşa güvenlik kamerası, Kemalpaşa elektrikçi, Armutlu kamera kurulumu, İzmir güvenlik kamerası, Kemalpaşa uydu kurulumu, kapı otomasyonu Kemalpaşa">
 <title>TEHAŞ — Teknik Hizmetler | Kemalpaşa, İzmir</title>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{background:#080808;color:#fff;font-family:'Inter',sans-serif;line-height:1.6;overflow-x:hidden}
-:root{--gold:#C9A84C;--gold-light:#E8C96A;--gold-dim:rgba(201,168,76,0.12);--dark:#080808;--dark2:#0f0f0f;--dark3:#141414;--card:#111111;--gray:#777;--gray2:#aaa;--border:rgba(255,255,255,0.05);--bordergold:rgba(201,168,76,0.15);--wa:#25D366}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}body{background:#080808;color:#fff;font-family:'Inter',sans-serif;line-height:1.6;overflow-x:hidden}:root{--gold:#C9A84C;--gold-light:#E8C96A;--gold-dim:rgba(201,168,76,0.12);--dark:#080808;--dark2:#0f0f0f;--dark3:#141414;--card:#111111;--gray:#777;--gray2:#aaa;--border:rgba(255,255,255,0.05);--bordergold:rgba(201,168,76,0.15);--wa:#25D366}
 nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 40px;display:flex;align-items:center;justify-content:space-between;background:rgba(8,8,8,0.9);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
 .nav-logo{font-family:'Montserrat',sans-serif;font-weight:900;font-size:22px;background:linear-gradient(135deg,#fff,var(--gold-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-decoration:none}
-.nav-links{display:flex;gap:28px;list-style:none}
-.nav-links a{color:var(--gray2);text-decoration:none;font-size:13px;font-weight:500;transition:color .2s}
-.nav-links a:hover{color:#fff}
-.nav-cta{background:var(--gold)!important;color:#080808!important;padding:8px 18px;border-radius:8px;font-weight:700!important}
-.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer}
-.hamburger span{width:24px;height:2px;background:#fff;display:block}
+.nav-links{display:flex;gap:28px;list-style:none}.nav-links a{color:var(--gray2);text-decoration:none;font-size:13px;font-weight:500;transition:color .2s}.nav-links a:hover{color:#fff}.nav-cta{background:var(--gold)!important;color:#080808!important;padding:8px 18px;border-radius:8px;font-weight:700!important}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer}.hamburger span{width:24px;height:2px;background:#fff;display:block}
 .hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:120px 24px 80px;background:radial-gradient(ellipse 70% 50% at 50% -10%,rgba(201,168,76,.10) 0%,transparent 70%),#080808}
 .hero-badge{display:inline-flex;align-items:center;gap:8px;background:var(--gold-dim);border:1px solid var(--bordergold);border-radius:100px;padding:7px 18px;font-size:11px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);margin-bottom:36px;animation:fadeUp .7s ease forwards;opacity:0}
 .badge-dot{width:6px;height:6px;border-radius:50%;background:var(--gold);animation:pulse 2s ease infinite}
@@ -28,14 +21,23 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 40px;display:fl
 .accent{background:linear-gradient(135deg,var(--gold-light),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .hero-sub{font-family:'Montserrat',sans-serif;font-size:clamp(16px,3vw,22px);font-weight:300;color:var(--gray2);margin-bottom:48px;animation:fadeUp .7s ease .2s forwards;opacity:0}
 .cta-group{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;animation:fadeUp .7s ease .3s forwards;opacity:0}
-.btn-wa{display:inline-flex;align-items:center;gap:10px;background:var(--wa);color:#fff;padding:16px 32px;border-radius:12px;font-family:'Montserrat',sans-serif;font-size:14px;font-weight:700;text-decoration:none;box-shadow:0 8px 32px rgba(37,211,102,.25);transition:all .3s}
-.btn-wa:hover{transform:translateY(-2px);box-shadow:0 16px 48px rgba(37,211,102,.35)}
-.btn-tel{display:inline-flex;align-items:center;gap:10px;background:transparent;color:#fff;padding:16px 32px;border-radius:12px;border:1px solid var(--bordergold);font-family:'Montserrat',sans-serif;font-size:14px;font-weight:600;text-decoration:none;transition:all .3s}
-.btn-tel:hover{background:var(--gold-dim);border-color:var(--gold);transform:translateY(-2px)}
+.btn-wa{display:inline-flex;align-items:center;gap:10px;background:var(--wa);color:#fff;padding:16px 32px;border-radius:12px;font-family:'Montserrat',sans-serif;font-size:14px;font-weight:700;text-decoration:none;box-shadow:0 8px 32px rgba(37,211,102,.25);transition:all .3s}.btn-wa:hover{transform:translateY(-2px);box-shadow:0 16px 48px rgba(37,211,102,.35)}
+.btn-tel{display:inline-flex;align-items:center;gap:10px;background:transparent;color:#fff;padding:16px 32px;border-radius:12px;border:1px solid var(--bordergold);font-family:'Montserrat',sans-serif;font-size:14px;font-weight:600;text-decoration:none;transition:all .3s}.btn-tel:hover{background:var(--gold-dim);border-color:var(--gold);transform:translateY(-2px)}
+.tespit-section{padding:72px 24px;background:#0a0a0a;border-bottom:1px solid var(--border)}
+.tespit-inner{max-width:1000px;margin:0 auto;text-align:center}
+.tespit-eyebrow{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:14px;display:flex;align-items:center;justify-content:center;gap:12px}
+.tespit-eyebrow span{width:20px;height:1px;background:var(--gold);display:inline-block}
+.tespit-title{font-family:'Montserrat',sans-serif;font-size:clamp(24px,4vw,38px);font-weight:700;letter-spacing:-1px;margin-bottom:16px;color:#fff}
+.tespit-desc{color:var(--gray2);font-size:15px;font-weight:300;max-width:560px;margin:0 auto 52px;line-height:1.8}
+.tespit-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;text-align:center}
+.tespit-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:28px 20px;transition:border-color .3s}.tespit-card:hover{border-color:rgba(201,168,76,.3)}
+.tespit-icon{font-size:28px;margin-bottom:14px}
+.tespit-name{font-family:'Montserrat',sans-serif;font-size:14px;font-weight:700;margin-bottom:8px;color:#fff}
+.tespit-text{font-size:12px;color:var(--gray);line-height:1.6}
+.tespit-cta{margin-top:40px}
 section{padding:100px 24px}
 .container{max-width:1100px;margin:0 auto}
-.eyebrow{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:14px;display:flex;align-items:center;gap:12px}
-.eyebrow::before{content:'';width:24px;height:1px;background:var(--gold)}
+.eyebrow{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:14px;display:flex;align-items:center;gap:12px}.eyebrow::before{content:'';width:24px;height:1px;background:var(--gold)}
 .sec-title{font-family:'Montserrat',sans-serif;font-size:clamp(26px,4vw,42px);font-weight:700;letter-spacing:-1px;margin-bottom:16px}
 .sec-desc{color:var(--gray2);font-size:16px;font-weight:300;max-width:520px;margin-bottom:60px}
 #hizmetler{background:var(--dark2)}
@@ -56,16 +58,14 @@ section{padding:100px 24px}
 .stat-label{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--gray);font-weight:500}
 #neden{background:var(--dark)}
 .reasons-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px}
-.reason-card{background:var(--dark3);border:1px solid var(--border);border-radius:16px;padding:36px 32px;transition:border-color .3s,transform .3s}
-.reason-card:hover{border-color:var(--bordergold);transform:translateY(-3px)}
+.reason-card{background:var(--dark3);border:1px solid var(--border);border-radius:16px;padding:36px 32px;transition:border-color .3s,transform .3s}.reason-card:hover{border-color:var(--bordergold);transform:translateY(-3px)}
 .reason-num{font-family:'Montserrat',sans-serif;font-size:48px;font-weight:900;color:rgba(201,168,76,.08);line-height:1;margin-bottom:16px}
 .reason-title{font-family:'Montserrat',sans-serif;font-size:17px;font-weight:700;margin-bottom:10px}
 .reason-desc{color:var(--gray2);font-size:14px;font-weight:300;line-height:1.7}
 #iletisim{background:var(--dark2)}
 .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
 .contact-info{display:flex;flex-direction:column;gap:20px}
-.contact-item{display:flex;align-items:center;gap:16px;padding:20px 24px;background:var(--card);border:1px solid var(--border);border-radius:12px;transition:border-color .3s,transform .3s;text-decoration:none;color:#fff}
-.contact-item:hover{border-color:var(--bordergold);transform:translateX(4px)}
+.contact-item{display:flex;align-items:center;gap:16px;padding:20px 24px;background:var(--card);border:1px solid var(--border);border-radius:12px;transition:border-color .3s,transform .3s;text-decoration:none;color:#fff}.contact-item:hover{border-color:var(--bordergold);transform:translateX(4px)}
 .ci-icon{width:44px;height:44px;border-radius:12px;background:var(--gold-dim);border:1px solid var(--bordergold);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
 .ci-label{font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--gray);margin-bottom:4px;font-weight:500}
 .ci-value{font-size:15px;font-weight:500}
@@ -75,22 +75,16 @@ footer{background:var(--dark);border-top:1px solid var(--border);padding:40px 24
 .footer-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px}
 .footer-logo{font-family:'Montserrat',sans-serif;font-weight:900;font-size:20px;background:linear-gradient(135deg,#fff,var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .footer-sub{font-size:11px;color:var(--gray);letter-spacing:1px;text-transform:uppercase}
-.footer-links{display:flex;gap:24px;list-style:none}
-.footer-links a{font-size:13px;color:var(--gray);text-decoration:none;transition:color .2s}
-.footer-links a:hover{color:var(--gold)}
 .footer-copy{font-size:12px;color:rgba(255,255,255,.12);width:100%;text-align:center;padding-top:28px;border-top:1px solid var(--border);margin-top:4px}
-.wa-float{position:fixed;bottom:28px;right:28px;z-index:200;width:60px;height:60px;border-radius:50%;background:var(--wa);display:flex;align-items:center;justify-content:center;font-size:26px;text-decoration:none;box-shadow:0 8px 32px rgba(37,211,102,.4);transition:transform .3s}
-.wa-float:hover{transform:scale(1.1)}
-.wa-float::before{content:'';position:absolute;inset:-4px;border-radius:50%;border:2px solid rgba(37,211,102,.3);animation:waPulse 2.5s ease infinite}
+.wa-float{position:fixed;bottom:28px;right:28px;z-index:200;width:58px;height:58px;border-radius:50%;background:var(--wa);display:flex;align-items:center;justify-content:center;font-size:24px;text-decoration:none;box-shadow:0 8px 32px rgba(37,211,102,.4);transition:transform .3s}.wa-float:hover{transform:scale(1.1)}.wa-float::before{content:'';position:absolute;inset:-4px;border-radius:50%;border:2px solid rgba(37,211,102,.3);animation:waPulse 2.5s ease infinite}
 @keyframes waPulse{0%{transform:scale(1);opacity:1}100%{transform:scale(1.5);opacity:0}}
 @keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
-.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
-.reveal.visible{opacity:1;transform:translateY(0)}
-.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}
-@media(max-width:768px){nav{padding:16px 20px}.nav-links{display:none}.hamburger{display:flex}section{padding:72px 20px}.contact-grid{grid-template-columns:1fr}.map-wrap{height:240px}.footer-inner{flex-direction:column}.cta-group{flex-direction:column;align-items:center}.btn-wa,.btn-tel{width:100%;max-width:300px;justify-content:center}}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}.reveal.visible{opacity:1;transform:translateY(0)}.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}
+@media(max-width:768px){nav{padding:14px 20px}.nav-links{display:none}.hamburger{display:flex}section{padding:72px 20px}.contact-grid{grid-template-columns:1fr}.map-wrap{height:240px}.footer-inner{flex-direction:column}.cta-group{flex-direction:column;align-items:center}.btn-wa,.btn-tel{width:100%;max-width:300px;justify-content:center}}
 </style>
 </head>
 <body>
+
 <nav>
   <a href="/" class="nav-logo">TEHAŞ</a>
   <ul class="nav-links">
@@ -99,9 +93,7 @@ footer{background:var(--dark);border-top:1px solid var(--border);padding:40px 24
     <li><a href="#iletisim">İletişim</a></li>
     <li><a href="tel:05367807059" class="nav-cta">Hemen Ara</a></li>
   </ul>
-  <div class="hamburger" onclick="toggleMenu()">
-    <span></span><span></span><span></span>
-  </div>
+  <div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
 </nav>
 
 <section class="hero">
@@ -111,6 +103,39 @@ footer{background:var(--dark);border-top:1px solid var(--border);padding:40px 24
   <div class="cta-group">
     <a href="https://wa.me/905367807059?text=Merhaba,%20hizmet%20almak%20istiyorum." class="btn-wa" target="_blank">💬 WhatsApp'ta Yaz</a>
     <a href="tel:05367807059" class="btn-tel">📞 0 (536) 780 70 59</a>
+  </div>
+</section>
+
+<section class="tespit-section">
+  <div class="tespit-inner">
+    <div class="tespit-eyebrow"><span></span>TEHAŞ Yaklaşımı<span></span></div>
+    <h2 class="tespit-title">Sökmeden Önce Tespit</h2>
+    <p class="tespit-desc">Birçok arıza yanlış teşhis nedeniyle büyür. TEHAŞ olarak parça değiştirmeden önce ölçüm, bağlantı kontrolü ve kök neden incelemesiyle hareket ederiz.</p>
+    <div class="tespit-grid">
+      <div class="tespit-card reveal d1">
+        <div class="tespit-icon">⚡</div>
+        <div class="tespit-name">Voltaj Kontrolü</div>
+        <div class="tespit-text">Hat gerilimi ölçülür, sapma varsa kök neden araştırılır.</div>
+      </div>
+      <div class="tespit-card reveal d2">
+        <div class="tespit-icon">🔌</div>
+        <div class="tespit-name">Akım Ölçümü</div>
+        <div class="tespit-text">Aşırı yük veya kaçak akım tespiti yapılır, arıza noktası daraltılır.</div>
+      </div>
+      <div class="tespit-card reveal d3">
+        <div class="tespit-icon">🔍</div>
+        <div class="tespit-name">Bağlantı Analizi</div>
+        <div class="tespit-text">Tüm bağlantı noktaları gözden geçirilir, gevşek veya oksitlenmiş noktalar tespit edilir.</div>
+      </div>
+      <div class="tespit-card reveal d1">
+        <div class="tespit-icon">🎯</div>
+        <div class="tespit-name">Kök Neden İncelemesi</div>
+        <div class="tespit-text">Belirti değil, sebep bulunur. Tekrar eden arızalar önlenir.</div>
+      </div>
+    </div>
+    <div class="tespit-cta">
+      <a href="https://wa.me/905367807059?text=Merhaba,%20%C3%B6n%20te%C5%9Fhis%20i%C3%A7in%20bilgi%20almak%20istiyorum." class="btn-wa" target="_blank" style="display:inline-flex">💬 Ön Teşhis İçin WhatsApp'tan Yaz</a>
+    </div>
   </div>
 </section>
 
@@ -221,15 +246,12 @@ footer{background:var(--dark);border-top:1px solid var(--border);padding:40px 24
 
 <footer>
   <div class="footer-inner">
-    <div>
-      <div class="footer-logo">TEHAŞ</div>
-      <div class="footer-sub">Teknik Hizmetler · Kemalpaşa / İzmir</div>
-    </div>
-    <ul class="footer-links">
-      <li><a href="#hizmetler">Hizmetler</a></li>
-      <li><a href="#neden">Hakkımızda</a></li>
-      <li><a href="#iletisim">İletişim</a></li>
-      <li><a href="https://wa.me/905367807059" target="_blank">WhatsApp</a></li>
+    <div><div class="footer-logo">TEHAŞ</div><div class="footer-sub">Teknik Hizmetler · Kemalpaşa / İzmir</div></div>
+    <ul style="display:flex;gap:24px;list-style:none;flex-wrap:wrap">
+      <li><a href="#hizmetler" style="font-size:13px;color:var(--gray);text-decoration:none">Hizmetler</a></li>
+      <li><a href="#neden" style="font-size:13px;color:var(--gray);text-decoration:none">Hakkımızda</a></li>
+      <li><a href="#iletisim" style="font-size:13px;color:var(--gray);text-decoration:none">İletişim</a></li>
+      <li><a href="https://wa.me/905367807059" target="_blank" style="font-size:13px;color:var(--gray);text-decoration:none">WhatsApp</a></li>
     </ul>
     <div class="footer-copy">© 2026 TEHAŞ Teknik Hizmetler · tehas.tr</div>
   </div>
@@ -239,15 +261,10 @@ footer{background:var(--dark);border-top:1px solid var(--border);padding:40px 24
 
 <script>
 const reveals=document.querySelectorAll('.reveal');
-const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}})},{threshold:.12});
+const obs=new IntersectionObserver(e=>{e.forEach(r=>{if(r.isIntersecting){r.target.classList.add('visible');obs.unobserve(r.target)}})},{threshold:.12});
 reveals.forEach(el=>obs.observe(el));
 let open=false;
-function toggleMenu(){
-  const l=document.querySelector('.nav-links');
-  open=!open;
-  if(open){l.style.cssText='display:flex;flex-direction:column;position:absolute;top:60px;left:0;right:0;background:rgba(8,8,8,.98);padding:20px 24px 28px;border-bottom:1px solid rgba(255,255,255,.06);gap:20px;z-index:99'}
-  else{l.style.display='none'}
-}
+function toggleMenu(){const l=document.querySelector('.nav-links');open=!open;if(open){l.style.cssText='display:flex;flex-direction:column;position:absolute;top:60px;left:0;right:0;background:rgba(8,8,8,.98);padding:20px 24px 28px;border-bottom:1px solid rgba(255,255,255,.06);gap:20px;z-index:99'}else{l.style.display='none'}}
 document.querySelectorAll('.nav-links a').forEach(a=>a.addEventListener('click',()=>{open=false;document.querySelector('.nav-links').style.display='none'}));
 window.addEventListener('scroll',()=>{document.querySelector('nav').style.padding=window.scrollY>50?'12px 40px':'18px 40px'});
 </script>
