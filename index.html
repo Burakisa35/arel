@@ -64,7 +64,6 @@ canvas{position:fixed;inset:0;z-index:0;pointer-events:none}
 /* ── KAYIT SİSTEMİ ─────────────────────────────────── */
 .k-wrap{width:100%;height:100%;display:flex;flex-direction:column;justify-content:space-between;padding-top:52px;padding-bottom:0}
 .k-top{flex:1;overflow-y:auto;padding-bottom:12px}
-.k-bot{flex-shrink:0}
 .k-progress{height:2px;background:rgba(255,255,255,0.06);margin-bottom:32px;border-radius:1px}
 .k-progress-fill{height:100%;background:#3B82F6;border-radius:1px;transition:width 0.4s ease}
 .k-step-lbl{font-family:‘Barlow’,sans-serif;font-size:9px;letter-spacing:4px;text-transform:uppercase;color:rgba(255,255,255,0.2);margin-bottom:10px}
@@ -74,9 +73,6 @@ canvas{position:fixed;inset:0;z-index:0;pointer-events:none}
 .k-btn-list .time-btn{animation:none;opacity:1}
 .k-hint{font-size:11px;color:rgba(59,130,246,0.5);margin-top:12px;padding-left:14px;border-left:2px solid rgba(59,130,246,0.2);line-height:1.6;font-family:‘Inter’,sans-serif}
 .k-warn{font-size:11px;color:rgba(239,68,68,0.7);margin-top:10px;padding-left:14px;border-left:2px solid rgba(239,68,68,0.3);line-height:1.6;font-family:‘Inter’,sans-serif}
-.k-devam{width:100%;padding:17px;background:rgba(59,130,246,0.12);color:rgba(59,130,246,0.4);border:1px solid rgba(59,130,246,0.1);border-radius:13px;font-family:‘Barlow’,sans-serif;font-size:13px;font-weight:600;letter-spacing:1px;cursor:default;margin-top:14px;transition:all 0.25s}
-.k-devam.aktif{background:rgba(59,130,246,0.15);color:#60A5FA;border-color:rgba(59,130,246,0.3);cursor:pointer}
-.k-devam.aktif:hover{background:rgba(59,130,246,0.22);border-color:rgba(59,130,246,0.45)}
 .k-talep-no{font-family:‘Barlow’,sans-serif;font-size:9px;letter-spacing:4px;color:#3B82F6;margin-bottom:20px;text-transform:uppercase}
 .k-ozet-row{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid rgba(255,255,255,0.04);padding:10px 0;gap:12px}
 .k-ozet-lbl{font-size:9px;letter-spacing:3px;color:rgba(255,255,255,0.2);text-transform:uppercase;flex-shrink:0;font-family:‘Barlow’,sans-serif}
@@ -380,24 +376,19 @@ function progressBar(){ return `<div class="k-progress"><div class="k-progress-f
 
 function backBtn(){ return `<button class="back-btn" id="k-geri"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Geri</button>`; }
 
-function devamBtn(aktif, lbl="DEVAM →"){ return `<button class="k-devam${aktif?" aktif":""}" id="k-devam">${lbl}</button>`; }
-
 /* ── EKRANLAR ───────────────────────────────────────── */
 function rKat(){
   const opts = KAT.map((k,i)=>`
     <button class="choice-btn b${i+1}${S.katId===k.id?" selected":""}" data-kat="${k.id}">
       <div class="btn-icon">${k.ikon}</div>
-      <div class="btn-text">
-        <div class="btn-main">${k.label}</div>
-      </div>
+      <div class="btn-text"><div class="btn-main">${k.label}</div></div>
       <span class="btn-arrow">›</span>
     </button>`).join("");
   return `<div class="k-top">${progressBar()}
     <div class="k-step-lbl">Adım 1 — Sorun</div>
     <div class="k-title">Ne sorunu var?</div>
     <div class="k-btn-list">${opts}</div>
-  </div>
-  <div class="k-bot">${devamBtn(!!S.katId)}</div>`;
+  </div>`;
 }
 
 function rAlt(){
@@ -407,15 +398,13 @@ function rAlt(){
       <div class="btn-text"><div class="btn-main">${a}</div></div>
       <span class="btn-arrow">›</span>
     </button>`).join("");
-  const hint = S.alt ? `<div class="k-hint">Bu sorun sık görülüyor.</div>` : "";
-  const warn = S.alt&&k?.uyari?.[S.alt] ? `<div class="k-warn">${k.uyari[S.alt]}</div>` : "";
+  const warn = k?.uyari ? Object.entries(k.uyari).map(([key,val])=>`<div class="k-warn" style="${S.alt===key?'':'display:none'}">${val}</div>`).join("") : "";
   return `<div class="k-top">${backBtn()}${progressBar()}
     <div class="k-step-lbl">Adım 2 — Belirti</div>
     <div class="k-title">Ne oluyor tam olarak?</div>
     <div class="k-btn-list">${opts}</div>
-    ${hint}${warn}
-  </div>
-  <div class="k-bot">${devamBtn(!!S.alt)}</div>`;
+    ${warn}
+  </div>`;
 }
 
 function rBag(idx){
@@ -432,8 +421,7 @@ function rBag(idx){
     <div class="k-step-lbl">Adım ${adim} — Bağlam</div>
     <div class="k-title">${bag.soru}</div>
     <div class="k-btn-list">${opts}</div>
-  </div>
-  <div class="k-bot">${devamBtn(!!S.bc[idx])}</div>`;
+  </div>`;
 }
 
 function rBolge(){
@@ -447,8 +435,7 @@ function rBolge(){
     <div class="k-step-lbl">Bölge</div>
     <div class="k-title">Hangi bölgedesiniz?</div>
     <div class="k-btn-list">${opts}</div>
-  </div>
-  <div class="k-bot">${devamBtn(!!S.bolge)}</div>`;
+  </div>`;
 }
 
 function rAcil(){
@@ -462,8 +449,7 @@ function rAcil(){
     <div class="k-step-lbl">Zaman</div>
     <div class="k-title">Ne zaman çözülmesini istiyorsunuz?</div>
     <div class="time-grid">${opts}</div>
-  </div>
-  <div class="k-bot">${devamBtn(!!S.acil,"ÖZET →")}</div>`;
+  </div>`;
 }
 
 function rOzet(){
@@ -506,12 +492,6 @@ function bindEvents(){
     S.faz=p; render();
   });
 
-  $("k-devam")?.addEventListener("click",()=>{
-    const hazir={kat:!!S.katId,alt:!!S.alt,bag0:!!S.bc[0],bag1:!!S.bc[1],bolge:!!S.bolge,acil:!!S.acil};
-    if(!hazir[S.faz]) return;
-    S.faz=sonrakiFaz(S.faz); render();
-  });
-
   $("k-sheets")?.addEventListener("click",()=>{
     navigator.clipboard.writeText(sheetsRow()).then(()=>{
       const b=$("k-sheets"); if(!b) return;
@@ -526,19 +506,24 @@ function bindEvents(){
   });
 
   document.querySelectorAll("[data-kat]").forEach(el=>el.addEventListener("click",()=>{
-    S.katId=el.dataset.kat; S.alt=null; S.bc=[]; render();
+    S.katId=el.dataset.kat; S.alt=null; S.bc=[];
+    S.faz=sonrakiFaz("kat"); render();
   }));
   document.querySelectorAll("[data-alt]").forEach(el=>el.addEventListener("click",()=>{
-    S.alt=el.dataset.alt; render();
+    S.alt=el.dataset.alt;
+    S.faz=sonrakiFaz("alt"); render();
   }));
   document.querySelectorAll("[data-bag]").forEach(el=>el.addEventListener("click",()=>{
-    const idx=parseInt(el.dataset.bag); S.bc[idx]=el.dataset.val; render();
+    const idx=parseInt(el.dataset.bag); S.bc[idx]=el.dataset.val;
+    S.faz=sonrakiFaz(idx===0?"bag0":"bag1"); render();
   }));
   document.querySelectorAll("[data-bolge]").forEach(el=>el.addEventListener("click",()=>{
-    S.bolge=el.dataset.bolge; render();
+    S.bolge=el.dataset.bolge;
+    S.faz=sonrakiFaz("bolge"); render();
   }));
   document.querySelectorAll("[data-acil]").forEach(el=>el.addEventListener("click",()=>{
-    S.acil=el.dataset.acil; render();
+    S.acil=el.dataset.acil;
+    S.faz=sonrakiFaz("acil"); render();
   }));
 }
 </script>
