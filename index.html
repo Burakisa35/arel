@@ -1,165 +1,188 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TEHAŞ</title>
-  <style>
-    /* Genel stiller */
-    body {
-      margin: 0;
-      padding: 0;
-      background-color: #121212; /* Koyu arka plan */
-      color: #ffffff; /* Beyaz metin */
-      font-family: "Arial", sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100dvh; /* Ekranın tamamını kaplama */
-      overflow: hidden;
-      -webkit-tap-highlight-color: transparent;
-      touch-action: manipulation;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TEHAŞ — Teknik Çözüm Merkezi</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;overflow:hidden}
+body{background:#000;color:#fff;font-family:'Inter',sans-serif;display:flex;flex-direction:column;align-items:center;justify-content:space-between;min-height:100vh;position:relative}
 
-    .container {
-      text-align: center;
-      width: 100%;
-    }
+/* CANVAS BACKGROUND */
+canvas{position:fixed;inset:0;z-index:0;pointer-events:none}
 
-    .logo {
-      font-size: 2rem;
-      font-weight: bold;
-      margin-bottom: 2rem;
-    }
+/* GLOW ORB */
+.glow-orb{position:fixed;bottom:35%;left:50%;transform:translateX(-50%);width:320px;height:120px;background:radial-gradient(ellipse at center,rgba(37,99,235,0.35) 0%,rgba(37,99,235,0.08) 50%,transparent 80%);border-radius:50%;animation:orbPulse 4s ease-in-out infinite;z-index:1;pointer-events:none}
+.glow-line{position:fixed;bottom:35%;left:50%;transform:translateX(-50%);width:200px;height:1px;background:linear-gradient(90deg,transparent,rgba(37,99,235,0.6),rgba(147,197,253,0.8),rgba(37,99,235,0.6),transparent);animation:linePulse 4s ease-in-out infinite;z-index:1;pointer-events:none}
+@keyframes orbPulse{0%,100%{opacity:0.6;transform:translateX(-50%) scaleX(1)}50%{opacity:1;transform:translateX(-50%) scaleX(1.15)}}
+@keyframes linePulse{0%,100%{opacity:0.4;width:160px}50%{opacity:1;width:240px}}
 
-    .menu, .sub-menu, .problem-menu {
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-      margin: 0 auto;
-      padding: 0 2rem;
-    }
+/* LAYOUT */
+.top-section{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;flex:1;padding-top:60px}
+.bottom-section{position:relative;z-index:2;width:100%;padding:0 32px 48px;display:flex;flex-direction:column;gap:0}
 
-    .menu > button, .sub-menu > button, .problem-menu > button {
-      background: none;
-      color: #ffffff;
-      font-size: 1.2rem;
-      padding: 1rem 0;
-      border: 1px solid #ffffff;
-      cursor: pointer;
-      border-radius: 0.5rem;
-      transition: all 200ms ease-in-out;
-    }
+/* LOGO */
+.logo-wrap{display:flex;flex-direction:column;align-items:center;gap:16px;margin-bottom:0}
+.logo-letters{display:flex;align-items:center;gap:2px}
+.logo-letter{font-family:'Montserrat',sans-serif;font-size:clamp(52px,14vw,72px);font-weight:900;letter-spacing:8px;opacity:0;animation:letterIn 0.5s ease forwards}
+.logo-letter.silver{color:#c8cdd6;text-shadow:0 0 30px rgba(200,205,214,0.3)}
+.logo-letter.blue{color:#3B82F6;text-shadow:0 0 20px rgba(59,130,246,0.6)}
+.logo-letter.l1{animation-delay:0.1s}
+.logo-letter.l2{animation-delay:0.25s}
+.logo-letter.l3{animation-delay:0.4s}
+.logo-letter.l4{animation-delay:0.55s}
+.logo-letter.l5{animation-delay:0.7s}
+.logo-letter.l6{animation-delay:0.85s}
 
-    .menu > button:hover, .sub-menu > button:hover, .problem-menu > button:hover {
-      border-color: #2196F3; /* Mavi vurgu */
-    }
+/* A harfi özel — çapraz çizgi */
+.logo-a{position:relative;display:inline-flex;align-items:center;justify-content:center}
+.logo-a svg{width:clamp(40px,11vw,56px);height:clamp(52px,14vw,72px);opacity:0;animation:letterIn 0.5s ease 0.4s forwards}
 
-    .menu > button:active, .sub-menu > button:active, .problem-menu > button:active {
-      transform: scale(0.98); /* Hafif küçülme animasyonu */
-    }
+.logo-tagline{font-size:10px;letter-spacing:5px;text-transform:uppercase;color:rgba(255,255,255,0.35);font-weight:400;opacity:0;animation:fadeIn 0.6s ease 1.2s forwards;margin-top:4px}
 
-    .hidden {
-      display: none;
-    }
+@keyframes letterIn{from{opacity:0;transform:translateY(-12px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
 
-    .back-button {
-      margin-top: 2rem;
-      color: #ffffff;
-      background: none;
-      border: 1px solid #ffffff;
-      font-size: 1rem;
-      padding: 0.5rem 1rem;
-      border-radius: 0.5rem;
-      cursor: pointer;
-      transition: all 200ms ease-in-out;
-    }
-    .back-button:hover {
-      border-color: #2196F3;
-    }
-    .intentional-space {
-      height: 40%;
-    }
-  </style>
+/* BUTTONS */
+.btn-list{display:flex;flex-direction:column;gap:14px;width:100%;margin-bottom:32px}
+.segment-btn{display:flex;align-items:center;gap:18px;padding:20px 24px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:16px;text-decoration:none;color:#fff;transition:all 0.3s ease;opacity:0;transform:translateY(20px);animation:btnIn 0.5s ease forwards;position:relative;overflow:hidden}
+.segment-btn::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(37,99,235,0.08),transparent);opacity:0;transition:opacity 0.3s}
+.segment-btn:hover{border-color:rgba(59,130,246,0.5);background:rgba(37,99,235,0.08);transform:translateY(-1px);box-shadow:0 8px 32px rgba(37,99,235,0.15)}
+.segment-btn:hover::before{opacity:1}
+.segment-btn:active{transform:scale(0.98)}
+.btn-b1{animation-delay:1.0s}
+.btn-b2{animation-delay:1.15s}
+.btn-b3{animation-delay:1.3s}
+@keyframes btnIn{to{opacity:1;transform:translateY(0)}}
+
+.btn-icon{width:44px;height:44px;border-radius:10px;background:rgba(37,99,235,0.12);border:1px solid rgba(59,130,246,0.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.3s}
+.segment-btn:hover .btn-icon{background:rgba(37,99,235,0.2);border-color:rgba(59,130,246,0.4)}
+.btn-icon svg{width:22px;height:22px;stroke:#3B82F6;fill:none;stroke-width:1.5}
+.btn-label{font-family:'Montserrat',sans-serif;font-size:15px;font-weight:700;letter-spacing:2px;text-transform:uppercase;flex:1}
+.btn-arrow{color:rgba(255,255,255,0.3);font-size:18px;transition:all 0.3s}
+.segment-btn:hover .btn-arrow{color:#3B82F6;transform:translateX(4px)}
+
+/* FOOTER INFO */
+.footer-info{display:flex;flex-direction:column;align-items:center;gap:10px;opacity:0;animation:fadeIn 0.6s ease 1.6s forwards}
+.footer-badge{display:flex;align-items:center;gap:8px;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.3)}
+.footer-badge svg{width:14px;height:14px;stroke:rgba(59,130,246,0.6);fill:none;stroke-width:1.5}
+.footer-phone{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:500;color:rgba(255,255,255,0.5);text-decoration:none;transition:color 0.2s}
+.footer-phone:hover{color:#3B82F6}
+.footer-phone svg{width:14px;height:14px;stroke:rgba(59,130,246,0.6);fill:none;stroke-width:1.5}
+
+/* HOME INDICATOR */
+.home-indicator{width:134px;height:5px;background:rgba(255,255,255,0.18);border-radius:3px;margin:12px auto 0;position:relative;z-index:2}
+</style>
 </head>
 <body>
-  <div class="container">
-    <div class="logo">TEHAŞ</div>
-    <div class="menu" id="mainMenu">
-      <button onclick="showSubMenu('konut')">KONUT</button>
-      <button onclick="showSubMenu('isletme')">İŞLETME</button>
-      <button onclick="showSubMenu('endustri')">ENDÜSTRİ</button>
-    </div>
 
-    <div class="sub-menu hidden" id="subMenu">
-      <div id="konut" class="hidden">
-        <button onclick="showProblems('KONUT / Bireysel')">Bireysel</button>
-        <button onclick="showProblems('KONUT / Apartman Yönetimi')">Apartman Yönetimi</button>
-        <button onclick="showProblems('KONUT / Site Yönetimi')">Site Yönetimi</button>
-        <button onclick="showProblems('KONUT / Mülk Sahibi')">Mülk Sahibi</button>
-        <button onclick="showProblems('KONUT / Müteahhit')">Müteahhit</button>
-      </div>
-      <div id="isletme" class="hidden">
-        <button onclick="showProblems('İŞLETME / Gıda & Ağırlama')">Gıda & Ağırlama</button>
-        <button onclick="showProblems('İŞLETME / Perakende')">Perakende</button>
-        <button onclick="showProblems('İŞLETME / Ofis & Yönetim')">Ofis & Yönetim</button>
-        <button onclick="showProblems('İŞLETME / Sağlık & Eğitim')">Sağlık & Eğitim</button>
-        <button onclick="showProblems('İŞLETME / Teknik & Otomotiv')">Teknik & Otomotiv</button>
-        <button onclick="showProblems('İŞLETME / Lojistik & Ulaşım')">Lojistik & Ulaşım</button>
-      </div>
-      <div id="endustri" class="hidden">
-        <button onclick="showProblems('ENDÜSTRİ / Metal & Makine')">Metal & Makine</button>
-        <button onclick="showProblems('ENDÜSTRİ / Gıda Sanayi')">Gıda Sanayi</button>
-        <button onclick="showProblems('ENDÜSTRİ / Kimya & Plastik')">Kimya & Plastik</button>
-        <button onclick="showProblems('ENDÜSTRİ / Depolama')">Depolama</button>
-        <button onclick="showProblems('ENDÜSTRİ / Üretim')">Üretim</button>
-        <button onclick="showProblems('ENDÜSTRİ / Atölye')">Atölye</button>
-      </div>
-      <button class="back-button" onclick="goBackToMain()">Geri</button>
-    </div>
+<canvas id="stars"></canvas>
+<div class="glow-orb"></div>
+<div class="glow-line"></div>
 
-    <div class="problem-menu hidden" id="problemMenu">
-      <button onclick="openWhatsApp('Kamera')">Kamera</button>
-      <button onclick="openWhatsApp('Elektrik')">Elektrik</button>
-      <button onclick="openWhatsApp('Ağ')">Ağ</button>
-      <button onclick="openWhatsApp('Uydu / Sinyal')">Uydu / Sinyal</button>
-      <button onclick="openWhatsApp('Motor / Otomasyon')">Motor / Otomasyon</button>
-      <button class="back-button" onclick="goBackToSubMenu()">Geri</button>
+<!-- ÜST ALAN — LOGO -->
+<div class="top-section">
+  <div class="logo-wrap">
+    <div class="logo-letters">
+      <span class="logo-letter silver l1">T</span>
+      <span class="logo-letter silver l2">E</span>
+      <span class="logo-letter silver l3">H</span>
+      <!-- A harfi — ok şekli -->
+      <span class="logo-letter blue l4" style="animation-delay:0.55s">A</span>
+      <span class="logo-letter silver l5">Ş</span>
     </div>
+    <div class="logo-tagline">Enerji ve Güvenlik Teknolojileri</div>
+  </div>
+</div>
+
+<!-- ALT ALAN — BUTONLAR -->
+<div class="bottom-section">
+  <div class="btn-list">
+
+    <a href="https://wa.me/905367807059?text=Konut%20için%20teknik%20destek%20almak%20istiyorum." class="segment-btn btn-b1" target="_blank">
+      <div class="btn-icon">
+        <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      </div>
+      <span class="btn-label">Konut</span>
+      <span class="btn-arrow">›</span>
+    </a>
+
+    <a href="https://wa.me/905367807059?text=İşletme%20için%20teknik%20destek%20almak%20istiyorum." class="segment-btn btn-b2" target="_blank">
+      <div class="btn-icon">
+        <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/><line x1="12" y1="12" x2="12" y2="12.01"/></svg>
+      </div>
+      <span class="btn-label">İşletme</span>
+      <span class="btn-arrow">›</span>
+    </a>
+
+    <a href="https://wa.me/905367807059?text=Endüstriyel%20tesis%20için%20teknik%20destek%20almak%20istiyorum." class="segment-btn btn-b3" target="_blank">
+      <div class="btn-icon">
+        <svg viewBox="0 0 24 24"><path d="M2 20h20M4 20V10l4-4 4 4 4-4 4 4v10"/><path d="M10 20v-5h4v5"/></svg>
+      </div>
+      <span class="btn-label">Endüstri</span>
+      <span class="btn-arrow">›</span>
+    </a>
+
   </div>
 
-  <script>
-    let selectedSegment = '';
+  <div class="footer-info">
+    <div class="footer-badge">
+      <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      Teknik Çözüm Merkezi
+    </div>
+    <a href="tel:05367807059" class="footer-phone">
+      <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.4 11.1 19.79 19.79 0 01.36 2.5 2 2 0 012.34.5h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.09a16 16 0 006 6l.77-.77a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+      0 905 367 80 70 59
+    </a>
+  </div>
 
-    function showSubMenu(segment) {
-      selectedSegment = segment.toUpperCase();
-      document.getElementById('mainMenu').classList.add('hidden');
-      document.getElementById('subMenu').classList.remove('hidden');
-      document.getElementById(segment).classList.remove('hidden');
-    }
+  <div class="home-indicator"></div>
+</div>
 
-    function goBackToMain() {
-      document.querySelectorAll('.sub-menu > div').forEach(div => div.classList.add('hidden'));
-      document.getElementById('subMenu').classList.add('hidden');
-      document.getElementById('mainMenu').classList.remove('hidden');
-    }
+<script>
+// YILDIZ CANVAS
+const canvas=document.getElementById('stars');
+const ctx=canvas.getContext('2d');
+let W,H,stars=[];
 
-    function showProblems(segment) {
-      selectedSegment = segment;
-      document.getElementById('subMenu').classList.add('hidden');
-      document.getElementById('problemMenu').classList.remove('hidden');
-    }
+function resize(){
+  W=canvas.width=window.innerWidth;
+  H=canvas.height=window.innerHeight;
+}
 
-    function goBackToSubMenu() {
-      document.getElementById('problemMenu').classList.add('hidden');
-      document.getElementById(selectedSegment.split(' / ')[0].toLowerCase()).classList.remove('hidden');
-      document.getElementById('subMenu').classList.remove('hidden');
-    }
+function initStars(){
+  stars=[];
+  for(let i=0;i<120;i++){
+    stars.push({
+      x:Math.random()*W,
+      y:Math.random()*H,
+      r:Math.random()*1.2+0.2,
+      o:Math.random()*0.5+0.1,
+      speed:Math.random()*0.3+0.05,
+      twinkle:Math.random()*Math.PI*2
+    });
+  }
+}
 
-    function openWhatsApp(problem) {
-      const message = `Merhaba, ${selectedSegment} için ${problem} sorunu yaşıyorum. Belirtiyi birlikte netleştirebilir miyiz?`;
-      window.open(`https://wa.me/905367807059?text=${encodeURIComponent(message)}`, '_blank');
-    }
-  </script>
+function drawStars(t){
+  ctx.clearRect(0,0,W,H);
+  stars.forEach(s=>{
+    s.twinkle+=s.speed*0.02;
+    const alpha=s.o*(0.6+0.4*Math.sin(s.twinkle));
+    ctx.beginPath();
+    ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+    ctx.fillStyle=`rgba(255,255,255,${alpha})`;
+    ctx.fill();
+  });
+  requestAnimationFrame(drawStars);
+}
+
+resize();
+initStars();
+drawStars();
+window.addEventListener('resize',()=>{resize();initStars()});
+</script>
 </body>
 </html>
