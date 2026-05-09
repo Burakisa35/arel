@@ -62,7 +62,7 @@ canvas{position:fixed;inset:0;z-index:0;pointer-events:none}
 .home-indicator{width:120px;height:4px;background:rgba(255,255,255,0.1);border-radius:2px;margin:14px auto 0}
 
 /* ── KAYIT SİSTEMİ ─────────────────────────────────── */
-.k-wrap{width:100%;height:100%;display:flex;flex-direction:column;justify-content:space-between;overflow-y:auto;padding-top:52px;padding-bottom:0}
+.k-wrap{width:100%;height:100%;display:flex;flex-direction:column;justify-content:space-between;padding-top:52px;padding-bottom:0}
 .k-top{flex:1;overflow-y:auto;padding-bottom:12px}
 .k-bot{flex-shrink:0}
 .k-progress{height:2px;background:rgba(255,255,255,0.06);margin-bottom:32px;border-radius:1px}
@@ -70,6 +70,8 @@ canvas{position:fixed;inset:0;z-index:0;pointer-events:none}
 .k-step-lbl{font-family:‘Barlow’,sans-serif;font-size:9px;letter-spacing:4px;text-transform:uppercase;color:rgba(255,255,255,0.2);margin-bottom:10px}
 .k-title{font-family:‘Barlow’,sans-serif;font-size:19px;font-weight:600;color:#e8e8e8;margin-bottom:24px;line-height:1.4;letter-spacing:-0.2px}
 .k-btn-list{display:flex;flex-direction:column;gap:9px;margin-bottom:8px}
+.k-btn-list .choice-btn{animation:none;opacity:1;transform:none}
+.k-btn-list .time-btn{animation:none;opacity:1}
 .k-hint{font-size:11px;color:rgba(59,130,246,0.5);margin-top:12px;padding-left:14px;border-left:2px solid rgba(59,130,246,0.2);line-height:1.6;font-family:‘Inter’,sans-serif}
 .k-warn{font-size:11px;color:rgba(239,68,68,0.7);margin-top:10px;padding-left:14px;border-left:2px solid rgba(239,68,68,0.3);line-height:1.6;font-family:‘Inter’,sans-serif}
 .k-devam{width:100%;padding:17px;background:rgba(59,130,246,0.12);color:rgba(59,130,246,0.4);border:1px solid rgba(59,130,246,0.1);border-radius:13px;font-family:‘Barlow’,sans-serif;font-size:13px;font-weight:600;letter-spacing:1px;cursor:default;margin-top:14px;transition:all 0.25s}
@@ -104,6 +106,7 @@ canvas{position:fixed;inset:0;z-index:0;pointer-events:none}
 <div class="screen" id="screen1">
   <div class="logo-section">
     <div class="logo-svg-wrap">
+      <!-- LOGO: Aşağıdaki SVG'yi orijinal logo SVG'nle değiştir -->
       <svg width="200" height="52" viewBox="0 0 200 52" fill="none" xmlns="http://www.w3.org/2000/svg">
         <defs><filter id="g"><feGaussianBlur stdDeviation="1.5" result="b"/><feComposite in="SourceGraphic" in2="b" operator="over"/></filter></defs>
         <!-- A -->
