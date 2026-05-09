@@ -1,10 +1,11 @@
 <!DOCTYPE html>
+
 <html lang="tr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="TEHAŞ — Teknik Çözüm Merkezi. Kemalpaşa / İzmir.">
-<title>TEHAŞ — Teknik Çözüm Merkezi</title>
+<meta name="description" content="Arel — Teknik Servis. Kemalpaşa / İzmir.">
+<title>Arel — Teknik Servis</title>
 <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
@@ -27,11 +28,12 @@ canvas{position:fixed;inset:0;z-index:0;pointer-events:none}
 .choice-btn{display:flex;align-items:center;gap:16px;padding:17px 20px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:13px;color:#fff;cursor:pointer;transition:all 0.25s ease;opacity:0;transform:translateY(14px);animation:btnIn 0.45s ease forwards;text-align:left;width:100%;font-family:inherit;-webkit-tap-highlight-color:transparent}
 .choice-btn:hover,.choice-btn:focus{border-color:rgba(59,130,246,0.35);background:rgba(37,99,235,0.07);transform:translateY(-1px);box-shadow:0 4px 20px rgba(37,99,235,0.1);outline:none}
 .choice-btn:active{transform:scale(0.98)}
-.b1{animation-delay:0.85s}.b2{animation-delay:1.0s}.b3{animation-delay:1.15s}.b4{animation-delay:1.3s}
+.choice-btn.selected{border-color:rgba(59,130,246,0.5);background:rgba(37,99,235,0.1)}
+.b1{animation-delay:0.1s}.b2{animation-delay:0.2s}.b3{animation-delay:0.3s}.b4{animation-delay:0.4s}.b5{animation-delay:0.5s}.b6{animation-delay:0.6s}
 @keyframes btnIn{to{opacity:1;transform:translateY(0)}}
 .btn-icon{width:38px;height:38px;border-radius:9px;background:rgba(37,99,235,0.1);border:1px solid rgba(59,130,246,0.13);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:17px;transition:all 0.25s}
 .btn-icon svg{width:18px;height:18px;stroke:#3B82F6;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
-.choice-btn:hover .btn-icon,.choice-btn:focus .btn-icon{background:rgba(37,99,235,0.18);border-color:rgba(59,130,246,0.3)}
+.choice-btn:hover .btn-icon,.choice-btn:focus .btn-icon,.choice-btn.selected .btn-icon{background:rgba(37,99,235,0.18);border-color:rgba(59,130,246,0.3)}
 .btn-text{flex:1}
 .btn-main{font-family:'Barlow',sans-serif;font-size:14px;font-weight:600;letter-spacing:0.3px;color:#e8e8e8;line-height:1.3}
 .btn-sub{font-size:11px;color:rgba(255,255,255,0.28);margin-top:2px;font-weight:300}
@@ -40,16 +42,15 @@ canvas{position:fixed;inset:0;z-index:0;pointer-events:none}
 .back-btn{display:flex;align-items:center;gap:8px;color:rgba(255,255,255,0.3);font-size:12px;letter-spacing:1px;text-transform:uppercase;background:none;border:none;cursor:pointer;font-family:'Barlow',sans-serif;font-weight:500;margin-bottom:20px;transition:color 0.2s;padding:0;-webkit-tap-highlight-color:transparent}
 .back-btn:hover{color:rgba(255,255,255,0.6)}
 .back-btn svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2}
-.time-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;width:100%;margin-bottom:24px}
-.time-btn{padding:20px 16px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:13px;color:#fff;cursor:pointer;transition:all 0.25s;text-align:center;font-family:inherit;opacity:0;animation:btnIn 0.4s ease forwards;-webkit-tap-highlight-color:transparent}
+.time-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;width:100%;margin-bottom:24px}
+.time-btn{padding:18px 12px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:13px;color:#fff;cursor:pointer;transition:all 0.25s;text-align:center;font-family:inherit;opacity:0;animation:btnIn 0.4s ease forwards;-webkit-tap-highlight-color:transparent}
 .time-btn:hover,.time-btn:focus{border-color:rgba(59,130,246,0.4);background:rgba(37,99,235,0.08);transform:translateY(-1px);outline:none}
 .time-btn:active{transform:scale(0.97)}
-.t1{animation-delay:0.1s}.t2{animation-delay:0.2s}.t3{animation-delay:0.3s}.t4{animation-delay:0.4s}
-.time-icon{font-size:22px;margin-bottom:8px}
-.time-label{font-family:'Barlow',sans-serif;font-size:13px;font-weight:600;letter-spacing:0.5px;color:#e8e8e8}
+.time-btn.selected{border-color:rgba(59,130,246,0.5);background:rgba(37,99,235,0.1)}
+.t1{animation-delay:0.1s}.t2{animation-delay:0.2s}.t3{animation-delay:0.3s}
+.time-icon{font-size:20px;margin-bottom:7px}
+.time-label{font-family:'Barlow',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.3px;color:#e8e8e8;line-height:1.3}
 .time-sub{font-size:10px;color:rgba(255,255,255,0.25);margin-top:3px}
-.job-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(37,99,235,0.08);border:1px solid rgba(59,130,246,0.2);border-radius:8px;padding:8px 14px;font-family:'Barlow',sans-serif;font-size:12px;font-weight:600;letter-spacing:2px;color:rgba(59,130,246,0.8);margin-bottom:20px}
-.job-badge svg{width:12px;height:12px;stroke:rgba(59,130,246,0.6);fill:none;stroke-width:1.5}
 .screen-title{font-family:'Barlow',sans-serif;font-size:20px;font-weight:600;text-align:center;color:#e8e8e8;margin-bottom:8px;letter-spacing:-0.3px}
 .screen-title-label{font-family:'Barlow',sans-serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.25);text-align:center;margin-bottom:32px}
 .footer-info{display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0;animation:fadeIn 0.5s ease 1.5s forwards}
@@ -59,31 +60,485 @@ canvas{position:fixed;inset:0;z-index:0;pointer-events:none}
 .footer-phone:hover{color:rgba(59,130,246,0.7)}
 .footer-phone svg{width:13px;height:13px;stroke:rgba(59,130,246,0.38);fill:none;stroke-width:1.5;flex-shrink:0}
 .home-indicator{width:120px;height:4px;background:rgba(255,255,255,0.1);border-radius:2px;margin:14px auto 0}
+
+/* ── KAYIT SİSTEMİ ─────────────────────────────────── */
+.k-wrap{width:100%;height:100%;display:flex;flex-direction:column;justify-content:space-between;overflow-y:auto;padding-top:52px;padding-bottom:0}
+.k-top{flex:1;overflow-y:auto;padding-bottom:12px}
+.k-bot{flex-shrink:0}
+.k-progress{height:2px;background:rgba(255,255,255,0.06);margin-bottom:32px;border-radius:1px}
+.k-progress-fill{height:100%;background:#3B82F6;border-radius:1px;transition:width 0.4s ease}
+.k-step-lbl{font-family:‘Barlow’,sans-serif;font-size:9px;letter-spacing:4px;text-transform:uppercase;color:rgba(255,255,255,0.2);margin-bottom:10px}
+.k-title{font-family:‘Barlow’,sans-serif;font-size:19px;font-weight:600;color:#e8e8e8;margin-bottom:24px;line-height:1.4;letter-spacing:-0.2px}
+.k-btn-list{display:flex;flex-direction:column;gap:9px;margin-bottom:8px}
+.k-hint{font-size:11px;color:rgba(59,130,246,0.5);margin-top:12px;padding-left:14px;border-left:2px solid rgba(59,130,246,0.2);line-height:1.6;font-family:‘Inter’,sans-serif}
+.k-warn{font-size:11px;color:rgba(239,68,68,0.7);margin-top:10px;padding-left:14px;border-left:2px solid rgba(239,68,68,0.3);line-height:1.6;font-family:‘Inter’,sans-serif}
+.k-devam{width:100%;padding:17px;background:rgba(59,130,246,0.12);color:rgba(59,130,246,0.4);border:1px solid rgba(59,130,246,0.1);border-radius:13px;font-family:‘Barlow’,sans-serif;font-size:13px;font-weight:600;letter-spacing:1px;cursor:default;margin-top:14px;transition:all 0.25s}
+.k-devam.aktif{background:rgba(59,130,246,0.15);color:#60A5FA;border-color:rgba(59,130,246,0.3);cursor:pointer}
+.k-devam.aktif:hover{background:rgba(59,130,246,0.22);border-color:rgba(59,130,246,0.45)}
+.k-talep-no{font-family:‘Barlow’,sans-serif;font-size:9px;letter-spacing:4px;color:#3B82F6;margin-bottom:20px;text-transform:uppercase}
+.k-ozet-row{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid rgba(255,255,255,0.04);padding:10px 0;gap:12px}
+.k-ozet-lbl{font-size:9px;letter-spacing:3px;color:rgba(255,255,255,0.2);text-transform:uppercase;flex-shrink:0;font-family:‘Barlow’,sans-serif}
+.k-ozet-val{font-family:‘Barlow’,sans-serif;font-size:13px;font-weight:600;color:#e8e8e8;text-align:right}
+.k-kok{margin-top:16px;padding:12px 16px;background:rgba(59,130,246,0.05);border:1px solid rgba(59,130,246,0.12);border-radius:10px;font-size:11px;color:rgba(255,255,255,0.3);line-height:1.7;font-family:‘Inter’,sans-serif}
+.k-status{display:flex;align-items:center;gap:0;margin-top:20px;margin-bottom:6px;font-family:‘Barlow’,sans-serif;font-size:9px;letter-spacing:3px;text-transform:uppercase}
+.k-status .on{color:#3B82F6}.k-status .off{color:rgba(255,255,255,0.1)}.k-status .sep{color:rgba(255,255,255,0.08);margin:0 8px}
+.k-wa{display:block;width:100%;padding:17px;background:rgba(37,211,102,0.12);border:1px solid rgba(37,211,102,0.2);border-radius:13px;color:#4ADE80;font-family:‘Barlow’,sans-serif;font-size:13px;font-weight:600;letter-spacing:1px;text-align:center;text-decoration:none;margin-top:16px;transition:all 0.25s;cursor:pointer}
+.k-wa:hover{background:rgba(37,211,102,0.18);border-color:rgba(37,211,102,0.35)}
+.k-sheets{width:100%;padding:13px;background:transparent;border:1px solid rgba(255,255,255,0.06);border-radius:13px;color:rgba(255,255,255,0.2);font-family:‘Barlow’,sans-serif;font-size:11px;letter-spacing:1px;cursor:pointer;margin-top:9px;transition:all 0.25s}
+.k-sheets:hover{border-color:rgba(255,255,255,0.12);color:rgba(255,255,255,0.35)}
+.k-sheets.ok{color:#4ADE80;border-color:rgba(74,222,128,0.25)}
+.k-note{font-size:9px;color:rgba(255,255,255,0.1);text-align:center;margin-top:8px;letter-spacing:2px;font-family:‘Barlow’,sans-serif;text-transform:uppercase}
+.k-yeni{background:none;border:none;color:rgba(255,255,255,0.15);font-family:‘Barlow’,sans-serif;font-size:10px;letter-spacing:3px;cursor:pointer;margin-top:20px;display:block;width:100%;text-align:center;text-transform:uppercase;padding-bottom:8px}
+.k-yeni:hover{color:rgba(255,255,255,0.3)}
 </style>
+
 </head>
 <body>
 
 <canvas id="stars"></canvas>
+
 <div class="glow-orb"></div>
 
-<!-- EKRAN 1: NİYET -->
+<!-- ── EKRAN 1: ANA ──────────────────────────────────── -->
+
 <div class="screen" id="screen1">
   <div class="logo-section">
     <div class="logo-svg-wrap">
-      <svg width="220" height="56" viewBox="0 0 220 56" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <defs><filter id="g"><feGaussianBlur stdDeviation="2" result="b"/><feComposite in="SourceGraphic" in2="b" operator="over"/></filter></defs>
-        <rect x="0" y="6" width="32" height="4" rx="1" fill="#EDEDED"/>
-        <rect x="14" y="6" width="4" height="44" rx="1" fill="#EDEDED"/>
-        <rect x="42" y="6" width="4" height="44" rx="1" fill="#EDEDED"/>
-        <rect x="42" y="6" width="26" height="4" rx="1" fill="#EDEDED"/>
-        <rect x="42" y="26" width="20" height="3.5" rx="1" fill="#EDEDED"/>
-        <rect x="42" y="46" width="26" height="4" rx="1" fill="#EDEDED"/>
-        <rect x="78" y="6" width="4" height="44" rx="1" fill="#EDEDED"/>
-        <rect x="78" y="26" width="22" height="3.5" rx="1" fill="#EDEDED"/>
-        <rect x="96" y="6" width="4" height="44" rx="1" fill="#EDEDED"/>
+      <svg width="200" height="52" viewBox="0 0 200 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs><filter id="g"><feGaussianBlur stdDeviation="1.5" result="b"/><feComposite in="SourceGraphic" in2="b" operator="over"/></filter></defs>
+        <!-- A -->
+        <rect x="0" y="2" width="30" height="4" rx="1" fill="#EDEDED"/>
+        <rect x="13" y="2" width="4" height="44" rx="1" fill="#EDEDED"/>
+        <!-- R -->
+        <rect x="40" y="2" width="4" height="44" rx="1" fill="#EDEDED"/>
+        <rect x="40" y="2" width="22" height="4" rx="1" fill="#EDEDED"/>
+        <rect x="40" y="22" width="18" height="3.5" rx="1" fill="#EDEDED"/>
+        <rect x="54" y="2" width="4" height="22" rx="1" fill="#EDEDED"/>
+        <rect x="50" y="25" width="4" height="21" rx="1" fill="#EDEDED" transform="rotate(12 52 36)"/>
+        <!-- E -->
+        <rect x="74" y="2" width="4" height="44" rx="1" fill="#EDEDED"/>
+        <rect x="74" y="2" width="24" height="4" rx="1" fill="#EDEDED"/>
+        <rect x="74" y="22" width="18" height="3.5" rx="1" fill="#EDEDED"/>
+        <rect x="74" y="42" width="24" height="4" rx="1" fill="#EDEDED"/>
+        <!-- L -->
+        <rect x="108" y="2" width="4" height="44" rx="1" fill="#EDEDED"/>
+        <rect x="108" y="42" width="22" height="4" rx="1" fill="#EDEDED"/>
+        <!-- glow group -->
         <g filter="url(#g)">
-          <rect x="112" y="6" width="4" height="44" rx="1" fill="#EDEDED" transform="rotate(-7 114 28)"/>
-          <rect x="131" y="6" width="4" height="44" rx="1" fill="#EDEDED" transform="rotate(7 133 28)"/>
-          <rect x="113" y="26" width="20" height="3" rx="1" fill="#3B82F6"/>
+          <rect x="140" y="2" width="4" height="44" rx="1" fill="#EDEDED"/>
+          <rect x="155" y="2" width="4" height="44" rx="1" fill="#EDEDED"/>
+          <rect x="140" y="22" width="19" height="3" rx="1" fill="#3B82F6"/>
         </g>
-        <path d="M152 18 Q152 6 165 6 Q178 6 178 15 Q178 22 165 24 Q152 26 152 35 Q152 44​​​​​​​​​​​​​​​​
+      </svg>
+    </div>
+    <div class="logo-tagline">Kemalpaşa · İzmir</div>
+    <div class="screen-label">Teknik Servis</div>
+  </div>
+
+  <div style="width:100%">
+    <div class="btn-list">
+      <button class="choice-btn b1" onclick="kayitBaslat()">
+        <div class="btn-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+        </div>
+        <div class="btn-text">
+          <div class="btn-main">Arıza Bildirin</div>
+          <div class="btn-sub">Hızlı kayıt · teknik servis</div>
+        </div>
+        <span class="btn-arrow">›</span>
+      </button>
+    </div>
+    <div class="footer-info">
+      <div class="footer-badge">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        Kemalpaşa / İzmir
+      </div>
+      <a href="tel:05367807059" class="footer-phone">
+        <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8 19.79 19.79 0 01.08 1.22 2 2 0 012.07 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92z"/></svg>
+        0536 780 70 59
+      </a>
+    </div>
+    <div class="home-indicator"></div>
+  </div>
+</div>
+
+<!-- ── KAYIT AKIŞI ───────────────────────────────────── -->
+
+<div class="screen hidden" id="screen-kayit">
+  <div class="k-wrap" id="k-inner"></div>
+</div>
+
+<script>
+/* ── YILDIZ TUVALI ──────────────────────────────────── */
+(function(){
+  const c = document.getElementById('stars');
+  const ctx = c.getContext('2d');
+  let W, H, stars = [];
+
+  function resize(){
+    W = c.width = window.innerWidth;
+    H = c.height = window.innerHeight;
+  }
+
+  function init(){
+    resize();
+    stars = Array.from({length:120}, ()=>({
+      x: Math.random()*W, y: Math.random()*H,
+      r: Math.random()*0.8+0.2,
+      a: Math.random(), da: (Math.random()-0.5)*0.003,
+    }));
+  }
+
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    stars.forEach(s=>{
+      s.a = Math.max(0.05, Math.min(1, s.a+s.da));
+      if(s.a<=0.05||s.a>=1) s.da*=-1;
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI*2);
+      ctx.fillStyle = `rgba(255,255,255,${s.a*0.5})`;
+      ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+
+  window.addEventListener('resize', resize);
+  init(); draw();
+})();
+
+/* ── VERİ ───────────────────────────────────────────── */
+const WA = "905367807059";
+
+const BOLGE = [
+  {kod:"K1", label:"Armutlu / Mehmet Akif"},
+  {kod:"K2", label:"Ulucak merkez"},
+  {kod:"K3", label:"Bağyurdu"},
+  {kod:"K4", label:"Kemalpaşa merkez"},
+  {kod:"K5", label:"OSB çevresi"},
+];
+
+const ACILIYET = [
+  {id:"acil",     label:"Acil", sub:"Şimdi",       ikon:"🔴"},
+  {id:"bugun",    label:"Bugün", sub:"İçinde",      ikon:"🟡"},
+  {id:"haftaici", label:"Bu hafta", sub:"Esnek",    ikon:"🟢"},
+];
+
+const KAT = [
+  {
+    id:"internet", label:"İnternet / Wi-Fi", ikon:"🌐", sistem:"Ağ",
+    altlar:["Bazı odalarda çekmiyor","Sürekli kopuyor","Hiç internet yok","Yavaş geliyor"],
+    baglamlar:[
+      {soru:"Sorun ne zamandır var?", sec:["Yeni başladı","Uzun süredir","Bazen oluyor"]},
+      {soru:"Ev tipi ne?", sec:["Küçük daire","Büyük daire","Dubleks / çift katlı","Müstakil ev"]},
+    ],
+    kok(a,b){
+      if(a==="Bazı odalarda çekmiyor") return "Modem konumu / ek erişim noktası ihtimali";
+      if(a==="Hiç internet yok") return "Servis veya modem arızası ihtimali";
+      if(a==="Sürekli kopuyor") return "Sinyal kalitesi / modem kaynaklı";
+      return "Ağ yapılandırma sorunu ihtimali";
+    }
+  },
+  {
+    id:"kamera", label:"Kamera sistemi", ikon:"📷", sistem:"Kamera",
+    altlar:["Görüntü yok","Telefondan izlenmiyor","Kayıt yok","Tek kamera çalışmıyor","Hepsi gitti"],
+    baglamlar:[
+      {soru:"Evde internet şu an çalışıyor mu?", sec:["Evet","Hayır","Emin değilim"]},
+      {soru:"Sistem kaç kameralı?", sec:["1–4 kamera","5–8 kamera","9 ve üzeri"]},
+    ],
+    kok(a,b){
+      if(a==="Telefondan izlenmiyor"&&b[0]==="Evet") return "Uzak erişim / bağlantı noktası ihtimali";
+      if(a==="Telefondan izlenmiyor"&&b[0]==="Hayır") return "İnternet kaynaklı erişim sorunu";
+      if(a==="Görüntü yok") return "Kablo / güç kaynağı / cihaz arızası ihtimali";
+      if(a==="Kayıt yok") return "Disk veya kayıt ayarı sorunu ihtimali";
+      if(a==="Tek kamera çalışmıyor") return "Cihaz veya bağlantı noktası arızası ihtimali";
+      return "Sistem geneli arıza — yerinde inceleme gerekli";
+    }
+  },
+  {
+    id:"elektrik", label:"Elektrik", ikon:"⚡", sistem:"Elektrik",
+    altlar:["Sigorta atıyor","Bazı prizler çalışmıyor","Elektrik gidip geliyor","Koku / ısınma var"],
+    uyari:{"Koku / ısınma var":"⚠️ Bu belirti acil olabilir. Şüpheli noktaları kullanmayın."},
+    baglamlar:[
+      {soru:"Sorun ne zaman oluyor?", sec:["Sürekli","Cihaz açınca","Bazen","Yağmur sonrası"]},
+      {soru:"Ev yaklaşık kaç yıllık?", sec:["0–5 yıl","5–15 yıl","15 yıl ve üzeri"]},
+    ],
+    kok(a,b){
+      if(a==="Sigorta atıyor"&&b[0]==="Cihaz açınca") return "Yüklenme / aşırı çekim ihtimali";
+      if(a==="Sigorta atıyor"&&b[0]==="Sürekli") return "Kaçak akım ihtimali";
+      if(a==="Koku / ısınma var") return "ACİL — gevşek bağlantı / kısa devre ihtimali";
+      if(b[1]==="15 yıl ve üzeri") return "Eski tesisat — yük taşıma sorunu ihtimali";
+      return "Tesisat veya bağlantı sorunu ihtimali";
+    }
+  },
+  {
+    id:"kapi", label:"Kapı / Motor", ikon:"🚪", sistem:"Otomasyon",
+    altlar:["Hiç tepki yok","Ses geliyor ama açılmıyor","Tek yönde çalışıyor","Kumanda algılamıyor"],
+    baglamlar:[
+      {soru:"Sorun ne zamandır var?", sec:["Yeni başladı","Yavaş yavaş arttı","Yağmur / nem sonrası oldu"]},
+    ],
+    kok(a,b){
+      if(a==="Ses geliyor ama açılmıyor") return "Kondansatör veya mekanik sıkışma ihtimali";
+      if(a==="Hiç tepki yok") return "Elektrik veya kontrol kartı arızası ihtimali";
+      if(a==="Kumanda algılamıyor") return "Kumanda veya alıcı sorunu ihtimali";
+      if(a==="Tek yönde çalışıyor") return "Sınır anahtarı arızası ihtimali";
+      return "Motor sistemi genel arıza";
+    }
+  },
+  {
+    id:"sinyal", label:"Sinyal / Bağlantı", ikon:"📡", sistem:"Sinyal/Ağ",
+    altlar:["TV sinyali yok","Bazı kanallar yok","IPTV / Smart TV donuyor","Kamera telefondan izlenmiyor","İnternet / Wi-Fi kopuyor","Uzak noktada bağlantı gerekiyor"],
+    baglamlar:[
+      {soru:"Binada ortak anten sistemi var mı?", sec:["Evet","Hayır","Emin değilim"]},
+    ],
+    kok(a,b){
+      if(a==="TV sinyali yok"&&b[0]==="Evet") return "Ortak dağıtım sistemi arızası ihtimali";
+      if(a==="TV sinyali yok") return "Anten / sinyal kaynağı / kablo zayıflaması ihtimali";
+      if(a==="Bazı kanallar yok") return "Sinyal yönü veya kaynak sorunu ihtimali";
+      if(a==="Kamera telefondan izlenmiyor") return "Uzak erişim / bağlantı noktası ihtimali";
+      if(a==="IPTV / Smart TV donuyor") return "İnternet hızı veya sinyal kalitesi";
+      return "Sinyal / bağlantı genel sorun";
+    }
+  },
+];
+
+/* ── STATE ──────────────────────────────────────────── */
+let S = {faz:"kat", katId:null, alt:null, bc:[], bolge:null, acil:null, talepNo:"", saat:""};
+
+function katObj(){ return KAT.find(k=>k.id===S.katId); }
+function bolgeObj(){ return BOLGE.find(b=>b.kod===S.bolge); }
+function acilObj(){ return ACILIYET.find(a=>a.id===S.acil); }
+
+function fazSirasi(){
+  const k = katObj();
+  const s = ["kat","alt"];
+  if(k?.baglamlar?.length>=1) s.push("bag0");
+  if(k?.baglamlar?.length>=2) s.push("bag1");
+  s.push("bolge","acil","ozet");
+  return s;
+}
+
+function sonrakiFaz(f){ const s=fazSirasi(); return s[s.indexOf(f)+1]||"ozet"; }
+function oncekiFaz(f){ const s=fazSirasi(); const i=s.indexOf(f); return i>0?s[i-1]:null; }
+
+function progressPct(){
+  const s=fazSirasi(); const i=s.indexOf(S.faz);
+  return i<0?0:Math.round(((i+1)/(s.length-1))*100);
+}
+
+function talepNoUret(){
+  const n=new Date();
+  return `TH-${String(n.getFullYear()).slice(2)}${String(n.getMonth()+1).padStart(2,"0")}${String(n.getDate()).padStart(2,"0")}-${Math.floor(100+Math.random()*900)}`;
+}
+
+function saatFmt(d){ return `${String(d.getHours()).padStart(2,"0")}:${String(d.getMinutes()).padStart(2,"0")}`; }
+
+function kokNeden(){ const k=katObj(); return k?.kok?.(S.alt,S.bc)||""; }
+
+function sheetsRow(){
+  const k=katObj(),b=bolgeObj(),a=acilObj();
+  return [S.talepNo,S.saat,b?`${b.kod}/${b.label}`:"",k?.label||"",S.alt||"",S.bc.filter(Boolean).join("|"),k?.sistem||"",a?.label||"",kokNeden(),"Bekliyor","",""].join("\t");
+}
+
+function waMsg(){
+  const k=katObj(),b=bolgeObj(),a=acilObj();
+  return encodeURIComponent([`Arel Talep`,`No: ${S.talepNo}`,`Sorun: ${k?.label||""}${S.alt?" — "+S.alt:""}`,`Bölge: ${b?b.kod+" / "+b.label:""}`,`Aciliyet: ${a?.label||""}`,`Saat: ${S.saat}`].join("\n"));
+}
+
+/* ── NAVİGASYON ─────────────────────────────────────── */
+function showScreen(id){
+  document.querySelectorAll('.screen').forEach(s=>{ s.classList.add('hidden'); s.classList.remove('slide-in'); });
+  const el = document.getElementById(id);
+  if(el){ el.classList.remove('hidden'); el.classList.add('slide-in'); }
+}
+
+function kayitBaslat(){
+  const now = new Date();
+  S = {faz:"kat", katId:null, alt:null, bc:[], bolge:null, acil:null, talepNo:talepNoUret(), saat:saatFmt(now)};
+  showScreen('screen-kayit');
+  render();
+}
+
+/* ── RENDER ─────────────────────────────────────────── */
+function render(){
+  const el = document.getElementById('k-inner');
+  switch(S.faz){
+    case "kat":   el.innerHTML = rKat(); break;
+    case "alt":   el.innerHTML = rAlt(); break;
+    case "bag0":  el.innerHTML = rBag(0); break;
+    case "bag1":  el.innerHTML = rBag(1); break;
+    case "bolge": el.innerHTML = rBolge(); break;
+    case "acil":  el.innerHTML = rAcil(); break;
+    case "ozet":  el.innerHTML = rOzet(); break;
+  }
+  bindEvents();
+}
+
+function progressBar(){ return `<div class="k-progress"><div class="k-progress-fill" style="width:${progressPct()}%"></div></div>`; }
+
+function backBtn(){ return `<button class="back-btn" id="k-geri"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Geri</button>`; }
+
+function devamBtn(aktif, lbl="DEVAM →"){ return `<button class="k-devam${aktif?" aktif":""}" id="k-devam">${lbl}</button>`; }
+
+/* ── EKRANLAR ───────────────────────────────────────── */
+function rKat(){
+  const opts = KAT.map((k,i)=>`
+    <button class="choice-btn b${i+1}${S.katId===k.id?" selected":""}" data-kat="${k.id}">
+      <div class="btn-icon">${k.ikon}</div>
+      <div class="btn-text">
+        <div class="btn-main">${k.label}</div>
+      </div>
+      <span class="btn-arrow">›</span>
+    </button>`).join("");
+  return `<div class="k-top">${progressBar()}
+    <div class="k-step-lbl">Adım 1 — Sorun</div>
+    <div class="k-title">Ne sorunu var?</div>
+    <div class="k-btn-list">${opts}</div>
+  </div>
+  <div class="k-bot">${devamBtn(!!S.katId)}</div>`;
+}
+
+function rAlt(){
+  const k = katObj();
+  const opts = (k?.altlar||[]).map((a,i)=>`
+    <button class="choice-btn b${i+1}${S.alt===a?" selected":""}" data-alt="${a}">
+      <div class="btn-text"><div class="btn-main">${a}</div></div>
+      <span class="btn-arrow">›</span>
+    </button>`).join("");
+  const hint = S.alt ? `<div class="k-hint">Bu sorun sık görülüyor.</div>` : "";
+  const warn = S.alt&&k?.uyari?.[S.alt] ? `<div class="k-warn">${k.uyari[S.alt]}</div>` : "";
+  return `<div class="k-top">${backBtn()}${progressBar()}
+    <div class="k-step-lbl">Adım 2 — Belirti</div>
+    <div class="k-title">Ne oluyor tam olarak?</div>
+    <div class="k-btn-list">${opts}</div>
+    ${hint}${warn}
+  </div>
+  <div class="k-bot">${devamBtn(!!S.alt)}</div>`;
+}
+
+function rBag(idx){
+  const k = katObj();
+  const bag = k?.baglamlar?.[idx];
+  if(!bag){ S.faz=sonrakiFaz(idx===0?"bag0":"bag1"); render(); return ""; }
+  const opts = bag.sec.map((s,i)=>`
+    <button class="choice-btn b${i+1}${S.bc[idx]===s?" selected":""}" data-bag="${idx}" data-val="${s}">
+      <div class="btn-text"><div class="btn-main">${s}</div></div>
+      <span class="btn-arrow">›</span>
+    </button>`).join("");
+  const adim = idx===0?3:4;
+  return `<div class="k-top">${backBtn()}${progressBar()}
+    <div class="k-step-lbl">Adım ${adim} — Bağlam</div>
+    <div class="k-title">${bag.soru}</div>
+    <div class="k-btn-list">${opts}</div>
+  </div>
+  <div class="k-bot">${devamBtn(!!S.bc[idx])}</div>`;
+}
+
+function rBolge(){
+  const opts = BOLGE.map((b,i)=>`
+    <button class="choice-btn b${i+1}${S.bolge===b.kod?" selected":""}" data-bolge="${b.kod}">
+      <div class="btn-icon" style="font-size:11px;font-weight:700;color:#3B82F6;background:rgba(37,99,235,0.08)">${b.kod}</div>
+      <div class="btn-text"><div class="btn-main">${b.label}</div></div>
+      <span class="btn-arrow">›</span>
+    </button>`).join("");
+  return `<div class="k-top">${backBtn()}${progressBar()}
+    <div class="k-step-lbl">Bölge</div>
+    <div class="k-title">Hangi bölgedesiniz?</div>
+    <div class="k-btn-list">${opts}</div>
+  </div>
+  <div class="k-bot">${devamBtn(!!S.bolge)}</div>`;
+}
+
+function rAcil(){
+  const opts = ACILIYET.map((a,i)=>`
+    <button class="time-btn t${i+1}${S.acil===a.id?" selected":""}" data-acil="${a.id}">
+      <div class="time-icon">${a.ikon}</div>
+      <div class="time-label">${a.label}</div>
+      <div class="time-sub">${a.sub}</div>
+    </button>`).join("");
+  return `<div class="k-top">${backBtn()}${progressBar()}
+    <div class="k-step-lbl">Zaman</div>
+    <div class="k-title">Ne zaman çözülmesini istiyorsunuz?</div>
+    <div class="time-grid">${opts}</div>
+  </div>
+  <div class="k-bot">${devamBtn(!!S.acil,"ÖZET →")}</div>`;
+}
+
+function rOzet(){
+  const k=katObj(), b=bolgeObj(), a=acilObj();
+  const bagSatir = S.bc.filter(Boolean).map((c,i)=>{
+    const soru = k?.baglamlar?.[i]?.soru||"";
+    return `<div class="k-ozet-row"><span class="k-ozet-lbl">${soru}</span><span class="k-ozet-val">${c}</span></div>`;
+  }).join("");
+  const kn = kokNeden();
+  return `<div class="k-top">
+    <div class="k-talep-no">${S.talepNo}</div>
+    <div class="k-ozet-row"><span class="k-ozet-lbl">Sorun</span><span class="k-ozet-val">${k?.label||""}</span></div>
+    <div class="k-ozet-row"><span class="k-ozet-lbl">Belirti</span><span class="k-ozet-val">${S.alt||""}</span></div>
+    ${bagSatir}
+    <div class="k-ozet-row"><span class="k-ozet-lbl">Bölge</span><span class="k-ozet-val">${b?b.kod+" / "+b.label:""}</span></div>
+    <div class="k-ozet-row"><span class="k-ozet-lbl">Aciliyet</span><span class="k-ozet-val">${a?.label||""}</span></div>
+    <div class="k-ozet-row"><span class="k-ozet-lbl">Saat</span><span class="k-ozet-val">${S.saat}</span></div>
+    ${kn?`<div class="k-kok">Şüphe: ${kn}</div>`:""}
+    <div class="k-status">
+      <span class="on">Talep alındı</span><span class="sep">→</span>
+      <span class="off">İnceleniyor</span><span class="sep">→</span>
+      <span class="off">Dönüş planlandı</span>
+    </div>
+  </div>
+  <div class="k-bot">
+    <a class="k-wa" href="https://wa.me/${WA}?text=${waMsg()}" target="_blank">WhatsApp'a Gönder ↗</a>
+    <button class="k-sheets" id="k-sheets">Google Sheets satırını kopyala</button>
+    <div class="k-note">No · Saat · Bölge · Sorun · Belirti · Bağlam · Sistem · Aciliyet · Şüphe · Durum</div>
+    <button class="k-yeni" id="k-yeni">Yeni kayıt →</button>
+  </div>`;
+}
+
+/* ── EVENT BINDING ───────────────────────────────────── */
+function bindEvents(){
+  const $ = id=>document.getElementById(id);
+
+  $("k-geri")?.addEventListener("click",()=>{
+    const p=oncekiFaz(S.faz);
+    if(!p){ showScreen('screen1'); return; }
+    S.faz=p; render();
+  });
+
+  $("k-devam")?.addEventListener("click",()=>{
+    const hazir={kat:!!S.katId,alt:!!S.alt,bag0:!!S.bc[0],bag1:!!S.bc[1],bolge:!!S.bolge,acil:!!S.acil};
+    if(!hazir[S.faz]) return;
+    S.faz=sonrakiFaz(S.faz); render();
+  });
+
+  $("k-sheets")?.addEventListener("click",()=>{
+    navigator.clipboard.writeText(sheetsRow()).then(()=>{
+      const b=$("k-sheets"); if(!b) return;
+      b.textContent="✓ kopyalandı — Sheets'e yapıştır"; b.classList.add("ok");
+      setTimeout(()=>{ b.textContent="Google Sheets satırını kopyala"; b.classList.remove("ok"); },2500);
+    });
+  });
+
+  $("k-yeni")?.addEventListener("click",()=>{
+    showScreen('screen1');
+    document.getElementById('k-inner').innerHTML="";
+  });
+
+  document.querySelectorAll("[data-kat]").forEach(el=>el.addEventListener("click",()=>{
+    S.katId=el.dataset.kat; S.alt=null; S.bc=[]; render();
+  }));
+  document.querySelectorAll("[data-alt]").forEach(el=>el.addEventListener("click",()=>{
+    S.alt=el.dataset.alt; render();
+  }));
+  document.querySelectorAll("[data-bag]").forEach(el=>el.addEventListener("click",()=>{
+    const idx=parseInt(el.dataset.bag); S.bc[idx]=el.dataset.val; render();
+  }));
+  document.querySelectorAll("[data-bolge]").forEach(el=>el.addEventListener("click",()=>{
+    S.bolge=el.dataset.bolge; render();
+  }));
+  document.querySelectorAll("[data-acil]").forEach(el=>el.addEventListener("click",()=>{
+    S.acil=el.dataset.acil; render();
+  }));
+}
+</script>
+
+</body>
+</html>
