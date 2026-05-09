@@ -9,60 +9,49 @@
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 html,body{height:100%;overflow:hidden}
-body{background:#070709;color:#fff;font-family:'Inter',sans-serif;min-height:100vh;position:relative}
+body{background:#070709;color:#fff;font-family:'Inter',sans-serif;min-height:100dvh;position:relative}
 canvas{position:fixed;inset:0;z-index:0;pointer-events:none}
 .glow-orb{position:fixed;bottom:40%;left:50%;transform:translateX(-50%);width:260px;height:90px;background:radial-gradient(ellipse at center,rgba(37,99,235,0.18) 0%,rgba(37,99,235,0.04) 55%,transparent 80%);border-radius:50%;animation:orbPulse 5s ease-in-out infinite;z-index:1;pointer-events:none}
 @keyframes orbPulse{0%,100%{opacity:0.5}50%{opacity:0.9}}
-
 .screen{position:fixed;inset:0;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:0 28px 44px;transition:opacity 0.35s ease,transform 0.35s ease}
 .screen.hidden{opacity:0;pointer-events:none;transform:translateX(-20px)}
 .screen.slide-in{animation:slideIn 0.35s ease forwards}
 @keyframes slideIn{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:translateX(0)}}
-
 .logo-section{display:flex;flex-direction:column;align-items:center;gap:14px;padding-top:72px;flex:1;justify-content:center}
 .logo-svg-wrap{opacity:0;animation:logoIn 0.7s ease 0.2s forwards}
 @keyframes logoIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
 .logo-tagline{font-family:'Barlow',sans-serif;font-size:9px;letter-spacing:5px;text-transform:uppercase;color:rgba(255,255,255,0.2);font-weight:400;opacity:0;animation:fadeIn 0.5s ease 0.9s forwards}
 .screen-label{font-family:'Barlow',sans-serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.25);opacity:0;animation:fadeIn 0.5s ease 0.7s forwards;margin-top:32px;text-align:center}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
-
 .btn-list{display:flex;flex-direction:column;gap:11px;width:100%;margin-bottom:24px}
-.choice-btn{display:flex;align-items:center;gap:16px;padding:17px 20px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:13px;color:#fff;cursor:pointer;transition:all 0.25s ease;opacity:0;transform:translateY(14px);animation:btnIn 0.45s ease forwards;text-align:left;width:100%;font-family:inherit}
-.choice-btn:hover{border-color:rgba(59,130,246,0.35);background:rgba(37,99,235,0.07);transform:translateY(-1px);box-shadow:0 4px 20px rgba(37,99,235,0.1)}
+.choice-btn{display:flex;align-items:center;gap:16px;padding:17px 20px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:13px;color:#fff;cursor:pointer;transition:all 0.25s ease;opacity:0;transform:translateY(14px);animation:btnIn 0.45s ease forwards;text-align:left;width:100%;font-family:inherit;-webkit-tap-highlight-color:transparent}
+.choice-btn:hover,.choice-btn:focus{border-color:rgba(59,130,246,0.35);background:rgba(37,99,235,0.07);transform:translateY(-1px);box-shadow:0 4px 20px rgba(37,99,235,0.1);outline:none}
 .choice-btn:active{transform:scale(0.98)}
 .b1{animation-delay:0.85s}.b2{animation-delay:1.0s}.b3{animation-delay:1.15s}.b4{animation-delay:1.3s}
 @keyframes btnIn{to{opacity:1;transform:translateY(0)}}
-
 .btn-icon{width:38px;height:38px;border-radius:9px;background:rgba(37,99,235,0.1);border:1px solid rgba(59,130,246,0.13);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:17px;transition:all 0.25s}
 .btn-icon svg{width:18px;height:18px;stroke:#3B82F6;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
-.choice-btn:hover .btn-icon{background:rgba(37,99,235,0.18);border-color:rgba(59,130,246,0.3)}
+.choice-btn:hover .btn-icon,.choice-btn:focus .btn-icon{background:rgba(37,99,235,0.18);border-color:rgba(59,130,246,0.3)}
 .btn-text{flex:1}
 .btn-main{font-family:'Barlow',sans-serif;font-size:14px;font-weight:600;letter-spacing:0.3px;color:#e8e8e8;line-height:1.3}
 .btn-sub{font-size:11px;color:rgba(255,255,255,0.28);margin-top:2px;font-weight:300}
 .btn-arrow{color:rgba(255,255,255,0.18);font-size:18px;transition:all 0.25s;flex-shrink:0}
-.choice-btn:hover .btn-arrow{color:#3B82F6;transform:translateX(3px)}
-
-.back-btn{display:flex;align-items:center;gap:8px;color:rgba(255,255,255,0.3);font-size:12px;letter-spacing:1px;text-transform:uppercase;background:none;border:none;cursor:pointer;font-family:'Barlow',sans-serif;font-weight:500;margin-bottom:20px;transition:color 0.2s;padding:0}
+.choice-btn:hover .btn-arrow,.choice-btn:focus .btn-arrow{color:#3B82F6;transform:translateX(3px)}
+.back-btn{display:flex;align-items:center;gap:8px;color:rgba(255,255,255,0.3);font-size:12px;letter-spacing:1px;text-transform:uppercase;background:none;border:none;cursor:pointer;font-family:'Barlow',sans-serif;font-weight:500;margin-bottom:20px;transition:color 0.2s;padding:0;-webkit-tap-highlight-color:transparent}
 .back-btn:hover{color:rgba(255,255,255,0.6)}
 .back-btn svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2}
-
-/* ZAMAN SEÇİMİ */
 .time-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;width:100%;margin-bottom:24px}
-.time-btn{padding:20px 16px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:13px;color:#fff;cursor:pointer;transition:all 0.25s;text-align:center;font-family:inherit;opacity:0;animation:btnIn 0.4s ease forwards}
-.time-btn:hover{border-color:rgba(59,130,246,0.4);background:rgba(37,99,235,0.08);transform:translateY(-1px)}
+.time-btn{padding:20px 16px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:13px;color:#fff;cursor:pointer;transition:all 0.25s;text-align:center;font-family:inherit;opacity:0;animation:btnIn 0.4s ease forwards;-webkit-tap-highlight-color:transparent}
+.time-btn:hover,.time-btn:focus{border-color:rgba(59,130,246,0.4);background:rgba(37,99,235,0.08);transform:translateY(-1px);outline:none}
 .time-btn:active{transform:scale(0.97)}
 .t1{animation-delay:0.1s}.t2{animation-delay:0.2s}.t3{animation-delay:0.3s}.t4{animation-delay:0.4s}
 .time-icon{font-size:22px;margin-bottom:8px}
 .time-label{font-family:'Barlow',sans-serif;font-size:13px;font-weight:600;letter-spacing:0.5px;color:#e8e8e8}
 .time-sub{font-size:10px;color:rgba(255,255,255,0.25);margin-top:3px}
-
-/* İŞ NUMARASI */
 .job-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(37,99,235,0.08);border:1px solid rgba(59,130,246,0.2);border-radius:8px;padding:8px 14px;font-family:'Barlow',sans-serif;font-size:12px;font-weight:600;letter-spacing:2px;color:rgba(59,130,246,0.8);margin-bottom:20px}
 .job-badge svg{width:12px;height:12px;stroke:rgba(59,130,246,0.6);fill:none;stroke-width:1.5}
-
 .screen-title{font-family:'Barlow',sans-serif;font-size:20px;font-weight:600;text-align:center;color:#e8e8e8;margin-bottom:8px;letter-spacing:-0.3px}
 .screen-title-label{font-family:'Barlow',sans-serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.25);text-align:center;margin-bottom:32px}
-
 .footer-info{display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0;animation:fadeIn 0.5s ease 1.5s forwards}
 .footer-badge{display:flex;align-items:center;gap:7px;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.18)}
 .footer-badge svg{width:11px;height:11px;stroke:rgba(59,130,246,0.4);fill:none;stroke-width:1.5}
@@ -97,209 +86,4 @@ canvas{position:fixed;inset:0;z-index:0;pointer-events:none}
           <rect x="131" y="6" width="4" height="44" rx="1" fill="#EDEDED" transform="rotate(7 133 28)"/>
           <rect x="113" y="26" width="20" height="3" rx="1" fill="#3B82F6"/>
         </g>
-        <path d="M152 18 Q152 6 165 6 Q178 6 178 15 Q178 22 165 24 Q152 26 152 35 Q152 44 165 44 Q178 44 178 35" stroke="#EDEDED" stroke-width="4" stroke-linecap="round" fill="none"/>
-        <rect x="163" y="44" width="4" height="6" rx="1" fill="#EDEDED"/>
-        <rect x="159" y="48" width="12" height="3.5" rx="1" fill="#EDEDED"/>
-      </svg>
-    </div>
-    <div class="logo-tagline">Teknik Çözüm Merkezi</div>
-    <div class="screen-label">Durumunuzu seçin</div>
-  </div>
-  <div style="width:100%">
-    <div class="btn-list">
-      <button class="choice-btn b1" onclick="goScreen2('ariza')">
-        <div class="btn-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
-        <div class="btn-text"><div class="btn-main">Bir arızam var</div><div class="btn-sub">Sistem çalışmıyor, sorun yaşıyorum</div></div>
-        <span class="btn-arrow">›</span>
-      </button>
-      <button class="choice-btn b2" onclick="goScreen2('kurulum')">
-        <div class="btn-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 010 14.14M4.93 4.93a10 10 0 000 14.14"/></svg></div>
-        <div class="btn-text"><div class="btn-main">Yeni sistem yaptırmak istiyorum</div><div class="btn-sub">Kamera, elektrik, ağ veya uydu kurulumu</div></div>
-        <span class="btn-arrow">›</span>
-      </button>
-      <button class="choice-btn b3" onclick="goScreen2('bakim')">
-        <div class="btn-icon"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg></div>
-        <div class="btn-text"><div class="btn-main">Bakım veya kontrol istiyorum</div><div class="btn-sub">Periyodik kontrol, sistem testi</div></div>
-        <span class="btn-arrow">›</span>
-      </button>
-      <button class="choice-btn b4" onclick="goTime('genel','Genel bilgi talebi','Merhaba, teknik bir konuda bilgi almak istiyorum.')">
-        <div class="btn-icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div>
-        <div class="btn-text"><div class="btn-main">Bilgi almak istiyorum</div><div class="btn-sub">Fiyat, süreç veya genel soru</div></div>
-        <span class="btn-arrow">›</span>
-      </button>
-    </div>
-    <div class="footer-info">
-      <div class="footer-badge"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>TEHAŞ · Kemalpaşa / İzmir</div>
-      <a href="tel:05367807059" class="footer-phone">
-        <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.4 11.1 19.79 19.79 0 01.36 2.5 2 2 0 012.34.5h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.09a16 16 0 006 6l.77-.77a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-        0 (536) 780 70 59
-      </a>
-    </div>
-    <div class="home-indicator"></div>
-  </div>
-</div>
-
-<!-- EKRAN 2: PROBLEM ALANI -->
-<div class="screen hidden" id="screen2">
-  <div style="width:100%;padding-top:64px;flex:1;display:flex;flex-direction:column;justify-content:center">
-    <div class="screen-title-label" id="s2-label">Sistem seçin</div>
-    <div class="screen-title" id="s2-title">Sorun nerede?</div>
-  </div>
-  <div style="width:100%">
-    <button class="back-btn" onclick="goBack(1)">
-      <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Geri
-    </button>
-    <div class="btn-list" id="s2-btns"></div>
-    <div class="home-indicator"></div>
-  </div>
-</div>
-
-<!-- EKRAN 3: ZAMAN SEÇİMİ -->
-<div class="screen hidden" id="screen3">
-  <div style="width:100%;padding-top:64px;flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center">
-    <div class="job-badge" id="job-num">
-      <svg viewBox="0 0 24 24"><rect x="9" y="2" width="6" height="4" rx="1"/><path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2"/></svg>
-      <span id="job-num-text">TH-000000-000</span>
-    </div>
-    <div class="screen-title-label">Ne zaman müsaitsiniz?</div>
-    <div class="screen-title">Zaman tercihiniz</div>
-  </div>
-  <div style="width:100%">
-    <button class="back-btn" onclick="goBack(2)">
-      <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Geri
-    </button>
-    <div class="time-grid">
-      <button class="time-btn t1" onclick="finalize('Bugün')">
-        <div class="time-icon">⚡</div>
-        <div class="time-label">Bugün</div>
-        <div class="time-sub">En kısa sürede</div>
-      </button>
-      <button class="time-btn t2" onclick="finalize('Yarın')">
-        <div class="time-icon">📅</div>
-        <div class="time-label">Yarın</div>
-        <div class="time-sub">Planlı ziyaret</div>
-      </button>
-      <button class="time-btn t3" onclick="finalize('Bu hafta')">
-        <div class="time-icon">🗓️</div>
-        <div class="time-label">Bu hafta</div>
-        <div class="time-sub">Uygun günde</div>
-      </button>
-      <button class="time-btn t4" onclick="finalize('Fark etmez')">
-        <div class="time-icon">💬</div>
-        <div class="time-label">Fark etmez</div>
-        <div class="time-sub">Siz planlayın</div>
-      </button>
-    </div>
-    <div class="home-indicator"></div>
-  </div>
-</div>
-
-<script>
-// YILDIZLAR
-const canvas=document.getElementById('stars');
-const ctx=canvas.getContext('2d');
-let W,H,stars=[];
-function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight}
-function initStars(){stars=[];for(let i=0;i<90;i++)stars.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*0.9+0.2,o:Math.random()*0.3+0.08,sp:Math.random()*0.3+0.05,t:Math.random()*Math.PI*2})}
-function draw(){ctx.clearRect(0,0,W,H);stars.forEach(s=>{s.t+=s.sp*0.018;const a=s.o*(0.5+0.5*Math.sin(s.t));ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fillStyle=`rgba(255,255,255,${a})`;ctx.fill()});requestAnimationFrame(draw)}
-resize();initStars();draw();
-window.addEventListener('resize',()=>{resize();initStars()});
-
-// AKIŞ VERİSİ
-const flows={
-  ariza:{title:'Arıza nerede?',label:'Sistemi seçin',btns:[
-    {icon:'📷',main:'Kamera sistemi',sub:'Görüntü yok, kayıt durdu, bağlantı koptu',wa:'Kamera sistemimde arıza var. Görüntü veya kayıt sorunu yaşıyorum.'},
-    {icon:'⚡',main:'Elektrik / Sigorta',sub:'Sigorta atıyor, elektrik gelmiyor',wa:'Elektrik arızam var. Sigorta atıyor veya elektrik sorunu yaşıyorum.'},
-    {icon:'🌐',main:'İnternet / Ağ',sub:'Bağlantı kopuyor, cihazlar görünmüyor',wa:'İnternet veya ağ bağlantımda sorun var.'},
-    {icon:'📡',main:'Uydu / Anten',sub:'Sinyal yok, kanal gelmiyor',wa:'Uydu veya anten sistemimde sinyal sorunu var.'},
-    {icon:'🚪',main:'Kapı / Motor',sub:'Kapı açılmıyor, motor ses yapıyor',wa:'Kapı veya motor sistemimde arıza var.'},
-  ]},
-  kurulum:{title:'Ne kurdurmak istiyorsunuz?',label:'Sistem seçin',btns:[
-    {icon:'📷',main:'Güvenlik kamerası',sub:'Ev, işyeri veya tesis için',wa:'Güvenlik kamerası kurulumu yaptırmak istiyorum.'},
-    {icon:'⚡',main:'Elektrik tesisatı',sub:'Yeni tesisat veya panel kurulumu',wa:'Elektrik tesisatı kurulumu yaptırmak istiyorum.'},
-    {icon:'🌐',main:'Ağ altyapısı',sub:'Kablolu ağ, Wi-Fi, network',wa:'Ağ altyapısı kurulumu yaptırmak istiyorum.'},
-    {icon:'📡',main:'Uydu / Merkezi anten',sub:'Çanak anten, merkezi sistem',wa:'Uydu veya merkezi anten sistemi kurulumu yaptırmak istiyorum.'},
-    {icon:'🚪',main:'Kapı otomasyonu',sub:'Bariyer, garaj kapısı, kartlı geçiş',wa:'Kapı otomasyonu kurulumu yaptırmak istiyorum.'},
-  ]},
-  bakim:{title:'Ne kontrol edilsin?',label:'Sistem seçin',btns:[
-    {icon:'📷',main:'Kamera sistemi bakımı',sub:'Kayıt, görüntü ve bağlantı kontrolü',wa:'Kamera sistemimin bakımını yaptırmak istiyorum.'},
-    {icon:'⚡',main:'Elektrik kontrolü',sub:'Tesisat röntgeni, ölçüm',wa:'Elektrik tesisatı kontrolü yaptırmak istiyorum.'},
-    {icon:'🌐',main:'Ağ sistemi kontrolü',sub:'Bağlantı testi ve optimizasyon',wa:'Ağ sistemi bakımı yaptırmak istiyorum.'},
-    {icon:'📡',main:'Uydu sistemi kontrolü',sub:'Sinyal ölçümü',wa:'Uydu sistemi bakımı yaptırmak istiyorum.'},
-  ]}
-};
-
-let state={flow:null,problem:null,waMsg:null,jobNum:null};
-
-function generateJobNum(){
-  const now=new Date();
-  const d=String(now.getFullYear()).slice(2)+String(now.getMonth()+1).padStart(2,'0')+String(now.getDate()).padStart(2,'0');
-  const r=String(Math.floor(Math.random()*900)+100);
-  return 'TH-'+d+'-'+r;
-}
-
-function showScreen(id){
-  ['screen1','screen2','screen3'].forEach(s=>{
-    const el=document.getElementById(s);
-    if(s===id){el.classList.remove('hidden');el.classList.add('slide-in');setTimeout(()=>el.classList.remove('slide-in'),400);}
-    else el.classList.add('hidden');
-  });
-}
-
-function goScreen2(flow){
-  state.flow=flow;
-  const f=flows[flow];
-  document.getElementById('s2-title').textContent=f.title;
-  document.getElementById('s2-label').textContent=f.label;
-  const container=document.getElementById('s2-btns');
-  container.innerHTML='';
-  f.btns.forEach((b,i)=>{
-    const btn=document.createElement('button');
-    btn.className='choice-btn';
-    btn.style.animation=`btnIn 0.4s ease ${i*0.08}s forwards`;
-    btn.innerHTML=`<div class="btn-icon">${b.icon}</div><div class="btn-text"><div class="btn-main">${b.main}</div><div class="btn-sub">${b.sub}</div></div><span class="btn-arrow">›</span>`;
-    btn.onclick=()=>goTime(b.main,b.wa);
-    container.appendChild(btn);
-  });
-  showScreen('screen2');
-}
-
-function goTime(problem,wa){
-  state.problem=problem;
-  state.waMsg=wa;
-  state.jobNum=generateJobNum();
-  document.getElementById('job-num-text').textContent=state.jobNum;
-  showScreen('screen3');
-}
-
-function finalize(time){
-  const msg=`${state.waMsg}\n\nZaman tercihim: ${time}\nTalep No: ${state.jobNum}`;
-  // Google Sheets kaydı
-  logToSheets(state.jobNum, state.flow, state.problem, time);
-  // WhatsApp
-  window.open('https://wa.me/905367807059?text='+encodeURIComponent(msg),'_blank');
-}
-
-function logToSheets(jobNum, flow, problem, time){
-  const SHEETS_URL='BURAYA_APPS_SCRIPT_URL_GELECEK';
-  if(SHEETS_URL.includes('BURAYA')) return; // Henüz kurulmadı
-  const data={jobNum,flow,problem,time,ts:new Date().toISOString()};
-  fetch(SHEETS_URL,{method:'POST',body:JSON.stringify(data)}).catch(()=>{});
-}
-
-function goBack(fromScreen){
-  if(fromScreen===1) showScreen('screen1');
-  if(fromScreen===2) showScreen('screen2');
-}
-
-function waGeneral(){
-  goTime('Genel bilgi','Merhaba, teknik bir konuda bilgi almak istiyorum.');
-}
-// b4 butonu için
-document.addEventListener('DOMContentLoaded',()=>{
-  const b4=document.querySelector('.b4');
-  if(b4) b4.onclick=waGeneral;
-});
-</script>
-</body>
-</html>
+        <path d="M152 18 Q152 6 165 6 Q178 6 178 15 Q178 22 165 24 Q152 26 152 35 Q152 44​​​​​​​​​​​​​​​​
