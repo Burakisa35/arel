@@ -26,33 +26,28 @@ canvas{position:fixed;inset:0;z-index:0;pointer-events:none}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 .btn-list{display:flex;flex-direction:column;gap:11px;width:100%;margin-bottom:24px}
 .choice-btn{display:flex;align-items:center;gap:16px;padding:17px 20px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:13px;color:#fff;cursor:pointer;transition:all 0.25s ease;opacity:0;transform:translateY(14px);animation:btnIn 0.45s ease forwards;text-align:left;width:100%;font-family:inherit;-webkit-tap-highlight-color:transparent}
-.choice-btn:hover,.choice-btn:focus{border-color:rgba(59,130,246,0.35);background:rgba(37,99,235,0.07);transform:translateY(-1px);box-shadow:0 4px 20px rgba(37,99,235,0.1);outline:none}
+.choice-btn:hover{border-color:rgba(59,130,246,0.35);background:rgba(37,99,235,0.07);transform:translateY(-1px);box-shadow:0 4px 20px rgba(37,99,235,0.1)}
 .choice-btn:active{transform:scale(0.98)}
-.choice-btn.selected{border-color:rgba(59,130,246,0.5);background:rgba(37,99,235,0.1)}
-.b1{animation-delay:0.1s}.b2{animation-delay:0.2s}.b3{animation-delay:0.3s}.b4{animation-delay:0.4s}.b5{animation-delay:0.5s}.b6{animation-delay:0.6s}
+.choice-btn.acil-stil{border-color:rgba(239,68,68,0.2);background:rgba(239,68,68,0.04)}
+.choice-btn.acil-stil:hover{border-color:rgba(239,68,68,0.4);background:rgba(239,68,68,0.08)}
+.b1{animation-delay:0.05s}.b2{animation-delay:0.1s}.b3{animation-delay:0.15s}.b4{animation-delay:0.2s}.b5{animation-delay:0.25s}.b6{animation-delay:0.3s}.b7{animation-delay:0.35s}.b8{animation-delay:0.4s}
 @keyframes btnIn{to{opacity:1;transform:translateY(0)}}
 .btn-icon{width:38px;height:38px;border-radius:9px;background:rgba(37,99,235,0.1);border:1px solid rgba(59,130,246,0.13);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:17px;transition:all 0.25s}
-.btn-icon svg{width:18px;height:18px;stroke:#3B82F6;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
-.choice-btn:hover .btn-icon,.choice-btn:focus .btn-icon,.choice-btn.selected .btn-icon{background:rgba(37,99,235,0.18);border-color:rgba(59,130,246,0.3)}
 .btn-text{flex:1}
 .btn-main{font-family:'Barlow',sans-serif;font-size:14px;font-weight:600;letter-spacing:0.3px;color:#e8e8e8;line-height:1.3}
 .btn-sub{font-size:11px;color:rgba(255,255,255,0.28);margin-top:2px;font-weight:300}
 .btn-arrow{color:rgba(255,255,255,0.18);font-size:18px;transition:all 0.25s;flex-shrink:0}
-.choice-btn:hover .btn-arrow,.choice-btn:focus .btn-arrow{color:#3B82F6;transform:translateX(3px)}
+.choice-btn:hover .btn-arrow{color:#3B82F6;transform:translateX(3px)}
 .back-btn{display:flex;align-items:center;gap:8px;color:rgba(255,255,255,0.3);font-size:12px;letter-spacing:1px;text-transform:uppercase;background:none;border:none;cursor:pointer;font-family:'Barlow',sans-serif;font-weight:500;margin-bottom:20px;transition:color 0.2s;padding:0;-webkit-tap-highlight-color:transparent}
 .back-btn:hover{color:rgba(255,255,255,0.6)}
 .back-btn svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2}
-.time-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;width:100%;margin-bottom:24px}
-.time-btn{padding:18px 12px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:13px;color:#fff;cursor:pointer;transition:all 0.25s;text-align:center;font-family:inherit;opacity:0;animation:btnIn 0.4s ease forwards;-webkit-tap-highlight-color:transparent}
-.time-btn:hover,.time-btn:focus{border-color:rgba(59,130,246,0.4);background:rgba(37,99,235,0.08);transform:translateY(-1px);outline:none}
+.time-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;width:100%;margin-bottom:8px}
+.time-btn{padding:18px 12px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:13px;color:#fff;cursor:pointer;transition:all 0.25s;text-align:center;font-family:inherit;-webkit-tap-highlight-color:transparent}
+.time-btn:hover{border-color:rgba(59,130,246,0.4);background:rgba(37,99,235,0.08);transform:translateY(-1px)}
 .time-btn:active{transform:scale(0.97)}
-.time-btn.selected{border-color:rgba(59,130,246,0.5);background:rgba(37,99,235,0.1)}
-.t1{animation-delay:0.1s}.t2{animation-delay:0.2s}.t3{animation-delay:0.3s}
 .time-icon{font-size:20px;margin-bottom:7px}
-.time-label{font-family:'Barlow',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.3px;color:#e8e8e8;line-height:1.3}
+.time-label{font-family:'Barlow',sans-serif;font-size:12px;font-weight:600;color:#e8e8e8;line-height:1.3}
 .time-sub{font-size:10px;color:rgba(255,255,255,0.25);margin-top:3px}
-.screen-title{font-family:'Barlow',sans-serif;font-size:20px;font-weight:600;text-align:center;color:#e8e8e8;margin-bottom:8px;letter-spacing:-0.3px}
-.screen-title-label{font-family:'Barlow',sans-serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.25);text-align:center;margin-bottom:32px}
 .footer-info{display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0;animation:fadeIn 0.5s ease 1.5s forwards}
 .footer-badge{display:flex;align-items:center;gap:7px;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.18)}
 .footer-badge svg{width:11px;height:11px;stroke:rgba(59,130,246,0.4);fill:none;stroke-width:1.5}
@@ -61,84 +56,67 @@ canvas{position:fixed;inset:0;z-index:0;pointer-events:none}
 .footer-phone svg{width:13px;height:13px;stroke:rgba(59,130,246,0.38);fill:none;stroke-width:1.5;flex-shrink:0}
 .home-indicator{width:120px;height:4px;background:rgba(255,255,255,0.1);border-radius:2px;margin:14px auto 0}
 
-/* ── KAYIT SİSTEMİ ─────────────────────────────────── */
-.k-wrap{width:100%;height:100%;display:flex;flex-direction:column;justify-content:space-between;padding-top:52px;padding-bottom:0}
-.k-top{flex:1;overflow-y:auto;padding-bottom:12px}
+/* KAYIT */
+.k-wrap{width:100%;height:100%;display:flex;flex-direction:column;padding-top:52px}
+.k-top{flex:1;overflow-y:auto;padding-bottom:16px}
 .k-progress{height:2px;background:rgba(255,255,255,0.06);margin-bottom:32px;border-radius:1px}
 .k-progress-fill{height:100%;background:#3B82F6;border-radius:1px;transition:width 0.4s ease}
 .k-step-lbl{font-family:‘Barlow’,sans-serif;font-size:9px;letter-spacing:4px;text-transform:uppercase;color:rgba(255,255,255,0.2);margin-bottom:10px}
 .k-title{font-family:‘Barlow’,sans-serif;font-size:19px;font-weight:600;color:#e8e8e8;margin-bottom:24px;line-height:1.4;letter-spacing:-0.2px}
-.k-btn-list{display:flex;flex-direction:column;gap:9px;margin-bottom:8px}
-.k-btn-list .choice-btn{animation:none;opacity:1;transform:none}
-.k-btn-list .time-btn{animation:none;opacity:1}
-.k-hint{font-size:11px;color:rgba(59,130,246,0.5);margin-top:12px;padding-left:14px;border-left:2px solid rgba(59,130,246,0.2);line-height:1.6;font-family:‘Inter’,sans-serif}
-.k-warn{font-size:11px;color:rgba(239,68,68,0.7);margin-top:10px;padding-left:14px;border-left:2px solid rgba(239,68,68,0.3);line-height:1.6;font-family:‘Inter’,sans-serif}
-.k-talep-no{font-family:‘Barlow’,sans-serif;font-size:9px;letter-spacing:4px;color:#3B82F6;margin-bottom:20px;text-transform:uppercase}
-.k-ozet-row{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid rgba(255,255,255,0.04);padding:10px 0;gap:12px}
-.k-ozet-lbl{font-size:9px;letter-spacing:3px;color:rgba(255,255,255,0.2);text-transform:uppercase;flex-shrink:0;font-family:‘Barlow’,sans-serif}
-.k-ozet-val{font-family:‘Barlow’,sans-serif;font-size:13px;font-weight:600;color:#e8e8e8;text-align:right}
-.k-kok{margin-top:16px;padding:12px 16px;background:rgba(59,130,246,0.05);border:1px solid rgba(59,130,246,0.12);border-radius:10px;font-size:11px;color:rgba(255,255,255,0.3);line-height:1.7;font-family:‘Inter’,sans-serif}
-.k-status{display:flex;align-items:center;gap:0;margin-top:20px;margin-bottom:6px;font-family:‘Barlow’,sans-serif;font-size:9px;letter-spacing:3px;text-transform:uppercase}
-.k-status .on{color:#3B82F6}.k-status .off{color:rgba(255,255,255,0.1)}.k-status .sep{color:rgba(255,255,255,0.08);margin:0 8px}
-.k-wa{display:block;width:100%;padding:17px;background:rgba(37,211,102,0.12);border:1px solid rgba(37,211,102,0.2);border-radius:13px;color:#4ADE80;font-family:‘Barlow’,sans-serif;font-size:13px;font-weight:600;letter-spacing:1px;text-align:center;text-decoration:none;margin-top:16px;transition:all 0.25s;cursor:pointer}
+.k-list{display:flex;flex-direction:column;gap:9px}
+.k-list .choice-btn{animation:none;opacity:1;transform:none}
+.k-warn{font-size:11px;color:rgba(239,68,68,0.8);margin-top:12px;padding:12px 14px;border-left:2px solid rgba(239,68,68,0.4);line-height:1.6;font-family:‘Inter’,sans-serif;display:none;background:rgba(239,68,68,0.05);border-radius:0 8px 8px 0}
+
+/* ACİL UYARI EKRANI */
+.uyari-ekran{display:flex;flex-direction:column;align-items:center;justify-content:center;flex:1;text-align:center;padding:20px 0}
+.uyari-ikon{font-size:48px;margin-bottom:20px}
+.uyari-baslik{font-family:‘Barlow’,sans-serif;font-size:20px;font-weight:700;color:#ef4444;margin-bottom:12px;letter-spacing:-0.3px}
+.uyari-metin{font-size:13px;color:rgba(255,255,255,0.5);line-height:1.8;margin-bottom:32px;font-family:‘Inter’,sans-serif}
+.uyari-metin strong{color:rgba(255,255,255,0.8)}
+.btn-anlad{width:100%;padding:17px;background:rgba(239,68,68,0.15);border:1px solid rgba(239,68,68,0.3);border-radius:13px;color:#f87171;font-family:‘Barlow’,sans-serif;font-size:13px;font-weight:600;letter-spacing:1px;cursor:pointer;transition:all 0.2s;margin-top:auto}
+.btn-anlad:hover{background:rgba(239,68,68,0.22);border-color:rgba(239,68,68,0.5)}
+
+/* ÖZET */
+.k-talep-no{font-family:‘Barlow’,sans-serif;font-size:9px;letter-spacing:4px;color:#3B82F6;margin-bottom:8px;text-transform:uppercase}
+.k-mudahale{font-family:‘Barlow’,sans-serif;font-size:10px;letter-spacing:2px;color:rgba(255,255,255,0.2);margin-bottom:20px;text-transform:uppercase}
+.k-row{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid rgba(255,255,255,0.04);padding:10px 0;gap:12px}
+.k-lbl{font-size:9px;letter-spacing:3px;color:rgba(255,255,255,0.2);text-transform:uppercase;flex-shrink:0;font-family:‘Barlow’,sans-serif}
+.k-val{font-family:‘Barlow’,sans-serif;font-size:13px;font-weight:600;color:#e8e8e8;text-align:right}
+.k-kok{margin-top:16px;padding:12px 16px;background:rgba(59,130,246,0.05);border:1px solid rgba(59,130,246,0.12);border-radius:10px;font-size:11px;color:rgba(255,255,255,0.35);line-height:1.9;font-family:‘Inter’,sans-serif}
+.k-kok-baslik{font-family:‘Barlow’,sans-serif;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:rgba(59,130,246,0.5);margin-bottom:6px}
+.k-status{display:flex;align-items:center;margin-top:20px;margin-bottom:6px;font-family:‘Barlow’,sans-serif;font-size:9px;letter-spacing:2px;text-transform:uppercase}
+.k-status .on{color:#3B82F6}.k-status .off{color:rgba(255,255,255,0.1)}.k-status .sep{color:rgba(255,255,255,0.08);margin:0 7px}
+.k-wa{display:block;width:100%;padding:17px;background:rgba(37,211,102,0.12);border:1px solid rgba(37,211,102,0.2);border-radius:13px;color:#4ADE80;font-family:‘Barlow’,sans-serif;font-size:13px;font-weight:600;letter-spacing:1px;text-align:center;text-decoration:none;margin-top:20px;transition:all 0.25s}
 .k-wa:hover{background:rgba(37,211,102,0.18);border-color:rgba(37,211,102,0.35)}
-.k-sheets{width:100%;padding:13px;background:transparent;border:1px solid rgba(255,255,255,0.06);border-radius:13px;color:rgba(255,255,255,0.2);font-family:‘Barlow’,sans-serif;font-size:11px;letter-spacing:1px;cursor:pointer;margin-top:9px;transition:all 0.25s}
-.k-sheets:hover{border-color:rgba(255,255,255,0.12);color:rgba(255,255,255,0.35)}
-.k-sheets.ok{color:#4ADE80;border-color:rgba(74,222,128,0.25)}
-.k-note{font-size:9px;color:rgba(255,255,255,0.1);text-align:center;margin-top:8px;letter-spacing:2px;font-family:‘Barlow’,sans-serif;text-transform:uppercase}
-.k-yeni{background:none;border:none;color:rgba(255,255,255,0.15);font-family:‘Barlow’,sans-serif;font-size:10px;letter-spacing:3px;cursor:pointer;margin-top:20px;display:block;width:100%;text-align:center;text-transform:uppercase;padding-bottom:8px}
+.k-yeni{background:none;border:none;color:rgba(255,255,255,0.15);font-family:‘Barlow’,sans-serif;font-size:10px;letter-spacing:3px;cursor:pointer;margin-top:18px;display:block;width:100%;text-align:center;text-transform:uppercase;padding-bottom:8px}
 .k-yeni:hover{color:rgba(255,255,255,0.3)}
 </style>
 
 </head>
 <body>
-
 <canvas id="stars"></canvas>
-
 <div class="glow-orb"></div>
 
-<!-- ── EKRAN 1: ANA ──────────────────────────────────── -->
+<!-- ANA EKRAN -->
 
 <div class="screen" id="screen1">
   <div class="logo-section">
     <div class="logo-svg-wrap">
-      <!-- LOGO: Aşağıdaki SVG'yi orijinal logo SVG'nle değiştir -->
-      <svg width="200" height="52" viewBox="0 0 200 52" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <defs><filter id="g"><feGaussianBlur stdDeviation="1.5" result="b"/><feComposite in="SourceGraphic" in2="b" operator="over"/></filter></defs>
-        <!-- A -->
-        <rect x="0" y="2" width="30" height="4" rx="1" fill="#EDEDED"/>
-        <rect x="13" y="2" width="4" height="44" rx="1" fill="#EDEDED"/>
-        <!-- R -->
-        <rect x="40" y="2" width="4" height="44" rx="1" fill="#EDEDED"/>
-        <rect x="40" y="2" width="22" height="4" rx="1" fill="#EDEDED"/>
-        <rect x="40" y="22" width="18" height="3.5" rx="1" fill="#EDEDED"/>
-        <rect x="54" y="2" width="4" height="22" rx="1" fill="#EDEDED"/>
-        <rect x="50" y="25" width="4" height="21" rx="1" fill="#EDEDED" transform="rotate(12 52 36)"/>
-        <!-- E -->
-        <rect x="74" y="2" width="4" height="44" rx="1" fill="#EDEDED"/>
-        <rect x="74" y="2" width="24" height="4" rx="1" fill="#EDEDED"/>
-        <rect x="74" y="22" width="18" height="3.5" rx="1" fill="#EDEDED"/>
-        <rect x="74" y="42" width="24" height="4" rx="1" fill="#EDEDED"/>
-        <!-- L -->
-        <rect x="108" y="2" width="4" height="44" rx="1" fill="#EDEDED"/>
-        <rect x="108" y="42" width="22" height="4" rx="1" fill="#EDEDED"/>
-        <!-- glow group -->
-        <g filter="url(#g)">
-          <rect x="140" y="2" width="4" height="44" rx="1" fill="#EDEDED"/>
-          <rect x="155" y="2" width="4" height="44" rx="1" fill="#EDEDED"/>
-          <rect x="140" y="22" width="19" height="3" rx="1" fill="#3B82F6"/>
-        </g>
-      </svg>
+      <!--
+        LOGO: Bu div'i orijinal <svg>...</svg> bloğunla değiştir.
+      -->
+      <div style="font-family:'Barlow',sans-serif;font-size:34px;font-weight:700;letter-spacing:8px;color:#EDEDED">
+        AR<span style="color:#3B82F6">E</span>L
+      </div>
     </div>
     <div class="logo-tagline">Kemalpaşa · İzmir</div>
-    <div class="screen-label">Teknik Servis</div>
+    <div class="screen-label">Teknik Servis · Saha Aktif</div>
   </div>
-
   <div style="width:100%">
     <div class="btn-list">
       <button class="choice-btn b1" onclick="kayitBaslat()">
         <div class="btn-icon">
-          <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+          <svg viewBox="0 0 24 24" style="width:18px;height:18px;stroke:#3B82F6;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
         </div>
         <div class="btn-text">
           <div class="btn-main">Arıza Bildirin</div>
@@ -161,369 +139,588 @@ canvas{position:fixed;inset:0;z-index:0;pointer-events:none}
   </div>
 </div>
 
-<!-- ── KAYIT AKIŞI ───────────────────────────────────── -->
+<!-- KAYIT AKIŞI -->
 
 <div class="screen hidden" id="screen-kayit">
   <div class="k-wrap" id="k-inner"></div>
 </div>
 
 <script>
-/* ── YILDIZ TUVALI ──────────────────────────────────── */
+/* YILDIZ */
 (function(){
-  const c = document.getElementById('stars');
-  const ctx = c.getContext('2d');
-  let W, H, stars = [];
-
-  function resize(){
-    W = c.width = window.innerWidth;
-    H = c.height = window.innerHeight;
-  }
-
-  function init(){
-    resize();
-    stars = Array.from({length:120}, ()=>({
-      x: Math.random()*W, y: Math.random()*H,
-      r: Math.random()*0.8+0.2,
-      a: Math.random(), da: (Math.random()-0.5)*0.003,
-    }));
-  }
-
-  function draw(){
-    ctx.clearRect(0,0,W,H);
-    stars.forEach(s=>{
-      s.a = Math.max(0.05, Math.min(1, s.a+s.da));
-      if(s.a<=0.05||s.a>=1) s.da*=-1;
-      ctx.beginPath();
-      ctx.arc(s.x, s.y, s.r, 0, Math.PI*2);
-      ctx.fillStyle = `rgba(255,255,255,${s.a*0.5})`;
-      ctx.fill();
-    });
-    requestAnimationFrame(draw);
-  }
-
-  window.addEventListener('resize', resize);
-  init(); draw();
+  const c=document.getElementById('stars'),ctx=c.getContext('2d');
+  let W,H,stars=[];
+  const resize=()=>{W=c.width=innerWidth;H=c.height=innerHeight;};
+  const init=()=>{resize();stars=Array.from({length:120},()=>({x:Math.random()*W,y:Math.random()*H,r:Math.random()*0.8+0.2,a:Math.random(),da:(Math.random()-0.5)*0.003}));};
+  const draw=()=>{ctx.clearRect(0,0,W,H);stars.forEach(s=>{s.a=Math.max(0.05,Math.min(1,s.a+s.da));if(s.a<=0.05||s.a>=1)s.da*=-1;ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fillStyle=`rgba(255,255,255,${s.a*0.5})`;ctx.fill();});requestAnimationFrame(draw);};
+  addEventListener('resize',resize);init();draw();
 })();
 
-/* ── VERİ ───────────────────────────────────────────── */
+/* VERİ */
 const WA = "905367807059";
 
 const BOLGE = [
-  {kod:"K1", label:"Armutlu / Mehmet Akif"},
-  {kod:"K2", label:"Ulucak merkez"},
-  {kod:"K3", label:"Bağyurdu"},
-  {kod:"K4", label:"Kemalpaşa merkez"},
-  {kod:"K5", label:"OSB çevresi"},
+  {kod:"K1", label:"Bağyurdu / Bağyurdu OSB / Yiğitler"},
+  {kod:"K2", label:"Ören / Armutlu / Kızılca"},
+  {kod:"K3", label:"Örnekköy / Nazarköy / Mehmet Akif"},
+  {kod:"K4", label:"Sekiz Eylül / Soğukpınar / Atatürk"},
+  {kod:"K5", label:"Kemalpaşa / Ulucak / Damlacık / Sütçüler"},
 ];
 
 const ACILIYET = [
-  {id:"acil",     label:"Acil", sub:"Şimdi",       ikon:"🔴"},
-  {id:"bugun",    label:"Bugün", sub:"İçinde",      ikon:"🟡"},
-  {id:"haftaici", label:"Bu hafta", sub:"Esnek",    ikon:"🟢"},
+  {id:"acil",     label:"Acil",     sub:"Şimdi",  ikon:"🔴"},
+  {id:"bugun",    label:"Bugün",    sub:"İçinde", ikon:"🟡"},
+  {id:"haftaici", label:"Bu hafta", sub:"Esnek",  ikon:"🟢"},
 ];
 
+/* A1 — ACİL ARIZA */
+const ACIL_TURLER = [
+  {id:"yanık", label:"Yanık kokusu geliyor",       uyari:true},
+  {id:"kıvılcım", label:"Kıvılcım gördüm",         uyari:true},
+  {id:"su-elektrik", label:"Su elektriğe temas etti", uyari:true},
+  {id:"salter", label:"Şalter / sigorta kalkmıyor", uyari:false},
+  {id:"elek-yok", label:"Elektrik tamamen yok",    uyari:false},
+  {id:"kamera-durdu", label:"Kamera kaydı tamamen durdu", uyari:false},
+  {id:"internet-yok", label:"İnternet tamamen kesildi",   uyari:false},
+  {id:"diger-acil", label:"Başka acil durum",       uyari:false},
+];
+
+/* A2 — NORMAL ARIZA — belirti dili */
 const KAT = [
   {
-    id:"internet", label:"İnternet / Wi-Fi", ikon:"🌐", sistem:"Ağ",
-    altlar:["Bazı odalarda çekmiyor","Sürekli kopuyor","Hiç internet yok","Yavaş geliyor"],
-    baglamlar:[
-      {soru:"Sorun ne zamandır var?", sec:["Yeni başladı","Uzun süredir","Bazen oluyor"]},
-      {soru:"Ev tipi ne?", sec:["Küçük daire","Büyük daire","Dubleks / çift katlı","Müstakil ev"]},
-    ],
-    kok(a,b){
-      if(a==="Bazı odalarda çekmiyor") return "Modem konumu / ek erişim noktası ihtimali";
-      if(a==="Hiç internet yok") return "Servis veya modem arızası ihtimali";
-      if(a==="Sürekli kopuyor") return "Sinyal kalitesi / modem kaynaklı";
-      return "Ağ yapılandırma sorunu ihtimali";
-    }
-  },
-  {
-    id:"kamera", label:"Kamera sistemi", ikon:"📷", sistem:"Kamera",
-    altlar:["Görüntü yok","Telefondan izlenmiyor","Kayıt yok","Tek kamera çalışmıyor","Hepsi gitti"],
-    baglamlar:[
-      {soru:"Evde internet şu an çalışıyor mu?", sec:["Evet","Hayır","Emin değilim"]},
-      {soru:"Sistem kaç kameralı?", sec:["1–4 kamera","5–8 kamera","9 ve üzeri"]},
-    ],
-    kok(a,b){
-      if(a==="Telefondan izlenmiyor"&&b[0]==="Evet") return "Uzak erişim / bağlantı noktası ihtimali";
-      if(a==="Telefondan izlenmiyor"&&b[0]==="Hayır") return "İnternet kaynaklı erişim sorunu";
-      if(a==="Görüntü yok") return "Kablo / güç kaynağı / cihaz arızası ihtimali";
-      if(a==="Kayıt yok") return "Disk veya kayıt ayarı sorunu ihtimali";
-      if(a==="Tek kamera çalışmıyor") return "Cihaz veya bağlantı noktası arızası ihtimali";
-      return "Sistem geneli arıza — yerinde inceleme gerekli";
-    }
-  },
-  {
-    id:"elektrik", label:"Elektrik", ikon:"⚡", sistem:"Elektrik",
-    altlar:["Sigorta atıyor","Bazı prizler çalışmıyor","Elektrik gidip geliyor","Koku / ısınma var"],
-    uyari:{"Koku / ısınma var":"⚠️ Bu belirti acil olabilir. Şüpheli noktaları kullanmayın."},
+    id:"priz-salter", label:"Priz çalışmıyor / Şalter atıyor", ikon:"⚡", sistem:"Elektrik",
+    altlar:["Priz hiç çalışmıyor","Şalter / sigorta atıyor","Priz ısınıyor veya kıvılcım yapıyor","Anahtar çalışmıyor","Bazı odalar enerji yok"],
+    uyari:{"Priz ısınıyor veya kıvılcım yapıyor":"⚠️ Acil belirtisi. Bu prizi kullanmayın, fişleri çıkarın."},
     baglamlar:[
       {soru:"Sorun ne zaman oluyor?", sec:["Sürekli","Cihaz açınca","Bazen","Yağmur sonrası"]},
       {soru:"Ev yaklaşık kaç yıllık?", sec:["0–5 yıl","5–15 yıl","15 yıl ve üzeri"]},
     ],
     kok(a,b){
-      if(a==="Sigorta atıyor"&&b[0]==="Cihaz açınca") return "Yüklenme / aşırı çekim ihtimali";
-      if(a==="Sigorta atıyor"&&b[0]==="Sürekli") return "Kaçak akım ihtimali";
-      if(a==="Koku / ısınma var") return "ACİL — gevşek bağlantı / kısa devre ihtimali";
-      if(b[1]==="15 yıl ve üzeri") return "Eski tesisat — yük taşıma sorunu ihtimali";
-      return "Tesisat veya bağlantı sorunu ihtimali";
+      if(a==="Şalter / sigorta atıyor"&&b[0]==="Cihaz açınca")return["Yüklenme / aşırı çekim","Arızalı cihaz tetikliyor","Kaçak akım ihtimali"];
+      if(a==="Şalter / sigorta atıyor"&&b[0]==="Sürekli")return["Kaçak akım rölesi","Tesisat sorunu"];
+      if(a==="Priz ısınıyor veya kıvılcım yapıyor")return["Gevşek bağlantı","Kısa devre ihtimali"];
+      if(b[1]==="15 yıl ve üzeri")return["Eski tesisat","Yük taşıma kapasitesi sorunu"];
+      return["Tesisat veya bağlantı sorunu"];
+    },
+    mudahale(a,b){
+      if(a==="Priz ısınıyor veya kıvılcım yapıyor")return"Acil saha";
+      return"Standart saha";
     }
   },
   {
-    id:"kapi", label:"Kapı / Motor", ikon:"🚪", sistem:"Otomasyon",
-    altlar:["Hiç tepki yok","Ses geliyor ama açılmıyor","Tek yönde çalışıyor","Kumanda algılamıyor"],
+    id:"aydinlatma", label:"Işık yanmıyor / Lamba sorunu", ikon:"💡", sistem:"Elektrik",
+    altlar:["Lamba hiç yanmıyor","Yanıp sönüyor","Sensörlü lamba çalışmıyor","Avize / spot problemi","Merdiven lambası sorunu"],
     baglamlar:[
-      {soru:"Sorun ne zamandır var?", sec:["Yeni başladı","Yavaş yavaş arttı","Yağmur / nem sonrası oldu"]},
+      {soru:"Sorun hangi tipte?", sec:["Tek ampul","Tüm grup","Sensör / dimmer","Duy / buat sorunu"]},
     ],
     kok(a,b){
-      if(a==="Ses geliyor ama açılmıyor") return "Kondansatör veya mekanik sıkışma ihtimali";
-      if(a==="Hiç tepki yok") return "Elektrik veya kontrol kartı arızası ihtimali";
-      if(a==="Kumanda algılamıyor") return "Kumanda veya alıcı sorunu ihtimali";
-      if(a==="Tek yönde çalışıyor") return "Sınır anahtarı arızası ihtimali";
-      return "Motor sistemi genel arıza";
+      if(a==="Yanıp sönüyor")return["Dimmer uyumsuzluğu","Trafo / driver sorunu","Gevşek bağlantı"];
+      if(a==="Sensörlü lamba çalışmıyor")return["Sensör hassasiyeti","Güç kaynağı","Kablolama sorunu"];
+      return["Ampul veya duy arızası","Buat bağlantısı"];
+    },
+    mudahale(){ return"Mikro saha";}
+  },
+  {
+    id:"internet", label:"İnternet / Wi-Fi çekmiyor", ikon:"🌐", sistem:"Ağ",
+    altlar:["Bazı odalarda çekmiyor","Sürekli kopuyor","Hiç internet yok","Kablo bağlantısı yok","Yavaş geliyor"],
+    baglamlar:[
+      {soru:"Sorun ne zamandır var?", sec:["Yeni başladı","Uzun süredir","Bazen oluyor"]},
+      {soru:"Ev tipi ne?", sec:["Küçük daire","Büyük daire","Dubleks / çift katlı","Müstakil ev"]},
+    ],
+    kok(a,b){
+      if(a==="Bazı odalarda çekmiyor")return["Modem konumu","Beton / duvar engeli","Ek erişim noktası gerekebilir"];
+      if(a==="Hiç internet yok")return["Servis kesintisi","Modem arızası","Kablo sorunu"];
+      if(a==="Sürekli kopuyor")return["Modem ısınması","Kanal yoğunluğu","Adaptör stabilitesi"];
+      return["Ağ yapılandırma sorunu"];
+    },
+    mudahale(a){ return a==="Hiç internet yok"?"Standart saha":"Uzaktan kontrol edilebilir";}
+  },
+  {
+    id:"kamera", label:"Kamera görüntü vermiyor", ikon:"📷", sistem:"Kamera",
+    altlar:["Telefondan izlenmiyor","Görüntü tamamen yok","Kayıt yok","Tek kamera çalışmıyor","Gece görüntüsü yok"],
+    baglamlar:[
+      {soru:"Evde internet şu an çalışıyor mu?", sec:["Evet","Hayır","Emin değilim"]},
+      {soru:"Sistem kaç kameralı?", sec:["1–4 kamera","5–8 kamera","9 ve üzeri"]},
+    ],
+    kok(a,b){
+      if(a==="Telefondan izlenmiyor"&&b[0]==="Evet")return["Uzak erişim ayarı","Port yönlendirme","DNS sorunu"];
+      if(a==="Telefondan izlenmiyor"&&b[0]==="Hayır")return["İnternet kaynaklı","Modem bağlantısı"];
+      if(a==="Görüntü tamamen yok")return["Güç kaynağı","Kablo bağlantısı","Cihaz arızası"];
+      if(a==="Kayıt yok")return["Disk dolu veya arızalı","Kayıt ayarı","Kamera tetik sorunu"];
+      if(a==="Tek kamera çalışmıyor")return["Kablo veya bağlantı noktası","Besleme sorunu","Kamera arızası"];
+      return["Sistem geneli kontrol gerekli"];
+    },
+    mudahale(a,b){
+      if(a==="Telefondan izlenmiyor")return"Uzaktan kontrol edilebilir";
+      return"Standart saha";
     }
   },
   {
-    id:"sinyal", label:"Sinyal / Bağlantı", ikon:"📡", sistem:"Sinyal/Ağ",
-    altlar:["TV sinyali yok","Bazı kanallar yok","IPTV / Smart TV donuyor","Kamera telefondan izlenmiyor","İnternet / Wi-Fi kopuyor","Uzak noktada bağlantı gerekiyor"],
+    id:"sinyal", label:"TV sinyali yok / Uydu sorunu", ikon:"📡", sistem:"Sinyal",
+    altlar:["TV sinyali tamamen yok","Bazı kanallar eksik","IPTV / Smart TV donuyor","Yağmurda sinyal gidiyor","Tüm dairelerde sorun var"],
     baglamlar:[
       {soru:"Binada ortak anten sistemi var mı?", sec:["Evet","Hayır","Emin değilim"]},
     ],
     kok(a,b){
-      if(a==="TV sinyali yok"&&b[0]==="Evet") return "Ortak dağıtım sistemi arızası ihtimali";
-      if(a==="TV sinyali yok") return "Anten / sinyal kaynağı / kablo zayıflaması ihtimali";
-      if(a==="Bazı kanallar yok") return "Sinyal yönü veya kaynak sorunu ihtimali";
-      if(a==="Kamera telefondan izlenmiyor") return "Uzak erişim / bağlantı noktası ihtimali";
-      if(a==="IPTV / Smart TV donuyor") return "İnternet hızı veya sinyal kalitesi";
-      return "Sinyal / bağlantı genel sorun";
-    }
+      if(b[0]==="Evet"&&a==="Tüm dairelerde sorun var")return["Merkezi dağıtım sistemi","Multiswitch arızası"];
+      if(a==="TV sinyali tamamen yok")return["Anten / LNB","Kablo zayıflaması","Çanak yönü"];
+      if(a==="Bazı kanallar eksik")return["Sinyal frekansı","Kaynak güncelleme","LNB problemi"];
+      if(a==="Yağmurda sinyal gidiyor")return["LNB kalitesi","Çanak ayarı","Kablo bağlantısı"];
+      return["Sinyal zinciri genel kontrol"];
+    },
+    mudahale(){ return"Standart saha";}
+  },
+  {
+    id:"kapi", label:"Kapı / Motor çalışmıyor", ikon:"🚪", sistem:"Otomasyon",
+    altlar:["Hiç tepki yok","Ses geliyor ama açılmıyor","Tek yönde çalışıyor","Kumanda algılamıyor","Yavaş çalışıyor"],
+    baglamlar:[
+      {soru:"Sorun ne zamandır var?", sec:["Yeni başladı","Yavaş yavaş arttı","Yağmur / nem sonrası"]},
+    ],
+    kok(a,b){
+      if(a==="Ses geliyor ama açılmıyor")return["Kondansatör arızası","Mekanik sıkışma","Kasnak sorunu"];
+      if(a==="Hiç tepki yok")return["Elektrik bağlantısı","Kontrol kartı","Sigorta attı"];
+      if(a==="Kumanda algılamıyor")return["Kumanda pili","Alıcı (receiver) arızası","Frekans uyumsuzluğu"];
+      if(a==="Tek yönde çalışıyor")return["Limit switch ayarı","Sınır anahtarı arızası"];
+      return["Motor sistemi genel kontrol"];
+    },
+    mudahale(){ return"Standart saha";}
   },
 ];
 
-/* ── STATE ──────────────────────────────────────────── */
-let S = {faz:"kat", katId:null, alt:null, bc:[], bolge:null, acil:null, talepNo:"", saat:""};
+/* A3 — BELİRSİZ */
+const BELIRSIZ_DAVRANISLAR = [
+  "Bazen oluyor, nedeni belirsiz",
+  "Belirli saatte veya gece oluyor",
+  "Yük binince / cihaz açınca oluyor",
+  "Yeni başladı, değişen bir şey var",
+  "Sadece bir oda veya bölge etkileniyor",
+];
 
-function katObj(){ return KAT.find(k=>k.id===S.katId); }
-function bolgeObj(){ return BOLGE.find(b=>b.kod===S.bolge); }
-function acilObj(){ return ACILIYET.find(a=>a.id===S.acil); }
+const BELIRSIZ_SISTEMLER = [
+  {label:"Elektrik / priz / anahtar", sistem:"Elektrik"},
+  {label:"İnternet / Wi-Fi",          sistem:"Ağ"},
+  {label:"Kamera sistemi",            sistem:"Kamera"},
+  {label:"TV / uydu",                 sistem:"Sinyal"},
+  {label:"Birden fazla sistem",       sistem:"Kombine"},
+  {label:"Bilmiyorum",                sistem:"Belirsiz"},
+];
+
+/* STATE */
+let S = {
+  faz:"deneyim",
+  deneyim:null,
+  acilTur:null,
+  katId:null, alt:null, bc:[],
+  belirsizDavranis:null, belirsizSistem:null,
+  bolge:null, acil:null,
+  talepNo:"", saat:""
+};
+
+const katObj    = () => KAT.find(k=>k.id===S.katId);
+const bolgeObj  = () => BOLGE.find(b=>b.kod===S.bolge);
+const acilObj   = () => ACILIYET.find(a=>a.id===S.acil);
+const acilTurObj= () => ACIL_TURLER.find(t=>t.id===S.acilTur);
 
 function fazSirasi(){
-  const k = katObj();
-  const s = ["kat","alt"];
+  if(S.deneyim==="acil"){
+    const s=["deneyim","acil-tur"];
+    if(acilTurObj()?.uyari) s.push("acil-uyari");
+    s.push("bolge","ozet");
+    return s;
+  }
+  if(S.deneyim==="belirsiz"){
+    return["deneyim","belirsiz-davranis","belirsiz-sistem","bolge","ozet"];
+  }
+  // normal
+  const k=katObj(), s=["deneyim","kat","alt"];
   if(k?.baglamlar?.length>=1) s.push("bag0");
   if(k?.baglamlar?.length>=2) s.push("bag1");
-  s.push("bolge","acil","ozet");
+  s.push("bolge","aciliyet","ozet");
   return s;
 }
 
-function sonrakiFaz(f){ const s=fazSirasi(); return s[s.indexOf(f)+1]||"ozet"; }
-function oncekiFaz(f){ const s=fazSirasi(); const i=s.indexOf(f); return i>0?s[i-1]:null; }
+const sonraki = f=>{const s=fazSirasi();return s[s.indexOf(f)+1]||"ozet";};
+const onceki  = f=>{const s=fazSirasi();const i=s.indexOf(f);return i>0?s[i-1]:null;};
 
-function progressPct(){
-  const s=fazSirasi(); const i=s.indexOf(S.faz);
-  return i<0?0:Math.round(((i+1)/(s.length-1))*100);
+function progress(){
+  const s=fazSirasi(),i=s.indexOf(S.faz);
+  if(i<=0) return 0;
+  return Math.round((i/(s.length-2))*100);
 }
 
 function talepNoUret(){
   const n=new Date();
-  return `TH-${String(n.getFullYear()).slice(2)}${String(n.getMonth()+1).padStart(2,"0")}${String(n.getDate()).padStart(2,"0")}-${Math.floor(100+Math.random()*900)}`;
+  return`TH-${String(n.getFullYear()).slice(2)}${String(n.getMonth()+1).padStart(2,"0")}${String(n.getDate()).padStart(2,"0")}-${Math.floor(100+Math.random()*900)}`;
+}
+const saatFmt=d=>`${String(d.getHours()).padStart(2,"0")}:${String(d.getMinutes()).padStart(2,"0")}`;
+
+function kokNeden(){
+  if(S.deneyim==="normal") return katObj()?.kok?.(S.alt,S.bc)||[];
+  return[];
 }
 
-function saatFmt(d){ return `${String(d.getHours()).padStart(2,"0")}:${String(d.getMinutes()).padStart(2,"0")}`; }
-
-function kokNeden(){ const k=katObj(); return k?.kok?.(S.alt,S.bc)||""; }
-
-function sheetsRow(){
-  const k=katObj(),b=bolgeObj(),a=acilObj();
-  return [S.talepNo,S.saat,b?`${b.kod}/${b.label}`:"",k?.label||"",S.alt||"",S.bc.filter(Boolean).join("|"),k?.sistem||"",a?.label||"",kokNeden(),"Bekliyor","",""].join("\t");
+function mudahaleTipi(){
+  if(S.deneyim==="acil") return"Acil saha müdahalesi";
+  if(S.deneyim==="belirsiz") return"Saha teşhisi gerekiyor";
+  return katObj()?.mudahale?.(S.alt,S.bc)||"Standart saha";
 }
 
 function waMsg(){
-  const k=katObj(),b=bolgeObj(),a=acilObj();
-  return encodeURIComponent([`Arel Talep`,`No: ${S.talepNo}`,`Sorun: ${k?.label||""}${S.alt?" — "+S.alt:""}`,`Bölge: ${b?b.kod+" / "+b.label:""}`,`Aciliyet: ${a?.label||""}`,`Saat: ${S.saat}`].join("\n"));
+  const b=bolgeObj(),k=katObj(),a=acilObj(),t=acilTurObj();
+  const lines=["Arel Talep", `No: ${S.talepNo}`];
+  if(S.deneyim==="acil"){
+    lines.push("Tür: Acil Arıza",`Durum: ${t?.label||""}`,`Bölge: ${b?b.kod+" / "+b.label:""}`);
+  } else if(S.deneyim==="belirsiz"){
+    lines.push("Tür: Belirsiz Arıza",`Davranış: ${S.belirsizDavranis||""}`,`Sistem: ${S.belirsizSistem||""}`,`Bölge: ${b?b.kod+" / "+b.label:""}`);
+  } else {
+    lines.push(`Sorun: ${k?.label||""}`,S.alt?`Belirti: ${S.alt}`:"");
+    S.bc.filter(Boolean).forEach(c=>lines.push(`Bağlam: ${c}`));
+    lines.push(`Bölge: ${b?b.kod+" / "+b.label:""}`,`Aciliyet: ${a?.label||""}`);
+  }
+  lines.push(`Müdahale: ${mudahaleTipi()}`,`Saat: ${S.saat}`);
+  const kn=kokNeden();
+  if(kn.length>0) lines.push(`Olası nedenler: ${kn.join(" / ")}`);
+  return encodeURIComponent(lines.filter(Boolean).join("\n"));
 }
 
-/* ── NAVİGASYON ─────────────────────────────────────── */
+/* NAVİGASYON */
 function showScreen(id){
-  document.querySelectorAll('.screen').forEach(s=>{ s.classList.add('hidden'); s.classList.remove('slide-in'); });
-  const el = document.getElementById(id);
-  if(el){ el.classList.remove('hidden'); el.classList.add('slide-in'); }
+  document.querySelectorAll('.screen').forEach(s=>{s.classList.add('hidden');s.classList.remove('slide-in');});
+  const el=document.getElementById(id);
+  el?.classList.remove('hidden'); el?.classList.add('slide-in');
 }
 
 function kayitBaslat(){
-  const now = new Date();
-  S = {faz:"kat", katId:null, alt:null, bc:[], bolge:null, acil:null, talepNo:talepNoUret(), saat:saatFmt(now)};
+  const now=new Date();
+  S={faz:"deneyim",deneyim:null,acilTur:null,katId:null,alt:null,bc:[],belirsizDavranis:null,belirsizSistem:null,bolge:null,acil:null,talepNo:talepNoUret(),saat:saatFmt(now)};
   showScreen('screen-kayit');
   render();
 }
 
-/* ── RENDER ─────────────────────────────────────────── */
+function ileri(f){ S.faz=sonraki(f); render(); }
+
+/* RENDER */
 function render(){
-  const el = document.getElementById('k-inner');
-  switch(S.faz){
-    case "kat":   el.innerHTML = rKat(); break;
-    case "alt":   el.innerHTML = rAlt(); break;
-    case "bag0":  el.innerHTML = rBag(0); break;
-    case "bag1":  el.innerHTML = rBag(1); break;
-    case "bolge": el.innerHTML = rBolge(); break;
-    case "acil":  el.innerHTML = rAcil(); break;
-    case "ozet":  el.innerHTML = rOzet(); break;
-  }
-  bindEvents();
+  const map={
+    "deneyim":rDeneyim,
+    "acil-tur":rAcilTur,
+    "acil-uyari":rAcilUyari,
+    "kat":rKat,
+    "alt":rAlt,
+    "bag0":()=>rBag(0),
+    "bag1":()=>rBag(1),
+    "belirsiz-davranis":rBelirsizDavranis,
+    "belirsiz-sistem":rBelirsizSistem,
+    "bolge":rBolge,
+    "aciliyet":rAciliyet,
+    "ozet":rOzet,
+  };
+  document.getElementById('k-inner').innerHTML=(map[S.faz]||rDeneyim)();
+  bind();
 }
 
-function progressBar(){ return `<div class="k-progress"><div class="k-progress-fill" style="width:${progressPct()}%"></div></div>`; }
+const pbar=()=>`<div class="k-progress"><div class="k-progress-fill" style="width:${progress()}%"></div></div>`;
+const geri=()=>`<button class="back-btn" id="k-geri"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Geri</button>`;
 
-function backBtn(){ return `<button class="back-btn" id="k-geri"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Geri</button>`; }
+/* EKRANLAR */
 
-/* ── EKRANLAR ───────────────────────────────────────── */
-function rKat(){
-  const opts = KAT.map((k,i)=>`
-    <button class="choice-btn b${i+1}${S.katId===k.id?" selected":""}" data-kat="${k.id}">
-      <div class="btn-icon">${k.ikon}</div>
-      <div class="btn-text"><div class="btn-main">${k.label}</div></div>
+/* A1/A2/A3 GİRİŞ */
+function rDeneyim(){
+  return`<div class="k-top">
+  ${pbar()}
+  <div class="k-step-lbl">Durum</div>
+  <div class="k-title">Şu an ne yaşıyorsunuz?</div>
+  <div class="k-list">
+    <button class="choice-btn acil-stil" data-deneyim="acil">
+      <div class="btn-icon">🚨</div>
+      <div class="btn-text">
+        <div class="btn-main">Acil arıza</div>
+        <div class="btn-sub">Güvenlik riski, sistem durdu, hemen çözülmeli</div>
+      </div>
       <span class="btn-arrow">›</span>
-    </button>`).join("");
-  return `<div class="k-top">${progressBar()}
-    <div class="k-step-lbl">Adım 1 — Sorun</div>
-    <div class="k-title">Ne sorunu var?</div>
-    <div class="k-btn-list">${opts}</div>
-  </div>`;
-}
-
-function rAlt(){
-  const k = katObj();
-  const opts = (k?.altlar||[]).map((a,i)=>`
-    <button class="choice-btn b${i+1}${S.alt===a?" selected":""}" data-alt="${a}">
-      <div class="btn-text"><div class="btn-main">${a}</div></div>
+    </button>
+    <button class="choice-btn" data-deneyim="normal">
+      <div class="btn-icon">🔧</div>
+      <div class="btn-text">
+        <div class="btn-main">Normal arıza</div>
+        <div class="btn-sub">Çalışmıyor ama acil değil</div>
+      </div>
       <span class="btn-arrow">›</span>
-    </button>`).join("");
-  const warn = k?.uyari ? Object.entries(k.uyari).map(([key,val])=>`<div class="k-warn" style="${S.alt===key?'':'display:none'}">${val}</div>`).join("") : "";
-  return `<div class="k-top">${backBtn()}${progressBar()}
-    <div class="k-step-lbl">Adım 2 — Belirti</div>
-    <div class="k-title">Ne oluyor tam olarak?</div>
-    <div class="k-btn-list">${opts}</div>
-    ${warn}
-  </div>`;
-}
-
-function rBag(idx){
-  const k = katObj();
-  const bag = k?.baglamlar?.[idx];
-  if(!bag){ S.faz=sonrakiFaz(idx===0?"bag0":"bag1"); render(); return ""; }
-  const opts = bag.sec.map((s,i)=>`
-    <button class="choice-btn b${i+1}${S.bc[idx]===s?" selected":""}" data-bag="${idx}" data-val="${s}">
-      <div class="btn-text"><div class="btn-main">${s}</div></div>
+    </button>
+    <button class="choice-btn" data-deneyim="belirsiz">
+      <div class="btn-icon">🔍</div>
+      <div class="btn-text">
+        <div class="btn-main">Neyden kaynaklı bilmiyorum</div>
+        <div class="btn-sub">Bazen oluyor, garip bir şey var</div>
+      </div>
       <span class="btn-arrow">›</span>
-    </button>`).join("");
-  const adim = idx===0?3:4;
-  return `<div class="k-top">${backBtn()}${progressBar()}
-    <div class="k-step-lbl">Adım ${adim} — Bağlam</div>
-    <div class="k-title">${bag.soru}</div>
-    <div class="k-btn-list">${opts}</div>
+    </button>
+  </div>
   </div>`;
 }
 
-function rBolge(){
-  const opts = BOLGE.map((b,i)=>`
-    <button class="choice-btn b${i+1}${S.bolge===b.kod?" selected":""}" data-bolge="${b.kod}">
-      <div class="btn-icon" style="font-size:11px;font-weight:700;color:#3B82F6;background:rgba(37,99,235,0.08)">${b.kod}</div>
-      <div class="btn-text"><div class="btn-main">${b.label}</div></div>
-      <span class="btn-arrow">›</span>
-    </button>`).join("");
-  return `<div class="k-top">${backBtn()}${progressBar()}
-    <div class="k-step-lbl">Bölge</div>
-    <div class="k-title">Hangi bölgedesiniz?</div>
-    <div class="k-btn-list">${opts}</div>
+/* A1 — ACİL TÜR */
+function rAcilTur(){
+  return`<div class="k-top">
+  ${geri()}${pbar()}
+  <div class="k-step-lbl">Acil — Durum</div>
+  <div class="k-title">Hangisi var?</div>
+  <div class="k-list">
+    ${ACIL_TURLER.map(t=>`
+      <button class="choice-btn${t.uyari?" acil-stil":""}" data-acil-tur="${t.id}">
+        <div class="btn-text"><div class="btn-main">${t.label}</div></div>
+        <span class="btn-arrow">›</span>
+      </button>`).join("")}
+  </div>
   </div>`;
 }
 
-function rAcil(){
-  const opts = ACILIYET.map((a,i)=>`
-    <button class="time-btn t${i+1}${S.acil===a.id?" selected":""}" data-acil="${a.id}">
-      <div class="time-icon">${a.ikon}</div>
-      <div class="time-label">${a.label}</div>
-      <div class="time-sub">${a.sub}</div>
-    </button>`).join("");
-  return `<div class="k-top">${backBtn()}${progressBar()}
-    <div class="k-step-lbl">Zaman</div>
-    <div class="k-title">Ne zaman çözülmesini istiyorsunuz?</div>
-    <div class="time-grid">${opts}</div>
-  </div>`;
-}
-
-function rOzet(){
-  const k=katObj(), b=bolgeObj(), a=acilObj();
-  const bagSatir = S.bc.filter(Boolean).map((c,i)=>{
-    const soru = k?.baglamlar?.[i]?.soru||"";
-    return `<div class="k-ozet-row"><span class="k-ozet-lbl">${soru}</span><span class="k-ozet-val">${c}</span></div>`;
-  }).join("");
-  const kn = kokNeden();
-  return `<div class="k-top">
-    <div class="k-talep-no">${S.talepNo}</div>
-    <div class="k-ozet-row"><span class="k-ozet-lbl">Sorun</span><span class="k-ozet-val">${k?.label||""}</span></div>
-    <div class="k-ozet-row"><span class="k-ozet-lbl">Belirti</span><span class="k-ozet-val">${S.alt||""}</span></div>
-    ${bagSatir}
-    <div class="k-ozet-row"><span class="k-ozet-lbl">Bölge</span><span class="k-ozet-val">${b?b.kod+" / "+b.label:""}</span></div>
-    <div class="k-ozet-row"><span class="k-ozet-lbl">Aciliyet</span><span class="k-ozet-val">${a?.label||""}</span></div>
-    <div class="k-ozet-row"><span class="k-ozet-lbl">Saat</span><span class="k-ozet-val">${S.saat}</span></div>
-    ${kn?`<div class="k-kok">Şüphe: ${kn}</div>`:""}
-    <div class="k-status">
-      <span class="on">Talep alındı</span><span class="sep">→</span>
-      <span class="off">İnceleniyor</span><span class="sep">→</span>
-      <span class="off">Dönüş planlandı</span>
+/* A1 — UYARI EKRANI */
+function rAcilUyari(){
+  return`<div class="k-top">
+  ${geri()}
+  <div class="uyari-ekran">
+    <div class="uyari-ikon">⚠️</div>
+    <div class="uyari-baslik">Güvenlik Uyarısı</div>
+    <div class="uyari-metin">
+      <strong>Sistemi hemen kullanmayı bırakın.</strong><br><br>
+      Tüm cihazların fişini çekin.<br>
+      Ana şalteri kapatın.<br><br>
+      Kokuyu veya kıvılcımı kaynağında aramayın.<br>
+      Varsa binayı terk edin ve güvenli alana geçin.
     </div>
   </div>
-  <div class="k-bot">
-    <a class="k-wa" href="https://wa.me/${WA}?text=${waMsg()}" target="_blank">WhatsApp'a Gönder ↗</a>
-    <button class="k-sheets" id="k-sheets">Google Sheets satırını kopyala</button>
-    <div class="k-note">No · Saat · Bölge · Sorun · Belirti · Bağlam · Sistem · Aciliyet · Şüphe · Durum</div>
-    <button class="k-yeni" id="k-yeni">Yeni kayıt →</button>
+  <button class="btn-anlad" id="k-anlad">Anladım, bildirim gönder →</button>
   </div>`;
 }
 
-/* ── EVENT BINDING ───────────────────────────────────── */
-function bindEvents(){
-  const $ = id=>document.getElementById(id);
+/* A2 — KATEGORİ */
+function rKat(){
+  return`<div class="k-top">
+  ${geri()}${pbar()}
+  <div class="k-step-lbl">Adım 1 — Sorun</div>
+  <div class="k-title">Sorun ne ile ilgili?</div>
+  <div class="k-list">
+    ${KAT.map(k=>`
+      <button class="choice-btn" data-kat="${k.id}">
+        <div class="btn-icon">${k.ikon}</div>
+        <div class="btn-text"><div class="btn-main">${k.label}</div></div>
+        <span class="btn-arrow">›</span>
+      </button>`).join("")}
+  </div>
+  </div>`;
+}
+
+/* A2 — ALT BELİRTİ */
+function rAlt(){
+  const k=katObj();
+  return`<div class="k-top">
+  ${geri()}${pbar()}
+  <div class="k-step-lbl">Adım 2 — Belirti</div>
+  <div class="k-title">Ne oluyor tam olarak?</div>
+  <div class="k-list">
+    ${(k?.altlar||[]).map(a=>`
+      <button class="choice-btn" data-alt="${a.replace(/"/g,'&quot;')}">
+        <div class="btn-text"><div class="btn-main">${a}</div></div>
+        <span class="btn-arrow">›</span>
+      </button>`).join("")}
+  </div>
+  <div class="k-warn" id="k-warn"></div>
+  </div>`;
+}
+
+/* A2 — BAĞLAM */
+function rBag(idx){
+  const k=katObj(),bag=k?.baglamlar?.[idx];
+  if(!bag){ileri(idx===0?"bag0":"bag1");return"";}
+  return`<div class="k-top">
+  ${geri()}${pbar()}
+  <div class="k-step-lbl">Adım ${idx+3} — Bağlam</div>
+  <div class="k-title">${bag.soru}</div>
+  <div class="k-list">
+    ${bag.sec.map(s=>`
+      <button class="choice-btn" data-bag="${idx}" data-val="${s.replace(/"/g,'&quot;')}">
+        <div class="btn-text"><div class="btn-main">${s}</div></div>
+        <span class="btn-arrow">›</span>
+      </button>`).join("")}
+  </div>
+  </div>`;
+}
+
+/* A3 — DAVRANIŞ */
+function rBelirsizDavranis(){
+  return`<div class="k-top">
+  ${geri()}${pbar()}
+  <div class="k-step-lbl">Adım 1 — Davranış</div>
+  <div class="k-title">Sorun nasıl davranıyor?</div>
+  <div class="k-list">
+    ${BELIRSIZ_DAVRANISLAR.map(d=>`
+      <button class="choice-btn" data-belirsiz-davranis="${d.replace(/"/g,'&quot;')}">
+        <div class="btn-text"><div class="btn-main">${d}</div></div>
+        <span class="btn-arrow">›</span>
+      </button>`).join("")}
+  </div>
+  </div>`;
+}
+
+/* A3 — SİSTEM */
+function rBelirsizSistem(){
+  return`<div class="k-top">
+  ${geri()}${pbar()}
+  <div class="k-step-lbl">Adım 2 — Sistem</div>
+  <div class="k-title">Hangi sistem etkileniyor?</div>
+  <div class="k-list">
+    ${BELIRSIZ_SISTEMLER.map(s=>`
+      <button class="choice-btn" data-belirsiz-sistem="${s.label.replace(/"/g,'&quot;')}" data-sistem-tip="${s.sistem}">
+        <div class="btn-text"><div class="btn-main">${s.label}</div></div>
+        <span class="btn-arrow">›</span>
+      </button>`).join("")}
+  </div>
+  </div>`;
+}
+
+/* BÖLGE */
+function rBolge(){
+  return`<div class="k-top">
+  ${geri()}${pbar()}
+  <div class="k-step-lbl">Bölge</div>
+  <div class="k-title">Hangi bölgedesiniz?</div>
+  <div class="k-list">
+    ${BOLGE.map(b=>`
+      <button class="choice-btn" data-bolge="${b.kod}">
+        <div class="btn-icon" style="font-size:10px;font-weight:800;color:#3B82F6;background:rgba(37,99,235,0.08)">${b.kod}</div>
+        <div class="btn-text"><div class="btn-main">${b.label}</div></div>
+        <span class="btn-arrow">›</span>
+      </button>`).join("")}
+  </div>
+  </div>`;
+}
+
+/* ACİLİYET (sadece normal) */
+function rAciliyet(){
+  return`<div class="k-top">
+  ${geri()}${pbar()}
+  <div class="k-step-lbl">Zaman</div>
+  <div class="k-title">Ne zaman çözülmesini istiyorsunuz?</div>
+  <div class="time-grid">
+    ${ACILIYET.map(a=>`
+      <button class="time-btn" data-aciliyet="${a.id}">
+        <div class="time-icon">${a.ikon}</div>
+        <div class="time-label">${a.label}</div>
+        <div class="time-sub">${a.sub}</div>
+      </button>`).join("")}
+  </div>
+  </div>`;
+}
+
+/* ÖZET */
+function rOzet(){
+  const b=bolgeObj(),k=katObj(),a=acilObj(),t=acilTurObj(),mt=mudahaleTipi();
+  const kn=kokNeden();
+
+  let satirlar="";
+  if(S.deneyim==="acil"){
+    satirlar+=row("Tür","Acil Arıza")+row("Durum",t?.label||"")+row("Bölge",b?b.kod+" / "+b.label:"");
+  } else if(S.deneyim==="belirsiz"){
+    satirlar+=row("Tür","Belirsiz Arıza")+row("Davranış",S.belirsizDavranis||"")+row("Sistem",S.belirsizSistem||"")+row("Bölge",b?b.kod+" / "+b.label:"");
+  } else {
+    satirlar+=row("Sorun",k?.label||"")+row("Belirti",S.alt||"");
+    S.bc.filter(Boolean).forEach((c,i)=>{ satirlar+=row(k?.baglamlar?.[i]?.soru||"Bağlam",c); });
+    satirlar+=row("Bölge",b?b.kod+" / "+b.label:"")+row("Aciliyet",a?.label||"");
+  }
+
+  const kokHtml = kn.length>0 ? `<div class="k-kok">
+    <div class="k-kok-baslik">Olası nedenler</div>
+    ${kn.map(n=>`— ${n}`).join("<br>")}
+  </div>` : "";
+
+  return`<div class="k-top">
+  <div class="k-talep-no">${S.talepNo}</div>
+  <div class="k-mudahale">${mt}</div>
+  ${satirlar}
+  ${kokHtml}
+  <div class="k-status">
+    <span class="on">Talep alındı</span><span class="sep">→</span>
+    <span class="off">İnceleniyor</span><span class="sep">→</span>
+    <span class="off">Dönüş planlandı</span>
+  </div>
+  <a class="k-wa" href="https://wa.me/${WA}?text=${waMsg()}" target="_blank">WhatsApp'a Gönder ↗</a>
+  <button class="k-yeni" id="k-yeni">Yeni kayıt →</button>
+  </div>`;
+}
+
+function row(lbl,val){
+  if(!val) return"";
+  return`<div class="k-row"><span class="k-lbl">${lbl}</span><span class="k-val">${val}</span></div>`;
+}
+
+/* EVENTLER */
+function bind(){
+  const $=id=>document.getElementById(id);
 
   $("k-geri")?.addEventListener("click",()=>{
-    const p=oncekiFaz(S.faz);
-    if(!p){ showScreen('screen1'); return; }
+    const p=onceki(S.faz);
+    if(!p){showScreen('screen1');return;}
     S.faz=p; render();
   });
 
-  $("k-sheets")?.addEventListener("click",()=>{
-    navigator.clipboard.writeText(sheetsRow()).then(()=>{
-      const b=$("k-sheets"); if(!b) return;
-      b.textContent="✓ kopyalandı — Sheets'e yapıştır"; b.classList.add("ok");
-      setTimeout(()=>{ b.textContent="Google Sheets satırını kopyala"; b.classList.remove("ok"); },2500);
-    });
-  });
+  $("k-anlad")?.addEventListener("click",()=>{ ileri("acil-uyari"); });
 
   $("k-yeni")?.addEventListener("click",()=>{
     showScreen('screen1');
     document.getElementById('k-inner').innerHTML="";
   });
 
+  document.querySelectorAll("[data-deneyim]").forEach(el=>el.addEventListener("click",()=>{
+    S.deneyim=el.dataset.deneyim;
+    ileri("deneyim");
+  }));
+
+  document.querySelectorAll("[data-acil-tur]").forEach(el=>el.addEventListener("click",()=>{
+    S.acilTur=el.dataset.acilTur;
+    ileri("acil-tur");
+  }));
+
   document.querySelectorAll("[data-kat]").forEach(el=>el.addEventListener("click",()=>{
     S.katId=el.dataset.kat; S.alt=null; S.bc=[];
-    S.faz=sonrakiFaz("kat"); render();
+    ileri("kat");
   }));
+
   document.querySelectorAll("[data-alt]").forEach(el=>el.addEventListener("click",()=>{
     S.alt=el.dataset.alt;
-    S.faz=sonrakiFaz("alt"); render();
+    const k=katObj(),w=$("k-warn");
+    if(k?.uyari?.[S.alt]&&w){
+      w.textContent=k.uyari[S.alt]; w.style.display="block";
+      setTimeout(()=>ileri("alt"),1400);
+    } else {
+      ileri("alt");
+    }
   }));
+
   document.querySelectorAll("[data-bag]").forEach(el=>el.addEventListener("click",()=>{
-    const idx=parseInt(el.dataset.bag); S.bc[idx]=el.dataset.val;
-    S.faz=sonrakiFaz(idx===0?"bag0":"bag1"); render();
+    const idx=parseInt(el.dataset.bag);
+    S.bc[idx]=el.dataset.val;
+    ileri(idx===0?"bag0":"bag1");
   }));
+
+  document.querySelectorAll("[data-belirsiz-davranis]").forEach(el=>el.addEventListener("click",()=>{
+    S.belirsizDavranis=el.dataset.belirsizDavranis;
+    ileri("belirsiz-davranis");
+  }));
+
+  document.querySelectorAll("[data-belirsiz-sistem]").forEach(el=>el.addEventListener("click",()=>{
+    S.belirsizSistem=el.dataset.belirsizSistem;
+    ileri("belirsiz-sistem");
+  }));
+
   document.querySelectorAll("[data-bolge]").forEach(el=>el.addEventListener("click",()=>{
     S.bolge=el.dataset.bolge;
-    S.faz=sonrakiFaz("bolge"); render();
+    ileri("bolge");
   }));
-  document.querySelectorAll("[data-acil]").forEach(el=>el.addEventListener("click",()=>{
-    S.acil=el.dataset.acil;
-    S.faz=sonrakiFaz("acil"); render();
+
+  document.querySelectorAll("[data-aciliyet]").forEach(el=>el.addEventListener("click",()=>{
+    S.acil=el.dataset.aciliyet;
+    ileri("aciliyet");
   }));
 }
 </script>
