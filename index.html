@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="TEHAŞ — Kemalpaşa ve çevresinde güvenlik kamerası, elektrik, uydu, ağ altyapısı ve teknik destek hizmetleri.">
+<meta name="description" content="TEHAŞ — Kamera görüntü kaybı, sigorta arızası, sinyal sorunu, ağ problemi? Kemalpaşa ve çevresinde ölçüm temelli teknik servis.">
+<meta name="keywords" content="Kemalpaşa elektrik arıza, kamera görüntü gitme, sigorta atıyor, Armutlu teknik servis, İzmir güvenlik kamerası arıza, Kemalpaşa uydu sorunu">
 <title>TEHAŞ — Teknik Hizmetler | Kemalpaşa, İzmir</title>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
@@ -11,8 +12,6 @@
 html{scroll-behavior:smooth}
 body{background:#060810;color:#fff;font-family:'Inter',sans-serif;line-height:1.6;overflow-x:hidden}
 :root{--blue:#2563EB;--blue-light:#3B82F6;--dark:#060810;--dark2:#0a0d16;--card:#0d1120;--border:rgba(255,255,255,0.07);--borderblue:rgba(37,99,235,0.3);--wa:#25D366;--gray:#666;--gray2:#999}
-
-/* NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 24px;display:flex;align-items:center;justify-content:space-between;background:rgba(6,8,16,0.85);backdrop-filter:blur(20px)}
 .nav-logo-wrap{display:flex;flex-direction:column;gap:2px}
 .nav-logo{font-family:'Montserrat',sans-serif;font-weight:900;font-size:22px;letter-spacing:2px;color:#fff;text-decoration:none}
@@ -20,12 +19,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 24px;display:fl
 .nav-tagline{font-size:8px;letter-spacing:3px;text-transform:uppercase;color:var(--gray2);font-weight:400}
 .nav-menu{width:44px;height:44px;border:1px solid rgba(255,255,255,0.15);border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;cursor:pointer;background:rgba(255,255,255,0.04)}
 .nav-menu span{width:18px;height:1.5px;background:#fff;display:block}
-
-/* HERO */
 .hero{min-height:100vh;position:relative;display:flex;flex-direction:column;justify-content:flex-end;padding:0 24px 60px;overflow:hidden}
 .hero-bg{position:absolute;inset:0;background:linear-gradient(135deg,#060810 0%,#0a0f1e 40%,#060d1a 100%)}
 .hero-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(6,8,16,0.3) 0%,rgba(6,8,16,0.7) 60%,rgba(6,8,16,0.95) 100%)}
-.hero-img{position:absolute;right:-20px;top:0;bottom:0;width:75%;object-fit:cover;opacity:0.25;mix-blend-mode:luminosity}
 .hero-accent{position:absolute;left:24px;top:50%;transform:translateY(-80%);width:3px;height:80px;background:linear-gradient(to bottom,transparent,var(--blue),transparent)}
 .hero-content{position:relative;z-index:2}
 .hero-title{font-family:'Montserrat',sans-serif;font-size:clamp(36px,9vw,56px);font-weight:900;letter-spacing:-1px;line-height:1.05;margin-bottom:32px;text-transform:uppercase}
@@ -35,13 +31,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 24px;display:fl
 .btn-call:hover{border-color:#fff;background:rgba(255,255,255,0.05)}
 .btn-wa{display:inline-flex;align-items:center;gap:10px;background:transparent;color:#fff;padding:14px 24px;border-radius:100px;border:1px solid rgba(37,211,102,0.4);font-family:'Montserrat',sans-serif;font-size:13px;font-weight:700;letter-spacing:1px;text-decoration:none;text-transform:uppercase;transition:all .3s}
 .btn-wa:hover{border-color:var(--wa);background:rgba(37,211,102,0.08)}
-
-/* SERVICE GRID */
 .services-section{padding:32px 24px 24px;background:var(--dark)}
 .services-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
 .svc-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:0;overflow:hidden;text-decoration:none;color:#fff;transition:border-color .3s,transform .3s;display:flex;flex-direction:column}
 .svc-card:hover{border-color:var(--borderblue);transform:translateY(-2px)}
-.svc-img{width:100%;height:100px;object-fit:cover;opacity:0.6;filter:brightness(0.7) saturate(0.5)}
 .svc-img-placeholder{width:100%;height:100px;background:linear-gradient(135deg,#0d1525,#111827);display:flex;align-items:center;justify-content:center;font-size:32px;opacity:0.7}
 .svc-body{padding:14px 14px 16px}
 .svc-icon-row{display:flex;align-items:center;gap:8px;margin-bottom:10px}
@@ -49,8 +42,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 24px;display:fl
 .svc-name{font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;line-height:1.3;flex:1}
 .svc-arrow{color:var(--gray);font-size:16px;transition:transform .3s}
 .svc-card:hover .svc-arrow{transform:translateX(3px);color:var(--blue-light)}
-
-/* QR BAND */
 .qr-band{margin:0 24px 32px;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px 20px;display:flex;align-items:center;gap:16px;text-decoration:none;color:#fff;transition:border-color .3s}
 .qr-band:hover{border-color:var(--borderblue)}
 .qr-box{width:52px;height:52px;background:#fff;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
@@ -59,8 +50,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 24px;display:fl
 .qr-label{font-family:'Montserrat',sans-serif;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:2px}
 .qr-sub{font-size:11px;color:var(--gray2)}
 .qr-arrow{color:var(--gray);font-size:18px}
-
-/* FOOTER */
 footer{background:var(--dark2);border-top:1px solid var(--border);padding:32px 24px;text-align:center}
 .footer-logo{font-family:'Montserrat',sans-serif;font-weight:900;font-size:18px;letter-spacing:2px;margin-bottom:6px}
 .footer-logo span{color:var(--blue)}
@@ -69,13 +58,10 @@ footer{background:var(--dark2);border-top:1px solid var(--border);padding:32px 2
 .footer-links a{font-size:12px;color:var(--gray2);text-decoration:none;transition:color .2s}
 .footer-links a:hover{color:#fff}
 .footer-copy{font-size:11px;color:rgba(255,255,255,0.15)}
-
-/* WA FLOAT */
 .wa-float{position:fixed;bottom:24px;right:24px;z-index:200;width:56px;height:56px;border-radius:50%;background:var(--wa);display:flex;align-items:center;justify-content:center;font-size:24px;text-decoration:none;box-shadow:0 8px 32px rgba(37,211,102,.4);transition:transform .3s}
 .wa-float:hover{transform:scale(1.1)}
 .wa-float::before{content:'';position:absolute;inset:-4px;border-radius:50%;border:2px solid rgba(37,211,102,.3);animation:waPulse 2.5s ease infinite}
 @keyframes waPulse{0%{transform:scale(1);opacity:1}100%{transform:scale(1.5);opacity:0}}
-
 .reveal{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
 .reveal.visible{opacity:1;transform:translateY(0)}
 .d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}.d4{transition-delay:.32s}.d5{transition-delay:.40s}.d6{transition-delay:.48s}
@@ -83,7 +69,6 @@ footer{background:var(--dark2);border-top:1px solid var(--border);padding:32px 2
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
   <a href="/" class="nav-logo-wrap" style="text-decoration:none">
     <div class="nav-logo">TEH<span>A</span>Ş</div>
@@ -94,26 +79,24 @@ footer{background:var(--dark2);border-top:1px solid var(--border);padding:32px 2
   </div>
 </nav>
 
-<!-- HERO -->
 <section class="hero">
   <div class="hero-bg"></div>
   <div class="hero-accent"></div>
   <div class="hero-content">
-    <h1 class="hero-title">SAHİPSİZ<br>BIRAKMIIYORUZ<span class="dot">.</span></h1>
+    <h1 class="hero-title">ÖLÇMEDEN<br>DEĞİŞTİRMEYİZ<span class="dot">.</span></h1>
     <div class="hero-btns">
       <a href="tel:05367807059" class="btn-call">
         <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.4 11.1 19.79 19.79 0 01.36 2.5 2 2 0 012.34.5h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.09a16 16 0 006 6l.77-.77a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-        Hemen Ara
+        Arızayı Anlat
       </a>
-      <a href="https://wa.me/905367807059?text=Merhaba,%20hizmet%20almak%20istiyorum." class="btn-wa" target="_blank">
+      <a href="https://wa.me/905367807059?text=Merhaba,%20teknik%20bir%20sorunum%20var,%20yard%C4%B1m%20alabilir%20miyim?" class="btn-wa" target="_blank">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-        WhatsApp
+        Arızayı Birlikte Netleştirelim
       </a>
     </div>
   </div>
 </section>
 
-<!-- SERVİS GRID -->
 <section class="services-section">
   <div class="services-grid">
 
@@ -123,7 +106,7 @@ footer{background:var(--dark2);border-top:1px solid var(--border);padding:32px 2
         <div class="svc-icon-row">
           <svg class="svc-icon-svg" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2v-4M9 21H5a2 2 0 01-2-2v-4m0 0h18"/></svg>
         </div>
-        <div class="svc-name">Görsel Güvenlik</div>
+        <div class="svc-name">Kamera Görüntü Gitmiş mi?</div>
         <div class="svc-arrow">→</div>
       </div>
     </a>
@@ -134,7 +117,7 @@ footer{background:var(--dark2);border-top:1px solid var(--border);padding:32px 2
         <div class="svc-icon-row">
           <svg class="svc-icon-svg" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
         </div>
-        <div class="svc-name">Enerji Sistemleri</div>
+        <div class="svc-name">Sigorta mı Atıyor?</div>
         <div class="svc-arrow">→</div>
       </div>
     </a>
@@ -145,7 +128,7 @@ footer{background:var(--dark2);border-top:1px solid var(--border);padding:32px 2
         <div class="svc-icon-row">
           <svg class="svc-icon-svg" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg>
         </div>
-        <div class="svc-name">Ağ Altyapısı</div>
+        <div class="svc-name">Ağ Bağlantısı Kopuyor mu?</div>
         <div class="svc-arrow">→</div>
       </div>
     </a>
@@ -156,7 +139,7 @@ footer{background:var(--dark2);border-top:1px solid var(--border);padding:32px 2
         <div class="svc-icon-row">
           <svg class="svc-icon-svg" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12.55a11 11 0 0114.08 0M1.42 9a16 16 0 0121.16 0M8.53 16.11a6 6 0 016.95 0M12 20h.01"/></svg>
         </div>
-        <div class="svc-name">Sinyal Sistemleri</div>
+        <div class="svc-name">Sinyal Var mı, Sorun Nerede?</div>
         <div class="svc-arrow">→</div>
       </div>
     </a>
@@ -178,7 +161,7 @@ footer{background:var(--dark2);border-top:1px solid var(--border);padding:32px 2
         <div class="svc-icon-row">
           <svg class="svc-icon-svg" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
         </div>
-        <div class="svc-name">Teknik Talep</div>
+        <div class="svc-name">Teknik Talep Oluştur</div>
         <div class="svc-arrow">→</div>
       </div>
     </a>
@@ -186,7 +169,6 @@ footer{background:var(--dark2);border-top:1px solid var(--border);padding:32px 2
   </div>
 </section>
 
-<!-- QR BAND -->
 <a href="https://wa.me/905367807059?text=Destek%20i%C3%A7in%20ula%C5%9F%C4%B1yorum." class="qr-band reveal" target="_blank">
   <div class="qr-box">
     <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -217,17 +199,16 @@ footer{background:var(--dark2);border-top:1px solid var(--border);padding:32px 2
   </div>
   <div class="qr-text">
     <div class="qr-label">QR Destek Erişimi</div>
-    <div class="qr-sub">Hızlı destek ve teknik talep için</div>
+    <div class="qr-sub">Daha önce hizmet aldıysanız buradan ulaşın</div>
   </div>
   <div class="qr-arrow">→</div>
 </a>
 
-<!-- FOOTER -->
 <footer>
   <div class="footer-logo">TEH<span>A</span>Ş</div>
   <div class="footer-sub">Teknik Hizmetler · Kemalpaşa / İzmir</div>
   <div class="footer-links">
-    <a href="hizmetler.html">Hizmetler</a>
+    <a href="hizmetler.html">Çözdüğümüz Problemler</a>
     <a href="hakkimizda.html">Hakkımızda</a>
     <a href="iletisim.html">İletişim</a>
     <a href="https://wa.me/905367807059" target="_blank">WhatsApp</a>
@@ -235,7 +216,7 @@ footer{background:var(--dark2);border-top:1px solid var(--border);padding:32px 2
   <div class="footer-copy">© 2026 TEHAŞ Teknik Hizmetler · tehas.tr</div>
 </footer>
 
-<a href="https://wa.me/905367807059?text=Merhaba,%20hizmet%20almak%20istiyorum." class="wa-float" target="_blank">💬</a>
+<a href="https://wa.me/905367807059?text=Merhaba,%20teknik%20bir%20sorunum%20var." class="wa-float" target="_blank">💬</a>
 
 <script>
 const reveals=document.querySelectorAll('.reveal');
@@ -253,7 +234,7 @@ function toggleMenu(){
       m.style.cssText='position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(6,8,16,.97);z-index:99;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:32px';
       m.innerHTML=`
         <a href="#" onclick="toggleMenu()" style="position:absolute;top:24px;right:24px;color:#fff;font-size:28px;text-decoration:none">✕</a>
-        <a href="hizmetler.html" style="font-family:Montserrat,sans-serif;font-size:22px;font-weight:700;color:#fff;text-decoration:none;letter-spacing:2px;text-transform:uppercase">Hizmetler</a>
+        <a href="hizmetler.html" style="font-family:Montserrat,sans-serif;font-size:22px;font-weight:700;color:#fff;text-decoration:none;letter-spacing:2px;text-transform:uppercase">Çözdüğümüz Problemler</a>
         <a href="hakkimizda.html" style="font-family:Montserrat,sans-serif;font-size:22px;font-weight:700;color:#fff;text-decoration:none;letter-spacing:2px;text-transform:uppercase">Hakkımızda</a>
         <a href="iletisim.html" style="font-family:Montserrat,sans-serif;font-size:22px;font-weight:700;color:#fff;text-decoration:none;letter-spacing:2px;text-transform:uppercase">İletişim</a>
         <a href="tel:05367807059" style="font-family:Montserrat,sans-serif;font-size:16px;font-weight:700;color:#2563EB;text-decoration:none;letter-spacing:1px;border:1px solid #2563EB;padding:14px 32px;border-radius:100px">0 (536) 780 70 59</a>
