@@ -360,6 +360,113 @@ ul,ol{list-style:none;}
 }
 .splash-foot::before{content:'';width:14px;height:1px;background:var(--t-4);}
 
+/* ─── Arıza Bildirimi ───────────────── */
+.splash-sec{display:flex;justify-content:center;margin-top:16px;}
+.splash-sec-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:11px 20px;
+  border:1px solid var(--line-2);border-radius:12px;
+  background:var(--bg-1);
+  font-size:13px;font-weight:500;color:var(--t-2);
+  transition:border-color .2s,color .2s,background .2s;
+}
+.splash-sec-btn:active{opacity:.75;}
+.splash-sec-btn svg{width:15px;height:15px;flex-shrink:0;}
+
+.ariza-form-wrap{padding-bottom:8px;}
+.ariza-note{
+  font-size:13px;color:var(--t-2);line-height:1.55;
+  padding:12px 15px;
+  background:rgba(251,191,36,.06);
+  border:1px solid rgba(251,191,36,.22);
+  border-radius:12px;margin-bottom:20px;
+}
+
+.file-field{margin-bottom:16px;}
+.file-field>label{
+  display:block;
+  font-family:var(--f-mono);font-size:10px;font-weight:500;
+  letter-spacing:0.18em;color:var(--t-3);
+  text-transform:uppercase;margin-bottom:8px;
+}
+.file-input-wrap{
+  position:relative;
+  display:flex;align-items:center;gap:13px;
+  padding:12px 16px;
+  background:var(--bg-1);border:1px dashed var(--line-2);
+  border-radius:12px;cursor:pointer;min-height:54px;
+  transition:border-color .2s;
+}
+.file-input-wrap:hover{border-color:rgba(251,191,36,.5);}
+.file-input-wrap input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;}
+.file-ico{
+  width:36px;height:36px;border-radius:9px;
+  background:var(--bg-2);border:1px solid var(--line);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;color:var(--t-3);
+}
+.file-ico svg{width:18px;height:18px;}
+.file-meta{flex:1;min-width:0;}
+.file-t{font-size:14px;font-weight:500;color:var(--t-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.file-s{font-size:11px;color:var(--t-4);font-family:var(--f-mono);letter-spacing:.06em;}
+.file-preview{display:none;margin-top:10px;}
+.file-preview.has-file{display:block;}
+.file-preview img{width:100%;max-height:180px;object-fit:cover;border-radius:10px;border:1px solid var(--line);}
+
+.ariza-submit{
+  display:flex;align-items:center;justify-content:center;gap:9px;
+  width:100%;padding:16px;
+  background:var(--c-amber);color:#0a0800;
+  border-radius:13px;font-size:15px;font-weight:700;
+  margin-top:4px;margin-bottom:12px;
+  transition:opacity .2s,transform .15s var(--ease);
+  box-shadow:0 4px 20px -4px rgba(251,191,36,.42);
+}
+.ariza-submit:disabled{opacity:.38;box-shadow:none;cursor:not-allowed;}
+.ariza-submit:active:not(:disabled){transform:scale(0.98);}
+.ariza-submit svg{width:18px;height:18px;flex-shrink:0;}
+@keyframes spin{to{transform:rotate(360deg);}}
+
+.ariza-back{
+  display:flex;align-items:center;justify-content:center;gap:6px;
+  width:100%;padding:12px;font-size:13px;color:var(--t-3);
+  border:1px solid var(--line);border-radius:12px;
+  transition:color .2s,border-color .2s;
+}
+.ariza-back:hover{color:var(--t-1);border-color:var(--line-2);}
+
+.ariza-done{
+  display:flex;flex-direction:column;align-items:center;
+  text-align:center;padding:52px 24px;
+}
+.ariza-done-mark{
+  width:80px;height:80px;border-radius:50%;
+  background:radial-gradient(circle, rgba(251,191,36,.14), transparent 70%);
+  display:flex;align-items:center;justify-content:center;margin-bottom:20px;
+}
+.ariza-done-mark svg{width:34px;height:34px;color:var(--c-amber);}
+.ariza-done-h{font-size:22px;font-weight:700;color:#fff;letter-spacing:-0.02em;margin-bottom:10px;}
+.ariza-done-p{font-size:14px;color:var(--t-2);line-height:1.6;margin-bottom:20px;}
+.ariza-done-ref{
+  font-family:var(--f-mono);font-size:11px;letter-spacing:0.2em;
+  color:var(--c-amber);padding:9px 18px;
+  background:rgba(251,191,36,.08);border:1px solid rgba(251,191,36,.28);
+  border-radius:99px;
+}
+.ariza-done-back{
+  margin-top:28px;font-size:13px;color:var(--t-3);
+  text-decoration:underline;text-underline-offset:3px;cursor:pointer;
+  transition:color .2s;
+}
+.ariza-done-back:hover{color:var(--t-1);}
+
+.form-err{
+  display:none;font-size:13px;color:var(--c-red);line-height:1.5;
+  padding:10px 14px;border:1px solid rgba(248,113,113,.28);
+  border-radius:10px;background:rgba(248,113,113,.06);margin-bottom:14px;
+}
+.form-err.is-vis{display:block;}
+
 /* ─── Form fields ───────────────────── */
 .field{margin-bottom:14px;}
 .field label{
@@ -660,6 +767,13 @@ ul,ol{list-style:none;}
         <button class="splash-cta" data-action="start">
           <b>Başla</b><span class="arr">→</span>
         </button>
+
+        <div class="splash-sec">
+          <button class="splash-sec-btn" data-action="open-ariza">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 4v6m0 4v.01M5 19h14a2 2 0 0 0 1.7-3L13.7 5a2 2 0 0 0-3.4 0L3.3 16A2 2 0 0 0 5 19z"/></svg>
+            Arıza Bildirimi Formu
+          </button>
+        </div>
 
         <div class="splash-meta">
           <span class="splash-tag">Solar Kamera</span>
@@ -1092,6 +1206,73 @@ ul,ol{list-style:none;}
       </div>
     </section>
 
+    <!-- ─── ARIZA BİLDİRİM FORMU ──────── -->
+    <section class="screen" data-screen="ariza-form">
+      <div class="ariza-form-wrap">
+        <div class="s-eye">Arıza Bildirimi</div>
+        <h2 class="s-h">Arızanızı bildirin.</h2>
+        <p class="ariza-note">Formu doldurun; ekibimiz kısa sürede sizinle iletişime geçsin.</p>
+
+        <div id="arizaErr" class="form-err" role="alert"></div>
+
+        <form id="arizaForm" autocomplete="on" novalidate>
+          <div class="field">
+            <label for="ab-name">Ad Soyad <span style="color:var(--c-red)">*</span></label>
+            <input id="ab-name" type="text" autocomplete="name" placeholder="Adınız ve soyadınız">
+          </div>
+          <div class="field">
+            <label for="ab-tel">Telefon <span style="color:var(--c-red)">*</span></label>
+            <input id="ab-tel" type="tel" inputmode="tel" autocomplete="tel" placeholder="0 5__ ___ __ __">
+          </div>
+          <div class="field">
+            <label for="ab-adres">Adres <span style="color:var(--c-red)">*</span></label>
+            <textarea id="ab-adres" rows="2" placeholder="Açık adresiniz"></textarea>
+          </div>
+          <div class="field">
+            <label for="ab-aciklama">Açıklama <span style="color:var(--c-red)">*</span></label>
+            <textarea id="ab-aciklama" rows="4" placeholder="Arızayı kısaca açıklayın…"></textarea>
+          </div>
+
+          <div class="file-field">
+            <label>Fotoğraf <span style="color:var(--t-4)">(isteğe bağlı)</span></label>
+            <div class="file-input-wrap">
+              <input type="file" id="ab-foto" accept="image/*">
+              <span class="file-ico">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3z"/><circle cx="12" cy="13" r="3"/></svg>
+              </span>
+              <span class="file-meta">
+                <span class="file-t" id="arizaFileName">Fotoğraf ekle</span>
+                <span class="file-s">JPG, PNG — maks 5 MB</span>
+              </span>
+            </div>
+            <div class="file-preview" id="arizaPreview">
+              <img id="arizaPreviewImg" src="" alt="Fotoğraf önizleme">
+            </div>
+          </div>
+
+          <button type="submit" class="ariza-submit" id="arizaSubmit">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+            Bildirimi Gönder
+          </button>
+        </form>
+
+        <button class="ariza-back" data-action="close-ariza">‹ Geri dön</button>
+      </div>
+    </section>
+
+    <!-- ─── ARIZA BİLDİRİM BAŞARILI ───── -->
+    <section class="screen" data-screen="ariza-done">
+      <div class="ariza-done">
+        <div class="ariza-done-mark">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 4 4 10-10"/></svg>
+        </div>
+        <h2 class="ariza-done-h">Bildirim alındı.</h2>
+        <p class="ariza-done-p">Arıza bildiriminiz kaydedildi. Ekibimiz kısa süre içinde sizinle iletişime geçecek.</p>
+        <div class="ariza-done-ref" id="arizaDoneRef">AB-——————</div>
+        <button class="ariza-done-back" data-action="close-ariza-done">Ana sayfaya dön</button>
+      </div>
+    </section>
+
   </div>
 
   <!-- ╭─ DOCK ──────────────────────────╮ -->
@@ -1421,6 +1602,186 @@ ul,ol{list-style:none;}
 
   // ─── Init ───────────────────────────
   showScreen('splash');
+})();
+</script>
+
+<script>
+// ─── Arıza Bildirimi Modülü ──────────────
+(function(){
+  'use strict';
+
+  function byId(id){ return document.getElementById(id); }
+
+  function switchScreen(name){
+    document.querySelectorAll('[data-screen]').forEach(function(s){
+      s.classList.toggle('is-on', s.dataset.screen === name);
+    });
+    document.scrollingElement.scrollTo({top:0, behavior:'instant'});
+    var dock = byId('dock');
+    var stageWrap = byId('stageWrap');
+    var isAriza = (name === 'ariza-form' || name === 'ariza-done');
+    if(isAriza){
+      dock.hidden = true;
+      stageWrap.hidden = true;
+    }
+  }
+
+  // Navigation actions
+  document.addEventListener('click', function(e){
+    var t = e.target.closest('[data-action]');
+    if(!t) return;
+    if(t.dataset.action === 'open-ariza'){
+      switchScreen('ariza-form');
+    } else if(t.dataset.action === 'close-ariza'){
+      switchScreen('splash');
+    } else if(t.dataset.action === 'close-ariza-done'){
+      switchScreen('splash');
+    }
+  });
+
+  // Phone formatting
+  var telInput = byId('ab-tel');
+  if(telInput){
+    telInput.addEventListener('input', function(){
+      var raw = this.value.replace(/\D/g,'').slice(0,11);
+      var out = raw;
+      if(raw.length >= 4)  out = raw.slice(0,4)+' '+raw.slice(4);
+      if(raw.length >= 7)  out = raw.slice(0,4)+' '+raw.slice(4,7)+' '+raw.slice(7);
+      if(raw.length >= 9)  out = raw.slice(0,4)+' '+raw.slice(4,7)+' '+raw.slice(7,9)+' '+raw.slice(9);
+      this.value = out;
+    });
+  }
+
+  // Photo preview
+  var fotoInput = byId('ab-foto');
+  if(fotoInput){
+    fotoInput.addEventListener('change', function(){
+      var file = this.files[0];
+      var preview = byId('arizaPreview');
+      var nameEl = byId('arizaFileName');
+      if(!file){
+        preview.classList.remove('has-file');
+        nameEl.textContent = 'Fotoğraf ekle';
+        return;
+      }
+      if(file.size > 5 * 1024 * 1024){
+        showErr('Fotoğraf boyutu 5 MB\'ı geçemez.');
+        this.value = '';
+        return;
+      }
+      nameEl.textContent = file.name;
+      var reader = new FileReader();
+      reader.onload = function(ev){
+        byId('arizaPreviewImg').src = ev.target.result;
+        preview.classList.add('has-file');
+      };
+      reader.readAsDataURL(file);
+    });
+  }
+
+  function showErr(msg){
+    var el = byId('arizaErr');
+    el.textContent = msg;
+    el.classList.add('is-vis');
+  }
+
+  function hideErr(){
+    var el = byId('arizaErr');
+    el.classList.remove('is-vis');
+    el.textContent = '';
+  }
+
+  function setSubmitting(on){
+    var btn = byId('arizaSubmit');
+    if(on){
+      btn.disabled = true;
+      btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="animation:spin 1s linear infinite"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg> Gönderiliyor…';
+    } else {
+      btn.disabled = false;
+      btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg> Bildirimi Gönder';
+    }
+  }
+
+  // Form submission
+  var form = byId('arizaForm');
+  if(form){
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      hideErr();
+
+      var name     = byId('ab-name').value.trim();
+      var tel      = byId('ab-tel').value.trim();
+      var adres    = byId('ab-adres').value.trim();
+      var aciklama = byId('ab-aciklama').value.trim();
+      var fotoFile = fotoInput && fotoInput.files[0] ? fotoInput.files[0] : null;
+
+      if(!name || !tel || !adres || !aciklama){
+        showErr('Lütfen zorunlu alanları (* ile işaretli) doldurun.');
+        return;
+      }
+      if(tel.replace(/\D/g,'').length < 10){
+        showErr('Geçerli bir telefon numarası girin.');
+        return;
+      }
+
+      setSubmitting(true);
+
+      function doSubmit(photoData){
+        fetch('/api/ariza-bildir', {
+          method: 'POST',
+          headers: {'Content-Type':'application/json'},
+          body: JSON.stringify({
+            name: name,
+            tel: tel,
+            adres: adres,
+            aciklama: aciklama,
+            photo: photoData
+          })
+        })
+        .then(function(resp){
+          return resp.json().then(function(json){
+            return {ok: resp.ok, json: json};
+          });
+        })
+        .then(function(result){
+          if(!result.ok || result.json.error){
+            throw new Error(result.json.error || 'Bir hata oluştu. Lütfen tekrar deneyin.');
+          }
+          form.reset();
+          var preview = byId('arizaPreview');
+          if(preview) preview.classList.remove('has-file');
+          var nameEl = byId('arizaFileName');
+          if(nameEl) nameEl.textContent = 'Fotoğraf ekle';
+          var ref = result.json.ref || ('AB-'+Math.random().toString(36).slice(2,8).toUpperCase());
+          byId('arizaDoneRef').textContent = ref;
+          setSubmitting(false);
+          switchScreen('ariza-done');
+        })
+        .catch(function(err){
+          showErr(err.message || 'Gönderim sırasında bir hata oluştu.');
+          setSubmitting(false);
+        });
+      }
+
+      if(fotoFile){
+        var reader = new FileReader();
+        reader.onload = function(ev){
+          doSubmit({
+            base64: ev.target.result,
+            name: fotoFile.name,
+            type: fotoFile.type,
+            size: fotoFile.size
+          });
+        };
+        reader.onerror = function(){
+          doSubmit(null);
+        };
+        reader.readAsDataURL(fotoFile);
+      } else {
+        doSubmit(null);
+      }
+    });
+  }
 })();
 </script>
 
