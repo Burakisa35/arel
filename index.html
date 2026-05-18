@@ -13,6 +13,13 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
+<link rel="manifest" href="/manifest.json">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Arel">
+<link rel="apple-touch-icon" href="/icon.svg">
+<meta name="mobile-web-app-capable" content="yes">
+
 <style>
 :root{
   --bg:#070b14;
@@ -136,23 +143,20 @@ ul,ol{list-style:none;}
 
 /* ─── Stage indicator ───────────────── */
 .stage-bar{
-  display:flex;gap:6px;
+  display:flex;align-items:center;gap:10px;
   padding:18px 22px 8px;
 }
-.stage-pip{
-  flex:1;height:3px;border-radius:2px;
-  background:var(--line);position:relative;overflow:hidden;
+.stage-progress-track{
+  flex:1;height:5px;border-radius:3px;
+  background:var(--line);
+  overflow:hidden;
 }
-.stage-pip.done{background:var(--c-cyan);}
-.stage-pip.active{background:var(--line);}
-.stage-pip.active::after{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(90deg,var(--c-cyan),transparent);
-  animation:pip-load 1.4s ease-in-out infinite;
-}
-@keyframes pip-load{
-  0%{transform:translateX(-100%);}
-  100%{transform:translateX(0%);}
+.stage-progress-fill{
+  height:100%;border-radius:3px;
+  background:linear-gradient(90deg, var(--c-cyan), var(--c-violet));
+  transition:width .4s var(--ease);
+  box-shadow:0 0 8px rgba(52,229,197,.35);
+  min-width:5px;
 }
 .stage-meta{
   display:flex;justify-content:space-between;
@@ -728,6 +732,37 @@ ul,ol{list-style:none;}
   }
   .dock{border-radius:0 0 28px 28px;}
 }
+
+/* ─── Splash bullets ────────────────── */
+.splash-bullets{
+  display:flex;flex-direction:column;gap:9px;
+  margin-bottom:28px;
+}
+.splash-bullet{
+  display:flex;align-items:center;gap:10px;
+  font-size:14px;color:var(--t-2);
+  line-height:1.4;
+}
+.splash-bullet-check{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:20px;height:20px;border-radius:50%;flex-shrink:0;
+  background:rgba(52,229,197,.12);border:1px solid rgba(52,229,197,.35);
+  color:var(--c-cyan);font-size:11px;font-weight:700;
+}
+
+/* ─── Confirm button ────────────────── */
+.confirm-btn{
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  width:100%;padding:18px 22px;
+  background:var(--c-cyan);color:#0a1410;
+  border-radius:14px;font-size:16px;font-weight:600;
+  transition:transform .15s var(--ease), box-shadow .2s, opacity .2s;
+  box-shadow:0 8px 30px -8px rgba(52,229,197,.55),inset 0 1px 0 rgba(255,255,255,.18);
+  min-height:58px;margin-bottom:14px;
+}
+.confirm-btn:active{transform:scale(0.985);}
+.confirm-btn:disabled{opacity:.38;box-shadow:none;cursor:not-allowed;}
+.confirm-btn svg{width:20px;height:20px;flex-shrink:0;}
 </style>
 </head>
 <body>
@@ -749,14 +784,12 @@ ul,ol{list-style:none;}
   <!-- ╭─ STAGE INDICATOR ───────────────╮ -->
   <div id="stageWrap" hidden>
     <div class="stage-bar" id="stageBar">
-      <span class="stage-pip"></span>
-      <span class="stage-pip"></span>
-      <span class="stage-pip"></span>
-      <span class="stage-pip"></span>
+      <div class="stage-progress-track">
+        <div class="stage-progress-fill" id="stageFill" style="width:8.33%"></div>
+      </div>
     </div>
     <div class="stage-meta">
-      <span id="stageLabel">Aşama 1 — Müşteri</span>
-      <span><b id="stageStep">01</b> / 04</span>
+      <span id="stageLabel">Adım 1/12</span>
     </div>
   </div>
 
@@ -770,6 +803,12 @@ ul,ol{list-style:none;}
         <div class="splash-eye">Hoş geldiniz</div>
         <h1 class="splash-h">Probleminizi anlamlandıralım, doğru çözümü <em>birlikte bulalım.</em></h1>
         <p class="splash-p">Teknik bilgi gerekmiyor. Yaşadığınız durumu kısa adımlarla anlatın; sistem geri kalanını sizin için kuracak.</p>
+
+        <div class="splash-bullets">
+          <div class="splash-bullet"><span class="splash-bullet-check">✓</span>Teknik bilgi gerekmiyor</div>
+          <div class="splash-bullet"><span class="splash-bullet-check">✓</span>2 dakikada tamamlanır</div>
+          <div class="splash-bullet"><span class="splash-bullet-check">✓</span>Sizi biz ararız</div>
+        </div>
 
         <button class="splash-cta" data-action="start">
           <b>Başla</b><span class="arr">→</span>
@@ -1164,7 +1203,7 @@ ul,ol{list-style:none;}
     <section class="screen" data-screen="summary" data-stage="4">
       <div class="s-eye">11 · Özet</div>
       <h2 class="s-h">Ön analiz tamamlandı.</h2>
-      <p class="s-p">Bilgiler kontrolünüze sunuldu. Onayladığınızda iletişim kanalları açılır.</p>
+      <p class="s-p">Bilgiler kontrolünüze sunuldu. Devam ederek talebinizi tamamlayın.</p>
 
       <div class="sum-card">
         <div class="sum-eye">Talep özeti</div>
@@ -1176,35 +1215,15 @@ ul,ol{list-style:none;}
     <!-- 4.3 İletişim Paylaşma -->
     <section class="screen" data-screen="contact" data-stage="4">
       <div class="s-eye">12 · İletişim</div>
-      <h2 class="s-h">Tercih ettiğiniz kanaldan görüşelim.</h2>
-      <p class="s-p">Talep özetiniz hazırlandı; aşağıdaki kanallardan biriyle iletmek size kalmış.</p>
+      <h2 class="s-h">Talebinizi onaylayın.</h2>
+      <p class="s-p">Bilgileriniz kaydedilecek ve sizi seçtiğiniz saat aralığında arayacağız.</p>
 
-      <div class="contact-list">
-        <button class="contact-btn wa" data-action="open-wa">
-          <span class="ct-ico"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 3.5A11 11 0 0 0 3.4 17.2L2 22l4.9-1.4A11 11 0 1 0 20.5 3.5zM12 20a8 8 0 0 1-4-1.1l-.3-.2-2.9.8.8-2.8-.2-.3a8 8 0 1 1 6.6 3.6zm4.6-6c-.3-.1-1.5-.8-1.7-.8-.3 0-.4 0-.6.2l-.7.9c-.2.2-.3.2-.5.1-.3-.2-1.2-.4-2.3-1.4-.9-.7-1.5-1.7-1.6-2-.2-.3 0-.4.1-.6l.4-.4.3-.5c.1-.2 0-.3 0-.5l-.7-1.6c-.2-.4-.4-.4-.6-.4h-.5c-.2 0-.5 0-.7.3-.3.3-1 1-1 2.4 0 1.4 1 2.7 1.2 2.9.1.2 2 3 4.7 4.2.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.6-.3z"/></svg></span>
-          <span class="ct-body">
-            <span class="ct-t">WhatsApp ile gönder</span>
-            <span class="ct-s">Talep özeti otomatik hazırlanır</span>
-          </span>
-          <span class="ct-arr">→</span>
-        </button>
-        <button class="contact-btn tel" data-action="open-tel">
-          <span class="ct-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .3 2 .6 2.9a2 2 0 0 1-.4 2L8 9.8a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2-.5c1 .3 2 .5 2.9.6a2 2 0 0 1 1.7 2z"/></svg></span>
-          <span class="ct-body">
-            <span class="ct-t">Telefonla ara</span>
-            <span class="ct-s mono">0 536 780 70 59</span>
-          </span>
-          <span class="ct-arr">→</span>
-        </button>
-        <button class="contact-btn mail" data-action="open-mail">
-          <span class="ct-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span>
-          <span class="ct-body">
-            <span class="ct-t">E-posta ile gönder</span>
-            <span class="ct-s"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7f0b1a171e0c3f1e0d1a130b1a14111614511c1012">[email&#160;protected]</a></span>
-          </span>
-          <span class="ct-arr">→</span>
-        </button>
-      </div>
+      <div id="contactErr" class="form-err" role="alert"></div>
+
+      <button class="confirm-btn" id="confirmBtn" data-action="confirm">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 4 4 10-10"/></svg>
+        Onaylıyorum
+      </button>
 
       <div class="skip-row">
         <button data-action="back">‹ Geri</button>
@@ -1216,8 +1235,8 @@ ul,ol{list-style:none;}
     <section class="screen" data-screen="done" data-stage="4">
       <div class="done">
         <div class="done-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 4 4 10-10"/></svg></div>
-        <h2 class="done-h">Talep iletildi.</h2>
-        <p class="done-p">Ekibimiz kısa süre içinde sizinle iletişime geçecek. Süreci buradan takip edebilirsiniz.</p>
+        <h2 class="done-h">Talebiniz alındı.</h2>
+        <p class="done-p" id="doneMsg">Sizi kısa süre içinde arayacağız.</p>
         <div class="done-ref" id="doneRef">REF · TH-—————</div>
         <button class="done-back" data-action="reset">Ana sayfaya dön</button>
       </div>
@@ -1370,7 +1389,7 @@ ul,ol{list-style:none;}
   const stageWrap = $('#stageWrap');
   const stageBar = $('#stageBar');
   const stageLabel = $('#stageLabel');
-  const stageStep = $('#stageStep');
+  const stageFill = $('#stageFill');
   const dock = $('#dock');
   const dockCta = $('#dockCta');
   const dockCtaL = $('#dockCtaL');
@@ -1388,18 +1407,17 @@ ul,ol{list-style:none;}
 
     // Stage indicator
     if (isFlow){
-      const pips = $$('.stage-pip', stageBar);
-      pips.forEach((p,i) => {
-        p.classList.toggle('done', i+1 < stage);
-        p.classList.toggle('active', i+1 === stage);
-      });
-      stageLabel.textContent = `Aşama ${stage} — ${STAGE_LABELS[stage]}`;
-      stageStep.textContent = String(stage).padStart(2,'0');
+      const stepNum = FLOW.indexOf(name); // 1 to 12
+      const totalSteps = FLOW.length - 2; // 12 (splash + done excluded)
+      stageLabel.textContent = `Adım ${stepNum}/${totalSteps}`;
+      if (stageFill) stageFill.style.width = ((stepNum / totalSteps) * 100) + '%';
     }
 
     // Dock context
     if (name !== 'splash' && name !== 'done'){
-      dockEye.textContent = `Aşama ${String(stage).padStart(2,'0')}`;
+      const stepNumDock = FLOW.indexOf(name);
+      const totalStepsDock = FLOW.length - 2;
+      dockEye.textContent = stepNumDock > 0 ? `Adım ${stepNumDock}/${totalStepsDock}` : '';
       dockL.textContent = STAGE_LABELS[stage];
       dock.classList.toggle('is-back', state.idx > 1);
       updateDockCta(name);
@@ -1432,7 +1450,7 @@ ul,ol{list-style:none;}
     }
     if (isSummary){
       dockCta.disabled = false;
-      dockCtaL.textContent = 'Onaylıyorum';
+      dockCtaL.textContent = 'Devam';
       return;
     }
     if (isInfo){
@@ -1518,6 +1536,11 @@ ul,ol{list-style:none;}
     state.data = {};
     state.refId = null;
     document.querySelectorAll('input,textarea').forEach(i => i.value = '');
+    const btn = document.getElementById('confirmBtn');
+    if (btn) {
+      btn.disabled = false;
+      btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><path d="m5 13 4 4 10-10"/></svg> Onaylıyorum';
+    }
     showScreen('splash');
   }
 
@@ -1528,10 +1551,11 @@ ul,ol{list-style:none;}
 
     if (t.dataset.action){
       switch(t.dataset.action){
-        case 'start': state.idx = 1; showScreen(FLOW[1]); return;
-        case 'next':  next(); return;
-        case 'back':  back(); return;
-        case 'reset': reset(); return;
+        case 'start':   state.idx = 1; showScreen(FLOW[1]); return;
+        case 'next':    next(); return;
+        case 'back':    back(); return;
+        case 'reset':   reset(); return;
+        case 'confirm': handleConfirm(); return;
         case 'open-wa':   handleSubmit('wa'); return;
         case 'open-tel':  handleSubmit('tel'); return;
         case 'open-mail': handleSubmit('mail'); return;
@@ -1627,6 +1651,48 @@ ul,ol{list-style:none;}
       const body = encodeURIComponent(msg);
       window.location.href = `mailto:tehas@arelteknik.com?subject=${subject}&body=${body}`;
     }
+  }
+
+  // ─── Confirm handler (Adım 12 Onaylıyorum) ─
+  function handleConfirm(){
+    const btn = document.getElementById('confirmBtn');
+    if (btn) { btn.disabled = true; btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="animation:spin 1s linear infinite;width:20px;height:20px"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg> Gönderiliyor…'; }
+
+    state.refId = state.refId || ('TH-' + Math.random().toString(36).slice(2,8).toUpperCase());
+    const ref = state.refId;
+    const d = state.data;
+    const get = (k) => LABELS[k] ? (LABELS[k][d[k]] || '—') : (d[k] || '—');
+
+    const notionAciklama = [
+      `Hizmet: ${get('service')}`,
+      `Profil: ${get('userType')}`,
+      `Bölge: ${get('region')}`,
+      `Davranış: ${get('behavior')}`,
+      `Etki: ${get('impact')}`,
+      `Başlangıç: ${get('when')}`,
+      `Sıklık: ${get('frequency')}`,
+      `Aciliyet: ${get('urgency')}`,
+      `Saat: ${get('slot')}`,
+      d.note ? `Not: ${d.note}` : null,
+    ].filter(Boolean).join('\n');
+
+    fetch('/api/ariza-bildir', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({
+        name:     d.name    || 'Belirtilmedi',
+        tel:      d.tel     || 'Belirtilmedi',
+        adres:    LABELS.region[d.region] || d.region || 'Belirtilmedi',
+        aciklama: notionAciklama
+      })
+    }).catch(()=>{});
+
+    // Update done message with selected slot
+    const slotLabel = LABELS.slot[d.slot] || 'kısa süre içinde';
+    const doneMsg = document.getElementById('doneMsg');
+    if (doneMsg) doneMsg.textContent = `Talebiniz alındı. Sizi ${slotLabel} arayacağız.`;
+
+    goto('done');
   }
 
   function buildMessage(ref){
@@ -1931,6 +1997,15 @@ ul,ol{list-style:none;}
     });
   }
 })();
+</script>
+
+<script>
+// ─── Service Worker kayıt ──────────────
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('/sw.js').catch(function(){});
+  });
+}
 </script>
 
 </body>

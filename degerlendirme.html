@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#070b14">
+<title>Arel — Hizmet Değerlendirmesi</title>
+<meta name="description" content="Aldığınız hizmet hakkındaki değerlendirmenizi paylaşın.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23070b14'/%3E%3Ccircle cx='16' cy='16' r='6' fill='none' stroke='%2334e5c5' stroke-width='1.6'/%3E%3Ccircle cx='16' cy='16' r='2' fill='%2334e5c5'/%3E%3C/svg%3E">
+<link rel="manifest" href="/manifest.json">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Arel">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#070b14;--bg-1:#0b1120;--bg-2:#0f1729;--bg-3:#141d33;
+  --line:#1c2740;--line-2:#283557;
+  --t-1:#eef2f9;--t-2:#9aa6c2;--t-3:#5d6b8c;--t-4:#3a4566;
+  --c-cyan:#34e5c5;--c-cyan-d:#0f7a68;--c-cyan-bg:rgba(52,229,197,.08);
+  --c-violet:#a78bfa;--c-amber:#fbbf24;--c-red:#f87171;--c-green:#22c55e;
+  --safe-t:env(safe-area-inset-top,0px);--safe-b:env(safe-area-inset-bottom,0px);
+  --f-body:'Inter',-apple-system,system-ui,sans-serif;
+  --f-mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
+  --ease:cubic-bezier(.2,.8,.2,1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+html{-webkit-text-size-adjust:100%;background:var(--bg);}
+body{
+  background:var(--bg);color:var(--t-1);font-family:var(--f-body);
+  font-size:15px;line-height:1.55;letter-spacing:-0.005em;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+  min-height:100vh;min-height:100dvh;
+  display:flex;align-items:flex-start;justify-content:center;
+  padding:calc(var(--safe-t) + 20px) 16px calc(var(--safe-b) + 40px);
+}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;-webkit-appearance:none;}
+input,textarea,select{font:inherit;color:inherit;-webkit-appearance:none;}
+::selection{background:var(--c-cyan);color:#000;}
+
+.card{
+  width:100%;max-width:480px;
+  background:
+    radial-gradient(ellipse 120% 50% at 50% 0%, rgba(52,229,197,0.06), transparent 60%),
+    var(--bg-1);
+  border:1px solid var(--line);border-radius:24px;
+  padding:36px 28px 32px;
+  position:relative;overflow:hidden;
+}
+.card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--c-cyan),transparent);
+  opacity:.5;
+}
+
+.logo-row{
+  display:flex;align-items:center;gap:10px;margin-bottom:32px;
+}
+.logo-mark{
+  width:36px;height:36px;border-radius:10px;
+  background:linear-gradient(135deg, rgba(52,229,197,.16), rgba(167,139,250,.16));
+  border:1px solid rgba(52,229,197,.35);
+  display:flex;align-items:center;justify-content:center;
+  position:relative;flex-shrink:0;
+}
+.logo-mark::before{content:'';position:absolute;inset:8px;border-radius:50%;border:1.5px solid var(--c-cyan);}
+.logo-mark::after{content:'';position:absolute;inset:13px;border-radius:50%;background:var(--c-cyan);box-shadow:0 0 10px rgba(52,229,197,.5);}
+.logo-name{font-weight:700;font-size:15px;letter-spacing:0.12em;color:#fff;}
+.logo-sub{font-family:var(--f-mono);font-size:9px;letter-spacing:0.16em;color:var(--t-3);text-transform:uppercase;margin-top:3px;}
+
+.eye{
+  font-family:var(--f-mono);font-size:10px;font-weight:500;
+  letter-spacing:0.22em;color:var(--c-cyan);text-transform:uppercase;
+  margin-bottom:12px;display:flex;align-items:center;gap:8px;
+}
+.eye::before{content:'';width:16px;height:1px;background:var(--c-cyan);}
+
+h1{font-size:28px;line-height:1.1;font-weight:600;letter-spacing:-0.022em;color:#fff;margin-bottom:10px;}
+.sub{font-size:14px;color:var(--t-2);line-height:1.55;margin-bottom:28px;max-width:340px;}
+
+/* Stars */
+.stars-wrap{margin-bottom:24px;}
+.stars-label{
+  font-family:var(--f-mono);font-size:10px;font-weight:500;
+  letter-spacing:0.18em;color:var(--t-3);text-transform:uppercase;margin-bottom:12px;
+}
+.stars{
+  display:flex;gap:10px;
+}
+.star-btn{
+  font-size:36px;line-height:1;cursor:pointer;
+  transition:transform .15s var(--ease),filter .15s;
+  filter:grayscale(1) brightness(0.5);
+}
+.star-btn:hover,
+.star-btn.active{filter:none;transform:scale(1.12);}
+.star-btn:active{transform:scale(0.95);}
+
+/* Comment field */
+.field{margin-bottom:20px;}
+.field label{
+  display:block;font-family:var(--f-mono);font-size:10px;font-weight:500;
+  letter-spacing:0.18em;color:var(--t-3);text-transform:uppercase;margin-bottom:8px;
+}
+.field textarea{
+  display:block;width:100%;padding:14px 16px;
+  background:var(--bg-2);border:1px solid var(--line);border-radius:12px;
+  font-size:15px;color:var(--t-1);transition:border-color .2s, background .2s;
+  outline:none;resize:vertical;min-height:90px;line-height:1.55;
+}
+.field textarea:focus{border-color:var(--c-cyan);background:var(--bg-3);}
+.optional{color:var(--t-4);font-weight:400;text-transform:none;letter-spacing:0;}
+
+/* Ref field */
+.ref-note{
+  font-size:12px;color:var(--t-3);margin-bottom:20px;
+  font-family:var(--f-mono);letter-spacing:0.04em;
+}
+.ref-note b{color:var(--c-cyan);}
+
+/* Submit */
+.submit-btn{
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  width:100%;padding:17px;
+  background:var(--c-cyan);color:#0a1410;
+  border-radius:13px;font-size:15px;font-weight:700;
+  transition:transform .15s var(--ease),box-shadow .2s,opacity .2s;
+  box-shadow:0 6px 24px -6px rgba(52,229,197,.52);
+}
+.submit-btn:active{transform:scale(0.98);}
+.submit-btn:disabled{opacity:.35;box-shadow:none;cursor:not-allowed;}
+.submit-btn svg{width:18px;height:18px;flex-shrink:0;}
+@keyframes spin{to{transform:rotate(360deg);}}
+
+/* Error / Done */
+.err-msg{
+  display:none;font-size:13px;color:var(--c-red);line-height:1.5;
+  padding:10px 14px;border:1px solid rgba(248,113,113,.28);
+  border-radius:10px;background:rgba(248,113,113,.06);margin-bottom:14px;
+}
+.err-msg.vis{display:block;}
+
+.done-wrap{
+  display:none;flex-direction:column;align-items:center;
+  text-align:center;padding:20px 0 8px;
+}
+.done-wrap.vis{display:flex;}
+.done-mark{
+  width:72px;height:72px;border-radius:50%;
+  background:radial-gradient(circle, var(--c-cyan-bg), transparent 70%);
+  display:flex;align-items:center;justify-content:center;margin-bottom:18px;
+  position:relative;
+}
+.done-mark::before{
+  content:'';position:absolute;inset:12px;border-radius:50%;
+  border:1.5px solid var(--c-cyan);animation:ring-out 2s ease-out infinite;
+}
+@keyframes ring-out{0%{transform:scale(.9);opacity:1;}100%{transform:scale(1.4);opacity:0;}}
+.done-mark svg{width:30px;height:30px;color:var(--c-cyan);}
+.done-h{font-size:22px;font-weight:600;color:#fff;letter-spacing:-0.02em;margin-bottom:8px;}
+.done-p{font-size:14px;color:var(--t-2);max-width:280px;line-height:1.55;margin-bottom:20px;}
+.done-ref{
+  font-family:var(--f-mono);font-size:10px;font-weight:500;
+  letter-spacing:0.18em;color:var(--c-cyan);
+  padding:9px 16px;border:1px dashed rgba(52,229,197,.35);
+  border-radius:99px;background:var(--c-cyan-bg);text-transform:uppercase;
+  margin-bottom:20px;
+}
+.done-back{
+  font-size:13px;color:var(--t-3);
+  text-decoration:underline;text-underline-offset:3px;
+  transition:color .2s;
+}
+.done-back:hover{color:var(--t-1);}
+</style>
+</head>
+<body>
+
+<div class="card" id="card">
+  <div class="logo-row">
+    <div class="logo-mark" aria-hidden="true"></div>
+    <div>
+      <div class="logo-name">AREL</div>
+      <div class="logo-sub">Teknik Hizmetler</div>
+    </div>
+  </div>
+
+  <!-- Form -->
+  <div id="formWrap">
+    <div class="eye">Değerlendirme</div>
+    <h1>Hizmeti nasıl buldunuz?</h1>
+    <p class="sub">Görüşünüz gelişmemize katkı sağlar. Tüm alanlar isteğe bağlıdır.</p>
+
+    <div id="refNote" class="ref-note" hidden></div>
+
+    <div class="err-msg" id="errMsg"></div>
+
+    <div class="stars-wrap">
+      <div class="stars-label">Puanınız</div>
+      <div class="stars" id="stars" role="group" aria-label="Yıldız puanı">
+        <button class="star-btn" data-star="1" aria-label="1 yıldız">★</button>
+        <button class="star-btn" data-star="2" aria-label="2 yıldız">★</button>
+        <button class="star-btn" data-star="3" aria-label="3 yıldız">★</button>
+        <button class="star-btn" data-star="4" aria-label="4 yıldız">★</button>
+        <button class="star-btn" data-star="5" aria-label="5 yıldız">★</button>
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="comment">Yorumunuz <span class="optional">(opsiyonel)</span></label>
+      <textarea id="comment" rows="4" placeholder="Hizmet hakkında kısa bir yorum yazabilirsiniz…" maxlength="500"></textarea>
+    </div>
+
+    <button class="submit-btn" id="submitBtn" type="button">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+      Değerlendirmeyi Gönder
+    </button>
+  </div>
+
+  <!-- Done -->
+  <div class="done-wrap" id="doneWrap">
+    <div class="done-mark">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 4 4 10-10"/></svg>
+    </div>
+    <h2 class="done-h">Teşekkürler!</h2>
+    <p class="done-p">Değerlendirmeniz kaydedildi. Hizmetlerimizi geliştirmemize katkıda bulundunuz.</p>
+    <div class="done-ref" id="doneRef"></div>
+    <a href="/" class="done-back">Ana sayfaya dön</a>
+  </div>
+</div>
+
+<script>
+(function(){
+  'use strict';
+
+  var rating = 0;
+  var ref = '';
+
+  // Read ref from URL param
+  var params = new URLSearchParams(window.location.search);
+  ref = params.get('ref') || '';
+  if (ref) {
+    var note = document.getElementById('refNote');
+    note.innerHTML = 'Talep no: <b>' + ref + '</b>';
+    note.hidden = false;
+  }
+
+  // Star selection
+  var stars = document.querySelectorAll('.star-btn');
+  stars.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      rating = parseInt(this.dataset.star, 10);
+      stars.forEach(function(s) {
+        s.classList.toggle('active', parseInt(s.dataset.star, 10) <= rating);
+      });
+    });
+    btn.addEventListener('mouseover', function() {
+      var hov = parseInt(this.dataset.star, 10);
+      stars.forEach(function(s) {
+        s.style.filter = parseInt(s.dataset.star, 10) <= hov ? 'none' : 'grayscale(1) brightness(0.5)';
+      });
+    });
+    btn.addEventListener('mouseout', function() {
+      stars.forEach(function(s) {
+        s.style.filter = '';
+        s.classList.toggle('active', parseInt(s.dataset.star, 10) <= rating);
+      });
+    });
+  });
+
+  // Submit
+  document.getElementById('submitBtn').addEventListener('click', function() {
+    var comment = document.getElementById('comment').value.trim();
+    var errMsg = document.getElementById('errMsg');
+
+    errMsg.classList.remove('vis');
+    errMsg.textContent = '';
+
+    if (!rating) {
+      errMsg.textContent = 'Lütfen bir puan seçin.';
+      errMsg.classList.add('vis');
+      return;
+    }
+
+    var btn = document.getElementById('submitBtn');
+    btn.disabled = true;
+    btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="animation:spin 1s linear infinite;width:18px;height:18px"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg> Gönderiliyor…';
+
+    fetch('/api/degerlendirme', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({ ref: ref, rating: rating, comment: comment })
+    })
+    .then(function(resp) {
+      return resp.json().then(function(json) { return { ok: resp.ok, json: json }; });
+    })
+    .then(function(result) {
+      if (!result.ok || result.json.error) {
+        throw new Error(result.json.error || 'Bir hata oluştu.');
+      }
+      document.getElementById('formWrap').style.display = 'none';
+      var doneWrap = document.getElementById('doneWrap');
+      doneWrap.classList.add('vis');
+      if (ref) document.getElementById('doneRef').textContent = ref;
+      else document.getElementById('doneRef').style.display = 'none';
+    })
+    .catch(function(err) {
+      errMsg.textContent = err.message || 'Gönderim sırasında bir hata oluştu. Lütfen tekrar deneyin.';
+      errMsg.classList.add('vis');
+      btn.disabled = false;
+      btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg> Değerlendirmeyi Gönder';
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
