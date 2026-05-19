@@ -763,6 +763,65 @@ ul,ol{list-style:none;}
 .confirm-btn:active{transform:scale(0.985);}
 .confirm-btn:disabled{opacity:.38;box-shadow:none;cursor:not-allowed;}
 .confirm-btn svg{width:20px;height:20px;flex-shrink:0;}
+
+/* ─── Shake animation ───────────────── */
+@keyframes shake{
+  0%,100%{transform:translateX(0);}
+  20%,60%{transform:translateX(-5px);}
+  40%,80%{transform:translateX(5px);}
+}
+.shake{animation:shake .35s ease;}
+
+/* ─── Dock error message ────────────── */
+.dock-err{
+  position:absolute;top:-34px;left:0;right:0;
+  text-align:center;
+  font-size:12px;color:var(--c-red);font-weight:500;
+  letter-spacing:0.06em;
+  padding:6px 14px;
+  background:rgba(248,113,113,.12);
+  border-top:1px solid rgba(248,113,113,.25);
+  opacity:0;pointer-events:none;
+  transition:opacity .2s;
+}
+.dock-err.is-vis{opacity:1;}
+
+/* ─── Dock CTA not-ready state ──────── */
+.dock-cta.not-ready{
+  background:var(--bg-2);
+  color:var(--t-3);
+  box-shadow:none;
+  border:1px solid var(--line-2);
+}
+
+/* ─── Header tooltip ────────────────── */
+.hdr-status{position:relative;cursor:default;}
+.hdr-status::after{
+  content:attr(data-tooltip);
+  position:absolute;top:calc(100% + 6px);right:0;
+  font-family:var(--f-body);font-size:11px;font-weight:400;
+  letter-spacing:normal;color:var(--t-1);text-transform:none;
+  background:var(--bg-2);border:1px solid var(--line-2);
+  border-radius:8px;padding:5px 10px;
+  white-space:nowrap;
+  opacity:0;pointer-events:none;
+  transition:opacity .2s;
+  z-index:10;
+}
+.hdr-status:hover::after{opacity:1;}
+
+/* ─── Phone validation styles ───────── */
+.field input.tel-ok{border-color:var(--c-green) !important;}
+.field input.tel-err{border-color:var(--c-red) !important;}
+.tel-hint{
+  font-size:12px;color:var(--t-3);
+  margin-top:6px;line-height:1.4;
+}
+.tel-err-msg{
+  display:none;font-size:12px;color:var(--c-red);
+  margin-top:5px;
+}
+.tel-err-msg.is-vis{display:block;}
 </style>
 </head>
 <body>
@@ -778,7 +837,7 @@ ul,ol{list-style:none;}
         <div class="hdr-sub">Teknik Hizmetler Asistanı</div>
       </div>
     </div>
-    <div class="hdr-status"><span class="hdr-dot"></span>Aktif</div>
+    <div class="hdr-status" data-tooltip="Şu an talep alıyoruz"><span class="hdr-dot"></span>Çevrimiçi</div>
   </header>
 
   <!-- ╭─ STAGE INDICATOR ───────────────╮ -->
@@ -1182,7 +1241,9 @@ ul,ol{list-style:none;}
       </div>
       <div class="field">
         <label for="f-tel">Telefon</label>
-        <input id="f-tel" type="tel" inputmode="tel" autocomplete="tel" placeholder="0 5__ ___ __ __">
+        <input id="f-tel" type="tel" inputmode="numeric" autocomplete="tel" placeholder="5__ ___ __ __">
+        <span class="tel-err-msg" id="f-tel-err">Geçerli bir numara girin (5XX ile başlamalı)</span>
+        <p class="tel-hint">Bilgileriniz yalnızca randevu için kullanılır.</p>
       </div>
 
       <!-- TELEFON DOĞRULAMA TASLAK — aktif etmek için bu bloğu açın ve aşağıdaki JS bloğunu da açın
@@ -1258,7 +1319,8 @@ ul,ol{list-style:none;}
           </div>
           <div class="field">
             <label for="ab-tel">Telefon <span style="color:var(--c-red)">*</span></label>
-            <input id="ab-tel" type="tel" inputmode="tel" autocomplete="tel" placeholder="0 5__ ___ __ __">
+            <input id="ab-tel" type="tel" inputmode="numeric" autocomplete="tel" placeholder="5__ ___ __ __">
+            <span class="tel-err-msg" id="ab-tel-err">Geçerli bir numara girin (5XX ile başlamalı)</span>
           </div>
 
           <!-- TELEFON DOĞRULAMA TASLAK — aktif etmek için bu bloğu açın ve aşağıdaki JS bloğunu da açın
@@ -1322,6 +1384,7 @@ ul,ol{list-style:none;}
 
   <!-- ╭─ DOCK ──────────────────────────╮ -->
   <nav class="dock" id="dock" hidden>
+    <div class="dock-err" id="dockErr" aria-live="polite"></div>
     <div class="dock-row">
       <button class="dock-back" data-action="back" aria-label="Geri">‹</button>
       <div class="dock-ctx">
@@ -1400,10 +1463,11 @@ ul,ol{list-style:none;}
   function showScreen(name){
     screens.forEach(el => el.classList.toggle('is-on', el.dataset.screen === name));
     const stage = SCREEN_TO_STAGE[name];
-    const isFlow = stage > 0 && name !== 'done';
+    const noNav = name === 'splash' || name === 'done' || name === 'contact';
+    const isFlow = stage > 0 && !noNav;
 
     stageWrap.hidden = !isFlow;
-    dock.hidden = (name === 'splash' || name === 'done');
+    dock.hidden = noNav;
 
     // Stage indicator
     if (isFlow){
@@ -1442,26 +1506,25 @@ ul,ol{list-style:none;}
     const hasPick = !!state.data[name];
     const isInfo = name === 'info';
     const isSummary = name === 'summary';
-    const isContact = name === 'contact';
 
-    if (isContact){
-      dock.hidden = true;
-      return;
-    }
+    dockCta.classList.remove('not-ready');
+
     if (isSummary){
       dockCta.disabled = false;
       dockCtaL.textContent = 'Devam';
       return;
     }
     if (isInfo){
-      const ok = (state.data.name?.trim().length||0) >= 2 && (state.data.tel?.replace(/\D/g,'').length||0) >= 10;
+      const telDigits = state.data.tel?.replace(/\D/g,'') || '';
+      const ok = (state.data.name?.trim().length||0) >= 2 && telDigits.length === 10 && telDigits.startsWith('5');
       dockCta.disabled = !ok;
-      dockCtaL.textContent = 'Özete geç';
+      dockCtaL.textContent = 'Devam';
       return;
     }
     if (isPick){
-      dockCta.disabled = !hasPick;
-      dockCtaL.textContent = hasPick ? 'Devam' : 'Bir seçim yapın';
+      dockCta.disabled = false;
+      dockCta.classList.toggle('not-ready', !hasPick);
+      dockCtaL.textContent = 'Devam';
       return;
     }
     dockCta.disabled = false;
@@ -1506,13 +1569,32 @@ ul,ol{list-style:none;}
     showScreen(name);
   }
 
+  let dockErrTimer;
+  function showDockError(msg){
+    const el = document.getElementById('dockErr');
+    if (!el) return;
+    el.textContent = msg;
+    el.classList.add('is-vis');
+    clearTimeout(dockErrTimer);
+    dockErrTimer = setTimeout(() => el.classList.remove('is-vis'), 2200);
+  }
+
   function next(){
     const cur = FLOW[state.idx];
     // Block if not satisfied
-    if (cur in LABELS && !state.data[cur]) return;
+    if (cur in LABELS && !state.data[cur]) {
+      dockCta.classList.remove('shake');
+      // Force reflow so animation re-triggers if already running
+      void dockCta.offsetWidth;
+      dockCta.classList.add('shake');
+      setTimeout(() => dockCta.classList.remove('shake'), 400);
+      showDockError('Lütfen bir seçim yapın');
+      return;
+    }
     if (cur === 'info'){
       if ((state.data.name?.trim().length||0) < 2) { focusField('f-name'); return; }
-      if ((state.data.tel?.replace(/\D/g,'').length||0) < 10) { focusField('f-tel'); return; }
+      const telDigits = state.data.tel?.replace(/\D/g,'') || '';
+      if (telDigits.length < 10 || !telDigits.startsWith('5')) { focusField('f-tel'); return; }
     }
     state.idx = Math.min(state.idx + 1, FLOW.length - 1);
     showScreen(FLOW[state.idx]);
@@ -1536,6 +1618,8 @@ ul,ol{list-style:none;}
     state.data = {};
     state.refId = null;
     document.querySelectorAll('input,textarea').forEach(i => i.value = '');
+    document.querySelectorAll('.tel-ok,.tel-err').forEach(el => el.classList.remove('tel-ok','tel-err'));
+    document.querySelectorAll('.tel-err-msg').forEach(el => el.classList.remove('is-vis'));
     const btn = document.getElementById('confirmBtn');
     if (btn) {
       btn.disabled = false;
@@ -1567,6 +1651,7 @@ ul,ol{list-style:none;}
       const v = t.dataset.value;
       state.data[k] = v;
       syncSelections();
+      updateDockCta(FLOW[state.idx]);
       // auto-advance after a beat (calm rhythm)
       setTimeout(() => {
         if (FLOW[state.idx] === k) next();
@@ -1578,19 +1663,40 @@ ul,ol{list-style:none;}
   document.addEventListener('input', (e) => {
     const el = e.target;
     if (el.id === 'f-name')  state.data.name = el.value;
-    if (el.id === 'f-tel')   state.data.tel  = formatTel(el);
+    if (el.id === 'f-tel')   state.data.tel  = formatTel(el, 'f-tel-err');
     if (el.id === 'f-note')  state.data.note = el.value;
     if (FLOW[state.idx] === 'info') updateDockCta('info');
   });
 
-  function formatTel(el){
+  function validateTelField(el, raw, errId){
+    el.classList.remove('tel-ok', 'tel-err');
+    const errEl = errId ? document.getElementById(errId) : null;
+    if (raw.length === 0) {
+      if (errEl) errEl.classList.remove('is-vis');
+      return;
+    }
+    const isValid = raw.length === 10 && raw.startsWith('5');
+    if (raw.length >= 10) {
+      el.classList.add(isValid ? 'tel-ok' : 'tel-err');
+      if (errEl) errEl.classList.toggle('is-vis', !isValid);
+    } else if (!raw.startsWith('5') && raw.length > 0) {
+      el.classList.add('tel-err');
+      if (errEl) errEl.classList.add('is-vis');
+    }
+  }
+
+  function formatTel(el, errId){
     const pos = el.selectionStart;
+    let digits = el.value.replace(/\D/g,'');
+    // Auto-clean: strip country code or leading zero
+    if (digits.startsWith('90') && digits.length > 10) digits = digits.slice(2);
+    else if (digits.startsWith('0')) digits = digits.slice(1);
+    const raw = digits.slice(0, 10);
     const before = el.value.slice(0, pos).replace(/\D/g,'').length;
-    const raw = el.value.replace(/\D/g,'').slice(0,11);
     let out = raw;
-    if (raw.length >= 4)  out = raw.slice(0,4) + ' ' + raw.slice(4);
-    if (raw.length >= 7)  out = raw.slice(0,4) + ' ' + raw.slice(4,7) + ' ' + raw.slice(7);
-    if (raw.length >= 9)  out = raw.slice(0,4) + ' ' + raw.slice(4,7) + ' ' + raw.slice(7,9) + ' ' + raw.slice(9);
+    if (raw.length >= 4)  out = raw.slice(0,3) + ' ' + raw.slice(3);
+    if (raw.length >= 7)  out = raw.slice(0,3) + ' ' + raw.slice(3,6) + ' ' + raw.slice(6);
+    if (raw.length >= 9)  out = raw.slice(0,3) + ' ' + raw.slice(3,6) + ' ' + raw.slice(6,8) + ' ' + raw.slice(8);
     el.value = out;
     let d = 0, newPos = out.length;
     for (let i = 0; i < out.length; i++) {
@@ -1598,6 +1704,7 @@ ul,ol{list-style:none;}
       if (d === before) { newPos = i + 1; break; }
     }
     el.setSelectionRange(newPos, newPos);
+    validateTelField(el, raw, errId);
     return out;
   }
 
@@ -1808,17 +1915,21 @@ ul,ol{list-style:none;}
     }
   });
 
-  // Phone formatting
+  // Phone formatting and validation
   var telInput = byId('ab-tel');
   if(telInput){
     telInput.addEventListener('input', function(){
       var pos = this.selectionStart;
+      var digits = this.value.replace(/\D/g,'');
+      // Auto-clean: strip country code or leading zero
+      if(digits.startsWith('90') && digits.length > 10) digits = digits.slice(2);
+      else if(digits.charAt(0) === '0') digits = digits.slice(1);
+      var raw = digits.slice(0, 10);
       var before = this.value.slice(0, pos).replace(/\D/g,'').length;
-      var raw = this.value.replace(/\D/g,'').slice(0,11);
       var out = raw;
-      if(raw.length >= 4)  out = raw.slice(0,4)+' '+raw.slice(4);
-      if(raw.length >= 7)  out = raw.slice(0,4)+' '+raw.slice(4,7)+' '+raw.slice(7);
-      if(raw.length >= 9)  out = raw.slice(0,4)+' '+raw.slice(4,7)+' '+raw.slice(7,9)+' '+raw.slice(9);
+      if(raw.length >= 4)  out = raw.slice(0,3)+' '+raw.slice(3);
+      if(raw.length >= 7)  out = raw.slice(0,3)+' '+raw.slice(3,6)+' '+raw.slice(6);
+      if(raw.length >= 9)  out = raw.slice(0,3)+' '+raw.slice(3,6)+' '+raw.slice(6,8)+' '+raw.slice(8);
       this.value = out;
       var d = 0, newPos = out.length;
       for(var i = 0; i < out.length; i++){
@@ -1826,6 +1937,19 @@ ul,ol{list-style:none;}
         if(d === before){ newPos = i+1; break; }
       }
       this.setSelectionRange(newPos, newPos);
+      // Validation styling
+      var errEl = byId('ab-tel-err');
+      this.classList.remove('tel-ok','tel-err');
+      if(raw.length === 0){
+        if(errEl) errEl.classList.remove('is-vis');
+      } else if(raw.length >= 10){
+        var ok = raw.length === 10 && raw.charAt(0) === '5';
+        this.classList.add(ok ? 'tel-ok' : 'tel-err');
+        if(errEl) errEl.classList.toggle('is-vis', !ok);
+      } else if(raw.charAt(0) !== '5'){
+        this.classList.add('tel-err');
+        if(errEl) errEl.classList.add('is-vis');
+      }
     });
   }
 
@@ -1933,8 +2057,9 @@ ul,ol{list-style:none;}
         showErr('Lütfen zorunlu alanları (* ile işaretli) doldurun.');
         return;
       }
-      if(tel.replace(/\D/g,'').length < 10){
-        showErr('Geçerli bir telefon numarası girin.');
+      var telDigits = tel.replace(/\D/g,'');
+      if(telDigits.length < 10 || telDigits.charAt(0) !== '5'){
+        showErr('Geçerli bir telefon numarası girin (5XX ile başlamalı).');
         return;
       }
 
