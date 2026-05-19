@@ -5,9 +5,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no">
 <meta name="theme-color" content="#070b14">
 <meta name="format-detection" content="telephone=no">
-<title>TEHAŞ — Teknik Hizmetler Asistanı</title>
-<meta name="description" content="Akıllı yönlendirme, doğru çözüm. Solar kamera ve elektrik sistemleri için kontrollü operasyon deneyimi.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23070b14'/%3E%3Ccircle cx='16' cy='16' r='6' fill='none' stroke='%2334e5c5' stroke-width='1.6'/%3E%3Ccircle cx='16' cy='16' r='2' fill='%2334e5c5'/%3E%3C/svg%3E">
+<title>Kemalpaşa Kamera &amp; Elektrik Servisi | TEHAŞ Teknik Hizmetler</title>
+<meta name="description" content="Kemalpaşa, Armutlu ve İzmir genelinde Hikvision kamera kurulum, elektrik tesisatı, uydu ve ağ altyapısı hizmetleri. 7 yıl deneyim, Partner Pro sertifikalı.">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://arel-phi.vercel.app/">
+<meta property="og:title" content="Kemalpaşa Kamera &amp; Elektrik Servisi | TEHAŞ Teknik Hizmetler">
+<meta property="og:description" content="Kemalpaşa, Armutlu ve İzmir genelinde Hikvision kamera kurulum, elektrik tesisatı, uydu ve ağ altyapısı hizmetleri. 7 yıl deneyim, Partner Pro sertifikalı.">
+<meta property="og:image" content="https://arel-phi.vercel.app/icon.svg">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Kemalpaşa Kamera &amp; Elektrik Servisi | TEHAŞ Teknik Hizmetler">
+<meta name="twitter:description" content="Kemalpaşa, Armutlu ve İzmir genelinde Hikvision kamera kurulum, elektrik tesisatı, uydu ve ağ altyapısı hizmetleri. 7 yıl deneyim, Partner Pro sertifikalı.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -778,7 +786,7 @@ ul,ol{list-style:none;}
         <div class="hdr-sub">Teknik Hizmetler Asistanı</div>
       </div>
     </div>
-    <div class="hdr-status"><span class="hdr-dot"></span>Aktif</div>
+    <div class="hdr-status"><span class="hdr-dot"></span>Çevrimiçi</div>
   </header>
 
   <!-- ╭─ STAGE INDICATOR ───────────────╮ -->
@@ -1096,7 +1104,7 @@ ul,ol{list-style:none;}
     <section class="screen" data-screen="urgency" data-stage="3">
       <div class="s-eye">08 · Uygunluk</div>
       <h2 class="s-h">Ne zaman uygun olursunuz?</h2>
-      <p class="s-p">Ekibimizin uygunluğu ile eşleştirelim — kesinleşmeden randevu oluşmayacak.</p>
+      <p class="s-p">Uygunluğumuzu eşleştirelim — kesinleşmeden randevu oluşmayacak.</p>
 
       <div class="choices">
         <button class="choice" data-pick="urgency" data-value="acil">
@@ -1183,6 +1191,7 @@ ul,ol{list-style:none;}
       <div class="field">
         <label for="f-tel">Telefon</label>
         <input id="f-tel" type="tel" inputmode="tel" autocomplete="tel" placeholder="0 5__ ___ __ __">
+        <p style="font-size:11px;color:var(--t-3);line-height:1.5;margin-top:6px;">Kişisel verileriniz yalnızca randevu ve hizmet süreçleri için kullanılır. KVKK kapsamında işlenmektedir.</p>
       </div>
 
       <!-- TELEFON DOĞRULAMA TASLAK — aktif etmek için bu bloğu açın ve aşağıdaki JS bloğunu da açın
@@ -1247,7 +1256,7 @@ ul,ol{list-style:none;}
       <div class="ariza-form-wrap">
         <div class="s-eye">Arıza Bildirimi</div>
         <h2 class="s-h">Arızanızı bildirin.</h2>
-        <p class="ariza-note">Formu doldurun; ekibimiz kısa sürede sizinle iletişime geçsin.</p>
+        <p class="ariza-note">Formu doldurun; kısa sürede sizinle iletişime geçeceğim.</p>
 
         <div id="arizaErr" class="form-err" role="alert"></div>
 
@@ -1312,7 +1321,7 @@ ul,ol{list-style:none;}
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 4 4 10-10"/></svg>
         </div>
         <h2 class="ariza-done-h">Bildirim alındı.</h2>
-        <p class="ariza-done-p">Arıza bildiriminiz kaydedildi. Ekibimiz kısa süre içinde sizinle iletişime geçecek.</p>
+        <p class="ariza-done-p">Arıza bildiriminiz kaydedildi. Kısa süre içinde sizinle iletişime geçeceğim.</p>
         <div class="ariza-done-ref" id="arizaDoneRef">AB-——————</div>
         <button class="ariza-done-back" data-action="close-ariza-done">Ana sayfaya dön</button>
       </div>
@@ -1504,6 +1513,7 @@ ul,ol{list-style:none;}
     if (i === -1) return;
     state.idx = i;
     showScreen(name);
+    saveSession();
   }
 
   function next(){
@@ -1516,11 +1526,13 @@ ul,ol{list-style:none;}
     }
     state.idx = Math.min(state.idx + 1, FLOW.length - 1);
     showScreen(FLOW[state.idx]);
+    saveSession();
   }
 
   function back(){
     state.idx = Math.max(state.idx - 1, 0);
     showScreen(FLOW[state.idx]);
+    saveSession();
   }
 
   function focusField(id){
@@ -1531,10 +1543,44 @@ ul,ol{list-style:none;}
     setTimeout(()=>el.classList.remove('shake'), 400);
   }
 
+  function saveSession(){
+    try {
+      sessionStorage.setItem('tehas_flow', JSON.stringify({
+        idx: state.idx,
+        data: state.data,
+        refId: state.refId
+      }));
+    } catch(e){}
+  }
+
+  function restoreSession(){
+    try {
+      const saved = sessionStorage.getItem('tehas_flow');
+      if (saved){
+        const parsed = JSON.parse(saved);
+        if (parsed.idx > 0 && FLOW[parsed.idx] && FLOW[parsed.idx] !== 'done'){
+          state.idx = parsed.idx;
+          state.data = parsed.data || {};
+          state.refId = parsed.refId || null;
+          const nameEl = document.getElementById('f-name');
+          const telEl  = document.getElementById('f-tel');
+          const noteEl = document.getElementById('f-note');
+          if (nameEl && state.data.name) nameEl.value = state.data.name;
+          if (telEl  && state.data.tel)  telEl.value  = state.data.tel;
+          if (noteEl && state.data.note) noteEl.value = state.data.note;
+          showScreen(FLOW[state.idx]);
+          return;
+        }
+      }
+    } catch(e){}
+    showScreen('splash');
+  }
+
   function reset(){
     state.idx = 0;
     state.data = {};
     state.refId = null;
+    try { sessionStorage.removeItem('tehas_flow'); } catch(e){}
     document.querySelectorAll('input,textarea').forEach(i => i.value = '');
     const btn = document.getElementById('confirmBtn');
     if (btn) {
@@ -1551,7 +1597,7 @@ ul,ol{list-style:none;}
 
     if (t.dataset.action){
       switch(t.dataset.action){
-        case 'start':   state.idx = 1; showScreen(FLOW[1]); return;
+        case 'start':   state.idx = 1; showScreen(FLOW[1]); saveSession(); return;
         case 'next':    next(); return;
         case 'back':    back(); return;
         case 'reset':   reset(); return;
@@ -1567,6 +1613,7 @@ ul,ol{list-style:none;}
       const v = t.dataset.value;
       state.data[k] = v;
       syncSelections();
+      saveSession();
       // auto-advance after a beat (calm rhythm)
       setTimeout(() => {
         if (FLOW[state.idx] === k) next();
@@ -1580,6 +1627,7 @@ ul,ol{list-style:none;}
     if (el.id === 'f-name')  state.data.name = el.value;
     if (el.id === 'f-tel')   state.data.tel  = formatTel(el);
     if (el.id === 'f-note')  state.data.note = el.value;
+    if (el.id === 'f-name' || el.id === 'f-tel' || el.id === 'f-note') saveSession();
     if (FLOW[state.idx] === 'info') updateDockCta('info');
   });
 
@@ -1770,7 +1818,7 @@ ul,ol{list-style:none;}
   });
 
   // ─── Init ───────────────────────────
-  showScreen('splash');
+  restoreSession();
 })();
 </script>
 
