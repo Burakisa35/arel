@@ -771,6 +771,60 @@ ul,ol{list-style:none;}
 .confirm-btn:active{transform:scale(0.985);}
 .confirm-btn:disabled{opacity:.38;box-shadow:none;cursor:not-allowed;}
 .confirm-btn svg{width:20px;height:20px;flex-shrink:0;}
+
+/* ─── Problem Cards ─────────────────── */
+.problem-section{padding:28px 22px 8px;}
+.problem-section-eye{
+  font-family:var(--f-mono);font-size:10px;font-weight:500;
+  letter-spacing:0.22em;color:var(--t-3);text-transform:uppercase;
+  margin-bottom:14px;display:flex;align-items:center;gap:10px;
+}
+.problem-section-eye::before{content:'';width:18px;height:1px;background:var(--t-3);}
+.problem-cards{display:flex;flex-direction:column;gap:8px;}
+.problem-card{
+  display:flex;align-items:center;gap:14px;
+  padding:14px 16px;
+  background:var(--bg-1);border:1px solid var(--line);border-radius:12px;
+  text-decoration:none;color:var(--t-1);
+  transition:border-color .2s,background .2s,transform .15s var(--ease);
+}
+.problem-card:active{transform:scale(0.985);}
+.problem-card:hover{border-color:var(--line-2);background:var(--bg-2);}
+.pc-ico{
+  flex-shrink:0;width:40px;height:40px;display:flex;align-items:center;justify-content:center;
+  border-radius:10px;border:1px solid var(--line-2);background:var(--bg-2);font-size:18px;
+}
+.pc-body{flex:1;min-width:0;}
+.pc-t{font-size:15px;font-weight:600;color:#fff;letter-spacing:-0.005em;margin-bottom:2px;}
+.pc-s{font-size:12px;color:var(--t-3);line-height:1.4;}
+.pc-arr{font-family:var(--f-mono);font-size:13px;color:var(--t-4);flex-shrink:0;}
+
+/* ─── Trust Block ───────────────────── */
+.trust-section{padding:28px 22px 32px;}
+.trust-section-h{
+  font-size:18px;font-weight:600;color:#fff;letter-spacing:-0.01em;margin-bottom:20px;
+}
+.trust-steps{display:flex;flex-direction:column;}
+.trust-step{
+  display:flex;align-items:flex-start;gap:14px;
+  padding:13px 0;border-bottom:1px solid var(--line);
+}
+.trust-step:last-child{border-bottom:none;}
+.ts-num{
+  flex-shrink:0;width:26px;height:26px;border-radius:50%;
+  background:var(--c-cyan-bg);border:1px solid rgba(52,229,197,.3);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--f-mono);font-size:11px;font-weight:500;color:var(--c-cyan);
+  margin-top:1px;
+}
+.ts-text{font-size:14px;color:var(--t-2);line-height:1.5;padding-top:3px;}
+.trust-motto{
+  margin-top:18px;
+  font-family:var(--f-mono);font-size:11px;font-weight:500;
+  letter-spacing:0.08em;color:var(--t-3);
+  padding:12px 14px;background:var(--bg-1);border:1px solid var(--line);
+  border-radius:10px;line-height:1.6;text-align:center;
+}
 </style>
 </head>
 <body>
@@ -809,17 +863,17 @@ ul,ol{list-style:none;}
       <div class="splash">
         <div class="splash-mark" aria-hidden="true"></div>
         <div class="splash-eye">Hoş geldiniz</div>
-        <h1 class="splash-h">Probleminizi anlamlandıralım, doğru çözümü <em>birlikte bulalım.</em></h1>
-        <p class="splash-p">Teknik bilgi gerekmiyor. Yaşadığınız durumu kısa adımlarla anlatın; sistem geri kalanını sizin için kuracak.</p>
+        <h1 class="splash-h">Sorun nerede?</h1>
+        <p class="splash-p">Elektrik, kamera, internet ve otomasyon arızalarında önce problemi netleştiririz.</p>
 
         <div class="splash-bullets">
-          <div class="splash-bullet"><span class="splash-bullet-check">✓</span>Teknik bilgi gerekmiyor</div>
-          <div class="splash-bullet"><span class="splash-bullet-check">✓</span>2 dakikada tamamlanır</div>
+          <div class="splash-bullet"><span class="splash-bullet-check">✓</span>Ölçmeden değiştirmeyiz</div>
+          <div class="splash-bullet"><span class="splash-bullet-check">✓</span>Önce problemi netleştiririz</div>
           <div class="splash-bullet"><span class="splash-bullet-check">✓</span>Sizi biz ararız</div>
         </div>
 
         <button class="splash-cta" data-action="start">
-          <b>Başla</b><span class="arr">→</span>
+          <b>Sorunu Anlat</b><span class="arr">→</span>
         </button>
 
         <div class="splash-sec">
@@ -836,6 +890,65 @@ ul,ol{list-style:none;}
         </div>
 
         <div class="splash-foot">TEHAŞ · Akıllı Yönlendirme, Doğru Çözüm</div>
+      </div>
+
+      <!-- Problem Cards -->
+      <div class="problem-section">
+        <div class="problem-section-eye">Hızlı Başlangıç</div>
+        <div class="problem-cards">
+          <a href="https://wa.me/905367807059?text=Merhaba%2C%20kamera%20sistemimde%20sorun%20var.%20G%C3%B6r%C3%BCnt%C3%BC%20yok%20%2F%20Kay%C4%B1t%20yok%20%2F%20Telefondan%20a%C3%A7%C4%B1lm%C4%B1yor." class="problem-card" target="_blank">
+            <div class="pc-ico">📷</div>
+            <div class="pc-body">
+              <div class="pc-t">Kamera</div>
+              <div class="pc-s">Görüntü yok / Kayıt yok / Telefondan açılmıyor</div>
+            </div>
+            <div class="pc-arr">→</div>
+          </a>
+          <a href="https://wa.me/905367807059?text=Merhaba%2C%20elektrik%20sorunu%20ya%C5%9F%C4%B1yorum.%20Sigorta%20at%C4%B1yor%20%2F%20Priz%20%C3%A7al%C4%B1%C5%9Fm%C4%B1yor%20%2F%20Ayd%C4%B1nlatma%20ar%C4%B1zas%C4%B1." class="problem-card" target="_blank">
+            <div class="pc-ico">⚡</div>
+            <div class="pc-body">
+              <div class="pc-t">Elektrik</div>
+              <div class="pc-s">Sigorta atıyor / Priz çalışmıyor / Aydınlatma arızası</div>
+            </div>
+            <div class="pc-arr">→</div>
+          </a>
+          <a href="https://wa.me/905367807059?text=Merhaba%2C%20internet%20sorunu%20ya%C5%9F%C4%B1yorum.%20Wi-Fi%20%C3%A7ekmiyor%20%2F%20Ba%C4%9Flant%C4%B1%20kopuyor." class="problem-card" target="_blank">
+            <div class="pc-ico">🌐</div>
+            <div class="pc-body">
+              <div class="pc-t">İnternet</div>
+              <div class="pc-s">Wi-Fi çekmiyor / Bağlantı kopuyor</div>
+            </div>
+            <div class="pc-arr">→</div>
+          </a>
+          <a href="https://wa.me/905367807059?text=Merhaba%2C%20uydu%20%2F%20anten%20sorunum%20var.%20Sinyal%20yok%20%2F%20Kanal%20gelmiyor." class="problem-card" target="_blank">
+            <div class="pc-ico">📡</div>
+            <div class="pc-body">
+              <div class="pc-t">Uydu / Anten</div>
+              <div class="pc-s">Sinyal yok / Kanal gelmiyor</div>
+            </div>
+            <div class="pc-arr">→</div>
+          </a>
+          <a href="https://wa.me/905367807059?text=Merhaba%2C%20otomasyon%20sorunu%20ya%C5%9F%C4%B1yorum.%20Kap%C4%B1%20a%C3%A7%C4%B1lm%C4%B1yor%20%2F%20Sistem%20yan%C4%B1t%20vermiyor." class="problem-card" target="_blank">
+            <div class="pc-ico">🔒</div>
+            <div class="pc-body">
+              <div class="pc-t">Otomasyon</div>
+              <div class="pc-s">Kapı açılmıyor / Sistem yanıt vermiyor</div>
+            </div>
+            <div class="pc-arr">→</div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Trust Block -->
+      <div class="trust-section">
+        <div class="trust-section-h">Nasıl ilerliyoruz?</div>
+        <div class="trust-steps">
+          <div class="trust-step"><div class="ts-num">1</div><div class="ts-text">Sorunu seç</div></div>
+          <div class="trust-step"><div class="ts-num">2</div><div class="ts-text">Fotoğraf / açıklama gönder</div></div>
+          <div class="trust-step"><div class="ts-num">3</div><div class="ts-text">Ön değerlendirme</div></div>
+          <div class="trust-step"><div class="ts-num">4</div><div class="ts-text">Müdahale planı</div></div>
+        </div>
+        <div class="trust-motto">Ölçmeden değiştirmeyiz. Gereksiz parça önermeyiz.</div>
       </div>
     </section>
 
