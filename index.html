@@ -1412,7 +1412,7 @@ ul,ol{list-style:none;}
     const isFlow = stage > 0 && name !== 'done';
 
     stageWrap.hidden = !isFlow;
-    dock.hidden = (name === 'splash' || name === 'done');
+    dock.hidden = (name === 'splash' || name === 'done' || name === 'contact');
 
     // Stage indicator
     if (isFlow){
@@ -1634,7 +1634,7 @@ ul,ol{list-style:none;}
   function formatTel(el){
     const pos = el.selectionStart;
     const before = el.value.slice(0, pos).replace(/\D/g,'').length;
-    const raw = el.value.replace(/\D/g,'').slice(0,11);
+    const raw = el.value.replace(/\D/g,'').replace(/^[^5]+/, '').slice(0,11);
     let out = raw;
     if (raw.length >= 4)  out = raw.slice(0,4) + ' ' + raw.slice(4);
     if (raw.length >= 7)  out = raw.slice(0,4) + ' ' + raw.slice(4,7) + ' ' + raw.slice(7);
@@ -1862,7 +1862,7 @@ ul,ol{list-style:none;}
     telInput.addEventListener('input', function(){
       var pos = this.selectionStart;
       var before = this.value.slice(0, pos).replace(/\D/g,'').length;
-      var raw = this.value.replace(/\D/g,'').slice(0,11);
+      var raw = this.value.replace(/\D/g,'').replace(/^[^5]+/, '').slice(0,11);
       var out = raw;
       if(raw.length >= 4)  out = raw.slice(0,4)+' '+raw.slice(4);
       if(raw.length >= 7)  out = raw.slice(0,4)+' '+raw.slice(4,7)+' '+raw.slice(7);
