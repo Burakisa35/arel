@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#090909">
+<title>Fiyat Tahmini | TEHAŞ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#090909;
+  --bg-1:#111111;
+  --bg-2:#171717;
+  --bg-3:#1e1e1e;
+  --line:#1a1a1a;
+  --line-2:#262626;
+  --t-1:#f0f0f0;
+  --t-2:#a0a0a0;
+  --t-3:#606060;
+  --t-4:#383838;
+  --c-cyan:#00d4ff;
+  --c-cyan-d:#007fa0;
+  --c-cyan-bg:rgba(0,212,255,.07);
+  --c-green:#22c55e;
+  --c-amber:#fbbf24;
+  --c-red:#f87171;
+  --safe-t:env(safe-area-inset-top,0px);
+  --safe-b:env(safe-area-inset-bottom,0px);
+  --f-body:'Inter',-apple-system,system-ui,sans-serif;
+  --f-mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
+  --ease:cubic-bezier(.2,.8,.2,1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+html{background:var(--bg);-webkit-text-size-adjust:100%;}
+body{
+  background:var(--bg);color:var(--t-1);
+  font-family:var(--f-body);font-size:15px;line-height:1.55;
+  letter-spacing:-0.005em;-webkit-font-smoothing:antialiased;
+  overflow-x:hidden;min-height:100vh;min-height:100dvh;
+}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;-webkit-appearance:none;}
+a{color:inherit;text-decoration:none;}
+::selection{background:var(--c-cyan);color:#000;}
+
+.app{
+  position:relative;max-width:480px;margin:0 auto;
+  min-height:100vh;min-height:100dvh;
+  background:
+    radial-gradient(ellipse 140% 60% at 50% 0%,rgba(0,212,255,.05),transparent 60%),
+    var(--bg);
+  padding-bottom:calc(48px + var(--safe-b));
+}
+
+/* Header */
+.hdr{
+  position:sticky;top:0;z-index:40;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:calc(var(--safe-t) + 14px) 20px 14px;
+  background:rgba(9,9,9,.82);
+  backdrop-filter:blur(20px) saturate(140%);
+  -webkit-backdrop-filter:blur(20px) saturate(140%);
+  border-bottom:1px solid var(--line);
+}
+.hdr-brand{display:flex;align-items:center;gap:10px;}
+.hdr-logo{
+  width:28px;height:28px;border-radius:7px;
+  background:linear-gradient(135deg,rgba(0,212,255,.18),rgba(0,212,255,.06));
+  border:1px solid rgba(0,212,255,.3);
+  display:flex;align-items:center;justify-content:center;font-size:14px;
+}
+.hdr-name{font-weight:700;font-size:13px;letter-spacing:0.18em;color:#fff;}
+.hdr-sub{font-family:var(--f-mono);font-size:9px;letter-spacing:0.14em;color:var(--t-3);text-transform:uppercase;margin-top:3px;}
+.hdr-back{
+  font-family:var(--f-mono);font-size:10px;letter-spacing:0.12em;color:var(--t-3);
+  text-transform:uppercase;padding:7px 12px;border:1px solid var(--line-2);border-radius:99px;
+  transition:color .15s,border-color .15s;
+}
+.hdr-back:hover{color:var(--t-1);border-color:var(--t-4);}
+
+/* Progress bar */
+.prog-wrap{padding:16px 20px 0;}
+.prog-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;}
+.prog-label{font-family:var(--f-mono);font-size:10px;letter-spacing:0.18em;color:var(--t-3);text-transform:uppercase;}
+.prog-label b{color:var(--c-cyan);font-weight:500;}
+.prog-track{height:3px;background:var(--line);border-radius:2px;overflow:hidden;}
+.prog-fill{
+  height:100%;border-radius:2px;
+  background:linear-gradient(90deg,var(--c-cyan),rgba(0,212,255,.4));
+  box-shadow:0 0 8px rgba(0,212,255,.35);
+  transition:width .4s var(--ease);min-width:4px;
+}
+
+/* Screen */
+.screens{position:relative;}
+.screen{display:none;padding:20px 20px 32px;animation:scr-in .32s var(--ease) both;}
+.screen.is-on{display:block;}
+@keyframes scr-in{from{opacity:0;transform:translateX(18px);}to{opacity:1;transform:translateX(0);}}
+
+.s-eye{
+  font-family:var(--f-mono);font-size:10px;font-weight:500;
+  letter-spacing:0.22em;color:var(--c-cyan);text-transform:uppercase;
+  margin-bottom:12px;display:flex;align-items:center;gap:8px;
+}
+.s-eye::before{content:'';width:16px;height:1px;background:var(--c-cyan);}
+.s-h{font-size:26px;font-weight:600;letter-spacing:-0.02em;color:#fff;margin-bottom:8px;line-height:1.15;}
+.s-p{color:var(--t-2);font-size:14px;line-height:1.55;margin-bottom:22px;}
+
+/* Cards */
+.cards{display:flex;flex-direction:column;gap:8px;margin-bottom:16px;}
+.card{
+  display:flex;align-items:center;gap:14px;width:100%;
+  padding:15px 16px;
+  background:var(--bg-1);border:1px solid var(--line);border-radius:12px;
+  text-align:left;cursor:pointer;
+  transition:transform .15s var(--ease),border-color .18s,background .18s;
+  min-height:66px;position:relative;
+}
+.card:active{transform:scale(0.984);}
+.card:hover{border-color:var(--line-2);background:var(--bg-2);}
+.card.sel{
+  border-color:var(--c-cyan);
+  background:linear-gradient(180deg,rgba(0,212,255,.07),rgba(0,212,255,.02));
+}
+.card.sel::after{
+  content:'';position:absolute;top:15px;right:15px;
+  width:16px;height:16px;border-radius:50%;
+  background:var(--c-cyan);box-shadow:inset 0 0 0 4px var(--bg-1);
+}
+.card.sel .c-ico{border-color:var(--c-cyan);color:var(--c-cyan);}
+.c-ico{
+  flex-shrink:0;width:42px;height:42px;
+  display:flex;align-items:center;justify-content:center;
+  border-radius:10px;border:1px solid var(--line-2);background:var(--bg-2);
+  color:var(--t-2);font-size:19px;transition:all .2s;
+}
+.c-body{flex:1;min-width:0;padding-right:22px;}
+.c-t{font-size:15px;font-weight:600;color:#fff;letter-spacing:-0.005em;line-height:1.2;margin-bottom:2px;}
+.c-s{font-size:12px;color:var(--t-3);line-height:1.4;}
+
+/* Brand grid */
+.brand-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:16px;}
+.brand-btn{
+  padding:13px 12px;background:var(--bg-1);border:1px solid var(--line);
+  border-radius:10px;font-size:13px;font-weight:500;color:var(--t-2);
+  cursor:pointer;text-align:center;transition:all .18s;
+}
+.brand-btn:hover{border-color:var(--line-2);color:var(--t-1);}
+.brand-btn.sel{border-color:var(--c-cyan);color:var(--c-cyan);background:var(--c-cyan-bg);}
+
+/* Adet / kanal */
+.adet-wrap{margin-bottom:22px;}
+.adet-label{font-family:var(--f-mono);font-size:10px;letter-spacing:0.16em;color:var(--t-3);text-transform:uppercase;margin-bottom:10px;}
+.adet-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;}
+.adet-btn{
+  padding:13px 6px;background:var(--bg-1);border:1px solid var(--line);
+  border-radius:10px;font-size:14px;font-weight:600;color:var(--t-2);
+  cursor:pointer;text-align:center;transition:all .18s;
+}
+.adet-btn:hover{border-color:var(--line-2);color:var(--t-1);}
+.adet-btn.sel{border-color:var(--c-cyan);color:var(--c-cyan);background:var(--c-cyan-bg);}
+
+/* Slider */
+.slider-wrap{margin-bottom:22px;}
+.slider-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}
+.slider-val{font-family:var(--f-mono);font-size:22px;font-weight:500;color:var(--c-cyan);}
+.slider-unit{font-size:12px;color:var(--t-3);margin-top:2px;}
+input[type=range]{
+  -webkit-appearance:none;appearance:none;width:100%;height:4px;
+  background:var(--line-2);border-radius:2px;outline:none;
+}
+input[type=range]::-webkit-slider-thumb{
+  -webkit-appearance:none;width:22px;height:22px;border-radius:50%;
+  background:var(--c-cyan);box-shadow:0 0 10px rgba(0,212,255,.4);
+  cursor:pointer;transition:transform .15s;
+}
+input[type=range]::-webkit-slider-thumb:active{transform:scale(1.18);}
+
+/* Kablo */
+.kablo-section{margin-top:20px;}
+.kablo-label{font-family:var(--f-mono);font-size:10px;letter-spacing:0.16em;color:var(--t-3);text-transform:uppercase;margin-bottom:10px;}
+.kablo-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;}
+.kablo-btn{
+  padding:11px 4px;background:var(--bg-1);border:1px solid var(--line);
+  border-radius:9px;font-size:12px;font-weight:500;color:var(--t-3);
+  cursor:pointer;text-align:center;transition:all .18s;
+}
+.kablo-btn:hover{border-color:var(--line-2);color:var(--t-1);}
+.kablo-btn.sel{border-color:var(--c-cyan);color:var(--c-cyan);background:var(--c-cyan-bg);}
+
+/* CTA button */
+.btn-primary{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  width:100%;padding:17px 20px;
+  background:linear-gradient(135deg,var(--c-cyan),rgba(0,180,220,.85));
+  color:#000;font-weight:700;font-size:15px;letter-spacing:-0.01em;
+  border-radius:13px;border:none;cursor:pointer;
+  transition:opacity .2s,transform .15s;
+  box-shadow:0 4px 24px rgba(0,212,255,.22);
+}
+.btn-primary:hover{opacity:.9;}
+.btn-primary:active{transform:scale(.984);}
+.btn-primary:disabled{opacity:.35;cursor:not-allowed;transform:none;}
+
+/* Nav row */
+.nav-row{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 0 0;
+}
+.nav-row button{
+  font-family:var(--f-mono);font-size:10px;letter-spacing:0.16em;color:var(--t-3);
+  text-transform:uppercase;padding:9px 12px;border-radius:7px;
+  transition:color .15s,background .15s;
+}
+.nav-row button:hover{color:var(--t-1);background:var(--bg-2);}
+
+/* Loading screen */
+.loading-screen{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:70vh;gap:32px;padding:32px 20px;}
+.loading-icon{
+  width:72px;height:72px;border-radius:18px;
+  background:linear-gradient(135deg,rgba(0,212,255,.12),rgba(0,212,255,.04));
+  border:1px solid rgba(0,212,255,.25);
+  display:flex;align-items:center;justify-content:center;font-size:32px;
+  box-shadow:0 0 40px rgba(0,212,255,.08);
+}
+.loading-title{font-size:20px;font-weight:600;color:#fff;text-align:center;letter-spacing:-0.015em;}
+.loading-msg{
+  font-family:var(--f-mono);font-size:11px;letter-spacing:0.14em;color:var(--c-cyan);
+  text-transform:uppercase;text-align:center;min-height:20px;
+  transition:opacity .3s;
+}
+.loading-bar-wrap{width:100%;max-width:260px;}
+.loading-bar-track{height:3px;background:var(--line);border-radius:2px;overflow:hidden;}
+.loading-bar-fill{
+  height:100%;width:0;border-radius:2px;
+  background:linear-gradient(90deg,var(--c-cyan),rgba(0,212,255,.4));
+  box-shadow:0 0 8px rgba(0,212,255,.4);
+  transition:width .6s var(--ease);
+}
+.dots{display:flex;gap:6px;justify-content:center;}
+.dots span{
+  width:7px;height:7px;border-radius:50%;background:var(--c-cyan);
+  animation:dot-bounce 1.2s infinite;opacity:.5;
+}
+.dots span:nth-child(2){animation-delay:.18s;}
+.dots span:nth-child(3){animation-delay:.36s;}
+@keyframes dot-bounce{0%,80%,100%{transform:scale(.6);opacity:.3;}40%{transform:scale(1);opacity:1;}}
+
+/* Result screen */
+.result-blocks{display:flex;flex-direction:column;gap:10px;margin-bottom:20px;}
+.result-block{
+  background:var(--bg-1);border:1px solid var(--line);border-radius:12px;padding:18px;
+}
+.result-block.total{
+  background:linear-gradient(135deg,rgba(0,212,255,.09),rgba(0,212,255,.03));
+  border-color:rgba(0,212,255,.3);
+}
+.rb-label{font-family:var(--f-mono);font-size:10px;letter-spacing:0.18em;color:var(--t-3);text-transform:uppercase;margin-bottom:10px;}
+.rb-range{font-size:22px;font-weight:700;color:#fff;letter-spacing:-0.02em;line-height:1;}
+.result-block.total .rb-range{font-size:28px;color:var(--c-cyan);text-shadow:0 0 20px rgba(0,212,255,.3);}
+.rb-sub{font-size:12px;color:var(--t-3);margin-top:5px;}
+
+.model-block{
+  background:var(--bg-1);border:1px solid var(--line);border-radius:12px;padding:18px;margin-bottom:10px;
+}
+.model-label{font-family:var(--f-mono);font-size:10px;letter-spacing:0.18em;color:var(--t-3);text-transform:uppercase;margin-bottom:8px;}
+.model-val{font-size:14px;font-weight:500;color:var(--t-1);line-height:1.45;}
+.source-val{font-size:12px;color:var(--t-3);margin-top:4px;}
+
+.disclaimer{
+  background:rgba(251,191,36,.06);border:1px solid rgba(251,191,36,.18);
+  border-radius:10px;padding:14px 16px;margin-bottom:18px;
+}
+.disclaimer p{font-size:12px;color:var(--c-amber);line-height:1.55;}
+
+.btn-wa{
+  display:flex;align-items:center;justify-content:center;gap:9px;
+  width:100%;padding:16px 20px;
+  background:linear-gradient(135deg,#25D366,#1da851);
+  color:#fff;font-weight:700;font-size:15px;letter-spacing:-0.01em;
+  border-radius:13px;border:none;cursor:pointer;
+  transition:opacity .2s,transform .15s;
+  box-shadow:0 4px 20px rgba(37,211,102,.2);
+  margin-top:12px;text-decoration:none;
+}
+.btn-wa:hover{opacity:.9;}
+.btn-wa:active{transform:scale(.984);}
+
+.btn-retry{
+  display:flex;align-items:center;justify-content:center;gap:7px;
+  width:100%;padding:13px;margin-top:8px;
+  background:transparent;border:1px solid var(--line-2);
+  color:var(--t-2);font-size:14px;border-radius:11px;cursor:pointer;
+  transition:all .18s;
+}
+.btn-retry:hover{border-color:var(--c-cyan);color:var(--c-cyan);}
+
+/* Error block */
+.error-block{
+  background:rgba(248,113,113,.06);border:1px solid rgba(248,113,113,.2);
+  border-radius:12px;padding:18px;margin-bottom:16px;
+}
+.error-block p{font-size:13px;color:var(--c-red);line-height:1.55;}
+
+/* Fallback range blocks (static) */
+.fallback-note{
+  font-family:var(--f-mono);font-size:10px;letter-spacing:0.14em;color:var(--c-amber);
+  text-transform:uppercase;text-align:center;margin-bottom:14px;
+}
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- Header -->
+  <header class="hdr">
+    <div class="hdr-brand">
+      <div class="hdr-logo">📷</div>
+      <div>
+        <div class="hdr-name">TEHAŞ</div>
+        <div class="hdr-sub">Fiyat Tahmini</div>
+      </div>
+    </div>
+    <a href="/" class="hdr-back">← Ana Sayfa</a>
+  </header>
+
+  <!-- Progress bar -->
+  <div class="prog-wrap" id="prog-wrap">
+    <div class="prog-row">
+      <div class="prog-label">Adım <b id="prog-cur">1</b> / 5</div>
+      <div class="prog-label" id="prog-title">Kategori</div>
+    </div>
+    <div class="prog-track"><div class="prog-fill" id="prog-fill" style="width:20%"></div></div>
+  </div>
+
+  <div class="screens">
+
+    <!-- STEP 1: Kategori -->
+    <div class="screen is-on" id="s1">
+      <div class="s-eye">01 — Ürün Tipi</div>
+      <h1 class="s-h">Ne kurmak istiyorsunuz?</h1>
+      <p class="s-p">Fiyat tahmini için önce ürün kategorisini seçin.</p>
+      <div class="cards" id="cat-cards">
+        <button class="card" data-val="IP Kamera">
+          <div class="c-ico">📷</div>
+          <div class="c-body"><div class="c-t">IP Kamera</div><div class="c-s">Standart, PoE beslemeli</div></div>
+        </button>
+        <button class="card" data-val="Solar Kamera">
+          <div class="c-ico">☀️</div>
+          <div class="c-body"><div class="c-t">Solar Kamera</div><div class="c-s">Güneş enerjili, 4G</div></div>
+        </button>
+        <button class="card" data-val="Analog Kamera">
+          <div class="c-ico">📼</div>
+          <div class="c-body"><div class="c-t">Analog Kamera</div><div class="c-s">AHD / HDCVI</div></div>
+        </button>
+        <button class="card" data-val="NVR">
+          <div class="c-ico">🖥️</div>
+          <div class="c-body"><div class="c-t">NVR — IP Kayıt Cihazı</div><div class="c-s">IP kamera sistemi için</div></div>
+        </button>
+        <button class="card" data-val="DVR">
+          <div class="c-ico">📀</div>
+          <div class="c-body"><div class="c-t">DVR — Analog Kayıt</div><div class="c-s">Analog sistem için</div></div>
+        </button>
+        <button class="card" data-val="PoE Switch">
+          <div class="c-ico">🔌</div>
+          <div class="c-body"><div class="c-t">PoE Switch</div><div class="c-s">Kamera ağ altyapısı</div></div>
+        </button>
+        <button class="card" data-val="Komple Set">
+          <div class="c-ico">📦</div>
+          <div class="c-body"><div class="c-t">Komple Set</div><div class="c-s">Kamera + kayıt + kablo</div></div>
+        </button>
+      </div>
+    </div>
+
+    <!-- STEP 2: Marka -->
+    <div class="screen" id="s2">
+      <div class="s-eye">02 — Marka</div>
+      <h1 class="s-h">Tercih ettiğiniz marka?</h1>
+      <p class="s-p">Belirli bir marka tercihiniz yoksa Hikvision önerilir.</p>
+      <div class="brand-grid" id="brand-grid"></div>
+      <div class="nav-row">
+        <button onclick="goTo(1)">← Geri</button>
+        <span></span>
+      </div>
+    </div>
+
+    <!-- STEP 3: Adet / Alan -->
+    <div class="screen" id="s3">
+      <div class="s-eye">03 — Miktar</div>
+      <h1 class="s-h" id="s3-title">Kaç adet?</h1>
+      <p class="s-p" id="s3-desc">Kurulacak kamera adedini seçin.</p>
+      <div id="s3-input"></div>
+      <div class="kablo-section" id="kablo-section">
+        <div class="kablo-label">Kablo mesafesi (opsiyonel)</div>
+        <div class="kablo-grid" id="kablo-grid">
+          <button class="kablo-btn" data-m="">Bilinmiyor</button>
+          <button class="kablo-btn" data-m="20">~20m</button>
+          <button class="kablo-btn" data-m="50">~50m</button>
+          <button class="kablo-btn" data-m="100">~100m</button>
+          <button class="kablo-btn" data-m="200">~200m</button>
+        </div>
+      </div>
+      <div class="nav-row" style="margin-top:20px">
+        <button onclick="goTo(2)">← Geri</button>
+        <button class="btn-primary" style="width:auto;padding:12px 24px;font-size:14px;" id="btn-s3-next">Fiyat Tahmin Et →</button>
+      </div>
+    </div>
+
+    <!-- STEP 4: Loading -->
+    <div class="screen" id="s4">
+      <div class="loading-screen">
+        <div class="loading-icon">🔍</div>
+        <div>
+          <div class="loading-title">Fiyat Araştırılıyor</div>
+        </div>
+        <div class="loading-msg" id="loading-msg">Piyasa fiyatları taranıyor…</div>
+        <div class="loading-bar-wrap">
+          <div class="loading-bar-track"><div class="loading-bar-fill" id="loading-bar"></div></div>
+        </div>
+        <div class="dots"><span></span><span></span><span></span></div>
+      </div>
+    </div>
+
+    <!-- STEP 5: Sonuç -->
+    <div class="screen" id="s5">
+      <div class="s-eye">05 — Sonuç</div>
+      <h1 class="s-h">Fiyat Tahmininiz</h1>
+      <p class="s-p" id="result-subtitle"></p>
+      <div id="result-content"></div>
+      <button class="btn-retry" onclick="restart()">↩ Yeni Tahmin Yap</button>
+    </div>
+
+  </div><!-- /screens -->
+</div><!-- /app -->
+
+<script>
+var state = { kategori: '', marka: '', adet: '', kablo: '' };
+
+var BRANDS = {
+  'IP Kamera':    ['Hikvision','Dahua','HiLook','Uniview','Neutron','EZVIZ','Imou','TP-Link','Tiandy','BDCOM','V380'],
+  'Solar Kamera': ['Hikvision','Dahua','EZVIZ','Imou'],
+  'Analog Kamera':['Hikvision','Dahua','HiLook','Uniview','Neutron','EZVIZ','Imou','TP-Link','Tiandy','BDCOM','V380'],
+  'NVR':          ['Hikvision','Dahua','HiLook','Neutron','Uniview'],
+  'DVR':          ['Hikvision','Dahua','HiLook','Neutron','Uniview'],
+  'PoE Switch':   ['BDCOM','TP-Link','Hikvision','Dahua','Netgear','Zyxel'],
+  'Komple Set':   ['Hikvision','Dahua','HiLook','Neutron'],
+};
+
+var ADET_OPTS = {
+  'IP Kamera':    null, // slider
+  'Solar Kamera': null,
+  'Analog Kamera':null,
+  'NVR':          ['4 Kanal','8 Kanal','16 Kanal','32 Kanal'],
+  'DVR':          ['4 Kanal','8 Kanal','16 Kanal','32 Kanal'],
+  'PoE Switch':   ['4 Port','8 Port','16 Port','24 Port'],
+  'Komple Set':   ['2 Kameralı','4 Kameralı','6 Kameralı','8 Kameralı'],
+};
+
+var PROG_TITLES = ['Kategori','Marka','Miktar','Araştırma','Sonuç'];
+
+function goTo(n) {
+  document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('is-on');});
+  document.getElementById('s'+n).classList.add('is-on');
+  var pct = (n/5)*100;
+  document.getElementById('prog-fill').style.width = pct+'%';
+  document.getElementById('prog-cur').textContent = n;
+  document.getElementById('prog-title').textContent = PROG_TITLES[n-1];
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// Step 1 — kategori
+document.getElementById('cat-cards').addEventListener('click', function(e) {
+  var card = e.target.closest('.card');
+  if (!card) return;
+  document.querySelectorAll('#cat-cards .card').forEach(function(c){c.classList.remove('sel');});
+  card.classList.add('sel');
+  state.kategori = card.dataset.val;
+  setTimeout(function() { buildBrands(); goTo(2); }, 200);
+});
+
+function buildBrands() {
+  var list = BRANDS[state.kategori] || [];
+  var grid = document.getElementById('brand-grid');
+  grid.innerHTML = '';
+  list.forEach(function(b) {
+    var btn = document.createElement('button');
+    btn.className = 'brand-btn';
+    btn.textContent = b;
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.brand-btn').forEach(function(x){x.classList.remove('sel');});
+      btn.classList.add('sel');
+      state.marka = b;
+      setTimeout(function() { buildAdet(); goTo(3); }, 180);
+    });
+    grid.appendChild(btn);
+  });
+}
+
+function buildAdet() {
+  var opts = ADET_OPTS[state.kategori];
+  var container = document.getElementById('s3-input');
+  container.innerHTML = '';
+  var isCamera = !opts;
+
+  if (isCamera) {
+    document.getElementById('s3-title').textContent = 'Kaç adet kamera?';
+    document.getElementById('s3-desc').textContent = 'Slider ile kamera adedini seçin.';
+    var val = state.adet || '4';
+    state.adet = val;
+    container.innerHTML = '<div class="slider-wrap">'
+      + '<div class="slider-row"><div><div class="slider-val" id="sl-val">'+val+'</div><div class="slider-unit">adet kamera</div></div></div>'
+      + '<input type="range" min="1" max="16" value="'+val+'" id="cam-slider">'
+      + '</div>';
+    document.getElementById('cam-slider').addEventListener('input', function() {
+      state.adet = this.value;
+      document.getElementById('sl-val').textContent = this.value;
+    });
+    document.getElementById('kablo-section').style.display = 'block';
+  } else {
+    document.getElementById('s3-title').textContent = 'Kapasite seçin';
+    document.getElementById('s3-desc').textContent = 'İhtiyacınıza uygun kanal / port sayısını seçin.';
+    var grid = document.createElement('div');
+    grid.className = 'adet-wrap';
+    var inner = '<div class="adet-label">Seçenek</div><div class="adet-grid">';
+    opts.forEach(function(o) {
+      inner += '<button class="adet-btn" data-val="'+o+'">'+o+'</button>';
+    });
+    inner += '</div>';
+    grid.innerHTML = inner;
+    grid.addEventListener('click', function(e) {
+      var btn = e.target.closest('.adet-btn');
+      if (!btn) return;
+      grid.querySelectorAll('.adet-btn').forEach(function(x){x.classList.remove('sel');});
+      btn.classList.add('sel');
+      state.adet = btn.dataset.val;
+    });
+    container.appendChild(grid);
+    document.getElementById('kablo-section').style.display = 'none';
+  }
+}
+
+// Kablo grid
+document.getElementById('kablo-grid').addEventListener('click', function(e) {
+  var btn = e.target.closest('.kablo-btn');
+  if (!btn) return;
+  document.querySelectorAll('.kablo-btn').forEach(function(x){x.classList.remove('sel');});
+  btn.classList.add('sel');
+  state.kablo = btn.dataset.m ? btn.dataset.m+'m' : '';
+});
+
+// Step 3 next
+document.getElementById('btn-s3-next').addEventListener('click', function() {
+  if (!state.adet) { alert('Lütfen bir miktar seçin.'); return; }
+  startSearch();
+});
+
+var loadMsgs = [
+  'Hikvision yetkili bayi fiyatları taranıyor…',
+  'Güncel piyasa fiyatları karşılaştırılıyor…',
+  'İşçilik maliyeti hesaplanıyor…',
+  'Tahmininiz hazırlanıyor…',
+];
+var loadInterval = null;
+
+function startSearch() {
+  goTo(4);
+  var msgEl = document.getElementById('loading-msg');
+  var barEl = document.getElementById('loading-bar');
+  var idx = 0;
+  msgEl.textContent = loadMsgs[0];
+  barEl.style.width = '10%';
+
+  loadInterval = setInterval(function() {
+    idx = (idx + 1) % loadMsgs.length;
+    msgEl.style.opacity = '0';
+    setTimeout(function() {
+      msgEl.textContent = loadMsgs[idx];
+      msgEl.style.opacity = '1';
+    }, 200);
+    var pct = Math.min(10 + idx * 22, 88);
+    barEl.style.width = pct + '%';
+  }, 3200);
+
+  fetch('/api/fiyat-tahmin', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      kategori: state.kategori,
+      marka: state.marka,
+      adet: state.adet,
+      alan: state.kablo || 'belirtilmedi',
+    }),
+  })
+  .then(function(r) { return r.json(); })
+  .then(function(data) {
+    clearInterval(loadInterval);
+    barEl.style.width = '100%';
+    setTimeout(function() { showResult(data); }, 400);
+  })
+  .catch(function(err) {
+    clearInterval(loadInterval);
+    showFallback(err.message);
+  });
+}
+
+function fmt(n) {
+  if (!n && n !== 0) return '—';
+  return Number(n).toLocaleString('tr-TR') + ' TL';
+}
+
+function showResult(data) {
+  goTo(5);
+  var subtitle = document.getElementById('result-subtitle');
+  var content = document.getElementById('result-content');
+  subtitle.textContent = state.kategori + ' · ' + state.marka + ' · ' + state.adet;
+
+  if (data.error) {
+    showFallback(data.error);
+    return;
+  }
+
+  var waMsg = encodeURIComponent(
+    'Merhaba, ' + state.kategori + ' ' + state.marka + ' ' + state.adet +
+    ' için fiyat tahmini aldım (Toplam: ' + fmt(data.toplam_min) + ' – ' + fmt(data.toplam_max) +
+    '). Keşif randevusu istiyorum.'
+  );
+
+  content.innerHTML =
+    '<div class="result-blocks">'
+    + '<div class="result-block">'
+    + '<div class="rb-label">Ürün Maliyeti</div>'
+    + '<div class="rb-range">' + fmt(data.urun_fiyat_min) + ' – ' + fmt(data.urun_fiyat_max) + '</div>'
+    + '</div>'
+    + '<div class="result-block">'
+    + '<div class="rb-label">İşçilik + Kablo</div>'
+    + '<div class="rb-range">' + fmt(data.iscilik_min) + ' – ' + fmt(data.iscilik_max) + '</div>'
+    + '</div>'
+    + '<div class="result-block total">'
+    + '<div class="rb-label">Toplam Tahmin</div>'
+    + '<div class="rb-range">' + fmt(data.toplam_min) + ' – ' + fmt(data.toplam_max) + '</div>'
+    + '</div>'
+    + '</div>'
+    + '<div class="model-block">'
+    + '<div class="model-label">Model Önerisi</div>'
+    + '<div class="model-val">' + (data.model_onerisi || '—') + '</div>'
+    + (data.kaynak ? '<div class="source-val">Kaynak: ' + data.kaynak + '</div>' : '')
+    + (data.notlar ? '<div class="source-val" style="margin-top:6px;color:var(--c-amber)">' + data.notlar + '</div>' : '')
+    + '</div>'
+    + '<div class="disclaimer"><p>⚠️ Bu yapay zeka tahminidir. Kesin fiyat için ücretsiz keşif yapılır.</p></div>'
+    + '<a href="https://wa.me/905367807059?text=' + waMsg + '" target="_blank" rel="noopener" class="btn-wa">'
+    + '<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>'
+    + 'Ücretsiz Keşif İste →'
+    + '</a>';
+}
+
+function showFallback(errMsg) {
+  goTo(5);
+  var subtitle = document.getElementById('result-subtitle');
+  var content = document.getElementById('result-content');
+  subtitle.textContent = state.kategori + ' · ' + state.marka + ' · ' + state.adet;
+
+  // Static fallback ranges based on category
+  var fallback = getFallbackRanges();
+  var waMsg = encodeURIComponent(
+    'Merhaba, ' + state.kategori + ' ' + state.marka + ' ' + state.adet +
+    ' için fiyat tahmini almak istiyorum. Keşif randevusu istiyorum.'
+  );
+
+  content.innerHTML =
+    '<div class="error-block"><p>⚠️ Anlık veri alınamadı — tahmini fiyat aralıkları gösteriliyor.</p></div>'
+    + '<div class="fallback-note">TAHMİNİ FİYAT ARALIĞI</div>'
+    + '<div class="result-blocks">'
+    + '<div class="result-block">'
+    + '<div class="rb-label">Ürün Maliyeti (tahmini)</div>'
+    + '<div class="rb-range">' + fallback.urun + '</div>'
+    + '</div>'
+    + '<div class="result-block">'
+    + '<div class="rb-label">İşçilik + Kablo (tahmini)</div>'
+    + '<div class="rb-range">' + fallback.iscilik + '</div>'
+    + '</div>'
+    + '<div class="result-block total">'
+    + '<div class="rb-label">Toplam (tahmini)</div>'
+    + '<div class="rb-range">' + fallback.toplam + '</div>'
+    + '</div>'
+    + '</div>'
+    + '<div class="disclaimer"><p>⚠️ Bu tahmini aralıktır. Kesin fiyat için ücretsiz keşif yapılır.</p></div>'
+    + '<a href="https://wa.me/905367807059?text=' + waMsg + '" target="_blank" rel="noopener" class="btn-wa">'
+    + '<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>'
+    + 'Ücretsiz Keşif İste →'
+    + '</a>';
+}
+
+function getFallbackRanges() {
+  var kat = state.kategori;
+  var adet = parseInt(state.adet) || 1;
+  var isKamera = kat === 'IP Kamera' || kat === 'Analog Kamera' || kat === 'Solar Kamera';
+
+  if (kat === 'Solar Kamera') {
+    return { urun: fmt(adet*2500) + ' – ' + fmt(adet*5000), iscilik: fmt(adet*500) + ' – ' + fmt(adet*900), toplam: fmt(adet*3000) + ' – ' + fmt(adet*5900) };
+  }
+  if (kat === 'IP Kamera' || kat === 'Analog Kamera') {
+    return { urun: fmt(adet*800) + ' – ' + fmt(adet*2000), iscilik: fmt(adet*400) + ' – ' + fmt(adet*700), toplam: fmt(adet*1200) + ' – ' + fmt(adet*2700) };
+  }
+  if (kat === 'NVR' || kat === 'DVR') {
+    return { urun: '2.000 TL – 8.000 TL', iscilik: '500 TL – 1.000 TL', toplam: '2.500 TL – 9.000 TL' };
+  }
+  if (kat === 'PoE Switch') {
+    return { urun: '800 TL – 4.000 TL', iscilik: '300 TL – 600 TL', toplam: '1.100 TL – 4.600 TL' };
+  }
+  if (kat === 'Komple Set') {
+    return { urun: '3.000 TL – 12.000 TL', iscilik: '1.500 TL – 3.000 TL', toplam: '4.500 TL – 15.000 TL' };
+  }
+  return { urun: '1.000 TL – 5.000 TL', iscilik: '500 TL – 1.500 TL', toplam: '1.500 TL – 6.500 TL' };
+}
+
+function restart() {
+  state = { kategori: '', marka: '', adet: '', kablo: '' };
+  document.querySelectorAll('.card,.brand-btn,.adet-btn,.kablo-btn').forEach(function(x){x.classList.remove('sel');});
+  goTo(1);
+}
+</script>
+</body>
+</html>
