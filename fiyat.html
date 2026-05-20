@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#070b14">
+<title>Fiyat Tahmini | TEHAŞ Teknik Hizmetler</title>
+<meta name="description" content="Kamera, elektrik, anten, ağ ve alarm hizmetleri için anlık fiyat tahmini alın.">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#070b14;
+  --bg-1:#0b1120;
+  --bg-2:#0f1729;
+  --bg-3:#141d33;
+  --line:#1c2740;
+  --line-2:#283557;
+  --t-1:#eef2f9;
+  --t-2:#9aa6c2;
+  --t-3:#5d6b8c;
+  --t-4:#3a4566;
+  --c-cyan:#34e5c5;
+  --c-cyan-d:#0f7a68;
+  --c-cyan-bg:rgba(52,229,197,.08);
+  --c-violet:#a78bfa;
+  --c-amber:#fbbf24;
+  --c-green:#22c55e;
+  --c-red:#f87171;
+  --safe-t:env(safe-area-inset-top,0px);
+  --safe-b:env(safe-area-inset-bottom,0px);
+  --f-body:'Inter',-apple-system,system-ui,sans-serif;
+  --f-mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
+  --ease:cubic-bezier(.2,.8,.2,1);
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+html{-webkit-text-size-adjust:100%;background:var(--bg);}
+body{
+  background:var(--bg);color:var(--t-1);
+  font-family:var(--f-body);font-weight:400;font-size:15px;line-height:1.55;
+  letter-spacing:-0.005em;-webkit-font-smoothing:antialiased;overflow-x:hidden;
+  min-height:100vh;min-height:100dvh;
+}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;-webkit-appearance:none;}
+a{color:inherit;text-decoration:none;}
+input,select{font:inherit;color:inherit;-webkit-appearance:none;}
+::selection{background:var(--c-cyan);color:#000;}
+
+.app{
+  position:relative;max-width:480px;margin:0 auto;
+  min-height:100vh;min-height:100dvh;
+  background:
+    radial-gradient(ellipse 140% 60% at 50% 0%, rgba(52,229,197,0.06), transparent 60%),
+    var(--bg);
+  padding-bottom:calc(40px + var(--safe-b));
+}
+
+.hdr{
+  position:sticky;top:0;z-index:40;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:calc(var(--safe-t) + 14px) 22px 14px;
+  background:rgba(7,11,20,0.78);
+  backdrop-filter:blur(20px) saturate(140%);
+  -webkit-backdrop-filter:blur(20px) saturate(140%);
+  border-bottom:1px solid var(--line);
+}
+.hdr-brand{display:flex;align-items:center;gap:11px;}
+.hdr-logo{
+  width:30px;height:30px;border-radius:8px;
+  background:linear-gradient(135deg, rgba(52,229,197,.18), rgba(167,139,250,.18));
+  border:1px solid rgba(52,229,197,.35);
+  display:flex;align-items:center;justify-content:center;position:relative;
+}
+.hdr-logo::before{content:'';position:absolute;inset:7px;border-radius:50%;border:1.5px solid var(--c-cyan);}
+.hdr-logo::after{content:'';position:absolute;inset:11px;border-radius:50%;background:var(--c-cyan);box-shadow:0 0 12px rgba(52,229,197,.55);}
+.hdr-name{font-weight:700;font-size:14px;letter-spacing:0.18em;color:#fff;line-height:1;}
+.hdr-sub{font-family:var(--f-mono);font-size:9px;font-weight:500;letter-spacing:0.16em;color:var(--t-3);line-height:1;margin-top:4px;text-transform:uppercase;}
+.hdr-back{
+  display:flex;align-items:center;gap:6px;
+  font-family:var(--f-mono);font-size:11px;letter-spacing:0.1em;color:var(--t-3);
+  padding:8px 12px;border:1px solid var(--line);border-radius:8px;
+  transition:color .15s,border-color .15s;text-transform:uppercase;
+}
+.hdr-back:hover{color:var(--t-1);border-color:var(--line-2);}
+
+.content{padding:32px 22px 0;}
+
+.page-eye{
+  font-family:var(--f-mono);font-size:10px;font-weight:500;
+  letter-spacing:0.22em;color:var(--c-cyan);text-transform:uppercase;
+  margin-bottom:12px;display:flex;align-items:center;gap:10px;
+}
+.page-eye::before{content:'';width:18px;height:1px;background:var(--c-cyan);}
+.page-h{font-size:28px;line-height:1.1;font-weight:600;letter-spacing:-0.022em;color:#fff;margin-bottom:8px;}
+.page-p{color:var(--t-2);font-size:14px;line-height:1.55;margin-bottom:32px;max-width:360px;}
+
+.form-section{margin-bottom:22px;}
+.form-label{
+  display:block;font-family:var(--f-mono);font-size:10px;font-weight:500;
+  letter-spacing:0.18em;color:var(--t-3);text-transform:uppercase;margin-bottom:10px;
+}
+
+.seg{
+  display:flex;gap:6px;flex-wrap:wrap;
+}
+.seg-btn{
+  padding:10px 16px;
+  background:var(--bg-1);border:1px solid var(--line);border-radius:10px;
+  font-size:13px;font-weight:500;color:var(--t-2);
+  transition:all .15s var(--ease);cursor:pointer;
+}
+.seg-btn:hover{border-color:var(--line-2);color:var(--t-1);}
+.seg-btn.is-on{
+  border-color:var(--c-cyan);color:var(--c-cyan);
+  background:var(--c-cyan-bg);
+}
+
+.select-wrap{position:relative;}
+.select-wrap select{
+  display:block;width:100%;
+  padding:14px 40px 14px 16px;
+  background:var(--bg-1);border:1px solid var(--line);border-radius:12px;
+  font-size:15px;color:var(--t-1);
+  transition:border-color .2s;outline:none;cursor:pointer;
+  appearance:none;-webkit-appearance:none;
+}
+.select-wrap select:focus{border-color:var(--c-cyan);}
+.select-wrap::after{
+  content:'↓';position:absolute;right:16px;top:50%;transform:translateY(-50%);
+  color:var(--t-3);font-size:13px;pointer-events:none;
+  font-family:var(--f-mono);
+}
+
+.cta-btn{
+  display:flex;align-items:center;justify-content:center;gap:9px;
+  width:100%;padding:16px;
+  background:var(--c-cyan);color:#0a1410;
+  border-radius:13px;font-size:15px;font-weight:700;
+  margin-top:8px;
+  transition:opacity .2s,transform .15s var(--ease);
+  box-shadow:0 4px 20px -4px rgba(52,229,197,.42);
+}
+.cta-btn:active{transform:scale(0.98);}
+.cta-btn:disabled{opacity:.38;box-shadow:none;cursor:not-allowed;}
+
+.result-card{
+  margin-top:28px;
+  background:linear-gradient(180deg, var(--bg-1), var(--bg));
+  border:1px solid var(--line);border-radius:16px;padding:20px;
+  position:relative;overflow:hidden;display:none;
+}
+.result-card.is-vis{display:block;}
+.result-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--c-cyan),transparent);
+  opacity:.6;
+}
+.result-eye{
+  font-family:var(--f-mono);font-size:10px;font-weight:500;
+  letter-spacing:0.18em;color:var(--c-cyan);text-transform:uppercase;
+  margin-bottom:14px;display:flex;align-items:center;gap:8px;
+}
+.result-eye::before{
+  content:'';width:6px;height:6px;border-radius:50%;background:var(--c-cyan);
+  box-shadow:0 0 8px var(--c-cyan);
+}
+.result-range{
+  font-size:32px;font-weight:700;color:#fff;letter-spacing:-0.025em;margin-bottom:6px;
+}
+.result-range span{color:var(--c-cyan);}
+.result-desc{font-size:13px;color:var(--t-2);margin-bottom:16px;}
+.result-note{
+  font-size:12px;color:var(--t-3);
+  padding:10px 13px;background:rgba(251,191,36,.05);
+  border:1px solid rgba(251,191,36,.18);border-radius:10px;
+  margin-bottom:18px;line-height:1.5;
+}
+
+.wa-btn{
+  display:flex;align-items:center;justify-content:space-between;
+  width:100%;padding:15px 18px;
+  background:linear-gradient(180deg, rgba(34,197,94,.10), rgba(34,197,94,.02));
+  border:1px solid rgba(34,197,94,.32);border-radius:13px;
+  font-size:14px;font-weight:600;color:#fff;
+  transition:transform .15s var(--ease),opacity .2s;
+}
+.wa-btn:active{transform:scale(0.985);}
+.wa-btn-ico{
+  width:36px;height:36px;background:rgba(34,197,94,.15);
+  border:1px solid rgba(34,197,94,.35);border-radius:9px;
+  display:flex;align-items:center;justify-content:center;color:#22c55e;
+  flex-shrink:0;
+}
+.wa-btn-ico svg{width:18px;height:18px;}
+.wa-btn-body{flex:1;text-align:left;padding:0 12px;}
+.wa-btn-t{font-size:14px;font-weight:600;color:#fff;margin-bottom:2px;}
+.wa-btn-s{font-size:11px;color:var(--t-3);font-family:var(--f-mono);}
+.wa-btn-arr{font-family:var(--f-mono);font-size:14px;color:var(--t-3);}
+
+.info-list{display:flex;flex-direction:column;gap:8px;margin-top:32px;}
+.info-item{
+  display:flex;align-items:flex-start;gap:12px;
+  padding:14px 16px;background:var(--bg-1);
+  border:1px solid var(--line);border-radius:12px;
+}
+.info-ico{
+  width:34px;height:34px;border-radius:8px;
+  background:var(--bg-2);border:1px solid var(--line-2);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--t-3);flex-shrink:0;margin-top:1px;
+}
+.info-ico svg{width:16px;height:16px;}
+.info-t{font-size:13px;font-weight:600;color:var(--t-1);margin-bottom:2px;}
+.info-s{font-size:12px;color:var(--t-3);line-height:1.5;}
+
+@media (min-width: 481px){
+  .app{margin-top:28px;margin-bottom:28px;border:1px solid var(--line);border-radius:28px;overflow:hidden;min-height:calc(100dvh - 56px);box-shadow:0 30px 80px -20px rgba(0,0,0,.6);}
+}
+@media (max-width: 380px){
+  .page-h{font-size:24px;}
+}
+</style>
+</head>
+<body>
+
+<div class="app">
+
+  <header class="hdr">
+    <div class="hdr-brand">
+      <div class="hdr-logo" aria-hidden="true"></div>
+      <div>
+        <div class="hdr-name">TEHAŞ</div>
+        <div class="hdr-sub">Fiyat Tahmini</div>
+      </div>
+    </div>
+    <a href="/" class="hdr-back">‹ Ana Sayfa</a>
+  </header>
+
+  <div class="content">
+    <div class="page-eye">Anlık Hesap</div>
+    <h1 class="page-h">Hizmet maliyetini tahmin edin.</h1>
+    <p class="page-p">Hizmet türü ve bölge seçerek yaklaşık fiyat aralığını görün. Kesin fiyat yerinde tespite göre belirlenir.</p>
+
+    <div class="form-section">
+      <label class="form-label">Hizmet Türü</label>
+      <div class="seg" id="hizmetSeg">
+        <button class="seg-btn is-on" data-val="kamera">Kamera</button>
+        <button class="seg-btn" data-val="elektrik">Elektrik</button>
+        <button class="seg-btn" data-val="anten">Anten</button>
+        <button class="seg-btn" data-val="network">Network</button>
+        <button class="seg-btn" data-val="alarm">Alarm</button>
+      </div>
+    </div>
+
+    <div class="form-section">
+      <label class="form-label">İşlem Türü</label>
+      <div class="seg" id="tipSeg">
+        <button class="seg-btn is-on" data-val="ariza">Arıza / Onarım</button>
+        <button class="seg-btn" data-val="bakim">Bakım</button>
+        <button class="seg-btn" data-val="kurulum">Kurulum</button>
+      </div>
+    </div>
+
+    <div class="form-section">
+      <label class="form-label" for="bolgeSelect">Bölge</label>
+      <div class="select-wrap">
+        <select id="bolgeSelect">
+          <option value="kemalpasa">Kemalpaşa merkez</option>
+          <option value="armutlu">Armutlu</option>
+          <option value="osb">Kemalpaşa OSB</option>
+          <option value="izmir">İzmir geneli</option>
+          <option value="diger">Diğer</option>
+        </select>
+      </div>
+    </div>
+
+    <button class="cta-btn" id="hesaplaBtn">
+      Fiyat Tahminini Gör
+    </button>
+
+    <div class="result-card" id="resultCard">
+      <div class="result-eye">Tahmini Fiyat</div>
+      <div class="result-range" id="resultRange">— — —</div>
+      <div class="result-desc" id="resultDesc"></div>
+      <div class="result-note" id="resultNote"></div>
+
+      <button class="wa-btn" id="waBtn">
+        <span class="wa-btn-ico">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.136.561 4.14 1.541 5.874L0 24l6.29-1.51A11.944 11.944 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.815 9.815 0 0 1-5.012-1.376l-.36-.214-3.733.897.935-3.638-.234-.374A9.818 9.818 0 0 1 2.182 12c0-5.419 4.4-9.818 9.818-9.818 5.419 0 9.818 4.4 9.818 9.818 0 5.419-4.4 9.818-9.818 9.818z"/></svg>
+        </span>
+        <span class="wa-btn-body">
+          <span class="wa-btn-t">WhatsApp'tan Randevu Al</span>
+          <span class="wa-btn-s">+90 536 780 70 59</span>
+        </span>
+        <span class="wa-btn-arr">→</span>
+      </button>
+    </div>
+
+    <div class="info-list">
+      <div class="info-item">
+        <span class="info-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 4v6m0 4v.01M5 19h14a2 2 0 0 0 1.7-3L13.7 5a2 2 0 0 0-3.4 0L3.3 16A2 2 0 0 0 5 19z"/></svg></span>
+        <div>
+          <div class="info-t">Tahmini fiyat rehber niteliğindedir</div>
+          <div class="info-s">Malzeme, saat ve ulaşım bedeli kesin teklife yansır. Yerinde tespitsiz kesin fiyat verilemez.</div>
+        </div>
+      </div>
+      <div class="info-item">
+        <span class="info-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18v3h3l6.3-6.3a4 4 0 0 0 5.4-5.4l-2 2-2.7-.7-.7-2.7 2-2z"/></svg></span>
+        <div>
+          <div class="info-t">7 yıl deneyim · Hikvision Partner Pro</div>
+          <div class="info-s">Kemalpaşa, Armutlu ve İzmir genelinde servis. Garanti kapsamında tüm işçilik.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+(() => {
+  const state = { hizmet: 'kamera', tip: 'ariza', bolge: 'kemalpasa' };
+
+  function initSeg(containerId, key) {
+    document.getElementById(containerId).addEventListener('click', (e) => {
+      const btn = e.target.closest('.seg-btn');
+      if (!btn) return;
+      state[key] = btn.dataset.val;
+      document.querySelectorAll(`#${containerId} .seg-btn`).forEach(b => b.classList.toggle('is-on', b === btn));
+    });
+  }
+
+  initSeg('hizmetSeg', 'hizmet');
+  initSeg('tipSeg', 'tip');
+
+  document.getElementById('bolgeSelect').addEventListener('change', function () {
+    state.bolge = this.value;
+  });
+
+  document.getElementById('hesaplaBtn').addEventListener('click', async () => {
+    const btn = document.getElementById('hesaplaBtn');
+    btn.disabled = true;
+    btn.textContent = 'Hesaplanıyor…';
+
+    try {
+      const res = await fetch('/api/fiyat-tahmin', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(state),
+      });
+      const data = await res.json();
+
+      if (!res.ok || !data.ok) throw new Error(data.error || 'Bir hata oluştu.');
+
+      document.getElementById('resultRange').innerHTML =
+        `<span>₺${data.min.toLocaleString('tr-TR')}</span> — ₺${data.max.toLocaleString('tr-TR')}`;
+      document.getElementById('resultDesc').textContent = data.aciklama;
+      document.getElementById('resultNote').textContent = data.not;
+      document.getElementById('resultCard').classList.add('is-vis');
+      document.getElementById('resultCard').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    } catch (err) {
+      alert(err.message);
+    } finally {
+      btn.disabled = false;
+      btn.textContent = 'Fiyat Tahminini Gör';
+    }
+  });
+
+  document.getElementById('waBtn').addEventListener('click', () => {
+    const bolgeLabel = document.getElementById('bolgeSelect').options[document.getElementById('bolgeSelect').selectedIndex].text;
+    const hizmetLabel = document.querySelector('#hizmetSeg .seg-btn.is-on')?.textContent || state.hizmet;
+    const tipLabel = document.querySelector('#tipSeg .seg-btn.is-on')?.textContent || state.tip;
+    const range = document.getElementById('resultRange').textContent;
+
+    const msg = `Merhaba, TEHAŞ fiyat tahmini için randevu almak istiyorum.\n\nHizmet: ${hizmetLabel}\nİşlem: ${tipLabel}\nBölge: ${bolgeLabel}\nTahmini aralık: ${range}`;
+    window.open('https://wa.me/905367807059?text=' + encodeURIComponent(msg), '_blank', 'noopener');
+  });
+})();
+</script>
+
+</body>
+</html>

@@ -13,10 +13,10 @@ export default async function handler(req, res) {
   }
 
   const token = process.env.NOTION_TOKEN;
-  const dbId  = process.env.NOTION_DATABASE_ID || 'dbb5f0363d514f84b24c11e297d86c9c';
+  const dbId  = process.env.NOTION_DATABASE_ID;
 
-  if (!token) {
-    return res.status(500).json({ error: 'Sunucu yapılandırma hatası. NOTION_TOKEN eksik.' });
+  if (!token || !dbId) {
+    return res.status(500).json({ error: 'Sunucu yapılandırma hatası. NOTION_TOKEN veya NOTION_DATABASE_ID eksik.' });
   }
 
   const headers = {
