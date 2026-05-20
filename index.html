@@ -372,8 +372,8 @@ ul,ol{list-style:none;}
 }
 .splash-foot::before{content:'';width:14px;height:1px;background:var(--t-4);}
 
-/* ─── Arıza Bildirimi ───────────────── */
-.splash-sec{display:flex;justify-content:center;margin-top:16px;}
+/* ─── Splash quick links ─────────────── */
+.splash-links{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;}
 .splash-sec-btn{
   display:inline-flex;align-items:center;gap:8px;
   padding:11px 20px;
@@ -822,11 +822,19 @@ ul,ol{list-style:none;}
           <b>Başla</b><span class="arr">→</span>
         </button>
 
-        <div class="splash-sec">
+        <div class="splash-links">
           <button class="splash-sec-btn" data-action="open-ariza">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 4v6m0 4v.01M5 19h14a2 2 0 0 0 1.7-3L13.7 5a2 2 0 0 0-3.4 0L3.3 16A2 2 0 0 0 5 19z"/></svg>
-            Arıza Bildirimi Formu
+            Arıza Bildirimi
           </button>
+          <a href="/fiyat.html" class="splash-sec-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            Fiyat Tahmini
+          </a>
+          <a href="/teknisyen.html" class="splash-sec-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18v3h3l6.3-6.3a4 4 0 0 0 5.4-5.4l-2 2-2.7-.7-.7-2.7 2-2z"/></svg>
+            Teknisyen Çağır
+          </a>
         </div>
 
         <div class="splash-meta">
@@ -1345,7 +1353,7 @@ ul,ol{list-style:none;}
 
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 (() => {
   'use strict';
 
