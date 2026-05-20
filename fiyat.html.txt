@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>TEHAI Fiyat Tahmini | Güvenlik Kamerası</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      overscroll-behavior: none;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #090909;
+      color: #f5f5f5;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 0;
+    }
+
+    .app {
+      width: 100%;
+      max-width: 480px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background: #090909;
+      padding: 20px;
+      padding-top: max(20px, env(safe-area-inset-top));
+      padding-bottom: max(20px, env(safe-area-inset-bottom));
+    }
+
+    /* Progress Bar */
+    .progress-container {
+      width: 100%;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 2px;
+      margin-bottom: 24px;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, #00d4ff, #0099cc);
+      transition: width 0.4s ease;
+      box-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+    }
+
+    .step-label {
+      font-size: 12px;
+      color: #888;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 16px;
+      font-weight: 600;
+    }
+
+    /* Genel Container */
+    .step {
+      display: none;
+      animation: slideIn 0.3s ease forwards;
+    }
+
+    .step.active {
+      display: block;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    h1 {
+      font-size: 28px;
+      margin-bottom: 12px;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    .subtitle {
+      font-size: 14px;
+      color: #999;
+      line-height: 1.5;
+      margin-bottom: 24px;
+    }
+
+    /* Kart Seçim */
+    .grid {
+      display: grid;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .card {
+      padding: 16px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(0, 212, 255, 0.1);
+      border-radius: 14px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-align: left;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), transparent);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .card-icon {
+      font-size: 20px;
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .card-title {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .card-desc {
+      font-size: 12px;
+      color: #888;
+      line-height: 1.4;
+    }
+
+    .card:hover {
+      border-color: rgba(0, 212, 255, 0.4);
+      background: rgba(0, 212, 255, 0.05);
+      transform: translateY(-2px);
+    }
+
+    .card.selected {
+      border-color: #00d4ff;
+      background: rgba(0, 212, 255, 0.1);
+      box-shadow: 0 0 16px rgba(0, 212, 255, 0.2);
+      animation: pulse 0.6s ease;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.02); }
+    }
+
+    /* Slider */
+    .slider-container {
+      margin: 24px 0;
+    }
+
+    .slider-label {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      font-size: 14px;
+    }
+
+    .slider {
+      width: 100%;
+      height: 6px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 3px;
+      outline: none;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+
+    .slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      background: #00d4ff;
+      border-radius: 50%;
+      cursor: pointer;
+      box-shadow: 0 0 12px rgba(0, 212, 255, 0.5);
+      transition: all 0.2s ease;
+    }
+
+    .slider::-moz-range-thumb {
+      width: 20px;
+      height: 20px;
+      background: #00d4ff;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      box-shadow: 0 0 12px rgba(0, 212, 255, 0.5);
+    }
+
+    .slider::-webkit-slider-thumb:hover {
+      transform: scale(1.2);
+      box-shadow: 0 0 20px rgba(0, 212, 255, 0.7);
+    }
+
+    /* Seçenekler */
+    .options {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin: 24px 0;
+    }
+
+    .option-btn {
+      padding: 12px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(0, 212, 255, 0.1);
+      border-radius: 12px;
+      color: #ccc;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .option-btn:hover {
+      border-color: rgba(0, 212, 255, 0.4);
+      background: rgba(0, 212, 255, 0.05);
+    }
+
+    .option-btn.selected {
+      border-color: #00d4ff;
+      background: rgba(0, 212, 255, 0.15);
+      color: #00d4ff;
+      box-shadow: 0 0 12px rgba(0, 212, 255, 0.2);
+    }
+
+    /* Loading */
+    .loading {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 300px;
+      text-align: center;
+    }
+
+    .spinner {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 20px;
+      justify-content: center;
+    }
+
+    .spinner-dot {
+      width: 10px;
+      height: 10px;
+      background: #00d4ff;
+      border-radius: 50%;
+      animation: bounce 1.4s infinite;
+    }
+
+    .spinner-dot:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    .spinner-dot:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+
+    @keyframes bounce {
+      0%, 80%, 100% { transform: scale(0.8); opacity: 0.5; }
+      40% { transform: scale(1); opacity: 1; }
+    }
+
+    .loading-text {
+      font-size: 14px;
+      color: #999;
+      line-height: 1.6;
+      min-height: 40px;
+      animation: fadeInOut 2s infinite;
+    }
+
+    @keyframes fadeInOut {
+      0%, 100% { opacity: 0.5; }
+      50% { opacity: 1; }
+    }
+
+    /* Sonuç */
+    .result {
+      animation: slideIn 0.4s ease forwards;
+    }
+
+    .price-block {
+      background: rgba(0, 212, 255, 0.05);
+      border: 1px solid rgba(0, 212, 255, 0.2);
+      border-radius: 14px;
+      padding: 16px;
+      margin: 12px 0;
+    }
+
+    .price-label {
+      font-size: 12px;
+      color: #888;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+    }
+
+    .price-value {
+      font-size: 24px;
+      font-weight: 700;
+      color: #00d4ff;
+    }
+
+    .price-range {
+      font-size: 12px;
+      color: #aaa;
+      margin-top: 4px;
+    }
+
+    .total-block {
+      background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(0, 150, 200, 0.05));
+      border: 2px solid rgba(0, 212, 255, 0.3);
+      border-radius: 16px;
+      padding: 20px;
+      margin: 20px 0;
+      text-align: center;
+    }
+
+    .total-label {
+      font-size: 13px;
+      color: #999;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 12px;
+    }
+
+    .total-value {
+      font-size: 32px;
+      font-weight: 800;
+      background: linear-gradient(90deg, #00d4ff, #0099cc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .info-box {
+      background: rgba(255, 200, 0, 0.08);
+      border-left: 3px solid #ffc800;
+      border-radius: 8px;
+      padding: 12px;
+      margin: 16px 0;
+      font-size: 13px;
+      color: #ddd;
+      line-height: 1.5;
+    }
+
+    .model-box {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 12px;
+      margin: 12px 0;
+      font-size: 13px;
+    }
+
+    .model-box-label {
+      color: #888;
+      font-size: 11px;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    /* Butonlar */
+    .actions {
+      display: grid;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    button, .btn {
+      padding: 14px;
+      border: none;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      -webkit-user-select: none;
+      user-select: none;
+    }
+
+    .btn-primary {
+      background: #00d4ff;
+      color: #090909;
+      text-decoration: none;
+      display: block;
+      text-align: center;
+    }
+
+    .btn-primary:hover,
+    .btn-primary:active {
+      background: #00e8ff;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0, 212, 255, 0.3);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #ccc;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .btn-back {
+      background: transparent;
+      color: #888;
+      font-size: 14px;
+      padding: 10px;
+      text-align: left;
+      margin-bottom: 10px;
+    }
+
+    .btn-back:hover {
+      color: #aaa;
+    }
+
+    /* Responsive */
+    @media (min-width: 600px) {
+      .options {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="app">
+    <!-- Progress -->
+    <div class="progress-container">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <!-- Step 1: Kategori -->
+    <div class="step active" id="step1">
+      <div class="step-label">Adım 1 / 5 — Kategori Seç</div>
+      <h1>Hangi hizmet gerekli?</h1>
+      <p class="subtitle">En uygun ürünü seçin</p>
+
+      <div class="grid" id="kategoriler">
+        <!-- JS tarafından doldurulacak -->
+      </div>
+
+      <button class="btn btn-secondary" style="width: 100%; opacity: 0.5;" disabled>Devam Et</button>
+    </div>
+
+    <!-- Step 2: Marka -->
+    <div class="step" id="step2">
+      <button class="btn-back" onclick="previousStep()">← Geri</button>
+      <div class="step-label">Adım 2 / 5 — Marka Seç</div>
+      <h1>Hangi markayı tercih ediyorsunuz?</h1>
+      <p class="subtitle">Hikvision en popüler tercih</p>
+
+      <div class="grid" id="markalar">
+        <!-- JS tarafından doldurulacak -->
+      </div>
+
+      <button class="btn btn-secondary" style="width: 100%; opacity: 0.5;" disabled>Devam Et</button>
+    </div>
+
+    <!-- Step 3: Adet -->
+    <div class="step" id="step3">
+      <button class="btn-back" onclick="previousStep()">← Geri</button>
+      <div class="step-label">Adım 3 / 5 — Adet / Kanal Seç</div>
+      <h1>Kaç adet/kanal gerekli?</h1>
+
+      <div class="slider-container">
+        <div class="slider-label">
+          <span>Adet</span>
+          <span id="adetDisplay">1</span>
+        </div>
+        <input type="range" id="adetSlider" class="slider" min="1" max="16" value="1" />
+      </div>
+
+      <div class="options" id="alanOptions">
+        <!-- JS tarafından doldurulacak -->
+      </div>
+
+      <button class="btn btn-secondary" style="width: 100%;" onclick="goToStep(4)">Devam Et</button>
+    </div>
+
+    <!-- Step 4: Loading -->
+    <div class="step" id="step4">
+      <div class="step-label">Adım 4 / 5 — Fiyat Araştırması</div>
+      <div class="loading">
+        <div class="spinner">
+          <div class="spinner-dot"></div>
+          <div class="spinner-dot"></div>
+          <div class="spinner-dot"></div>
+        </div>
+        <p class="loading-text" id="loadingText">Fiyatlar taranıyor...</p>
+      </div>
+    </div>
+
+    <!-- Step 5: Sonuç -->
+    <div class="step" id="step5">
+      <button class="btn-back" onclick="previousStep()">← Geri</button>
+      <div class="step-label">Adım 5 / 5 — Fiyat Tahmini</div>
+      <h1 id="resultTitle">Fiyat Tahmini</h1>
+
+      <div class="result">
+        <div class="price-block">
+          <div class="price-label">Ürün Maliyeti</div>
+          <div class="price-value" id="urunFiyat">-</div>
+          <div class="price-range" id="urunRange"></div>
+        </div>
+
+        <div class="price-block">
+          <div class="price-label">İşçilik + Kablo</div>
+          <div class="price-value" id="iscilikFiyat">-</div>
+          <div class="price-range" id="iscilikRange"></div>
+        </div>
+
+        <div class="total-block">
+          <div class="total-label">Toplam Tahmin</div>
+          <div class="total-value" id="toplamFiyat">-</div>
+        </div>
+
+        <div class="model-box">
+          <div class="model-box-label">Önerilen Model</div>
+          <div id="modelOnerisi">-</div>
+        </div>
+
+        <div class="info-box" id="notlar">
+          ⚠️ Bu yapay zeka tahminidir. Kesin fiyat için ücretsiz keşif yapılır.
+        </div>
+
+        <div class="actions">
+          <a href="#" id="whatsappBtn" class="btn btn-primary">WhatsApp ile Keşif İste →</a>
+          <button class="btn btn-secondary" onclick="goToStep(1)">Baştan Başla</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const kategoriler = {
+      "ip-kamera": { icon: "📷", title: "IP Kamera", desc: "Standart, PoE destekli" },
+      "solar-kamera": { icon: "☀️", title: "Solar Kamera", desc: "Güneş enerjili, 4G" },
+      "analog-kamera": { icon: "📼", title: "Analog Kamera", desc: "AHD/HDCVI" },
+      "nvr": { icon: "🖥️", title: "NVR", desc: "IP Kayıt Cihazı" },
+      "dvr": { icon: "📀", title: "DVR", desc: "Analog Kayıt Cihazı" },
+      "poe-switch": { icon: "🔌", title: "PoE Switch", desc: "Ağ Anahtarı" },
+      "komple-set": { icon: "📦", title: "Komple Set", desc: "Sistem paketi" }
+    };
+
+    const markalarByKategori = {
+      "ip-kamera": ["Hikvision", "Dahua", "HiLook", "Uniview", "EZVIZ", "Imou", "TP-Link"],
+      "solar-kamera": ["Hikvision", "Dahua", "EZVIZ", "Imou"],
+      "analog-kamera": ["Hikvision", "Dahua", "HiLook", "Uniview"],
+      "nvr": ["Hikvision", "Dahua", "HiLook", "Uniview"],
+      "dvr": ["Hikvision", "Dahua", "HiLook"],
+      "poe-switch": ["BDCOM", "TP-Link", "Hikvision", "Netgear"],
+      "komple-set": ["Hikvision", "Dahua", "HiLook"]
+    };
+
+    let state = {
+      kategori: null,
+      marka: null,
+      adet: 1,
+      alan: 0,
+      currentStep: 1
+    };
+
+    const loadingMessages = [
+      "Hikvision yetkili bayi fiyatları taranıyor…",
+      "Güncel piyasa fiyatları karşılaştırılıyor…",
+      "İşçilik maliyeti hesaplanıyor…",
+      "Tahmininiz hazırlanıyor…"
+    ];
+
+    let messageIndex = 0;
+
+    // Init
+    window.addEventListener("DOMContentLoaded", () => {
+      renderKategoriler();
+      updateProgress();
+    });
+
+    // Kategorileri render et
+    function renderKategoriler() {
+      const container = document.getElementById("kategoriler");
+      container.innerHTML = Object.entries(kategoriler).map(([key, val]) => `
+        <div class="card" onclick="selectKategori('${key}')">
+          <span class="card-icon">${val.icon}</span>
+          <div class="card-title">${val.title}</div>
+          <div class="card-desc">${val.desc}</div>
+        </div>
+      `).join("");
+    }
+
+    // Kategori seç
+    function selectKategori(key) {
+      state.kategori = key;
+      document.querySelectorAll("#step1 .card").forEach(c => c.classList.remove("selected"));
+      event.target.closest(".card").classList.add("selected");
+      
+      setTimeout(() => goToStep(2), 300);
+    }
+
+    // Markalar render
+    function renderMarkalar() {
+      const container = document.getElementById("markalar");
+      const markalar = markalarByKategori[state.kategori] || [];
+      container.innerHTML = markalar.map(m => `
+        <div class="card" onclick="selectMarka('${m}')">
+          <div class="card-title">${m}</div>
+        </div>
+      `).join("");
+    }
+
+    function selectMarka(marka) {
+      state.marka = marka;
+      document.querySelectorAll("#step2 .card").forEach(c => c.classList.remove("selected"));
+      event.target.closest(".card").classList.add("selected");
+      
+      setTimeout(() => goToStep(3), 300);
+    }
+
+    // Slider
+    document.addEventListener("input", (e) => {
+      if (e.target.id === "adetSlider") {
+        state.adet = e.target.value;
+        document.getElementById("adetDisplay").textContent = state.adet;
+      }
+    });
+
+    function selectAlan(value) {
+      state.alan = value;
+      document.querySelectorAll("#step3 .option-btn").forEach(b => b.classList.remove("selected"));
+      event.target.classList.add("selected");
+    }
+
+    // Step navigasyonu
+    function goToStep(step) {
+      if (step === 2) renderMarkalar();
+      if (step === 3) renderAlanOptions();
+      if (step === 4) fetchFiyat();
+
+      document.querySelectorAll(".step").forEach(s => s.classList.remove("active"));
+      document.getElementById(`step${step}`).classList.add("active");
+      state.currentStep = step;
+      updateProgress();
+      window.scrollTo(0, 0);
+    }
+
+    function previousStep() {
+      goToStep(Math.max(1, state.currentStep - 1));
+    }
+
+    function updateProgress() {
+      const percent = (state.currentStep / 5) * 100;
+      document.getElementById("progressBar").style.width = percent + "%";
+    }
+
+    function renderAlanOptions() {
+      const options = ["20m", "50m", "100m", "200m"];
+      const container = document.getElementById("alanOptions");
+      container.innerHTML = options.map(opt => `
+        <button class="option-btn" onclick="selectAlan(${opt.replace('m', '')})">
+          ${opt} kablo
+        </button>
+      `).join("");
+    }
+
+    // API çağrısı
+    async function fetchFiyat() {
+      messageIndex = 0;
+      updateLoadingMessage();
+
+      const messageInterval = setInterval(() => {
+        messageIndex = (messageIndex + 1) % loadingMessages.length;
+        updateLoadingMessage();
+      }, 2000);
+
+      try {
+        const url = `/api/fiyat-tahmin?kategori=${state.kategori}&marka=${state.marka}&adet=${state.adet}&alan=${state.alan}`;
+        const response = await fetch(url);
+        const data = await response.json();
+
+        clearInterval(messageInterval);
+
+        if (data.error) {
+          console.error("Hata:", data.error);
+          showError();
+        } else {
+          displayResult(data);
+          goToStep(5);
+        }
+      } catch (error) {
+        console.error("Error:", error);
+        clearInterval(messageInterval);
+        showError();
+      }
+    }
+
+    function updateLoadingMessage() {
+      document.getElementById("loadingText").textContent = loadingMessages[messageIndex];
+    }
+
+    function displayResult(data) {
+      const formatPrice = (n) => new Intl.NumberFormat("tr-TR").format(Math.round(n));
+
+      document.getElementById("urunFiyat").textContent = 
+        formatPrice((data.urun_fiyat_min + data.urun_fiyat_max) / 2) + " TL";
+      document.getElementById("urunRange").textContent = 
+        `${formatPrice(data.urun_fiyat_min)} - ${formatPrice(data.urun_fiyat_max)} TL`;
+
+      document.getElementById("iscilikFiyat").textContent = 
+        formatPrice((data.iscilik_min + data.iscilik_max) / 2) + " TL";
+      document.getElementById("iscilikRange").textContent = 
+        `${formatPrice(data.iscilik_min)} - ${formatPrice(data.iscilik_max)} TL`;
+
+      document.getElementById("toplamFiyat").textContent = 
+        `${formatPrice(data.toplam_min)} - ${formatPrice(data.toplam_max)} TL`;
+
+      document.getElementById("modelOnerisi").textContent = data.model_onerisi || "-";
+      document.getElementById("notlar").innerHTML = `
+        <strong>📍 Kaynak:</strong> ${data.kaynak}<br>
+        <strong>⚠️ Not:</strong> ${data.notlar}
+      `;
+
+      const msg = `Merhaba TEHAI! ${state.kategori} | ${state.marka} | ${state.adet} adet için fiyat tahmini: ${formatPrice(data.toplam_min)}-${formatPrice(data.toplam_max)} TL. Keşif randevusu istiyorum.`;
+      document.getElementById("whatsappBtn").href = 
+        `https://wa.me/905367807059?text=${encodeURIComponent(msg)}`;
+    }
+
+    function showError() {
+      document.getElementById("urunFiyat").textContent = "Hata oluştu";
+      document.getElementById("toplamFiyat").textContent = "Tekrar deneyin";
+      document.getElementById("notlar").innerHTML = 
+        "⚠️ Şu anda veri alınamıyor. Lütfen tekrar deneyin veya doğrudan WhatsApp'tan iletişime geçin.";
+      goToStep(5);
+    }
+  </script>
+</body>
+</html>

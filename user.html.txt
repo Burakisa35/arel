@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>TEHAI Kullanıcı Paneli</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #0a0a0a;
+      color: #f5f5f5;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 40px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .brand {
+      font-size: 14px;
+      font-weight: 700;
+      color: #d4a960;
+      letter-spacing: 2px;
+    }
+
+    .logout-btn {
+      background: transparent;
+      border: 1px solid rgba(212, 169, 96, 0.3);
+      color: #d4a960;
+      padding: 8px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 12px;
+      transition: all 0.2s ease;
+    }
+
+    .logout-btn:hover {
+      border-color: #d4a960;
+      background: rgba(212, 169, 96, 0.1);
+    }
+
+    h1 {
+      font-size: 28px;
+      margin-bottom: 30px;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 30px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .tab {
+      padding: 12px 20px;
+      background: transparent;
+      border: none;
+      color: #888;
+      cursor: pointer;
+      font-size: 14px;
+      transition: all 0.2s ease;
+      border-bottom: 2px solid transparent;
+    }
+
+    .tab.active {
+      color: #d4a960;
+      border-bottom-color: #d4a960;
+    }
+
+    .tab:hover {
+      color: #aaa;
+    }
+
+    .content {
+      display: none;
+    }
+
+    .content.active {
+      display: block;
+    }
+
+    .request-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(212, 169, 96, 0.2);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 12px;
+    }
+
+    .request-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .request-category {
+      font-size: 13px;
+      font-weight: 600;
+      color: #d4a960;
+    }
+
+    .request-status {
+      font-size: 11px;
+      padding: 4px 12px;
+      background: rgba(76, 175, 80, 0.15);
+      color: #4caf50;
+      border-radius: 8px;
+      text-transform: uppercase;
+    }
+
+    .request-details {
+      font-size: 13px;
+      color: #bbb;
+      line-height: 1.6;
+    }
+
+    .loading {
+      text-align: center;
+      color: #888;
+      padding: 40px 20px;
+    }
+
+    .spinner {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 3px solid rgba(212, 169, 96, 0.3);
+      border-top-color: #d4a960;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .error {
+      background: rgba(244, 67, 54, 0.1);
+      border: 1px solid rgba(244, 67, 54, 0.3);
+      color: #ff6b6b;
+      padding: 16px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+    }
+
+    .empty {
+      text-align: center;
+      color: #888;
+      padding: 40px 20px;
+      font-size: 14px;
+    }
+
+    button.primary {
+      background: #d4a960;
+      color: #0a0a0a;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.2s ease;
+      margin-top: 20px;
+      width: 100%;
+    }
+
+    button.primary:hover {
+      background: #e8c56f;
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <header>
+      <div class="brand">TEHAI</div>
+      <button class="logout-btn" onclick="logout()">Çıkış</button>
+    </header>
+
+    <h1>Benim Hizmetlerim</h1>
+
+    <div class="tabs">
+      <button class="tab active" onclick="switchTab('requests')">📋 Taleplerim</button>
+      <button class="tab" onclick="switchTab('quotes')">💬 Teklifler</button>
+      <button class="tab" onclick="switchTab('profile')">👤 Profil</button>
+    </div>
+
+    <!-- Talepler -->
+    <div class="content active" id="requests">
+      <div id="requestsList" class="loading">
+        <div class="spinner"></div> Talepler yükleniyor...
+      </div>
+    </div>
+
+    <!-- Teklifler -->
+    <div class="content" id="quotes">
+      <div class="empty">Henüz teklif alınmadı</div>
+    </div>
+
+    <!-- Profil -->
+    <div class="content" id="profile">
+      <div id="profileInfo" style="background: rgba(255,255,255,0.03); border-radius: 12px; padding: 20px;">
+        <div style="margin-bottom: 16px;">
+          <div style="font-size: 12px; color: #888; text-transform: uppercase; margin-bottom: 4px;">Telefon</div>
+          <div id="profilePhone">-</div>
+        </div>
+        <div>
+          <div style="font-size: 12px; color: #888; text-transform: uppercase; margin-bottom: 4px;">Rol</div>
+          <div id="profileRole">-</div>
+        </div>
+      </div>
+      <a href="/" class="primary" style="text-decoration: none; display: block; text-align: center; margin-top: 20px;">Ana Sayfa</a>
+    </div>
+  </div>
+
+  <script>
+    let token = localStorage.getItem('tehai_token');
+
+    if (!token) {
+      window.location.href = '/';
+      throw new Error('Token yok');
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      verifyAndLoadData();
+    });
+
+    async function verifyAndLoadData() {
+      try {
+        const verifyRes = await fetch('/api/auth', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ action: 'verify-token', token })
+        });
+
+        const verifyData = await verifyRes.json();
+        if (!verifyData.valid) {
+          localStorage.removeItem('tehai_token');
+          window.location.href = '/';
+          return;
+        }
+
+        document.getElementById('profilePhone').textContent = verifyData.user.phone_number;
+        document.getElementById('profileRole').textContent = verifyData.user.role;
+
+        loadRequests();
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    }
+
+    async function loadRequests() {
+      try {
+        const res = await fetch('/api/user/requests?token=' + token);
+        const data = await res.json();
+
+        if (data.success && data.requests.length > 0) {
+          const html = data.requests.map(req => `
+            <div class="request-card">
+              <div class="request-header">
+                <div class="request-category">${req.category.toUpperCase()}</div>
+                <div class="request-status">${req.status}</div>
+              </div>
+              <div class="request-details">
+                <div>📝 ${req.description || 'Açıklama yok'}</div>
+                <div>💰 ${req.estimated_price_min || '-'} - ${req.estimated_price_max || '-'} ₺</div>
+                <div>📅 ${new Date(req.created_at).toLocaleDateString('tr-TR')}</div>
+              </div>
+            </div>
+          `).join('');
+          document.getElementById('requestsList').innerHTML = html;
+        } else {
+          document.getElementById('requestsList').innerHTML = '<div class="empty">Henüz talep oluşturmadınız</div>';
+        }
+      } catch (error) {
+        document.getElementById('requestsList').innerHTML = '<div class="error">Talepler alınamadı</div>';
+      }
+    }
+
+    function switchTab(tab) {
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.content').forEach(c => c.classList.remove('active'));
+      
+      event.target.classList.add('active');
+      document.getElementById(tab).classList.add('active');
+    }
+
+    function logout() {
+      localStorage.removeItem('tehai_token');
+      window.location.href = '/';
+    }
+  </script>
+</body>
+</html>
