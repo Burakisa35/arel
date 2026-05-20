@@ -758,6 +758,55 @@ ul,ol{list-style:none;}
   color:var(--c-cyan);font-size:11px;font-weight:700;
 }
 
+/* ─── Operation cards (splash) ──────── */
+.op-cards{display:flex;flex-direction:column;gap:10px;margin-bottom:20px;}
+.op-card{
+  display:flex;align-items:center;gap:16px;
+  width:100%;padding:18px 18px;
+  background:var(--bg-1);border:1px solid var(--line);border-radius:14px;
+  text-align:left;cursor:pointer;font:inherit;color:inherit;
+  transition:transform .15s var(--ease),border-color .2s,background .2s;
+  min-height:74px;position:relative;
+}
+.op-card:active{transform:scale(0.985);}
+.op-card:hover{border-color:var(--line-2);background:var(--bg-2);}
+.op-card.is-primary{
+  background:var(--c-cyan);color:#0a1410;border-color:transparent;
+  box-shadow:0 8px 30px -8px rgba(52,229,197,.55),inset 0 1px 0 rgba(255,255,255,.18);
+}
+.op-card.is-primary:hover{border-color:transparent;filter:brightness(1.05);}
+.op-card.is-primary .op-ico{background:rgba(0,0,0,.12);border-color:rgba(0,0,0,.15);color:rgba(10,20,16,.8);}
+.op-card.is-primary .op-s{color:rgba(10,20,16,.65);}
+.op-card.is-primary .op-arr{color:rgba(10,20,16,.5);}
+.op-ico{
+  flex-shrink:0;width:46px;height:46px;
+  display:flex;align-items:center;justify-content:center;
+  border-radius:11px;border:1px solid var(--line-2);
+  background:var(--bg-2);color:var(--t-2);transition:all .2s;
+}
+.op-ico svg{width:22px;height:22px;}
+.op-body{flex:1;min-width:0;}
+.op-t{
+  font-size:16px;font-weight:600;letter-spacing:-0.005em;line-height:1.25;
+  margin-bottom:3px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;
+}
+.op-s{font-size:13px;color:var(--t-3);line-height:1.45;}
+.op-arr{flex-shrink:0;color:var(--t-3);font-family:var(--f-mono);font-size:14px;transition:color .15s,transform .15s;}
+.op-card:hover .op-arr{color:var(--c-cyan);transform:translateX(2px);}
+.op-card.is-primary:hover .op-arr{color:rgba(10,20,16,.8);}
+.op-badge{
+  font-family:var(--f-mono);font-size:9px;font-weight:500;letter-spacing:0.14em;
+  padding:3px 8px;border-radius:99px;
+  background:rgba(167,139,250,.12);border:1px solid rgba(167,139,250,.28);
+  color:var(--c-violet);text-transform:uppercase;
+}
+.op-divider{
+  display:flex;align-items:center;gap:12px;margin:4px 0 12px;
+  font-family:var(--f-mono);font-size:10px;font-weight:500;
+  letter-spacing:0.2em;color:var(--t-4);text-transform:uppercase;
+}
+.op-divider::before,.op-divider::after{content:'';flex:1;height:1px;background:var(--line);}
+
 /* ─── Confirm button ────────────────── */
 .confirm-btn{
   display:flex;align-items:center;justify-content:center;gap:10px;
@@ -812,28 +861,50 @@ ul,ol{list-style:none;}
         <h1 class="splash-h">Probleminizi anlamlandıralım, doğru çözümü <em>birlikte bulalım.</em></h1>
         <p class="splash-p">Teknik bilgi gerekmiyor. Yaşadığınız durumu kısa adımlarla anlatın; sistem geri kalanını sizin için kuracak.</p>
 
-        <div class="splash-bullets">
-          <div class="splash-bullet"><span class="splash-bullet-check">✓</span>Teknik bilgi gerekmiyor</div>
-          <div class="splash-bullet"><span class="splash-bullet-check">✓</span>2 dakikada tamamlanır</div>
-          <div class="splash-bullet"><span class="splash-bullet-check">✓</span>Sizi biz ararız</div>
+        <div class="op-cards">
+          <button class="op-card is-primary" data-action="start">
+            <span class="op-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 4v6m0 4v.01M5 19h14a2 2 0 0 0 1.7-3L13.7 5a2 2 0 0 0-3.4 0L3.3 16A2 2 0 0 0 5 19z"/></svg></span>
+            <span class="op-body">
+              <span class="op-t">Sorunum Var</span>
+              <span class="op-s">Arızayı birlikte netleştirelim.</span>
+            </span>
+            <span class="op-arr">→</span>
+          </button>
+          <a href="/fiyat.html" class="op-card">
+            <span class="op-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></span>
+            <span class="op-body">
+              <span class="op-t">Ne Kadar Tutar?</span>
+              <span class="op-s">Yaklaşık fiyat tahmini alın.</span>
+            </span>
+            <span class="op-arr">→</span>
+          </a>
+          <button class="op-card" data-action="open-ariza">
+            <span class="op-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>
+            <span class="op-body">
+              <span class="op-t">Teknik Destek Talebi</span>
+              <span class="op-s">Sorununuzu bırakın, size dönüş sağlayalım.</span>
+            </span>
+            <span class="op-arr">→</span>
+          </button>
+          <a href="/teknisyen.html" class="op-card">
+            <span class="op-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18v3h3l6.3-6.3a4 4 0 0 0 5.4-5.4l-2 2-2.7-.7-.7-2.7 2-2z"/></svg></span>
+            <span class="op-body">
+              <span class="op-t">Teknisyen Alanı</span>
+              <span class="op-s">Teknisyen çağırma veya saha akışı.</span>
+            </span>
+            <span class="op-arr">→</span>
+          </a>
         </div>
 
-        <button class="splash-cta" data-action="start">
-          <b>Başla</b><span class="arr">→</span>
-        </button>
-
-        <div class="splash-links">
-          <button class="splash-sec-btn" data-action="open-ariza">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 4v6m0 4v.01M5 19h14a2 2 0 0 0 1.7-3L13.7 5a2 2 0 0 0-3.4 0L3.3 16A2 2 0 0 0 5 19z"/></svg>
-            Arıza Bildirimi
-          </button>
-          <a href="/fiyat.html" class="splash-sec-btn">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-            Fiyat Tahmini
-          </a>
-          <a href="/teknisyen.html" class="splash-sec-btn">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18v3h3l6.3-6.3a4 4 0 0 0 5.4-5.4l-2 2-2.7-.7-.7-2.7 2-2z"/></svg>
-            Teknisyen Çağır
+        <div class="op-divider">Diğer İşlemler</div>
+        <div class="op-cards" style="margin-bottom:24px">
+          <a href="/user.html" class="op-card">
+            <span class="op-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg></span>
+            <span class="op-body">
+              <span class="op-t">Kullanıcı Paneli <span class="op-badge">Yakında</span></span>
+              <span class="op-s">Taleplerinizi ve tekliflerinizi görüntüleyin.</span>
+            </span>
+            <span class="op-arr">→</span>
           </a>
         </div>
 
