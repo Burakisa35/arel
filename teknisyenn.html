@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#070b14">
+<title>Teknisyen Çağır | TEHAŞ Teknik Hizmetler</title>
+<meta name="description" content="TEHAŞ teknisyeni çağırın. Kamera, elektrik, anten, ağ ve alarm sistemleri kurulum ve arıza hizmeti.">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#070b14;--bg-1:#0b1120;--bg-2:#0f1729;--bg-3:#141d33;
+  --line:#1c2740;--line-2:#283557;
+  --t-1:#eef2f9;--t-2:#9aa6c2;--t-3:#5d6b8c;--t-4:#3a4566;
+  --c-cyan:#34e5c5;--c-cyan-bg:rgba(52,229,197,.08);
+  --c-violet:#a78bfa;--c-amber:#fbbf24;--c-green:#22c55e;--c-red:#f87171;
+  --safe-t:env(safe-area-inset-top,0px);--safe-b:env(safe-area-inset-bottom,0px);
+  --f-body:'Inter',-apple-system,system-ui,sans-serif;
+  --f-mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
+  --ease:cubic-bezier(.2,.8,.2,1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+html{-webkit-text-size-adjust:100%;background:var(--bg);}
+body{background:var(--bg);color:var(--t-1);font-family:var(--f-body);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden;min-height:100vh;min-height:100dvh;}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;-webkit-appearance:none;}
+a{color:inherit;text-decoration:none;}
+
+.app{
+  max-width:480px;margin:0 auto;min-height:100vh;min-height:100dvh;
+  background:
+    radial-gradient(ellipse 140% 60% at 50% 0%, rgba(52,229,197,0.06), transparent 60%),
+    radial-gradient(ellipse 100% 40% at 50% 100%, rgba(167,139,250,0.04), transparent 60%),
+    var(--bg);
+  padding-bottom:calc(40px + var(--safe-b));
+}
+
+/* ── Header ── */
+.hdr{
+  position:sticky;top:0;z-index:40;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:calc(var(--safe-t) + 14px) 22px 14px;
+  background:rgba(7,11,20,0.82);backdrop-filter:blur(20px) saturate(140%);
+  -webkit-backdrop-filter:blur(20px) saturate(140%);border-bottom:1px solid var(--line);
+}
+.hdr-brand{display:flex;align-items:center;gap:11px;}
+.hdr-logo{width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg, rgba(52,229,197,.18), rgba(167,139,250,.18));border:1px solid rgba(52,229,197,.35);display:flex;align-items:center;justify-content:center;position:relative;}
+.hdr-logo::before{content:'';position:absolute;inset:7px;border-radius:50%;border:1.5px solid var(--c-cyan);}
+.hdr-logo::after{content:'';position:absolute;inset:11px;border-radius:50%;background:var(--c-cyan);box-shadow:0 0 12px rgba(52,229,197,.55);}
+.hdr-name{font-weight:700;font-size:14px;letter-spacing:0.18em;color:#fff;line-height:1;}
+.hdr-sub{font-family:var(--f-mono);font-size:9px;font-weight:500;letter-spacing:0.16em;color:var(--t-3);line-height:1;margin-top:4px;text-transform:uppercase;}
+.hdr-back{display:flex;align-items:center;gap:6px;font-family:var(--f-mono);font-size:11px;letter-spacing:0.1em;color:var(--t-3);padding:8px 12px;border:1px solid var(--line);border-radius:8px;transition:color .15s,border-color .15s;text-transform:uppercase;}
+.hdr-back:hover{color:var(--t-1);border-color:var(--line-2);}
+
+/* ── Screens ── */
+.screen{display:none;animation:screen-in .38s var(--ease) both;}
+.screen.is-on{display:block;}
+@keyframes screen-in{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+
+/* ── Hero ── */
+.hero{padding:36px 22px 20px;}
+.hero-eye{font-family:var(--f-mono);font-size:10px;font-weight:500;letter-spacing:0.22em;color:var(--c-cyan);text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:10px;}
+.hero-eye::before{content:'';width:18px;height:1px;background:var(--c-cyan);}
+.hero-h{font-size:28px;line-height:1.1;font-weight:600;letter-spacing:-0.022em;color:#fff;margin-bottom:8px;}
+.hero-p{color:var(--t-2);font-size:14px;line-height:1.55;margin-bottom:0;}
+
+/* ── Problem grupları ── */
+.groups{padding:24px 22px 8px;}
+.group-label{
+  font-family:var(--f-mono);font-size:10px;font-weight:500;
+  letter-spacing:0.2em;color:var(--t-4);text-transform:uppercase;
+  margin-bottom:10px;margin-top:20px;
+  display:flex;align-items:center;gap:10px;
+}
+.group-label:first-child{margin-top:0;}
+.group-label::after{content:'';flex:1;height:1px;background:var(--line);}
+
+.problems{display:flex;flex-direction:column;gap:7px;margin-bottom:4px;}
+.prob{
+  display:flex;align-items:center;gap:14px;
+  padding:14px 16px;
+  background:var(--bg-1);border:1px solid var(--line);border-radius:12px;
+  cursor:pointer;text-align:left;width:100%;
+  transition:transform .12s var(--ease),border-color .18s,background .18s;
+}
+.prob:active{transform:scale(0.987);}
+.prob:hover{border-color:var(--line-2);background:var(--bg-2);}
+.prob.is-on{border-color:var(--c-cyan);background:var(--c-cyan-bg);}
+.prob-ico{
+  flex-shrink:0;width:36px;height:36px;border-radius:9px;
+  background:var(--bg-2);border:1px solid var(--line-2);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--t-3);transition:all .18s;
+}
+.prob.is-on .prob-ico{border-color:var(--c-cyan);color:var(--c-cyan);}
+.prob-ico svg{width:17px;height:17px;}
+.prob-t{flex:1;font-size:14px;font-weight:500;color:var(--t-1);line-height:1.35;}
+.prob.is-on .prob-t{color:#fff;}
+.prob-arr{font-family:var(--f-mono);font-size:13px;color:var(--t-4);transition:color .15s,transform .15s;}
+.prob:hover .prob-arr,.prob.is-on .prob-arr{color:var(--c-cyan);transform:translateX(2px);}
+
+/* ── "Diğer" text girişi ── */
+.other-wrap{padding:0 22px 24px;display:none;}
+.other-wrap.is-vis{display:block;}
+.other-field{
+  width:100%;padding:14px 16px;
+  background:var(--bg-1);border:1px solid var(--line-2);border-radius:12px;
+  font:inherit;font-size:14px;color:var(--t-1);
+  outline:none;resize:none;min-height:80px;line-height:1.5;
+  transition:border-color .2s;
+}
+.other-field:focus{border-color:var(--c-cyan);}
+.other-field::placeholder{color:var(--t-4);}
+
+/* ── Devam butonu ── */
+.next-wrap{padding:0 22px 28px;}
+.next-btn{
+  display:flex;align-items:center;justify-content:space-between;
+  width:100%;padding:17px 22px;
+  background:var(--c-cyan);color:#0a1410;
+  border-radius:13px;font-size:15px;font-weight:600;
+  transition:transform .13s var(--ease),opacity .18s;
+  box-shadow:0 8px 28px -8px rgba(52,229,197,.5),inset 0 1px 0 rgba(255,255,255,.18);
+  min-height:56px;
+}
+.next-btn:active{transform:scale(0.985);}
+.next-btn:disabled{opacity:.32;box-shadow:none;cursor:not-allowed;}
+.next-btn .arr{font-family:var(--f-mono);font-size:14px;opacity:.7;}
+
+/* ── İletişim ekranı ── */
+.contact-hero{padding:36px 22px 20px;}
+
+.selected-prob-card{
+  margin:0 22px 20px;
+  padding:14px 16px;
+  background:var(--c-cyan-bg);border:1px solid rgba(52,229,197,.28);
+  border-radius:12px;
+  display:flex;align-items:center;gap:12px;
+}
+.spc-dot{width:8px;height:8px;border-radius:50%;background:var(--c-cyan);box-shadow:0 0 10px var(--c-cyan);flex-shrink:0;}
+.spc-t{font-size:13px;color:var(--t-1);font-weight:500;line-height:1.4;}
+
+.contact-divider{
+  margin:0 22px 12px;
+  font-family:var(--f-mono);font-size:10px;font-weight:500;
+  letter-spacing:0.2em;color:var(--t-4);text-transform:uppercase;
+  display:flex;align-items:center;gap:10px;
+}
+.contact-divider::after{content:'';flex:1;height:1px;background:var(--line);}
+
+.contact-btns{display:flex;flex-direction:column;gap:10px;padding:0 22px 16px;}
+
+.cta-wa{
+  display:flex;align-items:center;gap:14px;
+  width:100%;padding:18px 18px;
+  background:linear-gradient(180deg, rgba(34,197,94,.10), rgba(34,197,94,.02));
+  border:1px solid rgba(34,197,94,.32);border-radius:13px;
+  cursor:pointer;text-align:left;
+  transition:transform .13s var(--ease),border-color .2s;min-height:68px;
+}
+.cta-wa:active{transform:scale(0.985);}
+.cta-tel{
+  display:flex;align-items:center;gap:14px;
+  width:100%;padding:18px 18px;
+  background:var(--c-cyan-bg);
+  border:1px solid rgba(52,229,197,.28);border-radius:13px;
+  cursor:pointer;text-align:left;
+  transition:transform .13s var(--ease),border-color .2s;min-height:68px;
+}
+.cta-tel:active{transform:scale(0.985);}
+
+.ct-ico{
+  flex-shrink:0;width:42px;height:42px;border-radius:11px;
+  display:flex;align-items:center;justify-content:center;
+}
+.cta-wa .ct-ico{background:rgba(34,197,94,.15);color:var(--c-green);}
+.cta-tel .ct-ico{background:var(--c-cyan-bg);color:var(--c-cyan);}
+.ct-ico svg{width:20px;height:20px;}
+.ct-body{flex:1;}
+.ct-t{font-size:15px;font-weight:600;color:#fff;margin-bottom:2px;}
+.ct-s{font-size:12px;color:var(--t-3);font-family:var(--f-mono);letter-spacing:0.04em;}
+.ct-arr{font-family:var(--f-mono);font-size:14px;color:var(--t-3);}
+
+.back-row{
+  padding:4px 22px 0;
+  display:flex;align-items:center;justify-content:center;
+}
+.back-btn{
+  font-family:var(--f-mono);font-size:11px;letter-spacing:0.14em;color:var(--t-4);
+  text-transform:uppercase;padding:10px 16px;border-radius:8px;
+  transition:color .15s,background .15s;
+}
+.back-btn:hover{color:var(--t-2);background:var(--bg-1);}
+
+.faz-note{
+  margin:20px 22px 0;
+  padding:12px 16px;background:rgba(167,139,250,.05);
+  border:1px solid rgba(167,139,250,.18);border-radius:11px;
+  font-size:12px;color:var(--t-4);line-height:1.55;
+  display:flex;align-items:flex-start;gap:9px;
+}
+.faz-note-ico{color:var(--c-violet);flex-shrink:0;margin-top:1px;}
+.faz-note-ico svg{width:13px;height:13px;}
+
+@media (min-width: 481px){
+  .app{margin-top:28px;margin-bottom:28px;border:1px solid var(--line);border-radius:28px;overflow:hidden;min-height:calc(100dvh - 56px);box-shadow:0 30px 80px -20px rgba(0,0,0,.6);}
+}
+</style>
+</head>
+<body>
+<div class="app">
+
+  <header class="hdr">
+    <div class="hdr-brand">
+      <div class="hdr-logo" aria-hidden="true"></div>
+      <div>
+        <div class="hdr-name">TEHAŞ</div>
+        <div class="hdr-sub">Teknisyen</div>
+      </div>
+    </div>
+    <a href="/" class="hdr-back">‹ Ana Sayfa</a>
+  </header>
+
+  <!-- ── EKRAN 1: Problem Seçimi ── -->
+  <div class="screen is-on" id="s-problem">
+
+    <div class="hero">
+      <div class="hero-eye">Problem Nedir?</div>
+      <h1 class="hero-h">Yaşadığınız durumu seçin.</h1>
+      <p class="hero-p">Hizmet kategorisi değil — tam olarak ne oluyor? En yakın seçeneği tıklayın.</p>
+    </div>
+
+    <div class="groups">
+
+      <div class="group-label">Kamera &amp; Görüntü</div>
+      <div class="problems">
+        <button class="prob" data-prob="Kamerayı telefondan izleyemiyorum">
+          <span class="prob-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3z"/><circle cx="12" cy="13" r="3"/></svg></span>
+          <span class="prob-t">Kamerayı telefondan izleyemiyorum</span>
+          <span class="prob-arr">→</span>
+        </button>
+        <button class="prob" data-prob="Kamera görüntüsü donuyor veya kesiliyor">
+          <span class="prob-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3z"/><path d="M8 13h8"/></svg></span>
+          <span class="prob-t">Kamera görüntüsü donuyor veya kesiliyor</span>
+          <span class="prob-arr">→</span>
+        </button>
+        <button class="prob" data-prob="Kamera kayıt almıyor">
+          <span class="prob-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16v.01"/></svg></span>
+          <span class="prob-t">Kamera kayıt almıyor</span>
+          <span class="prob-arr">→</span>
+        </button>
+        <button class="prob" data-prob="Gece görüntüsü yok veya çok kötü">
+          <span class="prob-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 13a8 8 0 1 1-9-9 6 6 0 0 0 9 9z"/></svg></span>
+          <span class="prob-t">Gece görüntüsü yok veya çok kötü</span>
+          <span class="prob-arr">→</span>
+        </button>
+      </div>
+
+      <div class="group-label">İnternet &amp; Ağ</div>
+      <div class="problems">
+        <button class="prob" data-prob="İnternet veya Wi-Fi çekmiyor">
+          <span class="prob-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4.93 4.93a10 10 0 0 0 0 14.14M19.07 4.93a10 10 0 0 1 0 14.14M8.46 8.46a5 5 0 0 0 0 7.08M15.54 8.46a5 5 0 0 1 0 7.08"/><circle cx="12" cy="12" r="1.5"/></svg></span>
+          <span class="prob-t">İnternet veya Wi-Fi çekmiyor</span>
+          <span class="prob-arr">→</span>
+        </button>
+        <button class="prob" data-prob="İnternet çok yavaş veya sürekli kopuyor">
+          <span class="prob-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M1 6l5 5M18 6l5 5M6 11a8 8 0 0 1 12 0"/><path d="M9 15a4 4 0 0 1 6 0"/><circle cx="12" cy="19" r="1.5"/></svg></span>
+          <span class="prob-t">İnternet çok yavaş veya sürekli kopuyor</span>
+          <span class="prob-arr">→</span>
+        </button>
+      </div>
+
+      <div class="group-label">Elektrik</div>
+      <div class="problems">
+        <button class="prob" data-prob="Sigorta atıyor veya devre dışı kalıyor">
+          <span class="prob-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M13 2 3 14h8l-2 8 11-14h-9z"/></svg></span>
+          <span class="prob-t">Sigorta atıyor veya devre dışı kalıyor</span>
+          <span class="prob-arr">→</span>
+        </button>
+        <button class="prob" data-prob="Priz veya şalter çalışmıyor">
+          <span class="prob-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16v.01"/></svg></span>
+          <span class="prob-t">Priz veya şalter çalışmıyor</span>
+          <span class="prob-arr">→</span>
+        </button>
+        <button class="prob" data-prob="Lamba veya aydınlatma yanmıyor">
+          <span class="prob-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 1 5 11.9V16a2 2 0 0 1-2 2h-6a2 2 0 0 1-2-2v-2.1A7 7 0 0 1 12 2z"/></svg></span>
+          <span class="prob-t">Lamba veya aydınlatma yanmıyor</span>
+          <span class="prob-arr">→</span>
+        </button>
+      </div>
+
+      <div class="group-label">Kapı &amp; Otomasyon</div>
+      <div class="problems">
+        <button class="prob" data-prob="Diyafon veya kapı zili çalışmıyor">
+          <span class="prob-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg></span>
+          <span class="prob-t">Diyafon veya kapı zili çalışmıyor</span>
+          <span class="prob-arr">→</span>
+        </button>
+        <button class="prob" data-prob="Otomatik kapı veya motor arızası">
+          <span class="prob-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="11" width="18" height="10" rx="1"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
+          <span class="prob-t">Otomatik kapı veya motor arızası</span>
+          <span class="prob-arr">→</span>
+        </button>
+      </div>
+
+      <div class="group-label">Diğer</div>
+      <div class="problems">
+        <button class="prob" data-prob="__other__">
+          <span class="prob-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6" cy="12" r="1.4"/><circle cx="12" cy="12" r="1.4"/><circle cx="18" cy="12" r="1.4"/></svg></span>
+          <span class="prob-t">Farklı bir problem yaşıyorum</span>
+          <span class="prob-arr">→</span>
+        </button>
+      </div>
+
+    </div>
+
+    <div class="other-wrap" id="otherWrap">
+      <textarea class="other-field" id="otherField" rows="3" placeholder="Probleminizi kısaca yazın…"></textarea>
+    </div>
+
+    <div class="next-wrap">
+      <button class="next-btn" id="nextBtn" disabled>
+        <span>Devam Et</span>
+        <span class="arr">→</span>
+      </button>
+    </div>
+
+  </div>
+
+  <!-- ── EKRAN 2: İletişim ── -->
+  <div class="screen" id="s-contact">
+
+    <div class="contact-hero">
+      <div class="hero-eye">İletişim</div>
+      <h2 style="font-size:24px;font-weight:600;letter-spacing:-0.02em;color:#fff;margin-bottom:6px;line-height:1.15;">Nasıl ulaşalım?</h2>
+      <p style="color:var(--t-2);font-size:14px;line-height:1.55;">Probleminizi aldık. Sizinle nasıl iletişime geçmemizi istersiniz?</p>
+    </div>
+
+    <div class="selected-prob-card">
+      <span class="spc-dot"></span>
+      <span class="spc-t" id="selectedProbLabel">—</span>
+    </div>
+
+    <div class="contact-divider">İletişim Kanalı</div>
+
+    <div class="contact-btns">
+      <button class="cta-wa" id="waBtn">
+        <span class="ct-ico">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.554 4.122 1.522 5.853L.073 23.927l6.272-1.448A11.934 11.934 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.794 9.794 0 0 1-5.001-1.373l-.358-.213-3.722.858.894-3.618-.233-.371A9.79 9.79 0 0 1 2.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+        </span>
+        <span class="ct-body">
+          <span class="ct-t">WhatsApp ile Yazın</span>
+          <span class="ct-s">+90 536 780 70 59 · Hızlı yanıt</span>
+        </span>
+        <span class="ct-arr">→</span>
+      </button>
+
+      <button class="cta-tel" id="telBtn">
+        <span class="ct-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.26 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.17 1.2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.07 16l.85.92z"/></svg>
+        </span>
+        <span class="ct-body">
+          <span class="ct-t">Sizi Arayalım</span>
+          <span class="ct-s">Numaranızı bırakın, dönüş sağlayalım</span>
+        </span>
+        <span class="ct-arr">→</span>
+      </button>
+    </div>
+
+    <div class="back-row">
+      <button class="back-btn" id="backBtn">‹ Problemi değiştir</button>
+    </div>
+
+    <div class="faz-note">
+      <span class="faz-note-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 0 1 5 .5c0 1.5-2.5 2-2.5 3M12 17v.01"/></svg></span>
+      <span>Canlı teknisyen takibi ve anlık durum bildirimleri FAZ-2'de aktif hale gelecektir.</span>
+    </div>
+
+  </div>
+
+  <!-- ── EKRAN 3: Telefon kaydı ── -->
+  <div class="screen" id="s-callback">
+    <div class="contact-hero">
+      <div class="hero-eye">Geri Arama</div>
+      <h2 style="font-size:24px;font-weight:600;letter-spacing:-0.02em;color:#fff;margin-bottom:6px;">Numaranızı bırakın.</h2>
+      <p style="color:var(--t-2);font-size:14px;line-height:1.55;">Sizi en kısa sürede arayacağız.</p>
+    </div>
+
+    <div class="selected-prob-card" style="margin-bottom:20px;">
+      <span class="spc-dot"></span>
+      <span class="spc-t" id="selectedProbLabel2">—</span>
+    </div>
+
+    <div style="padding:0 22px 16px;display:flex;flex-direction:column;gap:12px;">
+      <div>
+        <label style="display:block;font-family:var(--f-mono);font-size:10px;font-weight:500;letter-spacing:0.18em;color:var(--t-3);text-transform:uppercase;margin-bottom:8px;">Ad Soyad</label>
+        <input id="cb-name" type="text" autocomplete="name" placeholder="Adınız ve soyadınız"
+          style="display:block;width:100%;padding:14px 16px;background:var(--bg-1);border:1px solid var(--line);border-radius:11px;font:inherit;font-size:15px;color:var(--t-1);outline:none;transition:border-color .2s;"
+          onfocus="this.style.borderColor='var(--c-cyan)'" onblur="this.style.borderColor='var(--line)'">
+      </div>
+      <div>
+        <label style="display:block;font-family:var(--f-mono);font-size:10px;font-weight:500;letter-spacing:0.18em;color:var(--t-3);text-transform:uppercase;margin-bottom:8px;">Telefon <span style="color:var(--c-red)">*</span></label>
+        <input id="cb-tel" type="tel" inputmode="tel" autocomplete="tel" placeholder="0 5__ ___ __ __"
+          style="display:block;width:100%;padding:14px 16px;background:var(--bg-1);border:1px solid var(--line);border-radius:11px;font:inherit;font-size:15px;color:var(--t-1);outline:none;transition:border-color .2s;"
+          onfocus="this.style.borderColor='var(--c-cyan)'" onblur="this.style.borderColor='var(--line)'">
+      </div>
+    </div>
+
+    <div id="cbErr" style="display:none;margin:0 22px 12px;padding:10px 14px;background:rgba(248,113,113,.06);border:1px solid rgba(248,113,113,.28);border-radius:10px;font-size:13px;color:var(--c-red);"></div>
+
+    <div style="padding:0 22px 16px;">
+      <button id="cbSubmit" style="display:flex;align-items:center;justify-content:center;gap:9px;width:100%;padding:16px;background:var(--c-cyan);color:#0a1410;border-radius:12px;font-size:15px;font-weight:600;transition:opacity .2s,transform .13s var(--ease);box-shadow:0 4px 20px -4px rgba(52,229,197,.42);">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="18" height="18"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.26 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.17 1.2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.07 16l.85.92z"/></svg>
+        Geri Arama Talep Et
+      </button>
+    </div>
+
+    <div class="back-row">
+      <button class="back-btn" id="backBtn2">‹ Geri</button>
+    </div>
+  </div>
+
+  <!-- ── EKRAN 4: Tamamlandı ── -->
+  <div class="screen" id="s-done">
+    <div style="display:flex;flex-direction:column;align-items:center;text-align:center;padding:64px 24px;">
+      <div style="width:80px;height:80px;border-radius:50%;background:radial-gradient(circle,var(--c-cyan-bg),transparent 70%);display:flex;align-items:center;justify-content:center;margin-bottom:22px;position:relative;">
+        <div style="position:absolute;inset:14px;border-radius:50%;border:1.5px solid var(--c-cyan);animation:ring-out 2s ease-out infinite;"></div>
+        <svg viewBox="0 0 24 24" fill="none" stroke="var(--c-cyan)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" width="36" height="36"><path d="m5 13 4 4 10-10"/></svg>
+      </div>
+      <h2 style="font-size:22px;font-weight:600;color:#fff;letter-spacing:-0.02em;margin-bottom:10px;">Talebiniz alındı.</h2>
+      <p style="font-size:14px;color:var(--t-2);max-width:280px;line-height:1.6;margin-bottom:24px;" id="doneMsg">Sizi kısa süre içinde arayacağız.</p>
+      <div id="doneRef" style="font-family:var(--f-mono);font-size:11px;font-weight:500;letter-spacing:0.18em;color:var(--c-cyan);padding:10px 18px;border:1px dashed rgba(52,229,197,.35);border-radius:99px;background:var(--c-cyan-bg);text-transform:uppercase;"></div>
+      <a href="/" style="margin-top:28px;font-size:13px;color:var(--t-3);text-decoration:underline;text-underline-offset:3px;">Ana sayfaya dön</a>
+    </div>
+  </div>
+
+</div>
+
+<style>
+@keyframes ring-out{0%{transform:scale(.9);opacity:1;}100%{transform:scale(1.4);opacity:0;}}
+</style>
+
+<script>
+(() => {
+  'use strict';
+
+  let selectedProb = null;
+
+  const screens = {
+    problem: document.getElementById('s-problem'),
+    contact: document.getElementById('s-contact'),
+    callback: document.getElementById('s-callback'),
+    done: document.getElementById('s-done'),
+  };
+
+  function show(name) {
+    Object.values(screens).forEach(s => s.classList.remove('is-on'));
+    screens[name].classList.add('is-on');
+    document.scrollingElement.scrollTo({top:0, behavior:'instant'});
+  }
+
+  // Problem seçimi
+  document.querySelectorAll('.prob').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.prob').forEach(b => b.classList.remove('is-on'));
+      btn.classList.add('is-on');
+      selectedProb = btn.dataset.prob;
+
+      const otherWrap = document.getElementById('otherWrap');
+      const nextBtn = document.getElementById('nextBtn');
+
+      if (selectedProb === '__other__') {
+        otherWrap.classList.add('is-vis');
+        document.getElementById('otherField').focus();
+        updateNextBtn();
+      } else {
+        otherWrap.classList.remove('is-vis');
+        nextBtn.disabled = false;
+      }
+    });
+  });
+
+  document.getElementById('otherField').addEventListener('input', updateNextBtn);
+
+  function updateNextBtn() {
+    const nextBtn = document.getElementById('nextBtn');
+    if (selectedProb === '__other__') {
+      const val = document.getElementById('otherField').value.trim();
+      nextBtn.disabled = val.length < 4;
+    } else {
+      nextBtn.disabled = !selectedProb;
+    }
+  }
+
+  function getFinalProb() {
+    if (selectedProb === '__other__') {
+      return document.getElementById('otherField').value.trim();
+    }
+    return selectedProb;
+  }
+
+  document.getElementById('nextBtn').addEventListener('click', () => {
+    const prob = getFinalProb();
+    if (!prob) return;
+    document.getElementById('selectedProbLabel').textContent = prob;
+    document.getElementById('selectedProbLabel2').textContent = prob;
+    show('contact');
+  });
+
+  // WhatsApp
+  document.getElementById('waBtn').addEventListener('click', () => {
+    const prob = getFinalProb();
+    const msg = `Merhaba, TEHAŞ teknisyen talebi:\n\nProblem: ${prob}\n\nMüsait olduğunuz en yakın saati öğrenebilir miyim?`;
+    window.open('https://wa.me/905367807059?text=' + encodeURIComponent(msg), '_blank', 'noopener');
+  });
+
+  // Telefon ekranına geç
+  document.getElementById('telBtn').addEventListener('click', () => {
+    show('callback');
+  });
+
+  // Geri butonları
+  document.getElementById('backBtn').addEventListener('click', () => show('problem'));
+  document.getElementById('backBtn2').addEventListener('click', () => show('contact'));
+
+  // Telefon formatı
+  document.getElementById('cb-tel').addEventListener('input', function() {
+    const pos = this.selectionStart;
+    const before = this.value.slice(0, pos).replace(/\D/g,'').length;
+    const raw = this.value.replace(/\D/g,'').replace(/^[^5]+/, '').slice(0,11);
+    let out = raw;
+    if (raw.length >= 4) out = raw.slice(0,4)+' '+raw.slice(4);
+    if (raw.length >= 7) out = raw.slice(0,4)+' '+raw.slice(4,7)+' '+raw.slice(7);
+    if (raw.length >= 9) out = raw.slice(0,4)+' '+raw.slice(4,7)+' '+raw.slice(7,9)+' '+raw.slice(9);
+    this.value = out;
+    let d = 0, newPos = out.length;
+    for (let i = 0; i < out.length; i++) {
+      if (/\d/.test(out[i])) d++;
+      if (d === before) { newPos = i+1; break; }
+    }
+    this.setSelectionRange(newPos, newPos);
+  });
+
+  // Geri arama gönder
+  document.getElementById('cbSubmit').addEventListener('click', () => {
+    const name = document.getElementById('cb-name').value.trim();
+    const tel  = document.getElementById('cb-tel').value.trim();
+    const errEl = document.getElementById('cbErr');
+
+    if (tel.replace(/\D/g,'').length < 10) {
+      errEl.textContent = 'Geçerli bir telefon numarası girin.';
+      errEl.style.display = 'block';
+      return;
+    }
+    errEl.style.display = 'none';
+
+    const prob = getFinalProb();
+    const ref = 'TH-' + Math.random().toString(36).slice(2,8).toUpperCase();
+
+    // API'ye gönder
+    fetch('/api/ariza-bildir', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({
+        name: name || 'Belirtilmedi',
+        tel: tel,
+        adres: 'Geri arama talebi',
+        aciklama: `Problem: ${prob}\nİletişim: Geri arama talep edildi`
+      })
+    }).catch(()=>{});
+
+    document.getElementById('doneMsg').textContent = 'Numaranızı aldık. Sizi kısa süre içinde arayacağız.';
+    document.getElementById('doneRef').textContent = 'REF · ' + ref;
+    show('done');
+  });
+
+})();
+</script>
+
+</body>
+</html>
