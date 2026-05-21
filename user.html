@@ -1,95 +1,283 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no">
-<meta name="theme-color" content="#070b14">
-<title>Kullanıcı Paneli | TEHAŞ</title>
-<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#050c1a">
+  <title>Kullanıcı Paneli | TEHAŞ</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Syne:wght@500;600;700;800&display=swap" rel="stylesheet">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:       #050c1a;
+      --bg-1:     #091422;
+      --bg-2:     #0d1c30;
+      --line:     #162336;
+      --line-2:   #1e3050;
+      --t-1:      #eaf0ff;
+      --t-2:      #7c9cbf;
+      --t-3:      #3f5a7a;
+      --t-4:      #253548;
 
-<style>
-:root{
-  --bg:#070b14;--bg-1:#0b1120;--line:#1c2740;--line-2:#283557;
-  --t-1:#eef2f9;--t-2:#9aa6c2;--t-3:#5d6b8c;--t-4:#3a4566;
-  --c-cyan:#34e5c5;--c-violet:#a78bfa;
-  --safe-t:env(safe-area-inset-top,0px);--safe-b:env(safe-area-inset-bottom,0px);
-  --f-body:'Inter',-apple-system,system-ui,sans-serif;
-  --f-mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
-}
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
-html{-webkit-text-size-adjust:100%;background:var(--bg);}
-body{background:var(--bg);color:var(--t-1);font-family:var(--f-body);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased;min-height:100vh;min-height:100dvh;display:flex;align-items:center;justify-content:center;padding:20px;}
-a{color:inherit;text-decoration:none;}
+      --blue:     #3b82f6;
+      --blue-dim: rgba(59, 130, 246, .10);
+      --cyan:     #34d399;
+      --cyan-dim: rgba(52, 211, 153, .10);
+      --violet:   #a78bfa;
 
-.card{
-  max-width:360px;width:100%;text-align:center;
-  background:linear-gradient(180deg,var(--bg-1),var(--bg));
-  border:1px solid var(--line);border-radius:20px;
-  padding:40px 28px;
-}
-.card-mark{
-  width:64px;height:64px;border-radius:18px;
-  background:linear-gradient(135deg, rgba(167,139,250,.15), rgba(52,229,197,.15));
-  border:1px solid rgba(167,139,250,.3);
-  display:flex;align-items:center;justify-content:center;
-  margin:0 auto 24px;
-}
-.card-mark svg{width:28px;height:28px;color:var(--c-violet);}
-.card-badge{
-  font-family:var(--f-mono);font-size:10px;font-weight:500;
-  letter-spacing:0.2em;color:var(--c-violet);text-transform:uppercase;
-  background:rgba(167,139,250,.08);border:1px solid rgba(167,139,250,.2);
-  padding:6px 14px;border-radius:99px;display:inline-block;margin-bottom:16px;
-}
-.card-h{font-size:22px;font-weight:600;color:#fff;letter-spacing:-0.02em;margin-bottom:10px;}
-.card-p{font-size:14px;color:var(--t-2);line-height:1.6;margin-bottom:28px;}
-.card-list{display:flex;flex-direction:column;gap:8px;margin-bottom:28px;text-align:left;}
-.card-item{
-  display:flex;align-items:center;gap:10px;
-  padding:12px 14px;background:rgba(255,255,255,.03);
-  border:1px solid var(--line);border-radius:10px;
-  font-size:13px;color:var(--t-2);
-}
-.card-item-check{
-  width:20px;height:20px;border-radius:50%;flex-shrink:0;
-  background:rgba(167,139,250,.1);border:1px solid rgba(167,139,250,.3);
-  display:flex;align-items:center;justify-content:center;
-  font-size:10px;color:var(--c-violet);font-weight:700;
-}
-.card-back{
-  display:inline-flex;align-items:center;gap:7px;
-  padding:12px 22px;background:var(--c-cyan);color:#0a1410;
-  border-radius:12px;font-size:14px;font-weight:700;
-  transition:opacity .15s;
-}
-.card-back:active{opacity:.8;}
-</style>
+      --mono: 'IBM Plex Mono', ui-monospace, Menlo, monospace;
+      --head: 'Syne', system-ui, sans-serif;
+
+      --safe-t: env(safe-area-inset-top, 0px);
+      --safe-b: env(safe-area-inset-bottom, 0px);
+      --ease:   cubic-bezier(.22, .8, .2, 1);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html {
+      background: var(--bg);
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      min-height: 100dvh;
+      background:
+        radial-gradient(ellipse 70% 50% at 50% -10%, rgba(167, 139, 250, .10), transparent 55%),
+        radial-gradient(ellipse 50% 40% at 15% 90%,  rgba(52, 211, 153, .06),  transparent 50%),
+        var(--bg);
+      color: var(--t-1);
+      font-family: var(--mono);
+      font-size: 14px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: calc(var(--safe-t) + 24px) 20px calc(var(--safe-b) + 24px);
+    }
+
+    /* Grid texture */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(59, 130, 246, .02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(59, 130, 246, .02) 1px, transparent 1px);
+      background-size: 48px 48px;
+      pointer-events: none;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* ─── Card ────────────────────────────────────── */
+    .card {
+      position: relative;
+      max-width: 380px;
+      width: 100%;
+      text-align: center;
+      background: var(--bg-1);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 40px 28px;
+      overflow: hidden;
+    }
+
+    /* Subtle top glow inside card */
+    .card::before {
+      content: '';
+      position: absolute;
+      top: -40px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 200px;
+      height: 80px;
+      background: radial-gradient(ellipse, rgba(167, 139, 250, .12), transparent 70%);
+      pointer-events: none;
+    }
+
+    /* ─── Icon mark ───────────────────────────────── */
+    .mark {
+      width: 62px;
+      height: 62px;
+      border-radius: 16px;
+      background: rgba(167, 139, 250, .07);
+      border: 1px solid rgba(167, 139, 250, .25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 22px;
+      position: relative;
+    }
+
+    .mark svg {
+      width: 26px;
+      height: 26px;
+      color: var(--violet);
+    }
+
+    /* ─── Badge ───────────────────────────────────── */
+    .badge {
+      display: inline-block;
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: .22em;
+      color: var(--violet);
+      text-transform: uppercase;
+      background: rgba(167, 139, 250, .07);
+      border: 1px solid rgba(167, 139, 250, .2);
+      padding: 5px 13px;
+      border-radius: 99px;
+      margin-bottom: 16px;
+    }
+
+    /* ─── Heading ─────────────────────────────────── */
+    h1 {
+      font-family: var(--head);
+      font-weight: 700;
+      font-size: 24px;
+      color: var(--t-1);
+      letter-spacing: -.01em;
+      margin-bottom: 10px;
+    }
+
+    /* ─── Body text ───────────────────────────────── */
+    .desc {
+      font-size: 12px;
+      color: var(--t-2);
+      line-height: 1.7;
+      letter-spacing: .02em;
+      margin-bottom: 28px;
+    }
+
+    /* ─── Feature list ────────────────────────────── */
+    .list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 28px;
+      text-align: left;
+    }
+
+    .item {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      padding: 12px 13px;
+      background: rgba(255, 255, 255, .02);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      font-size: 12px;
+      color: var(--t-2);
+      letter-spacing: .02em;
+      transition: border-color .2s, background .2s;
+    }
+
+    .item-dot {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      background: rgba(167, 139, 250, .07);
+      border: 1px solid rgba(167, 139, 250, .25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--violet);
+      font-size: 8px;
+    }
+
+    /* ─── Divider ─────────────────────────────────── */
+    .divider {
+      width: 40px;
+      height: 1px;
+      background: var(--line);
+      margin: 0 auto 22px;
+    }
+
+    /* ─── Back link ───────────────────────────────── */
+    .back {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 13px 24px;
+      background: var(--cyan);
+      color: #071a12;
+      border-radius: 12px;
+      font-family: var(--head);
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      box-shadow: 0 8px 22px -8px rgba(52, 211, 153, .45);
+      transition: opacity .15s, box-shadow .15s;
+    }
+
+    .back:active {
+      opacity: .85;
+      box-shadow: 0 4px 10px -4px rgba(52, 211, 153, .3);
+    }
+
+    /* ─── Footer note ─────────────────────────────── */
+    .note {
+      margin-top: 20px;
+      font-size: 10px;
+      color: var(--t-4);
+      letter-spacing: .04em;
+    }
+  </style>
 </head>
 <body>
 
 <div class="card">
-  <div class="card-mark">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
-      <circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>
-      <path d="M17 14l2 2 4-4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Icon -->
+  <div class="mark">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+         stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="8" r="4"/>
+      <path d="M4 21a8 8 0 0 1 16 0"/>
+      <path d="M17 14l2 2 4-4" stroke-width="2"/>
     </svg>
   </div>
-  <div class="card-badge">FAZ-2 · Yakında</div>
-  <h1 class="card-h">Kullanıcı Paneli</h1>
-  <p class="card-p">Kişisel kullanıcı paneli üzerinde çalışıyoruz. Yakında servis geçmişinizi, faturalarınızı ve randevularınızı buradan yönetebileceksiniz.</p>
 
-  <div class="card-list">
-    <div class="card-item"><span class="card-item-check">●</span>Servis geçmişi ve takip</div>
-    <div class="card-item"><span class="card-item-check">●</span>Aktif randevular</div>
-    <div class="card-item"><span class="card-item-check">●</span>Fatura ve ödemeler</div>
-    <div class="card-item"><span class="card-item-check">●</span>Doğrudan teknisyen mesajlaşması</div>
+  <!-- Badge -->
+  <div class="badge">FAZ-2 · Yakında</div>
+
+  <!-- Heading -->
+  <h1>Kullanıcı Paneli</h1>
+
+  <!-- Description -->
+  <p class="desc">
+    Kişisel paneli geliştiriyoruz. Servis geçmişinizi,
+    faturalarınızı ve randevularınızı buradan yönetebileceksiniz.
+  </p>
+
+  <!-- Feature list -->
+  <div class="list">
+    <div class="item"><span class="item-dot">●</span>Servis geçmişi ve takip</div>
+    <div class="item"><span class="item-dot">●</span>Aktif randevular</div>
+    <div class="item"><span class="item-dot">●</span>Fatura ve ödemeler</div>
+    <div class="item"><span class="item-dot">●</span>Doğrudan teknisyen mesajlaşması</div>
   </div>
 
-  <a href="/" class="card-back">Ana Sayfaya Dön →</a>
+  <div class="divider"></div>
+
+  <!-- CTA -->
+  <a href="/" class="back">Ana Sayfaya Dön →</a>
+
+  <!-- Note -->
+  <p class="note">tehas.tr · Teknik Hizmetler A.Ş.</p>
+
 </div>
 
 </body>
