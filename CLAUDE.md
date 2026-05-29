@@ -20,16 +20,25 @@
 /
 ├── index.html              # Ana uygulama — TEHAŞ wizard akışı (arıza bildirimi, adım adım)
 ├── degerlendirme.html      # Müşteri değerlendirme sayfası (yıldız puanı + yorum)
+├── fiyat.html              # Fiyat tahmini + talep durum sorgulama (REF / ad+tel4)
+├── teknisyen.html          # Teknisyen çağırma formu
+├── user.html               # Kullanıcı paneli (IBM Plex Mono + Syne teması)
 ├── hizmetler.html          # Sunulan hizmetlerin listesi (statik bilgi sayfası)
 ├── hakkimizda.html         # Hakkımızda / profil sayfası (statik)
 ├── iletisim.html           # İletişim bilgileri ve harita (statik)
-├── arel-koc.html           # Arel Koç — Claude API ile çalışan sohbet asistanı
-├── arel.deployer.html      # GitHub'a tek tıkla yayın aracı (geliştirici yardımcısı)
+├── gizlilik.html           # KVKK gizlilik politikası (statik)
 │
 ├── api/
 │   ├── ariza-bildir.js     # Serverless: arıza formunu Notion'a kaydeder
 │   ├── degerlendirme.js    # Serverless: müşteri değerlendirmesini Notion'a kaydeder
+│   ├── durum-sorgula.js    # Serverless: REF veya ad+tel4 ile Notion'dan talep durumu sorgular
+│   ├── fiyat-tahmin.js     # Serverless: statik fiyat matrisi (5 hizmet × 3 tip × 5 bölge)
+│   ├── auth.js             # Serverless: OTP gönder/doğrula, JWT üret (FAZ-2 — şu an çağrılmıyor)
+│   ├── inventory.js        # Serverless: 501 placeholder (FAZ-2 — henüz aktif değil)
 │   └── bildirim-gonder.js  # Serverless: WhatsApp bildirimi (taslak, henüz aktif değil)
+│
+├── lib/
+│   └── db.js               # Notion API yardımcı fonksiyonları (para, heading, divider, createPage)
 │
 ├── manifest.json           # PWA manifest (standalone mod, tema rengi #070b14)
 ├── sw.js                   # Service Worker — offline için uygulama kabuğunu önbelleğe alır
@@ -37,7 +46,7 @@
 ├── icon-maskable.svg       # PWA maskable ikon
 ├── robots.txt              # SEO — arama robotu direktifleri
 ├── sitemap.xml             # SEO — site haritası
-└── deploy.yml              # GitHub Actions — Vercel otomatik dağıtım workflow'u
+└── deploy.yml              # Vercel dağıtım workflow taslağı (kök dizinde — .github/workflows/ altında değil)
 ```
 
 ---
@@ -132,12 +141,17 @@ Koyu altın; masaüstü uyumlu kurumsal tasarım.
 
 Fontlar: **Montserrat** (başlıklar, logo) + **Inter** (gövde metni).
 
-### 3. Arel Koç Paleti (arel-koc.html)
-Koyu amber; sohbet arayüzü.
+### 3. İkincil Uygulama Paleti (fiyat.html, user.html)
+Koyu lacivert; monospace ağırlıklı, terminal hissi.
 
-- Arka plan: `#0c0c0c`
-- Aksant: `#f59e0b` (amber)
-- Fontlar: **Barlow Condensed** (etiketler) + **Barlow** (gövde)
+```css
+:root {
+  --bg:   #050c1a;
+  --blue: #3b82f6;
+  --mono: 'IBM Plex Mono', ui-monospace, Menlo, monospace;
+  --head: 'Syne', system-ui, sans-serif;
+}
+```
 
 ---
 
@@ -182,8 +196,9 @@ Arıza fotoğrafı yüklemek için kullanılır.
 | `WHATSAPP_PHONE_ID` | WhatsApp Business telefon ID'si |
 
 ### Vercel
-- `main` branch'e push yapıldığında GitHub Actions (`deploy.yml`) otomatik production deploy tetikler.
-- Secrets: `VERCEL_TOKEN`, `ORG_ID`, `PROJECT_ID`
+- Vercel native Git entegrasyonu ile `main` branch'e push yapıldığında otomatik production deploy tetiklenir.
+- Kök dizindeki `deploy.yml`, `.github/workflows/` altında olmadığından GitHub Actions tarafından çalıştırılmaz; yalnızca referans olarak durmaktadır.
+- Secrets (GitHub Actions ile deploy kullanılacaksa): `VERCEL_TOKEN`, `ORG_ID`, `PROJECT_ID`
 
 ---
 
