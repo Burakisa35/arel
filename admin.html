@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>TEHAŞ Admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ── Tokens ── */
+:root{
+  --bg:#06060f;--bg-1:#0b0b1a;--bg-2:#101024;--bg-3:#161630;
+  --line:#1a1a35;--line-2:#252545;
+  --t-1:#eef0ff;--t-2:#9194b8;--t-3:#555880;--t-4:#30324e;
+  --cyan:#34e5c5;--cyan-dim:rgba(52,229,197,.08);--cyan-glow:rgba(52,229,197,.25);
+  --violet:#a78bfa;--amber:#fbbf24;--green:#22c55e;--green-dim:rgba(34,197,94,.1);
+  --red:#f87171;--red-dim:rgba(248,113,113,.08);--wa:#25d366;
+  --f-body:'Inter',-apple-system,system-ui,sans-serif;
+  --f-mono:'JetBrains Mono',ui-monospace,monospace;
+  --ease:cubic-bezier(.2,.8,.2,1);
+  --sidebar:220px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html,body{height:100%;background:var(--bg);color:var(--t-1);font-family:var(--f-body);font-size:14px;-webkit-font-smoothing:antialiased;}
+button{font:inherit;color:inherit;background:none;border:none;cursor:pointer;}
+input,select,textarea{font:inherit;color:inherit;}
+a{color:inherit;text-decoration:none;}
+table{border-collapse:collapse;width:100%;}
+
+/* ── Layout ── */
+#sidebar{
+  position:fixed;top:0;left:0;bottom:0;width:var(--sidebar);
+  background:var(--bg-1);border-right:1px solid var(--line);
+  display:flex;flex-direction:column;z-index:100;overflow-y:auto;
+}
+#main{margin-left:var(--sidebar);min-height:100vh;display:flex;flex-direction:column;}
+.topbar{
+  position:sticky;top:0;z-index:50;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 28px;background:rgba(6,6,15,.9);
+  backdrop-filter:blur(12px);border-bottom:1px solid var(--line);
+}
+.content{flex:1;overflow-y:auto;padding:28px;}
+
+/* ── Sidebar ── */
+.sb-logo{
+  display:flex;align-items:center;gap:10px;padding:20px 18px 14px;
+  border-bottom:1px solid var(--line);
+}
+.sb-mark{
+  width:28px;height:28px;border-radius:7px;
+  border:1px solid rgba(52,229,197,.4);background:rgba(52,229,197,.06);
+  display:flex;align-items:center;justify-content:center;position:relative;flex-shrink:0;
+}
+.sb-mark::before{content:'';position:absolute;inset:6px;border-radius:50%;border:1.5px solid rgba(52,229,197,.6);}
+.sb-mark::after{content:'';position:absolute;inset:10px;border-radius:50%;background:var(--cyan);}
+.sb-name{font-weight:700;font-size:13px;letter-spacing:.15em;}
+.sb-sub{font-family:var(--f-mono);font-size:9px;letter-spacing:.14em;color:var(--t-3);text-transform:uppercase;margin-top:2px;}
+.sb-nav{flex:1;padding:12px 0;}
+.sb-item{
+  display:flex;align-items:center;gap:10px;
+  padding:10px 18px;font-size:13px;font-weight:500;color:var(--t-2);
+  cursor:pointer;transition:background .15s,color .15s;border-left:2px solid transparent;
+}
+.sb-item:hover{background:var(--bg-2);color:var(--t-1);}
+.sb-item.active{color:var(--cyan);background:var(--cyan-dim);border-left-color:var(--cyan);}
+.sb-item-ico{font-size:16px;width:20px;text-align:center;flex-shrink:0;}
+.sb-foot{padding:16px 18px;border-top:1px solid var(--line);}
+.sb-user{font-size:12px;color:var(--t-3);}
+
+/* ── Sections ── */
+.section{display:none;}
+.section.active{display:block;}
+
+/* ── Cards ── */
+.metric-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:14px;margin-bottom:24px;}
+.metric-card{
+  padding:18px 20px;background:var(--bg-1);
+  border:1px solid var(--line);border-radius:12px;
+}
+.metric-label{font-family:var(--f-mono);font-size:10px;letter-spacing:.18em;color:var(--t-3);text-transform:uppercase;margin-bottom:8px;}
+.metric-val{font-size:28px;font-weight:700;color:var(--t-1);line-height:1;}
+.metric-sub{font-size:11px;color:var(--t-3);margin-top:4px;}
+
+/* ── Tables ── */
+.tbl-wrap{background:var(--bg-1);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-bottom:20px;}
+.tbl-head{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 18px;border-bottom:1px solid var(--line);
+}
+.tbl-title{font-size:14px;font-weight:600;}
+table th{
+  padding:10px 14px;text-align:left;font-family:var(--f-mono);
+  font-size:9px;letter-spacing:.16em;color:var(--t-3);text-transform:uppercase;
+  background:var(--bg-2);border-bottom:1px solid var(--line);
+}
+table td{
+  padding:11px 14px;font-size:13px;color:var(--t-1);
+  border-bottom:1px solid var(--line);vertical-align:middle;
+}
+table tr:last-child td{border-bottom:none;}
+table tbody tr:hover td{background:rgba(255,255,255,.02);}
+
+/* ── Status badges ── */
+.badge{
+  display:inline-flex;align-items:center;gap:5px;
+  padding:3px 10px;border-radius:99px;font-size:11px;font-weight:600;
+  font-family:var(--f-mono);letter-spacing:.08em;
+}
+.badge-draft    {background:rgba(148,163,184,.1);color:#94a3b8;border:1px solid rgba(148,163,184,.2);}
+.badge-approved {background:var(--cyan-dim);color:var(--cyan);border:1px solid rgba(52,229,197,.25);}
+.badge-completed{background:var(--green-dim);color:var(--green);border:1px solid rgba(34,197,94,.2);}
+.badge-talep    {background:rgba(167,139,250,.1);color:var(--violet);border:1px solid rgba(167,139,250,.2);}
+.badge-dot{width:5px;height:5px;border-radius:50%;background:currentColor;}
+
+/* ── Buttons ── */
+.btn-primary{
+  padding:8px 16px;border-radius:8px;background:var(--cyan);color:#000;
+  font-size:12px;font-weight:700;letter-spacing:.04em;transition:opacity .15s;
+}
+.btn-primary:hover{opacity:.88;}
+.btn-primary:disabled{opacity:.35;cursor:not-allowed;}
+.btn-secondary{
+  padding:8px 14px;border-radius:8px;background:var(--bg-2);color:var(--t-2);
+  border:1px solid var(--line-2);font-size:12px;font-weight:600;transition:background .15s,color .15s;
+}
+.btn-secondary:hover{background:var(--bg-3);color:var(--t-1);}
+.btn-ghost{
+  padding:6px 12px;border-radius:7px;color:var(--t-3);
+  font-size:12px;transition:color .15s,background .15s;
+}
+.btn-ghost:hover{background:var(--bg-2);color:var(--t-1);}
+.btn-danger{
+  padding:8px 14px;border-radius:8px;background:var(--red-dim);color:var(--red);
+  border:1px solid rgba(248,113,113,.2);font-size:12px;font-weight:600;
+}
+
+/* ── Form fields ── */
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.form-grid.col3{grid-template-columns:1fr 1fr 1fr;}
+.field-group{margin-bottom:14px;}
+.field-group label{
+  display:block;font-family:var(--f-mono);font-size:10px;font-weight:500;
+  letter-spacing:.16em;color:var(--t-3);text-transform:uppercase;margin-bottom:6px;
+}
+.field-group input,.field-group select,.field-group textarea{
+  width:100%;padding:10px 13px;background:var(--bg-2);
+  border:1px solid var(--line);border-radius:9px;font-size:13px;
+  outline:none;transition:border-color .18s;
+}
+.field-group input:focus,.field-group select,.field-group textarea:focus{border-color:rgba(52,229,197,.4);}
+.field-group select option{background:var(--bg-1);}
+.field-group textarea{resize:vertical;min-height:80px;}
+.field-hint{font-size:11px;color:var(--t-4);margin-top:4px;}
+
+/* ── Alerts ── */
+.alert{padding:10px 14px;border-radius:9px;font-size:12px;line-height:1.5;margin-bottom:12px;}
+.alert-err {background:var(--red-dim);border:1px solid rgba(248,113,113,.2);color:var(--red);}
+.alert-warn{background:rgba(251,191,36,.07);border:1px solid rgba(251,191,36,.2);color:var(--amber);}
+.alert-ok  {background:var(--green-dim);border:1px solid rgba(34,197,94,.2);color:var(--green);}
+.alert-info{background:var(--cyan-dim);border:1px solid rgba(52,229,197,.2);color:var(--cyan);}
+
+/* ── Tier cards ── */
+.tier-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin:14px 0;}
+.tier-card{
+  padding:16px;background:var(--bg-2);border:1px solid var(--line);
+  border-radius:11px;text-align:center;cursor:pointer;transition:border-color .18s,background .18s;
+}
+.tier-card:hover,.tier-card.selected{border-color:rgba(52,229,197,.5);background:var(--cyan-dim);}
+.tier-card-label{font-family:var(--f-mono);font-size:10px;letter-spacing:.15em;color:var(--t-3);text-transform:uppercase;margin-bottom:8px;}
+.tier-card-price{font-size:22px;font-weight:700;color:var(--t-1);}
+.tier-card-margin{font-size:11px;color:var(--t-3);margin-top:4px;}
+
+/* ── Items table inside quote form ── */
+.items-tbl td input{
+  width:100%;background:transparent;border:none;outline:none;
+  padding:0;font-size:13px;color:var(--t-1);
+}
+.items-tbl td input:focus{outline:1px solid rgba(52,229,197,.3);border-radius:4px;}
+
+/* ── Section header ── */
+.section-hdr{
+  display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;
+}
+.section-hdr h2{font-size:20px;font-weight:700;letter-spacing:-.02em;}
+.section-hdr p{font-size:13px;color:var(--t-3);margin-top:3px;}
+
+/* ── Panel (card container) ── */
+.panel{
+  background:var(--bg-1);border:1px solid var(--line);
+  border-radius:12px;padding:20px;margin-bottom:20px;
+}
+.panel-title{
+  font-size:14px;font-weight:600;margin-bottom:16px;
+  display:flex;align-items:center;gap:8px;
+}
+.panel-title-ico{font-size:16px;}
+
+/* ── Similar info card ── */
+#similarCard{display:none;}
+.sim-row{display:flex;gap:20px;flex-wrap:wrap;}
+.sim-stat{text-align:center;}
+.sim-stat .val{font-size:18px;font-weight:700;color:var(--cyan);}
+.sim-stat .lbl{font-size:11px;color:var(--t-3);margin-top:2px;}
+
+/* ── WA message output ── */
+#waOutput{
+  width:100%;background:var(--bg-2);border:1px solid var(--line);
+  border-radius:9px;padding:14px;font-family:var(--f-mono);font-size:12px;
+  line-height:1.6;color:var(--t-1);resize:vertical;min-height:160px;
+}
+
+/* ── Inline price edit ── */
+.price-cell{position:relative;}
+.price-cell input.edit-input{
+  background:var(--bg-3);border:1px solid rgba(52,229,197,.4);
+  border-radius:6px;padding:4px 8px;font-size:13px;width:100px;
+}
+
+/* ── Loading spinner ── */
+.spinner{
+  display:inline-block;width:16px;height:16px;
+  border-radius:50%;border:2px solid var(--line-2);
+  border-top-color:var(--cyan);animation:spin 1s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg);}}
+</style>
+</head>
+<body>
+
+<!-- ── Sidebar ── -->
+<nav id="sidebar">
+  <div class="sb-logo">
+    <div class="sb-mark"></div>
+    <div>
+      <div class="sb-name">TEHAŞ</div>
+      <div class="sb-sub">Admin Panel</div>
+    </div>
+  </div>
+  <div class="sb-nav">
+    <div class="sb-item active" data-section="dashboard">
+      <span class="sb-item-ico">📊</span> Dashboard
+    </div>
+    <div class="sb-item" data-section="talepler">
+      <span class="sb-item-ico">📋</span> Talepler
+    </div>
+    <div class="sb-item" data-section="teklif-merkezi">
+      <span class="sb-item-ico">🧾</span> Teklif Merkezi
+    </div>
+    <div class="sb-item" data-section="urun-havuzu">
+      <span class="sb-item-ico">📦</span> Ürün Havuzu
+    </div>
+    <div class="sb-item" data-section="tedarikciler">
+      <span class="sb-item-ico">🤝</span> Tedarikçiler
+    </div>
+    <div class="sb-item" data-section="ogrenme-hafizasi">
+      <span class="sb-item-ico">🧠</span> Öğrenme Hafızası
+    </div>
+  </div>
+  <div class="sb-foot">
+    <div class="sb-user" id="sbUser">—</div>
+    <button class="btn-ghost" style="margin-top:8px;padding:6px 0;" onclick="logout()">Çıkış Yap</button>
+  </div>
+</nav>
+
+<!-- ── Main ── -->
+<div id="main">
+  <div class="topbar">
+    <div style="font-weight:600;font-size:15px;" id="topTitle">Dashboard</div>
+    <div style="display:flex;gap:8px;align-items:center;">
+      <span id="topSpinner" style="display:none;"><span class="spinner"></span></span>
+      <span style="font-family:var(--f-mono);font-size:11px;color:var(--t-3);" id="topDate"></span>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <!-- ── DASHBOARD ── -->
+    <div id="sec-dashboard" class="section active">
+      <div class="section-hdr">
+        <div><h2>Dashboard</h2><p>Genel bakış</p></div>
+      </div>
+      <div class="metric-grid" id="dashMetrics">
+        <div class="metric-card">
+          <div class="metric-label">Toplam Teklif</div>
+          <div class="metric-val" id="dToplam">—</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Kabul Oranı</div>
+          <div class="metric-val" id="dKabul">—</div>
+          <div class="metric-sub">onaylanan / toplam</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Ort. Kâr</div>
+          <div class="metric-val" id="dKar">—</div>
+          <div class="metric-sub">₺ / teklif</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Ort. Kâr %</div>
+          <div class="metric-val" id="dKarPct">—</div>
+        </div>
+      </div>
+      <div class="tbl-wrap">
+        <div class="tbl-head"><span class="tbl-title">Son Teklifler</span></div>
+        <table><thead><tr>
+          <th>Ref</th><th>Müşteri</th><th>Kamera</th><th>Durum</th><th>Fiyat</th><th>Tarih</th>
+        </tr></thead>
+        <tbody id="dashQuotesTbl"></tbody></table>
+      </div>
+    </div>
+
+    <!-- ── TALEPLER ── -->
+    <div id="sec-talepler" class="section">
+      <div class="section-hdr">
+        <div><h2>Talepler</h2><p>Müşteri arıza ve kurulum talepleri</p></div>
+        <button class="btn-secondary" onclick="loadTalepler()">↻ Yenile</button>
+      </div>
+      <div class="tbl-wrap">
+        <table><thead><tr>
+          <th>Ref Kodu</th><th>Müşteri</th><th>Hizmet</th><th>Durum</th><th>Tarih</th><th>İşlem</th>
+        </tr></thead>
+        <tbody id="taleplerTbl"></tbody></table>
+      </div>
+    </div>
+
+    <!-- ── TEKLİF MERKEZİ ── -->
+    <div id="sec-teklif-merkezi" class="section">
+      <div class="section-hdr">
+        <div><h2>Teklif Merkezi</h2><p>Yeni kamera sistemi teklifi oluştur</p></div>
+      </div>
+
+      <!-- Benzerlik bloğu -->
+      <div class="panel" id="similarCard">
+        <div class="panel-title"><span class="panel-title-ico">📈</span> Benzer Geçmiş Teklifler</div>
+        <div class="sim-row">
+          <div class="sim-stat"><div class="val" id="simMin">—</div><div class="lbl">En düşük</div></div>
+          <div class="sim-stat"><div class="val" id="simAvg">—</div><div class="lbl">Ortalama</div></div>
+          <div class="sim-stat"><div class="val" id="simMax">—</div><div class="lbl">En yüksek</div></div>
+          <div class="sim-stat"><div class="val" id="simAcc">—</div><div class="lbl">Kabul oranı</div></div>
+          <div class="sim-stat"><div class="val" id="simCount">—</div><div class="lbl">Örnek sayısı</div></div>
+        </div>
+      </div>
+
+      <!-- Teklif formu -->
+      <div class="panel">
+        <div class="panel-title"><span class="panel-title-ico">📝</span> Teklif Formu</div>
+        <div class="form-grid">
+          <div class="field-group">
+            <label>Talep Ref</label>
+            <input id="qReqRef" type="text" placeholder="AB-XXXXXX (opsiyonel)">
+          </div>
+          <div class="field-group">
+            <label>Müşteri Adı</label>
+            <input id="qCustomer" type="text" placeholder="Ahmet Bey">
+          </div>
+        </div>
+        <div class="form-grid col3">
+          <div class="field-group">
+            <label>Kamera Adedi</label>
+            <input id="qCamCount" type="number" min="1" max="64" value="4" oninput="onCamChange()">
+          </div>
+          <div class="field-group">
+            <label>Çözünürlük (MP)</label>
+            <select id="qResolution" onchange="onCamChange()">
+              <option value="2">2 MP</option>
+              <option value="4">4 MP</option>
+              <option value="5">5 MP</option>
+              <option value="8">8 MP</option>
+            </select>
+          </div>
+          <div class="field-group">
+            <label>Kayıt Süresi (gün)</label>
+            <input id="qDays" type="number" min="1" value="30" oninput="onCamChange()">
+          </div>
+        </div>
+        <div class="form-grid col3">
+          <div class="field-group">
+            <label>Bölge</label>
+            <select id="qRegion">
+              <option value="kemalpasa">Kemalpaşa</option>
+              <option value="armutlu">Armutlu</option>
+              <option value="osb">OSB</option>
+              <option value="izmir">İzmir</option>
+              <option value="uzak">Uzak</option>
+            </select>
+          </div>
+          <div class="field-group">
+            <label>Kablo Mesafesi (m)</label>
+            <input id="qCable" type="number" min="0" value="50">
+          </div>
+          <div class="field-group" style="padding-top:22px;">
+            <label style="display:flex;gap:8px;align-items:center;cursor:pointer;">
+              <input id="qOutdoor" type="checkbox"> Dış Mekan
+            </label>
+            <label style="display:flex;gap:8px;align-items:center;cursor:pointer;margin-top:8px;">
+              <input id="qAudio" type="checkbox"> Ses Kaydı
+            </label>
+          </div>
+        </div>
+        <div class="form-grid">
+          <div class="field-group">
+            <label>DVR Kanalı (otomatik)</label>
+            <input id="qChannel" type="number" placeholder="Hesaplanıyor…">
+            <div class="field-hint">Kamera adedi değişince otomatik güncellenir</div>
+          </div>
+          <div class="field-group">
+            <label>HDD (GB, otomatik)</label>
+            <input id="qHDD" type="number" placeholder="Hesaplanıyor…">
+            <div class="field-hint">Çözünürlük ve kayıt süresine göre</div>
+          </div>
+        </div>
+        <div class="field-group">
+          <label>Notlar</label>
+          <textarea id="qNotes" placeholder="Müşteri talebi, özel durum…"></textarea>
+        </div>
+      </div>
+
+      <!-- Ürün kalemleri -->
+      <div class="panel">
+        <div class="panel-title" style="justify-content:space-between;">
+          <span><span class="panel-title-ico">📦</span> Kalemler</span>
+          <button class="btn-secondary" onclick="addProductRow()">+ Kalem Ekle</button>
+        </div>
+        <table class="items-tbl">
+          <thead><tr>
+            <th>Ürün Adı</th><th>Tür</th><th>Adet</th><th>Birim Fiyat</th><th>Toplam</th><th></th>
+          </tr></thead>
+          <tbody id="itemsTbl"></tbody>
+        </table>
+        <div style="display:flex;justify-content:flex-end;margin-top:12px;gap:20px;">
+          <span style="font-size:13px;color:var(--t-3);">Toplam Maliyet:</span>
+          <span id="totalCostLabel" style="font-size:14px;font-weight:700;color:var(--cyan);">₺0</span>
+        </div>
+      </div>
+
+      <!-- Validasyon + Tier seçimi -->
+      <div class="panel">
+        <div class="panel-title"><span class="panel-title-ico">✅</span> Kontrol ve Fiyatlandırma</div>
+        <div id="validateAlerts"></div>
+        <div style="display:flex;gap:10px;margin-bottom:16px;">
+          <button class="btn-secondary" onclick="runValidate()">Kontrol Et</button>
+          <button class="btn-secondary" onclick="loadTiers()">Teklif Önizle</button>
+        </div>
+
+        <div id="tierSection" style="display:none;">
+          <div style="font-family:var(--f-mono);font-size:10px;letter-spacing:.16em;color:var(--t-3);text-transform:uppercase;margin-bottom:8px;">Fiyat Katmanı Seç</div>
+          <div class="tier-grid">
+            <div class="tier-card" id="tierEkonomik" onclick="selectTier('ekonomik')">
+              <div class="tier-card-label">Ekonomik</div>
+              <div class="tier-card-price" id="tpEkonomik">—</div>
+              <div class="tier-card-margin" id="tmEkonomik"></div>
+            </div>
+            <div class="tier-card" id="tierStandart" onclick="selectTier('standart')">
+              <div class="tier-card-label">Standart</div>
+              <div class="tier-card-price" id="tpStandart">—</div>
+              <div class="tier-card-margin" id="tmStandart"></div>
+            </div>
+            <div class="tier-card" id="tierGuclu" onclick="selectTier('guclu')">
+              <div class="tier-card-label">Güçlü</div>
+              <div class="tier-card-price" id="tpGuclu">—</div>
+              <div class="tier-card-margin" id="tmGuclu"></div>
+            </div>
+          </div>
+          <div class="field-group" style="margin-top:12px;">
+            <label>Admin Fiyatı (₺, düzenlenebilir)</label>
+            <input id="qAdminPrice" type="number" placeholder="0">
+          </div>
+        </div>
+
+        <div style="display:flex;gap:10px;margin-top:16px;">
+          <button id="btnSaveQuote" class="btn-primary" onclick="saveQuote()" disabled>Taslak Kaydet</button>
+          <button id="btnApprove" class="btn-primary" style="display:none;background:var(--green);color:#000;" onclick="approveQuote()">Onayla ve WA Oluştur</button>
+        </div>
+      </div>
+
+      <!-- WA Mesajı çıktı -->
+      <div class="panel" id="waPanel" style="display:none;">
+        <div class="panel-title"><span class="panel-title-ico">💬</span> WhatsApp Mesajı</div>
+        <textarea id="waOutput" readonly></textarea>
+        <button class="btn-secondary" style="margin-top:10px;" onclick="copyWA()">Kopyala</button>
+      </div>
+    </div>
+
+    <!-- ── ÜRÜN HAVUZU ── -->
+    <div id="sec-urun-havuzu" class="section">
+      <div class="section-hdr">
+        <div><h2>Ürün Havuzu</h2><p>Fiyat listesi — çift tıkla düzenle</p></div>
+        <div style="display:flex;gap:8px;">
+          <select id="catFilter" onchange="loadProducts(this.value)" style="padding:7px 12px;background:var(--bg-2);border:1px solid var(--line);border-radius:8px;color:var(--t-1);font-size:13px;">
+            <option value="">Tüm kategoriler</option>
+            <option value="camera">Kamera</option>
+            <option value="dvr">DVR</option>
+            <option value="hdd">HDD</option>
+            <option value="cable">Kablo</option>
+            <option value="accessory">Aksesuar</option>
+          </select>
+          <button class="btn-secondary" onclick="loadProducts()">↻</button>
+        </div>
+      </div>
+      <div class="tbl-wrap">
+        <table><thead><tr>
+          <th>Ürün Adı</th><th>SKU</th><th>Kategori</th><th>Birim Fiyat</th><th>Son Güncelleme</th>
+        </tr></thead>
+        <tbody id="productsTbl"></tbody></table>
+      </div>
+    </div>
+
+    <!-- ── TEDARİKÇİLER ── -->
+    <div id="sec-tedarikciler" class="section">
+      <div class="section-hdr">
+        <div><h2>Tedarikçiler</h2><p>Satın alma ve stok takibi — FAZ-2</p></div>
+      </div>
+      <div class="panel">
+        <p style="color:var(--t-3);font-size:13px;">Tedarikçi modülü FAZ-2 kapsamında eklenecektir. Şu an ürün havuzu üzerinden fiyat güncellemesi yapılabilir.</p>
+      </div>
+    </div>
+
+    <!-- ── ÖĞRENME HAFIZASI ── -->
+    <div id="sec-ogrenme-hafizasi" class="section">
+      <div class="section-hdr">
+        <div><h2>Öğrenme Hafızası</h2><p>Geçmiş teklif istatistikleri</p></div>
+        <button class="btn-secondary" onclick="loadLearning()">↻ Yenile</button>
+      </div>
+      <div class="metric-grid" id="learnMetrics">
+        <div class="metric-card"><div class="metric-label">Toplam Teklif</div><div class="metric-val" id="lToplam">—</div></div>
+        <div class="metric-card"><div class="metric-label">Kabul Oranı</div><div class="metric-val" id="lKabul">—</div></div>
+        <div class="metric-card"><div class="metric-label">Ort. Kâr</div><div class="metric-val" id="lKar">—</div></div>
+        <div class="metric-card"><div class="metric-label">Ort. Kâr %</div><div class="metric-val" id="lKarPct">—</div></div>
+      </div>
+      <div class="tbl-wrap">
+        <div class="tbl-head"><span class="tbl-title">Hata Dağılımı</span></div>
+        <table><thead><tr><th>Hata Türü</th><th>Sayı</th></tr></thead>
+        <tbody id="errDistTbl"></tbody></table>
+      </div>
+    </div>
+
+  </div><!-- /content -->
+</div><!-- /main -->
+
+<script>
+// ─── Globals ────────────────────────────────────────────────────
+let TOKEN        = '';
+let currentQuoteId = null;
+let quoteItems   = [];
+let canSaveQuote = false;
+
+// ─── Init ────────────────────────────────────────────────────────
+(function init() {
+  TOKEN = localStorage.getItem('tehas_token') || '';
+  if (!TOKEN) { window.location.replace('/admin-login.html'); return; }
+
+  document.getElementById('topDate').textContent =
+    new Date().toLocaleDateString('tr-TR', { day:'numeric', month:'long', year:'numeric' });
+
+  // Sidebar nav
+  document.querySelectorAll('.sb-item').forEach(el => {
+    el.addEventListener('click', () => {
+      const sec = el.dataset.section;
+      showSection(sec);
+    });
+  });
+
+  showSection('dashboard');
+})();
+
+// ─── Navigation ──────────────────────────────────────────────────
+const SECTION_TITLES = {
+  'dashboard': 'Dashboard',
+  'talepler': 'Talepler',
+  'teklif-merkezi': 'Teklif Merkezi',
+  'urun-havuzu': 'Ürün Havuzu',
+  'tedarikciler': 'Tedarikçiler',
+  'ogrenme-hafizasi': 'Öğrenme Hafızası',
+};
+
+function showSection(name) {
+  document.querySelectorAll('.sb-item').forEach(el =>
+    el.classList.toggle('active', el.dataset.section === name));
+  document.querySelectorAll('.section').forEach(el =>
+    el.classList.toggle('active', el.id === 'sec-' + name));
+  document.getElementById('topTitle').textContent = SECTION_TITLES[name] || name;
+
+  if (name === 'dashboard')          loadDashboard();
+  if (name === 'talepler')           loadTalepler();
+  if (name === 'urun-havuzu')        loadProducts();
+  if (name === 'ogrenme-hafizasi')   loadLearning();
+  if (name === 'teklif-merkezi')     onCamChange();
+}
+
+// ─── Auth helpers ────────────────────────────────────────────────
+function authHeaders() {
+  return { 'Content-Type': 'application/json', 'Authorization': `Bearer ${TOKEN}` };
+}
+
+function logout() {
+  localStorage.removeItem('tehas_token');
+  window.location.replace('/admin-login.html');
+}
+
+function setLoading(on) {
+  document.getElementById('topSpinner').style.display = on ? 'inline-block' : 'none';
+}
+
+// ─── API fetch wrapper ───────────────────────────────────────────
+async function api(url, opts = {}) {
+  setLoading(true);
+  try {
+    const r = await fetch(url, { headers: authHeaders(), ...opts });
+    const d = await r.json().catch(() => ({}));
+    if (r.status === 401) { logout(); return null; }
+    return d;
+  } catch(e) {
+    console.error('API error', url, e);
+    return null;
+  } finally {
+    setLoading(false);
+  }
+}
+
+// ─── Formatting helpers ──────────────────────────────────────────
+function fmtMoney(n) { return '₺' + (n || 0).toLocaleString('tr-TR'); }
+function fmtDate(s)  { if(!s) return '—'; return new Date(s).toLocaleDateString('tr-TR'); }
+function statusBadge(s) {
+  const map = { draft:'badge-draft', approved:'badge-approved', completed:'badge-completed' };
+  return `<span class="badge ${map[s]||'badge-draft'}"><span class="badge-dot"></span>${s}</span>`;
+}
+
+// ─── DASHBOARD ───────────────────────────────────────────────────
+async function loadDashboard() {
+  const [stats, quotes] = await Promise.all([
+    api('/api/learning-summary'),
+    api('/api/quotes'),
+  ]);
+
+  if (stats) {
+    document.getElementById('dToplam').textContent  = stats.toplam_teklif  ?? '—';
+    document.getElementById('dKabul').textContent   = (stats.kabul_orani ?? '—') + '%';
+    document.getElementById('dKar').textContent     = stats.ort_kar ? fmtMoney(stats.ort_kar) : '—';
+    document.getElementById('dKarPct').textContent  = (stats.ort_kar_yuzdesi ?? '—') + '%';
+  }
+
+  if (quotes && Array.isArray(quotes)) {
+    const tbody = document.getElementById('dashQuotesTbl');
+    tbody.innerHTML = quotes.slice(0, 10).map(q => `
+      <tr>
+        <td><span style="font-family:var(--f-mono);color:var(--cyan);">${q.quote_ref}</span></td>
+        <td>${q.customer_name || '—'}</td>
+        <td>${q.cam_count} kamera</td>
+        <td>${statusBadge(q.status)}</td>
+        <td>${q.admin_price ? fmtMoney(q.admin_price) : '—'}</td>
+        <td>${fmtDate(q.created_at)}</td>
+      </tr>`).join('');
+  }
+}
+
+// ─── TALEPLER ────────────────────────────────────────────────────
+async function loadTalepler() {
+  // Notion arıza bildirimleri DB'sinden çek
+  const r = await fetch('/api/durum-sorgula?admin=1', { headers: authHeaders() });
+  // durum-sorgula bir HTML dosyası; talepleri Notion'dan çekiyoruz
+  // Gerçek veri için api/requests.js gerekir; burada quotes ile fallback:
+  const quotes = await api('/api/quotes') || [];
+  const tbody  = document.getElementById('taleplerTbl');
+  tbody.innerHTML = quotes.map(q => `
+    <tr>
+      <td><span style="font-family:var(--f-mono);color:var(--cyan);">${q.request_ref || q.quote_ref}</span></td>
+      <td>${q.customer_name || '—'}</td>
+      <td>Kamera</td>
+      <td>${statusBadge(q.status)}</td>
+      <td>${fmtDate(q.created_at)}</td>
+      <td>
+        <button class="btn-secondary" onclick="openQuoteFor('${q.request_ref||q.quote_ref}','${q.customer_name||''}')">
+          Teklif Oluştur
+        </button>
+      </td>
+    </tr>`).join('');
+}
+
+function openQuoteFor(ref, customer) {
+  document.getElementById('qReqRef').value = ref;
+  document.getElementById('qCustomer').value = customer;
+  showSection('teklif-merkezi');
+}
+
+// ─── TEKLİF MERKEZİ — Client-side hesaplamalar ───────────────────
+// _quoteEngine.js fonksiyonlarının client-side kopyaları
+function calcDVRLocal(n) {
+  const tiers = [4, 8, 16, 32];
+  for (const ch of tiers) {
+    if (n <= ch && n / ch <= 0.8) return { channel: ch };
+  }
+  return { channel: 32, note: '2×cihaz' };
+}
+
+function calcHDDLocal(n, mp, days, audio) {
+  const c = {2:0.3, 4:0.5, 5:0.7, 8:1.2}[mp] || 0.5;
+  const total = n * c * 24 * 0.5 * days * (audio ? 1.15 : 1);
+  return [1000,2000,4000,6000,8000,10000].find(s => s >= total) || 10000;
+}
+
+function onCamChange() {
+  const n    = parseInt(document.getElementById('qCamCount').value) || 0;
+  const mp   = parseInt(document.getElementById('qResolution').value) || 2;
+  const days = parseInt(document.getElementById('qDays').value) || 30;
+  const aud  = document.getElementById('qAudio').checked;
+
+  if (n > 0) {
+    const dvr = calcDVRLocal(n);
+    const hdd = calcHDDLocal(n, mp, days, aud);
+    document.getElementById('qChannel').value = dvr.channel;
+    document.getElementById('qHDD').value     = hdd;
+    loadSimilar();
+  }
+}
+
+async function loadSimilar() {
+  const n   = document.getElementById('qCamCount').value;
+  const mp  = document.getElementById('qResolution').value;
+  const reg = document.getElementById('qRegion').value;
+  const d   = await api(`/api/quotes-similar?cam_count=${n}&region=${reg}&resolution=${mp}`);
+  const card = document.getElementById('similarCard');
+  if (d && d.found) {
+    card.style.display = 'block';
+    document.getElementById('simMin').textContent   = fmtMoney(d.min_price);
+    document.getElementById('simAvg').textContent   = fmtMoney(d.avg_price);
+    document.getElementById('simMax').textContent   = fmtMoney(d.max_price);
+    document.getElementById('simAcc').textContent   = d.acceptance_rate + '%';
+    document.getElementById('simCount').textContent = d.count;
+  } else {
+    card.style.display = 'none';
+  }
+}
+
+// Kalem ekleme
+function addProductRow(name='', type='product', qty=1, price=0) {
+  const tbody = document.getElementById('itemsTbl');
+  const id    = 'item-' + Date.now();
+  const tr    = document.createElement('tr');
+  tr.id       = id;
+  tr.innerHTML = `
+    <td><input type="text" value="${name}" placeholder="Ürün adı" onchange="calcTotal()"></td>
+    <td><select onchange="calcTotal()">
+      <option value="product" ${type==='product'?'selected':''}>Ürün</option>
+      <option value="labor"   ${type==='labor'  ?'selected':''}>İşçilik</option>
+      <option value="travel"  ${type==='travel' ?'selected':''}>Yol</option>
+      <option value="hdd"     ${type==='hdd'    ?'selected':''}>HDD</option>
+      <option value="accessory" ${type==='accessory'?'selected':''}>Aksesuar</option>
+    </select></td>
+    <td><input type="number" value="${qty}" min="1" style="width:60px;" onchange="calcTotal()"></td>
+    <td><input type="number" value="${price}" min="0" style="width:90px;" onchange="calcTotal()"></td>
+    <td id="${id}-total" style="font-weight:600;">${fmtMoney(qty*price)}</td>
+    <td><button class="btn-ghost" onclick="document.getElementById('${id}').remove();calcTotal();">✕</button></td>`;
+  tbody.appendChild(tr);
+  calcTotal();
+}
+
+function calcTotal() {
+  const rows = document.querySelectorAll('#itemsTbl tr');
+  let total  = 0;
+  rows.forEach(tr => {
+    const inputs = tr.querySelectorAll('input[type=number]');
+    if (inputs.length >= 2) {
+      const qty   = parseFloat(inputs[0].value) || 0;
+      const price = parseFloat(inputs[1].value) || 0;
+      const t     = qty * price;
+      total      += t;
+      const tid   = tr.id + '-total';
+      const cell  = document.getElementById(tid);
+      if (cell) cell.textContent = fmtMoney(t);
+    }
+  });
+  document.getElementById('totalCostLabel').textContent = fmtMoney(total);
+  return total;
+}
+
+function collectItems() {
+  return Array.from(document.querySelectorAll('#itemsTbl tr')).map(tr => {
+    const inputs  = tr.querySelectorAll('input');
+    const selects = tr.querySelectorAll('select');
+    return {
+      name:       inputs[0]?.value || '',
+      item_type:  selects[0]?.value || 'product',
+      quantity:   parseFloat(inputs[1]?.value) || 1,
+      unit_price: parseFloat(inputs[2]?.value) || 0,
+    };
+  });
+}
+
+async function runValidate() {
+  const items   = collectItems();
+  const summary = {
+    camCount:   parseInt(document.getElementById('qCamCount').value) || 0,
+    channel:    parseInt(document.getElementById('qChannel').value)  || 0,
+    region:     document.getElementById('qRegion').value,
+    adminPrice: parseFloat(document.getElementById('qAdminPrice').value) || 0,
+    totalCost:  calcTotal(),
+  };
+  const d = await api('/api/quotes-validate', {
+    method: 'POST',
+    body: JSON.stringify({ items, summary }),
+  });
+  if (!d) return;
+
+  const box = document.getElementById('validateAlerts');
+  box.innerHTML = '';
+  d.errors.forEach(e =>
+    box.innerHTML += `<div class="alert alert-err">🚫 ${e}</div>`);
+  d.warnings.forEach(w =>
+    box.innerHTML += `<div class="alert alert-warn">⚠️ ${w}</div>`);
+  if (d.canSave)
+    box.innerHTML += `<div class="alert alert-ok">✓ Kontrol geçti — kaydetmeye hazır.</div>`;
+
+  canSaveQuote = d.canSave;
+  document.getElementById('btnSaveQuote').disabled = !d.canSave;
+}
+
+async function loadTiers() {
+  if (!currentQuoteId) {
+    // Önce kaydet
+    await saveQuote();
+    if (!currentQuoteId) return;
+  }
+  const d = await api(`/api/quotes-tiers?id=${currentQuoteId}`);
+  if (!d) return;
+
+  document.getElementById('tierSection').style.display = 'block';
+  const totalCost = calcTotal();
+
+  ['ekonomik','standart','guclu'].forEach(key => {
+    const t    = d[key];
+    const marg = totalCost > 0 ? Math.round(((t.price - totalCost) / t.price) * 100) : 0;
+    document.getElementById('tp' + key.charAt(0).toUpperCase() + key.slice(1)).textContent = fmtMoney(t.price);
+    document.getElementById('tm' + key.charAt(0).toUpperCase() + key.slice(1)).textContent = `Kâr: %${marg}`;
+  });
+}
+
+function selectTier(key) {
+  ['Ekonomik','Standart','Guclu'].forEach(k =>
+    document.getElementById('tier' + k).classList.toggle('selected', k.toLowerCase() === key));
+  const priceEl = document.getElementById('tp' + key.charAt(0).toUpperCase() + key.slice(1));
+  const raw     = priceEl.textContent.replace(/[₺.,\s]/g, '').trim();
+  document.getElementById('qAdminPrice').value = raw || '';
+}
+
+async function saveQuote() {
+  const totalCost = calcTotal();
+  const body = {
+    request_ref:   document.getElementById('qReqRef').value.trim(),
+    customer_name: document.getElementById('qCustomer').value.trim(),
+    cam_count:     parseInt(document.getElementById('qCamCount').value) || 0,
+    resolution_mp: parseInt(document.getElementById('qResolution').value) || 2,
+    days:          parseInt(document.getElementById('qDays').value) || 30,
+    region:        document.getElementById('qRegion').value,
+    channel:       parseInt(document.getElementById('qChannel').value) || 0,
+    hdd_gb:        parseInt(document.getElementById('qHDD').value) || 0,
+    total_cost:    totalCost,
+    notes:         document.getElementById('qNotes').value,
+    items:         collectItems(),
+  };
+  const d = await api('/api/quotes', { method:'POST', body: JSON.stringify(body) });
+  if (d && d.quote_id) {
+    currentQuoteId = d.quote_id;
+    document.getElementById('btnApprove').style.display = 'inline-block';
+    return d.quote_id;
+  }
+  return null;
+}
+
+async function approveQuote() {
+  if (!currentQuoteId) return;
+  const adminPrice = parseFloat(document.getElementById('qAdminPrice').value) || 0;
+  if (!adminPrice) { alert('Admin fiyatı girin.'); return; }
+
+  // Tier belirle
+  const selCard = document.querySelector('.tier-card.selected');
+  const tier    = selCard?.id?.replace('tier','').toLowerCase() || 'standart';
+
+  await api(`/api/quotes-detail?id=${currentQuoteId}`, {
+    method: 'PATCH',
+    body: JSON.stringify({ status:'approved', admin_price: adminPrice, tier }),
+  });
+
+  // WA mesajı al
+  const wa = await api(`/api/quotes-whatsapp?id=${currentQuoteId}`);
+  if (wa && wa.message) {
+    document.getElementById('waPanel').style.display = 'block';
+    document.getElementById('waOutput').value = wa.message;
+  }
+}
+
+function copyWA() {
+  const ta = document.getElementById('waOutput');
+  navigator.clipboard.writeText(ta.value);
+  const btn = event.target;
+  btn.textContent = 'Kopyalandı ✓';
+  setTimeout(() => { btn.textContent = 'Kopyala'; }, 1400);
+}
+
+// ─── ÜRÜN HAVUZU ─────────────────────────────────────────────────
+async function loadProducts(cat) {
+  const url  = cat ? `/api/products?category=${cat}` : '/api/products';
+  const data = await api(url);
+  if (!data) return;
+
+  const today = new Date();
+  const tbody = document.getElementById('productsTbl');
+  tbody.innerHTML = data.map(p => {
+    const lastUpd  = p.last_updated ? new Date(p.last_updated) : null;
+    const daysOld  = lastUpd ? Math.floor((today - lastUpd) / 86400000) : 999;
+    const stale    = daysOld > 30;
+    const priceStyle = stale ? 'background:rgba(251,191,36,.12);' : '';
+    return `<tr>
+      <td>${p.name}</td>
+      <td><span style="font-family:var(--f-mono);font-size:11px;color:var(--t-3);">${p.sku}</span></td>
+      <td><span class="badge badge-talep">${p.category}</span></td>
+      <td class="price-cell" data-id="${p.id}" ondblclick="editPrice(this)" style="${priceStyle}">
+        <span class="price-disp">${fmtMoney(p.unit_price)}</span>
+        ${stale ? '<span title="30+ gün güncellenmedı" style="margin-left:6px;color:var(--amber);">⚠</span>' : ''}
+      </td>
+      <td style="color:var(--t-3);">${p.last_updated || '—'}</td>
+    </tr>`;
+  }).join('');
+}
+
+function editPrice(cell) {
+  if (cell.querySelector('input')) return;
+  const disp  = cell.querySelector('.price-disp');
+  const raw   = disp.textContent.replace(/[₺.,\s]/g,'').trim();
+  const id    = cell.dataset.id;
+  const input = document.createElement('input');
+  input.className = 'edit-input';
+  input.type      = 'number';
+  input.value     = raw;
+  cell.appendChild(input);
+  input.focus();
+
+  async function save() {
+    const newPrice = parseFloat(input.value) || 0;
+    await api('/api/products', {
+      method: 'PATCH',
+      body: JSON.stringify({ id, unit_price: newPrice }),
+    });
+    disp.textContent = fmtMoney(newPrice);
+    input.remove();
+    cell.querySelector('[title]')?.remove();
+  }
+
+  input.addEventListener('blur', save);
+  input.addEventListener('keydown', e => { if(e.key==='Enter') save(); });
+}
+
+// ─── ÖĞRENME HAFIZASI ────────────────────────────────────────────
+async function loadLearning() {
+  const d = await api('/api/learning-summary');
+  if (!d) return;
+
+  document.getElementById('lToplam').textContent = d.toplam_teklif  ?? '—';
+  document.getElementById('lKabul').textContent  = (d.kabul_orani ?? '—') + '%';
+  document.getElementById('lKar').textContent    = d.ort_kar ? fmtMoney(d.ort_kar) : '—';
+  document.getElementById('lKarPct').textContent = (d.ort_kar_yuzdesi ?? '—') + '%';
+
+  const tbody = document.getElementById('errDistTbl');
+  if (d.hata_dagilimi && d.hata_dagilimi.length) {
+    tbody.innerHTML = d.hata_dagilimi.map(h =>
+      `<tr><td>${h.type}</td><td style="font-weight:600;">${h.count}</td></tr>`
+    ).join('');
+  } else {
+    tbody.innerHTML = '<tr><td colspan="2" style="color:var(--t-3);">Henüz kayıt yok</td></tr>';
+  }
+}
+</script>
+</body>
+</html>
