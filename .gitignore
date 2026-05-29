@@ -1,0 +1,22 @@
+# Ortam değişkenleri — asla commit edilmez
+.env
+.env.local
+.env.development
+.env.production
+.env.*.local
+
+# Vercel
+.vercel
+
+# Node (API handler'ları için)
+node_modules/
+npm-debug.log*
+
+# macOS
+.DS_Store
+
+# Editor
+.vscode/settings.json
+.idea/
+*.swp
+*.swo
