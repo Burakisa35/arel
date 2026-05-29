@@ -1,4 +1,8 @@
+import rateLimit from './_rateLimit.js';
+
 export default async function handler(req, res) {
+  if (rateLimit(req, res)) return;
+
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
@@ -99,7 +103,7 @@ export default async function handler(req, res) {
   if (!notionRes.ok) {
     const errData = await notionRes.json().catch(() => ({}));
     console.error('Notion error:', JSON.stringify(errData));
-    return res.status(500).json({ error: 'Kayıt hatası: ' + (errData.message || notionRes.statusText) });
+    return res.status(500).json({ error: 'Kayıt sırasında bir hata oluştu.' });
   }
 
   return res.status(200).json({ ok: true, ref });

@@ -5,6 +5,23 @@
 const OTP_TTL = 10 * 60 * 1000; // 10 dakika
 const otpStore = new Map();
 
+// OTP'ye özel rate limit: 60 saniyede maks 3 istek / IP
+const OTP_RATE_WINDOW = 60 * 1000;
+const OTP_RATE_MAX    = 3;
+const otpRateMap      = new Map();
+
+function checkOtpRate(ip) {
+  const now   = Date.now();
+  const entry = otpRateMap.get(ip) || { count: 0, start: now };
+  if (now - entry.start > OTP_RATE_WINDOW) {
+    otpRateMap.set(ip, { count: 1, start: now });
+    return false; // ok
+  }
+  if (entry.count >= OTP_RATE_MAX) return true; // blocked
+  otpRateMap.set(ip, { count: entry.count + 1, start: entry.start });
+  return false; // ok
+}
+
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', process.env.ALLOWED_ORIGIN || '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
@@ -17,6 +34,11 @@ export default async function handler(req, res) {
 
   if (action === 'send') {
     if (!telefon) return res.status(400).json({ error: 'Telefon numarası gerekli.' });
+
+    const ip = req.headers['x-forwarded-for'] || req.socket?.remoteAddress || 'unknown';
+    if (checkOtpRate(ip)) {
+      return res.status(429).json({ error: 'Çok fazla doğrulama denemesi. 1 dakika bekleyin.' });
+    }
 
     const telRaw = String(telefon).replace(/\D/g, '');
     if (telRaw.length < 10) return res.status(400).json({ error: 'Geçerli telefon numarası girin.' });

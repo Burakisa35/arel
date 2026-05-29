@@ -26,7 +26,11 @@ const BOLGE_CARPAN = {
   diger:     1.1,
 };
 
+import rateLimit from './_rateLimit.js';
+
 export default async function handler(req, res) {
+  if (rateLimit(req, res)) return;
+
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
